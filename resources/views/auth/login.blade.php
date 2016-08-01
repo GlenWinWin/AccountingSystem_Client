@@ -8,7 +8,7 @@
     {!! Form::open(array('route' => 'user.store'))!!}
             <h1>Login Form</h1>
             <div>
-              <input type="email" class="form-control" name="email" placeholder="Email" required="" />
+              <input type="text" class="form-control" name="username" placeholder="Username" required="" />
             </div>
             <div>
               <input type="password" class="form-control" name="password" placeholder="Password" required="" />
@@ -16,7 +16,7 @@
             <div>
               <button class="btn btn-default submit">Log in</button>
               <a class="reset_pass" href="#">Lost your password?</a>
-            </div>        
+            </div>
     {!! Form::close()!!}
   </body>
 </html>

@@ -16,22 +16,22 @@ class UserController extends Controller
 
     	   $validator = Validator::make(
             array(
-                'email' => $requests->email,
+                'username' => $requests->username,
                 'password' => $requests->password
             ),
             array(
-                'email' => 'required|email',
+                'username' => 'required',
                 'password' => 'required'
             ),
             array(
-                'email.required' => 'Email is mandatory !',
+                'username.required' => 'Username is  mandatory!',
                 'password.required' => 'Password is necessary !'
             )
         );
 
         if($validator->passes()){
           $attempt = Auth::attempt([
-            'email' => $requests->email,
+            'username' => $requests->username,
             'password' => $requests->password,
           ]);
           if($attempt){
