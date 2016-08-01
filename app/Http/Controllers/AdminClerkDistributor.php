@@ -27,7 +27,7 @@ class AdminClerkDistributor extends Controller{
     $i = 0;
     $pass = '' ;
 
-        while ($i < 4) {
+        while ($i < 8) {
             $num = rand() % 33;
             $tmp = substr($chars, $num, 1);
             $pass .= $tmp;
