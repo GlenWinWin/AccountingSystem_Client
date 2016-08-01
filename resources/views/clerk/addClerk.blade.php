@@ -3,7 +3,7 @@
 @section('title')
 	Add Clerk
 @stop
-
+@yield('nav')
 @section('body-content')
 <center>
 	{!! Form::open(array('action' => 'AdminClerkDistributor@addClerkProcess' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
