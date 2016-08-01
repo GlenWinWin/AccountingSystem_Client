@@ -5,7 +5,6 @@
 @stop
 
 @section('body-content')
-  <a href="logout" style="float:right" onclick=" return confirm('Are you sure you want to logout?')">Logout</a>
+  <a href="add_clerk" style="float:right;margin-right:10px;">Add Clerk</a>
   Home
-
 @stop
