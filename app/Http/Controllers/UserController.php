@@ -35,10 +35,10 @@ class UserController extends Controller
             'password' => $requests->password,
           ]);
           if($attempt){
-            echo 'yehey';
+            return redirect('home');
           }
           else{
-            echo 'nah';
+            echo 'wrong password';
           }
         }
         else{

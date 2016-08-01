@@ -5,6 +5,7 @@
     <title>Login Here</title>
   </head>
   <body>
+    <center>
     {!! Form::open(array('route' => 'user.store'))!!}
             <h1>Login Form</h1>
             <div>
@@ -18,5 +19,6 @@
               <a class="reset_pass" href="#">Lost your password?</a>
             </div>
     {!! Form::close()!!}
+  </center>
   </body>
 </html>

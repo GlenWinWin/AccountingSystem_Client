@@ -19,4 +19,11 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
+Route::get('home',[
+  'middleware' => 'auth',
+  'uses' => 'PagesController@home'
+]);
+Route::get('logout',[
+  'uses' => 'UserController@logout'
+]);
 Route::resource('user','UserController',['only' => ['store','destroy']]);
