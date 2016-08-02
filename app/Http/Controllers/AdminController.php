@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-class AdminClerkDistributor extends Controller{
+class AdminController extends Controller{
     public function addClerk(){
       return view('clerk.addClerk');
     }

@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::post('acd/clerk_add', 'AdminClerkDistributor@addClerkProcess');
+Route::post('acd/clerk_add', 'AdminController@addClerkProcess');
 
 Route::get('login', function () {
   if(Auth::check()){
@@ -26,10 +26,10 @@ Route::get('home',[
 ]);
 Route::get('add_clerk',[
   'middleware' => 'auth',
-  'uses' => 'AdminClerkDistributor@addClerk'
+  'uses' => 'AdminController@addClerk'
 ]);
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
 Route::resource('user','UserController',['only' => ['store']]);
-Route::resource('acd','AdminClerkDistributor');
+Route::resource('acd','AdminController');

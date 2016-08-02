@@ -6,7 +6,7 @@
 @yield('nav')
 @section('body-content')
 <center>
-	{!! Form::open(array('action' => 'AdminClerkDistributor@addClerkProcess' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
+	{!! Form::open(array('action' => 'AdminController@addClerkProcess' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
 						<h1>Add Clerk here</h1>
 					<div>
 						<input type="text" name="first_name" placeholder="First Name" required="" />
