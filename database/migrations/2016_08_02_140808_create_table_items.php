@@ -17,9 +17,9 @@ class CreateTableItems extends Migration
         $table->string('item_category');
         $table->string('item_sub_category');
         $table->string('item_name');
-        $table->number('item_quantity');
-        $table->number('item_costPrice');
-        $table->number('item_sellingPrice');
+        $table->integer('item_quantity');
+        $table->integer('item_costPrice');
+        $table->integer('item_sellingPrice');
       });
     }
 

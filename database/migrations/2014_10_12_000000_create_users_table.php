@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('address');
             $table->string('contact',11);
-            $table->number('typeOfUser');
-            $table->number('channelPosition');
-            $table->number('distributor_id');
+            $table->integer('typeOfUser');
+            $table->integer('channelPosition');
+            $table->integer('distributor_id');
             $table->rememberToken();
             $table->timestamps();
         });

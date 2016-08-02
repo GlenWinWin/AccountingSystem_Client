@@ -25,9 +25,6 @@ Route::get('list_distributor', [
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfDistributor'
 ]);
-Route::get('items', function () {
-  return view('pages.items');
-});
 Route::get('list_clerk',[
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfClerk'

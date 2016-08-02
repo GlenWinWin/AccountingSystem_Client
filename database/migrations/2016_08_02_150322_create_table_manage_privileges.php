@@ -13,12 +13,12 @@ class CreateTableManagePrivileges extends Migration
     public function up()
     {
       Schema::create('manage_privileges', function (Blueprint $table) {
-        $table->number('clerk_id');
-        $table->number('sales_encoding');
-        $table->number('accout_registration');
-        $table->number('add_clerk');
-        $table->number('use_inventory');
-        $table->number('generate_report');
+        $table->integer('clerk_id');
+        $table->integer('sales_encoding');
+        $table->integer('accout_registration');
+        $table->integer('add_clerk');
+        $table->integer('use_inventory');
+        $table->integer('generate_report');
       });
     }
 

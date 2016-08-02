@@ -13,8 +13,8 @@ class CreateTableReceivings extends Migration
      public function up()
      {
        Schema::create('receivings', function (Blueprint $table) {
-         $table->number('clerk_id');
-         $table->number('receiving_id');
+         $table->integer('clerk_id');
+         $table->integer('receiving_id');
          $table->string('receiving_time');
        });
      }

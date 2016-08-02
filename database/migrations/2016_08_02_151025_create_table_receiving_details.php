@@ -14,11 +14,11 @@ class CreateTableReceivingDetails extends Migration
      {
        Schema::create('receiving_details', function (Blueprint $table) {
          $table->increments('receiving_id');
-         $table->number('item_id');
+         $table->integer('item_id');
          $table->string('item_name');
-         $table->number('receive_quantity');
-         $table->number('receive_subtotal');
-         $table->number('receive_total');
+         $table->integer('receive_quantity');
+         $table->integer('receive_subtotal');
+         $table->integer('receive_total');
        });
      }
 

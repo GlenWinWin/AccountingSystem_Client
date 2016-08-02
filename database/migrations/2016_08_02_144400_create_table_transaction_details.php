@@ -13,12 +13,12 @@ class CreateTableTransactionDetails extends Migration
     public function up()
     {
       Schema::create('transaction_details', function (Blueprint $table) {
-        $table->number('transaction_id');
-        $table->number('item_id');
+        $table->integer('transaction_id');
+        $table->integer('item_id');
         $table->string('item_name');
-        $table->number('transaction_quantity');
-        $table->number('transaction_sub_total');
-        $table->number('transaction_total');
+        $table->integer('transaction_quantity');
+        $table->integer('transaction_sub_total');
+        $table->integer('transaction_total');
       });
     }
 
