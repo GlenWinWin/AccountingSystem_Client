@@ -61,7 +61,7 @@
 
 		    <!-- Modal Password -->
 		    <div id="myModal-password" class="modal fade">
-		        <div class="modal-dialog">
+		        <div class="modal-dialog modal-sm">
 		            <div class="modal-content">
 		                <div class="modal-header" style="color:#b3cccc";>
 					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -70,8 +70,10 @@
 
 							<div class="form-group">
 							 <form class="form-inline">
-								<label for="inputPassword4">Password</label>
-								<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+
+								<center>	<label for="inputPassword4">Password</label>
+								<br>
+							<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline"></center>
 								<small id="passwordHelpInline" class="text-muted">
 								</small>
 								</form>
@@ -79,8 +81,10 @@
 
 							<div class="form-group">
 							 <form class="form-inline">
+								 <center>
 								<label for="inputPassword4">Repeat Password</label>
-								<input type="password1" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+								<br>
+							<input type="password1" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
 								<small id="passwordHelpInline" class="text-muted">
 								</small>
 								</form>
@@ -88,8 +92,10 @@
 
 							<div class="form-group">
 							 <form class="form-inline">
+								 	<center>
 								<label for="inputPassword4">Admin Password</label>
-								<input type="password2" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+								<br>
+								<input type="password2" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
 								<small id="passwordHelpInline" class="text-muted">
 								</small>
 								</form>

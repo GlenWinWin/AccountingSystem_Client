@@ -55,50 +55,56 @@
 	</center>
 </div>
 
-		    <!-- Modal Password -->
-		    <div id="myModal-password" class="modal fade">
-		        <div class="modal-dialog">
-		            <div class="modal-content">
-		                <div class="modal-header" style="color:#b3cccc";>
-					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title">Fill-up the fields:</h4>
-		                </div>
+<!-- Modal Password -->
+<div id="myModal-password" class="modal fade">
+		<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+						<div class="modal-header" style="color:#b3cccc";>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Fill-up the fields:</h4>
+						</div>
 
-							<div class="form-group">
-							 <form class="form-inline">
-								<label for="inputPassword4">Password</label>
-								<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
-								<small id="passwordHelpInline" class="text-muted">
-								</small>
-								</form>
-							</div>
+			<div class="form-group">
+			 <form class="form-inline">
 
-							<div class="form-group">
-							 <form class="form-inline">
-								<label for="inputPassword4">Repeat Password</label>
-								<input type="password1" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
-								<small id="passwordHelpInline" class="text-muted">
-								</small>
-								</form>
-							</div>
+				<center>	<label for="inputPassword4">Password</label>
+				<br>
+			<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline"></center>
+				<small id="passwordHelpInline" class="text-muted">
+				</small>
+				</form>
+			</div>
 
-							<div class="form-group">
-							 <form class="form-inline">
-								<label for="inputPassword4">Admin Password</label>
-								<input type="password2" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
-								<small id="passwordHelpInline" class="text-muted">
-								</small>
-								</form>
-							</div>
+			<div class="form-group">
+			 <form class="form-inline">
+				 <center>
+				<label for="inputPassword4">Repeat Password</label>
+				<br>
+			<input type="password1" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+				<small id="passwordHelpInline" class="text-muted">
+				</small>
+				</form>
+			</div>
+
+			<div class="form-group">
+			 <form class="form-inline">
+					<center>
+				<label for="inputPassword4">Admin Password</label>
+				<br>
+				<input type="password2" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+				<small id="passwordHelpInline" class="text-muted">
+				</small>
+				</form>
+			</div>
 
 
-		                <div class="modal-footer">
-						 <button type="button" class="btn btn-primary">Save changes</button>
-		                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
+						<div class="modal-footer">
+		 <button type="button" class="btn btn-primary">Save changes</button>
+						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+				</div>
+		</div>
+</div>
 <!--  Modal Change Password-->
 <!-- Modal delete -->
 <!-- Modal HTML -->

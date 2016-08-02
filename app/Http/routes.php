@@ -20,6 +20,7 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
+
 Route::get('list_distributor', [
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfDistributor'
