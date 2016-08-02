@@ -20,6 +20,9 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
+Route::get('distributor', function () {
+  return view('pages.distributor');
+});
 Route::get('home',[
   'middleware' => 'auth',
   'uses' => 'PagesController@home'
