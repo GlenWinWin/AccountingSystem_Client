@@ -20,8 +20,13 @@
     </head>
 
     <body>
-
-
+      @if( (Session::has('flash_message')) && (Session::get('flash_message') != 'has-error') )
+    <div class="alert alert-{{ Session::get('type_message') }} alert-dismissible fade in" id="viewAlert" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <strong>{{ strtoupper(Session::get('type_message') == 'danger' ? 'error' : Session::get('type_message')) }} : </strong> {!! Session::get('flash_message') !!}
+    </div>
+	   @endif
                             {!! Form::open(array('route' => 'user.store'))!!}
                             <!-- Top content -->
                             <div class="top-content">
@@ -81,3 +86,9 @@
     </body>
 
 </html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#viewAlert").fadeTo(3000, 500).fadeOut(500, function(){
+		});
+	});
+	</script>

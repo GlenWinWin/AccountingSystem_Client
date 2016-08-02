@@ -38,7 +38,10 @@ class UserController extends Controller
             return redirect('home');
           }
           else{
-            echo 'wrong password';
+            Session::flash('flash_message','Credentials Invalid');
+            Session::flash('type_message','danger');
+
+            return redirect('login')->withInput();
           }
         }
         else{
