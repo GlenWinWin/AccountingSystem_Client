@@ -1,7 +1,7 @@
 @extends('layouts.mylayout')
 
 @section('title')
-	Home
+	List of Distributor
 @stop
 
 @section('body-content')
@@ -162,17 +162,17 @@
 			</div>
 		<ul class="nav">
 			<li >
-				<a href="home">
+				<a href="list_clerk">
 				<i class="glyphicon glyphicon-user"></i>
 				Clerks </a>
 			</li>
 			<li class="active-sidebar">
-				<a href="distributor">
+				<a href="list_distributor">
 				<i class="glyphicon glyphicon-user"></i>
 			Distributors</a>
 			</li>
 			<li>
-				<a href="items">
+				<a href="list_items">
 				<i class="glyphicon glyphicon-user"></i>
 			Items</a>
 			</li>

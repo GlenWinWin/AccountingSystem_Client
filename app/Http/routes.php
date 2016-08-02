@@ -20,16 +20,22 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
-Route::get('distributor', function () {
-  return view('pages.distributor');
-});
+Route::get('list_distributor', [
+  'middleware' => 'auth',
+  'uses' => 'AdminController@listOfDistributor'
+]);
 Route::get('items', function () {
   return view('pages.items');
 });
-Route::get('home',[
+Route::get('list_clerk',[
   'middleware' => 'auth',
-  'uses' => 'PagesController@home'
+  'uses' => 'AdminController@listOfClerk'
 ]);
+Route::get('list_items',[
+  'middleware' => 'auth',
+  'uses' => 'AdminController@listOfItems'
+]);
+
 Route::get('add_clerk',[
   'middleware' => 'auth',
   'uses' => 'AdminController@addClerk'

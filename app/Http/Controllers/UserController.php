@@ -35,7 +35,7 @@ class UserController extends Controller
             'password' => $requests->password,
           ]);
           if($attempt){
-            return redirect('home');
+            return redirect('list_clerk');
           }
           else{
             Session::flash('flash_message','Credentials Invalid');
