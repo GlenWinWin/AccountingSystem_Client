@@ -6,9 +6,7 @@
 
 @section('body-content')
 <div class="col-lg-9">
-	<center><h1 style="padding-bottom:20px;">List of Clerks</h1></center>
-	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md">
-	<input type="button" name="name" value="Manage Priviliges" class="btn btn-primary btn-md">
+	<center><h1 style="padding-bottom:20px;">List of Distributor</h1></center>
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
 	<div class="search">
 	<input type="text" name="name" value="">
@@ -25,7 +23,7 @@
 				<th>Username</th>
 				<th>Password</th>
 				<th>Delete</th>
-				<th>Manage Priviliges</th>
+				<th>Total Sales</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,9 +36,9 @@
 				<td>joyth</td>
 				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
 				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Priviliges"  class="btn btn-primary btn-sm"></td>
+				<td>PHP. 12232,232.00</td>
 			</tr>
-			<tr>
+      <tr>
 				<td><input type="checkbox" name="name" value=""></td>
 				<th scope="row">joyth</th>
 				<td>joyth</td>
@@ -49,7 +47,7 @@
 				<td>joyth</td>
 				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
 				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Priviliges"  class="btn btn-primary btn-sm"></td>
+				<td>PHP. 12232,232.00</td>
 			</tr>
 
 
@@ -109,12 +107,12 @@
 				</div>
 			</div>
 		<ul class="nav">
-			<li class="active-sidebar">
+			<li >
 				<a href="home">
 				<i class="glyphicon glyphicon-user"></i>
 				Clerks </a>
 			</li>
-			<li>
+			<li class="active-sidebar">
 				<a href="distributor">
 				<i class="glyphicon glyphicon-user"></i>
 			Distributors</a>
