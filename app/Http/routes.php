@@ -24,6 +24,9 @@ Route::get('list_distributor', function () {
   'middleware' => 'auth',
   'uses' => 'AdminController@addClerk'
 });
+Route::get('items', function () {
+  return view('pages.items');
+});
 Route::get('home',[
   'middleware' => 'auth',
   'uses' => 'PagesController@home'
