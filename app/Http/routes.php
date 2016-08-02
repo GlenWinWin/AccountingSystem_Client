@@ -20,8 +20,9 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
-Route::get('distributor', function () {
-  return view('pages.distributor');
+Route::get('list_distributor', function () {
+  'middleware' => 'auth',
+  'uses' => 'AdminController@addClerk'
 });
 Route::get('home',[
   'middleware' => 'auth',

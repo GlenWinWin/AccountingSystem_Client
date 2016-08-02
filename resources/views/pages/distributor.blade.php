@@ -113,7 +113,7 @@
 				Clerks </a>
 			</li>
 			<li class="active-sidebar">
-				<a href="distributor">
+				<a href="list_distributor">
 				<i class="glyphicon glyphicon-user"></i>
 			Distributors</a>
 			</li>
