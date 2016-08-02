@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 class AdminController extends Controller{
+    public function listOfClerk(){
+      return view('clerk.listClerk');
+    }
+    public function listOfItems(){
+      return view('items.listOfItems');
+    }
+    public function listOfDistributor(){
+      return view('distributor.listOfDistributor');
+    }
     public function addClerk(){
       return view('clerk.addClerk');
     }
