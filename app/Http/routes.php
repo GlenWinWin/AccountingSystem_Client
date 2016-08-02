@@ -23,6 +23,9 @@ Route::get('login', function () {
 Route::get('distributor', function () {
   return view('pages.distributor');
 });
+Route::get('items', function () {
+  return view('pages.items');
+});
 Route::get('home',[
   'middleware' => 'auth',
   'uses' => 'PagesController@home'
