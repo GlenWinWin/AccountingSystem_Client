@@ -28,6 +28,7 @@
 				<th>Manage Priviliges</th>
 			</tr>
 		</thead>
+
 		<tbody>
 			<tr>
 				<td><input type="checkbox" name="name" value=""></td>
@@ -36,21 +37,11 @@
 				<td>joyth@yahoo.com</td>
 				<td>joyth</td>
 				<td>joyth</td>
-				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Priviliges"  class="btn btn-primary btn-sm"></td>
+				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
+				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
+				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" value="Manage Privileges"></td>
 			</tr>
-			<tr>
-				<td><input type="checkbox" name="name" value=""></td>
-				<th scope="row">joyth</th>
-				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>joyth</td>
-				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Priviliges"  class="btn btn-primary btn-sm"></td>
-			</tr>
+
 
 
 		</tbody>
@@ -67,7 +58,143 @@
 		</ul>
 	</center>
 </div>
-  Home
+
+		    <!-- Modal Password -->
+		    <div id="myModal-password" class="modal fade">
+		        <div class="modal-dialog">
+		            <div class="modal-content">
+		                <div class="modal-header" style="color:#b3cccc";>
+					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">Fill-up the fields:</h4>
+		                </div>
+
+							<div class="form-group">
+							 <form class="form-inline">
+								<label for="inputPassword4">Password</label>
+								<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+								<small id="passwordHelpInline" class="text-muted">
+								</small>
+								</form>
+							</div>
+
+							<div class="form-group">
+							 <form class="form-inline">
+								<label for="inputPassword4">Repeat Password</label>
+								<input type="password1" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+								<small id="passwordHelpInline" class="text-muted">
+								</small>
+								</form>
+							</div>
+
+							<div class="form-group">
+							 <form class="form-inline">
+								<label for="inputPassword4">Admin Password</label>
+								<input type="password2" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+								<small id="passwordHelpInline" class="text-muted">
+								</small>
+								</form>
+							</div>
+
+
+		                <div class="modal-footer">
+						 <button type="button" class="btn btn-primary">Save changes</button>
+		                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+<!--  Modal Change Password-->
+<!--  Modal Change Priviliges-->
+<div id="myModal-priviliges" class="modal fade">
+		<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header" style="color:#b3cccc";>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Check the privileges you will allow:</h4>
+						</div>
+
+
+		 <div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox"/>Sales Encoding</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox"/>Account Registration</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox"/>Add Clerk</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox"/>Use Inventory</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox"/>Generate Reports</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+		 <button type="button" class="btn btn-primary">Save changes</button>
+						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+				</div>
+		</div>
+</div>
+<!--  modal priviliges-->
+
+  <!-- Modal delete -->
+	<!-- Modal HTML -->
+	<div id="myModal-delete" class="modal fade">
+			<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+							<div class="modal-header" style="color:#b3cccc";>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Are you sure you want to delete <&name>?</h4>
+							</div>
+
+
+							<div class="modal-footer">
+			 <button type="button" class="btn btn-primary">Yes</button>
+			 <button type="button" class="btn btn-primary">No</button>
+							</div>
+					</div>
+			</div>
+	</div>
+	<!-- Modal Delete -->
 @stop
 @section('nav')
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -140,4 +267,34 @@
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/sidebar.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.open-modal-password').click(function(){
+			$('#myModal-password').modal('show');
+		});
+	    $("#myModal-password").on('hidden.bs.modal', function(){
+			<!--alert("Modal window has been completely closed.");-->
+		});
+	});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.open-modal-priviliges').click(function(){
+			$('#myModal-priviliges').modal('show');
+		});
+	    $("#myModal-priviliges").on('hidden.bs.modal', function(){
+			<!--alert("Modal window has been completely closed.");-->
+		});
+	});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.open-modal-delete').click(function(){
+			$('#myModal-delete').modal('show');
+		});
+	    $("#myModal-delete").on('hidden.bs.modal', function(){
+			<!--alert("Modal window has been completely closed.");-->
+		});
+	});
+	</script>
 @stop

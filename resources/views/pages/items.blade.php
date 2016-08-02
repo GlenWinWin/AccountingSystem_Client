@@ -8,7 +8,7 @@
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">List of Items</h1></center>
   <div class="dropdown">
-             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="/page.html">
+             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#" href="/page.html">
                  Category<span class="caret"></span>
              </a>
      		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
@@ -28,11 +28,12 @@
                  </ul>
                </li>
              </ul>
+             <div class="search">
+             <input type="text" name="name" value="">
+             <input type="button" name="name" value="Search" class="btn btn-primary btn-md">
+             </div>
          </div>
-	<div class="search">
-	<input type="text" name="name" value="">
-	<input type="button" name="name" value="Search" class="btn btn-primary btn-md">
-	</div>
+
 	<table class="table table-design">
 		<thead class="thead">
 			<tr>
