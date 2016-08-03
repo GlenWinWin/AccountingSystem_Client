@@ -7,7 +7,7 @@
 @section('body-content')
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">List of Clerks</h1></center>
-
+<hr>
 	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md">
 	<input type="button" name="name" value="Manage Priviliges" class="btn btn-primary btn-md">
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">

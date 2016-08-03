@@ -7,6 +7,7 @@
 @section('body-content')
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">List of Items</h1></center>
+	<hr>
   <div class="dropdown">
              <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#" href="/page.html">
                  Category<span class="caret"></span>

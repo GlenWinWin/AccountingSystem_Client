@@ -7,6 +7,7 @@
 @section('body-content')
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">List of Distributor</h1></center>
+	<hr>
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
 	<div class="search">
 	<input type="text" name="name" value="">
