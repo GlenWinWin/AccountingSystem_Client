@@ -87,5 +87,4 @@
 		</ul>
 	</center>
 </div>
-  Home
 @stop

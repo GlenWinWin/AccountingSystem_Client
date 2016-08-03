@@ -80,7 +80,7 @@
 				 <center>
 				<label for="inputPassword4">Repeat Password</label>
 				<br>
-			<input type="password1" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+			<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
 				<small id="passwordHelpInline" class="text-muted">
 				</small>
 				</form>
@@ -91,7 +91,7 @@
 					<center>
 				<label for="inputPassword4">Admin Password</label>
 				<br>
-				<input type="password2" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+				<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
 				<small id="passwordHelpInline" class="text-muted">
 				</small>
 				</form>
@@ -113,13 +113,13 @@
         <div class="modal-content">
             <div class="modal-header" style="color:#b3cccc";>
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Are you sure you want to delete <&name>?</h4>
+            <h4 class="modal-title">Are you sure you want to delete?</h4>
             </div>
 
 
             <div class="modal-footer">
      <button type="button" class="btn btn-primary">Yes</button>
-     <button type="button" class="btn btn-primary">No</button>
+     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
