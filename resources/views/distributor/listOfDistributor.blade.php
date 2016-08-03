@@ -13,7 +13,8 @@
 	<input type="text" name="name" value="">
 	<input type="button" name="name" value="Search" class="btn btn-primary btn-md">
 	</div>
-	<table class="table table-design" id="tab1">
+	<div class="table-responsive">
+	<table class="table" id="tab1">
 		<thead class="thead">
 			<tr>
 				<th><input type="checkbox" value="" name="checkAll" id="checkAll"></th>
@@ -21,10 +22,11 @@
 				<th>Contact</th>
 				<th>Email</th>
 				<th>Address</th>
+				<th>Total Sales</th>
 				<th>Username</th>
 				<th>Password</th>
 				<th>Delete</th>
-				<th>Total Sales</th>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -34,10 +36,10 @@
 				<td>joyth</td>
 				<td>joyth@yahoo.com</td>
 				<td>joyth</td>
+				<td>PHP. 12232,232.00</td>
 				<td>joyth</td>
         <td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
 				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
-				<td>PHP. 12232,232.00</td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="name" value="" id="checkone"></td>
@@ -45,10 +47,10 @@
 				<td>joyth</td>
 				<td>joyth@yahoo.com</td>
 				<td>joyth</td>
+				<td>PHP. 12232,232.00</td>
 				<td>joyth</td>
 				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
 				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
-				<td>PHP. 12232,232.00</td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="name" value="" id="checkone"></td>
@@ -56,18 +58,20 @@
 				<td>joyth</td>
 				<td>joyth@yahoo.com</td>
 				<td>joyth</td>
-				<td>joyth</td>
-        <td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
-				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
 				<td>PHP. 12232,232.00</td>
+				<td>joyth</td>
+				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
+				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
 			</tr>
+
 
 		</tbody>
 	</table>
+	</div>
 	<center>
 		<ul class="pagination pagination-color">
-			<li><a href="#"><<</a></li>
-			<li><a href="#">1</a></li>
+			<li ><a href="#"><<</a></li>
+			<li class="active"><a href="#">1</a></li>
 			<li><a href="#">2</a></li>
 			<li><a href="#">3</a></li>
 			<li><a href="#">4</a></li>
@@ -75,8 +79,8 @@
 			<li><a href="#">>></a></li>
 		</ul>
 	</center>
-</div>
 
+</div>
 <!-- Modal Password -->
 <div id="myModal-password" class="modal fade">
 		<div class="modal-dialog modal-sm">

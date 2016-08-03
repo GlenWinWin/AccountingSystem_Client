@@ -29,68 +29,61 @@
                  </ul>
                </li>
              </ul>
-             <div class="search">
+						 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
+             <div class="search" style="display:block;">
              <input type="text" name="name" value="">
              <input type="button" name="name" value="Search" class="btn btn-primary btn-md">
              </div>
-         </div>
 
-	<table class="table table-design" id="tab1">
+         </div>
+<div class="table-responsive">
+
+	<table class="table" id="tab1">
 		<thead class="thead">
 			<tr>
 				<th><input type="checkbox" value="" name="checkAll" id="checkAll"></th>
-				<th>Name</th>
-				<th>Contact</th>
-				<th>Email</th>
-				<th>Address</th>
-				<th>Username</th>
-				<th>Password</th>
+				<th>Item ID</th>
+				<th>Item Name</th>
+				<th>Quantity</th>
+				<th>Cost Price</th>
+				<th>Sub Cost Price</th>
+				<th>Selling Price</th>
+				<th>Edit</th>
 				<th>Delete</th>
-				<th>Total Sales</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td><input type="checkbox" id="checkone" value=""></td>
-				<th scope="row">joyth</th>
+				<th scope="row">1</th>
 				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>joyth</td>
-				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
+				<td>25</td>
 				<td>PHP. 12232,232.00</td>
+				<td>PHP. 12232,232.00</td>
+				<td>PHP. 12232,232.00</td>
+				<td><input type="button" name="name" value="Edit" class="btn btn-primary btn-sm"></td>
+				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" id="checkone" value=""></td>
-				<th scope="row">joyth</th>
+				<th scope="row">1</th>
 				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>joyth</td>
-				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
+				<td>25</td>
 				<td>PHP. 12232,232.00</td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" id="checkone" value=""></td>
-				<th scope="row">joyth</th>
-				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>joyth</td>
-				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
 				<td>PHP. 12232,232.00</td>
+				<td>PHP. 12232,232.00</td>
+				<td><input type="button" name="name" value="Edit" class="btn btn-primary btn-sm"></td>
+				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
 			</tr>
-
 
 		</tbody>
 	</table>
+
+	</div>
 	<center>
 		<ul class="pagination pagination-color">
-			<li><a href="#"><<</a></li>
-			<li><a href="#">1</a></li>
+			<li ><a href="#"><<</a></li>
+			<li class="active"><a href="#">1</a></li>
 			<li><a href="#">2</a></li>
 			<li><a href="#">3</a></li>
 			<li><a href="#">4</a></li>

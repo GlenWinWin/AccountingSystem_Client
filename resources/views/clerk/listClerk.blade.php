@@ -15,7 +15,8 @@
 	<input type="text" name="name" value="">
 	<input type="button" name="name" value="Search" class="btn btn-primary btn-md">
 	</div>
-	<table class="table table-design" id="tab1">
+	<div class="table-responsive">
+	<table class="table" id="tab1">
 		<thead class="thead">
 			<tr >
 				<th><input type="checkbox" name="name" value="" name="checkAll" id="checkAll"></th>
@@ -59,10 +60,11 @@
 
 		</tbody>
 	</table>
+	</div>
 	<center>
 		<ul class="pagination pagination-color">
 			<li><a href="#"><<</a></li>
-			<li><a href="#">1</a></li>
+			<li class="active"><a href="#">1</a></li>
 			<li><a href="#">2</a></li>
 			<li><a href="#">3</a></li>
 			<li><a href="#">4</a></li>
