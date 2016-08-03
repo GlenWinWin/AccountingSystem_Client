@@ -11,6 +11,8 @@
 |
 */
 Route::post('admin/clerk_add', 'AdminController@addClerkProcess');
+Route::post('admin/clerk_search', 'AdminController@searchClerk');
+
 
 Route::get('login', function () {
   if(Auth::check()){
@@ -21,15 +23,15 @@ Route::get('login', function () {
 	}
 });
 
-Route::get('list_distributor', [
+Route::get('admin/list_distributor', [
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfDistributor'
 ]);
-Route::get('list_clerk',[
+Route::get('admin/list_clerk',[
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfClerk'
 ]);
-Route::get('list_items',[
+Route::get('admin/list_items',[
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfItems'
 ]);
@@ -37,13 +39,24 @@ Route::get('edit_profile',[
   'middleware' => 'auth',
   'uses' => 'UserController@edit_profile'
 ]);
-
 Route::get('add_clerk',[
   'middleware' => 'auth',
   'uses' => 'AdminController@addClerk'
 ]);
+
+Route::get('subCategory_head',[
+  'middleware' => 'auth',
+  'uses' => 'ItemsController@subCategory_head'
+]);
+
+Route::get('subCategory_eye',[
+  'middleware' => 'auth',
+  'uses' => 'ItemsController@subCategory_eye'
+]);
+
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
 Route::resource('user','UserController',['only' => ['store']]);
 Route::resource('admin','AdminController');
+Route::resource('items','ItemsController');

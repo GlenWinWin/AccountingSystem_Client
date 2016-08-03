@@ -30,41 +30,19 @@
 			</tr>
 		</thead>
 		<tbody>
+			@foreach($distributors as $distributorss)
       <tr>
 				<td><input type="checkbox" name="name" value="" id="checkone"></td>
-				<th scope="row">joyth</th>
-				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>PHP. 12232,232.00</td>
-				<td>joyth</td>
+				<th scope="row">{{$distributorss->fname}} {{$distributorss->lname}}</th>
+				<td>{{$distributorss->contact}}</td>
+				<td>{{$distributorss->email}}</td>
+				<td>{{$distributorss->address}}</td>
+				<td>PHP {{$distributorss->totalSales}}</td>
+				<td>{{$distributorss->username}}</td>
         <td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
 				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
 			</tr>
-			<tr>
-				<td><input type="checkbox" name="name" value="" id="checkone"></td>
-				<th scope="row">joyth</th>
-				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>PHP. 12232,232.00</td>
-				<td>joyth</td>
-				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
-				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" name="name" value="" id="checkone"></td>
-				<th scope="row">joyth</th>
-				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>PHP. 12232,232.00</td>
-				<td>joyth</td>
-				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
-				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
-			</tr>
-
-
+			@endforeach
 		</tbody>
 	</table>
 	</div>

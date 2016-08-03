@@ -4,30 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Clerk;
+use App\Distributor;
+use App\Items;
 
 class AdminController extends Controller{
     public function listOfClerk(){
-      return view('clerk.listClerk');
+      $clerks = Clerk::where('typeOfUser', '=', 1)->get();
+      return view('clerk.listClerk')->with('clerks',$clerks);
     }
     public function listOfItems(){
-      return view('items.listOfItems');
+      $items = Items::all();
+      return view('items.listOfItems')->with('items',$items);
     }
     public function listOfDistributor(){
-      return view('distributor.listOfDistributor');
+      $distributors = Distributor::where('typeOfUser', '=', 2)->get();
+      return view('distributor.listOfDistributor')->with('distributors',$distributors);
+    }
+    public function searchClerk(Request $requests){
+      $keyword = $requests->search;
+      $searchClerk = Clerk::where('typeOfUser','=',1)->where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->get();
+      $title = "Results for search...";
+      return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title);
     }
     public function addClerk(){
       return view('clerk.addClerk');
     }
     public function addClerkProcess(Request $requests){
-      $fname = $requests->first_name;
-      $lname = $requests->last_name;
+      $fname = $requests->fname;
+      $lname = $requests->lname;
       $username = 'c_'.substr(strtolower($fname),0,1).strtolower($lname);
       $password = $this->createRandomPassword();
+      $contact = $requests->contact;
+      $email = $requests->email;
+      $address = $requests->address;
 
-      echo 'First Name : ' . $fname.'<br>';
-      echo 'Last Name : ' . $lname.'<br>';
-      echo 'Username : ' . $username.'<br>';
-      echo 'Password : ' . $password.'<br>';
+      $addClerkQuery = new Clerk;
+      $addClerkQuery->fname = $fname;
+      $addClerkQuery->lname = $lname;
+      $addClerkQuery->email = $email;
+      $addClerkQuery->username = $username;
+      $addClerkQuery->password = $password;
+      $addClerkQuery->contact = $contact;
+      $addClerkQuery->address = $address;
+      $addClerkQuery->typeOfUser = 1;
+      $addClerkQuery->profile_path = 'assets/images/user.png';
+      $addClerkQuery->save();
+
+      return redirect('list_clerk');
     }
     public function createRandomPassword() {
 

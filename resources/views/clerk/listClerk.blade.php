@@ -1,19 +1,31 @@
 @extends('layouts.mylayout')
 
 @section('title')
+	@if(isset($title))
+		{{$title}}
+	@else
 	List of Clerks
+	@endif
 @stop
 
 @section('body-content')
 <div class="col-lg-9">
-	<center><h1 style="padding-bottom:20px;">List of Clerks</h1></center>
+	<center><h1 style="padding-bottom:20px;">
+		@if(isset($title))
+			{{$title}}
+		@else
+		List of Clerks
+		@endif
+	</h1></center>
 <hr>
-	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md">
+	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
 	<input type="button" name="name" value="Manage Priviliges" class="btn btn-primary btn-md">
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
 	<div class="search">
-	<input type="text" name="name" value="">
-	<input type="button" name="name" value="Search" class="btn btn-primary btn-md">
+		{!! Form::open(array('action' => 'AdminController@searchClerk' , 'method' => 'post'))!!}
+	<input type="text" name="search" placeholder="Search...">
+	<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">
 	<table class="table" id="tab1">
@@ -30,34 +42,20 @@
 				<th>Manage Priviliges</th>
 			</tr>
 		</thead>
-
 		<tbody>
+			@foreach($clerks as $clerkss)
 			<tr>
 				<td><input type="checkbox" name="name" value="" id="checkone"></td>
-				<th scope="row">joyth</th>
-				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>joyth</td>
+				<th scope="row">{{$clerkss->fname}} {{$clerkss->lname}}</th>
+				<td>{{$clerkss->contact}}</td>
+				<td>{{$clerkss->email}}</td>
+				<td>{{$clerkss->address}}</td>
+				<td>{{$clerkss->username}}</td>
 				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
 				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" value="Manage Privileges"></td>
 			</tr>
-			<tr>
-				<td><input type="checkbox" name="name" value="" id="checkone"></td>
-				<th scope="row">joyth</th>
-				<td>joyth</td>
-				<td>joyth@yahoo.com</td>
-				<td>joyth</td>
-				<td>joyth</td>
-				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
-				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" value="Manage Privileges"></td>
-			</tr>
-
-
-
-
+			@endforeach
 		</tbody>
 	</table>
 	</div>
@@ -196,6 +194,35 @@
 		</div>
 </div>
 <!--  modal priviliges-->
+<!--  Modal Add Clerks-->
+<div id="myModal-addClerk" class="modal fade">
+		<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Add Clerk</h4>
+						</div>
+
+						<div class="modal-body">
+								<div class="form-group">
+									{!! Form::open(array('action' => 'AdminController@addClerkProcess' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
+											<input type="text" name="fname" placeholder="First Name" required=""><br>
+											<input type="text" name="lname" placeholder="Last Name" required=""><br>
+											<input type="text" name="contact" placeholder="Contact Number" required=""><br>
+											<input type="email" name="email" placeholder="Email Address" required=""><br>
+											<textarea name="address" placeholder="Address here..." rows="8" cols="40" required=""></textarea><br>
+											<button>Add Clerk</button>
+									{!! Form::close()!!}
+								</div>
+						</div>
+						<div class="modal-footer">
+		 <button type="button" class="btn btn-primary">Submit</button>
+						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+				</div>
+		</div>
+</div>
+<!--  modal add clerk-->
 
   <!-- Modal delete -->
 	<!-- Modal HTML -->

@@ -1,12 +1,22 @@
 @extends('layouts.mylayout')
 
 @section('title')
-	List of Items
+		@if(isset($title))
+			{{$title}}
+		@else
+			List Of Items
+		@endif
 @stop
 
 @section('body-content')
 <div class="col-lg-9">
-	<center><h1 style="padding-bottom:20px;">List of Items</h1></center>
+	<center><h1 style="padding-bottom:20px;">
+		@if(isset($title))
+			{{$title}}
+		@else
+			List Of Items
+		@endif
+	</h1></center>
 	<hr>
   <div class="dropdown">
              <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#" href="/page.html">
@@ -16,8 +26,8 @@
                <li class="dropdown-submenu">
                  <a tabindex="-1" href="#">Safety Equipments</a>
                  <ul class="dropdown-menu">
-                   <li><a tabindex="-1" href="#">Head</a></li>
-                   <li><a href="#">Eye</a></li>
+                   <li><a tabindex="-1" href="subCategory_head">Head</a></li>
+                   <li><a href="subCategory_eye">Eye</a></li>
                    <li><a href="#">Eyewash</a></li>
                    <li><a href="#">Ear</a></li>
                    <li><a href="#">Respiratory</a></li>
@@ -42,7 +52,6 @@
 		<thead class="thead">
 			<tr>
 				<th><input type="checkbox" value="" name="checkAll" id="checkAll"></th>
-				<th>Item ID</th>
 				<th>Item Name</th>
 				<th>Quantity</th>
 				<th>Cost Price</th>
@@ -53,29 +62,18 @@
 			</tr>
 		</thead>
 		<tbody>
+			@foreach($items as $itemss)
 			<tr>
 				<td><input type="checkbox" id="checkone" value=""></td>
-				<th scope="row">1</th>
-				<td>joyth</td>
-				<td>25</td>
-				<td>PHP. 12232,232.00</td>
-				<td>PHP. 12232,232.00</td>
-				<td>PHP. 12232,232.00</td>
+				<td>{{$itemss->item_name}}</td>
+				<td>{{$itemss->item_quantity}}</td>
+				<td>PHP {{$itemss->item_costPrice}}</td>
+				<td>PHP {{$itemss->item_subcostPrice}}</td>
+				<td>PHP {{$itemss->item_sellingPrice}}</td>
 				<td><input type="button" name="name" value="Edit" class="btn btn-primary btn-sm"></td>
 				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
 			</tr>
-			<tr>
-				<td><input type="checkbox" id="checkone" value=""></td>
-				<th scope="row">1</th>
-				<td>joyth</td>
-				<td>25</td>
-				<td>PHP. 12232,232.00</td>
-				<td>PHP. 12232,232.00</td>
-				<td>PHP. 12232,232.00</td>
-				<td><input type="button" name="name" value="Edit" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
-			</tr>
-
+			@endforeach
 		</tbody>
 	</table>
 
