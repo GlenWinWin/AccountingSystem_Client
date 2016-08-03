@@ -14,7 +14,8 @@ class UserTAbleSeeder extends Seeder
       DB::table('users')->insert([
       	'email' => 'glenwinbernabe@gmail.com',
         'username' => 'admin',
-        'name' => 'Glenwin G. Bernabe',
+        'fname' => 'Glenwin',
+        'lname' => 'Bernabe',
       	'password' => Hash::make('admin'),
         'profile_path' => 'assets/images/admin.png'
       	]);
