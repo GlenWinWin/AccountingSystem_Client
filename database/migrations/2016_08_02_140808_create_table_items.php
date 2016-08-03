@@ -18,8 +18,8 @@ class CreateTableItems extends Migration
         $table->string('item_sub_category');
         $table->string('item_name');
         $table->integer('item_quantity');
-        $table->integer('item_costPrice');
-        $table->integer('item_sellingPrice');
+        $table->double('item_costPrice');
+        $table->double('item_sellingPrice');
       });
     }
 
