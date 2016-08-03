@@ -35,10 +35,10 @@
              </div>
          </div>
 
-	<table class="table table-design">
+	<table class="table table-design" id="tab1">
 		<thead class="thead">
 			<tr>
-				<th><input type="checkbox" name="name" value=""></th>
+				<th><input type="checkbox" value="" name="checkAll" id="checkAll"></th>
 				<th>Name</th>
 				<th>Contact</th>
 				<th>Email</th>
@@ -51,7 +51,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="checkbox" name="name" value=""></td>
+				<td><input type="checkbox" id="checkone" value=""></td>
 				<th scope="row">joyth</th>
 				<td>joyth</td>
 				<td>joyth@yahoo.com</td>
@@ -61,8 +61,19 @@
 				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
 				<td>PHP. 12232,232.00</td>
 			</tr>
-      <tr>
-				<td><input type="checkbox" name="name" value=""></td>
+			<tr>
+				<td><input type="checkbox" id="checkone" value=""></td>
+				<th scope="row">joyth</th>
+				<td>joyth</td>
+				<td>joyth@yahoo.com</td>
+				<td>joyth</td>
+				<td>joyth</td>
+				<td><input type="button" name="name" value="Password" class="btn btn-primary btn-sm"></td>
+				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
+				<td>PHP. 12232,232.00</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="checkone" value=""></td>
 				<th scope="row">joyth</th>
 				<td>joyth</td>
 				<td>joyth@yahoo.com</td>
