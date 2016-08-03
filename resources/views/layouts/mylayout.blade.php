@@ -18,7 +18,7 @@
     						<span class="icon-bar"></span>
     						<span class="icon-bar"></span>
     		</a>
-    			<a class="navbar-brand" href="#">
+    			<a class="navbar-brand" href="list_clerk">
     				logo
     			</a>
     		</div>
@@ -27,7 +27,7 @@
     				<li class="dropdown">
     											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
     											<ul class="dropdown-menu">
-    												<li><a href="#">Edit Profile</a></li>
+    												<li><a href="edit_profile">Edit Profile</a></li>
     												<li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
     											</ul>
     										</li>
