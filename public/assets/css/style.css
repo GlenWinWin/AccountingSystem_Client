@@ -234,7 +234,6 @@ a:hover{
 }
 .table-design{
   margin-top: 20px;
-  overflow-y: auto;
 }
 /*genealogy*/
 .genealogy{
@@ -305,4 +304,8 @@ border-color: #2d4668;
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
+}
+/*Modal*/
+.modal-title{
+  color:#000;
 }

@@ -7,6 +7,7 @@
 @section('body-content')
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">List of Clerks</h1></center>
+
 	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md">
 	<input type="button" name="name" value="Manage Priviliges" class="btn btn-primary btn-md">
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
@@ -14,9 +15,9 @@
 	<input type="text" name="name" value="">
 	<input type="button" name="name" value="Search" class="btn btn-primary btn-md">
 	</div>
-	<table class="table table-design">
+	<table class="table table-design" >
 		<thead class="thead">
-			<tr>
+			<tr >
 				<th><input type="checkbox" name="name" value=""></th>
 				<th>Name</th>
 				<th>Contact</th>
@@ -114,7 +115,7 @@
 <div id="myModal-priviliges" class="modal fade">
 		<div class="modal-dialog">
 				<div class="modal-content">
-						<div class="modal-header" style="color:#b3cccc";>
+						<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Check the privileges you will allow:</h4>
 						</div>
@@ -201,106 +202,4 @@
 			</div>
 	</div>
 	<!-- Modal Delete -->
-@stop
-@section('nav')
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container">
-	<div class="navbar-header">
-		<a id="menu-toggle" href="#" class="navbar-toggle">
-				<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-		</a>
-			<a class="navbar-brand" href="#">
-				logo
-			</a>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse ">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">Edit Profile</a></li>
-												<li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
-											</ul>
-										</li>
-
-			</ul>
-		</div>
-	</div>
-</nav>
-	<div class=" col-lg-3">
-
-	<div id="sidebar-wrapper" class="sidebar-toggle">
-			<div class="profile-userpic">
-				<img src="assets/images/joyth.jpg" class="img-responsive" alt="">
-			</div>
-			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">
-					Administrator
-				</div>
-			</div>
-		<ul class="nav">
-			<li class="active-sidebar">
-				<a href="list_clerk">
-				<i class="glyphicon glyphicon-user"></i>
-				Clerks </a>
-			</li>
-			<li>
-				<a href="list_distributor">
-				<i class="glyphicon glyphicon-user"></i>
-			Distributors</a>
-			</li>
-			<li>
-				<a href="list_items">
-				<i class="glyphicon glyphicon-user"></i>
-			Items</a>
-			</li>
-
-
-	</div>
-</div>
-@stop
-
-@section('css')
-
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-     <link rel="stylesheet" href="assets/css/style.css" media="screen" title="no title" charset="utf-8">
-     <link rel="stylesheet" href="assets/fonts/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
-@stop
-@section('javascript')
-<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/sidebar.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$('.open-modal-password').click(function(){
-			$('#myModal-password').modal('show');
-		});
-	    $("#myModal-password").on('hidden.bs.modal', function(){
-			<!--alert("Modal window has been completely closed.");-->
-		});
-	});
-	</script>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$('.open-modal-priviliges').click(function(){
-			$('#myModal-priviliges').modal('show');
-		});
-	    $("#myModal-priviliges").on('hidden.bs.modal', function(){
-			<!--alert("Modal window has been completely closed.");-->
-		});
-	});
-	</script>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$('.open-modal-delete').click(function(){
-			$('#myModal-delete').modal('show');
-		});
-	    $("#myModal-delete").on('hidden.bs.modal', function(){
-			<!--alert("Modal window has been completely closed.");-->
-		});
-	});
-	</script>
 @stop
