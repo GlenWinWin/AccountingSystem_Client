@@ -40,7 +40,7 @@
 
     	<div id="sidebar-wrapper" class="sidebar-toggle">
     			<div class="profile-userpic">
-    				<img src="assets/images/joyth.jpg" class="img-responsive" alt="">
+    				<img src="assets/images/admin.png" class="img-responsive" alt="">
     			</div>
     			<div class="profile-usertitle">
     				<div class="profile-usertitle-name">

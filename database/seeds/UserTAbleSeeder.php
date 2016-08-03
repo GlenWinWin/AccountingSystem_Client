@@ -15,7 +15,8 @@ class UserTAbleSeeder extends Seeder
       	'email' => 'glenwinbernabe@gmail.com',
         'username' => 'admin',
         'name' => 'Glenwin G. Bernabe',
-      	'password' => Hash::make('admin')
+      	'password' => Hash::make('admin'),
+        'profile_path' => 'assets/images/admin.png'
       	]);
     }
 }

@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->double('totalSales');
             $table->integer('totalNewMemberMonth');
             $table->integer('totalNewMember');
+            $table->string('profile_path');
             $table->rememberToken();
             $table->timestamps();
         });
