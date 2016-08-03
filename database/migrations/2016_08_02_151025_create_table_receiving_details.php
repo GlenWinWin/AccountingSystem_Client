@@ -17,8 +17,8 @@ class CreateTableReceivingDetails extends Migration
          $table->integer('item_id');
          $table->string('item_name');
          $table->integer('receive_quantity');
-         $table->integer('receive_subtotal');
-         $table->integer('receive_total');
+         $table->double('receive_subtotal');
+         $table->double('receive_total');
        });
      }
 

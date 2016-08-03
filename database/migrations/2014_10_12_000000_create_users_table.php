@@ -23,6 +23,12 @@ class CreateUsersTable extends Migration
             $table->integer('typeOfUser');
             $table->integer('channelPosition');
             $table->integer('distributor_id');
+            $table->integer('connectCounter');
+            $table->integer('monthCounter');
+            $table->double('totalSalesMonth');
+            $table->double('totalSales');
+            $table->integer('totalNewMemberMonth');
+            $table->integer('totalNewMember');
             $table->rememberToken();
             $table->timestamps();
         });

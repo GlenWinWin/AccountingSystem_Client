@@ -17,8 +17,8 @@ class CreateTableSalesDetails extends Migration
          $table->integer('item_id');
          $table->string('item_description');
          $table->integer('sales_quantity');
-         $table->integer('sales_total');
-         $table->integer('sales_subtotal');
+         $table->double('sales_total');
+         $table->double('sales_subtotal');
        });
      }
 

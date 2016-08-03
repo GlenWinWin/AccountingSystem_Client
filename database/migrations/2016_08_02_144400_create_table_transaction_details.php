@@ -17,8 +17,8 @@ class CreateTableTransactionDetails extends Migration
         $table->integer('item_id');
         $table->string('item_name');
         $table->integer('transaction_quantity');
-        $table->integer('transaction_sub_total');
-        $table->integer('transaction_total');
+        $table->double('transaction_sub_total');
+        $table->double('transaction_total');
       });
     }
 
