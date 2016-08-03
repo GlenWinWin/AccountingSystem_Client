@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::post('acd/clerk_add', 'AdminController@addClerkProcess');
+Route::post('admin/clerk_add', 'AdminController@addClerkProcess');
 
 Route::get('login', function () {
   if(Auth::check()){
@@ -46,4 +46,4 @@ Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
 Route::resource('user','UserController',['only' => ['store']]);
-Route::resource('acd','AdminController');
+Route::resource('admin','AdminController');
