@@ -53,4 +53,7 @@ class UserController extends Controller
       Auth::logout();
       return redirect('login');
     }
+    public function edit_profile(){
+      return view('settings.edit_profile');
+    }
 }

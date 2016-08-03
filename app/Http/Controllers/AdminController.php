@@ -18,9 +18,6 @@ class AdminController extends Controller{
     public function addClerk(){
       return view('clerk.addClerk');
     }
-    public function edit_profile(){
-      return view('settings.edit_profile');
-    }
     public function addClerkProcess(Request $requests){
       $fname = $requests->first_name;
       $lname = $requests->last_name;

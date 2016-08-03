@@ -35,7 +35,7 @@ Route::get('list_items',[
 ]);
 Route::get('edit_profile',[
   'middleware' => 'auth',
-  'uses' => 'AdminController@edit_profile'
+  'uses' => 'UserController@edit_profile'
 ]);
 
 Route::get('add_clerk',[
