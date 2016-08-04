@@ -65,6 +65,24 @@ class AdminController extends Controller{
 
       return redirect('list_clerk');
     }
+    public function changePasswordAccount(Request $requests){
+      $id = $requests->specific_id;
+      $newPassword = $requests->new_password;
+      $changePwordAccount = User::where('id','=',$id)->update(['password'=>Hash::make($newPassword)]);
+      return redirect()->back();
+    }
+    public function editItem(Request $requests){
+      $item_id = $requests->id_item;
+      $item_name = $requests->name_item;
+      $item_quantity = $requests->quantity_item;
+      $item_costPrice = $requests->costPrice_item;
+      $item_subcostPrice = $requests->subcostPrice_item;
+      $item_sellingPrice = $requests->sellingPrice_item;
+      $editItem = Items::where('item_id','=',$item_id)->update(['item_name'=>$item_name,'item_quantity'=>$item_quantity,
+    'item_costPrice'=>$item_costPrice],'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice]'=>$item_sellingPrice]);
+      return redirect()->back();
+    }
+
     public function removeClerk(Request $requests){
       $id = $requests->the_id;
       $deleteClerk = Clerk::where('id','=',$id)->delete();
