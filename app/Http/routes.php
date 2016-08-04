@@ -42,6 +42,9 @@ Route::get('edit_profile',[
   'uses' => 'UserController@edit_profile'
 ]);
 
+//Edit Functions
+Route::post('update_item', 'AdminController@editItem');
+
 //Change Password function for admin
 Route::post('change_password_account', 'AdminController@changePasswordAccount');
 
