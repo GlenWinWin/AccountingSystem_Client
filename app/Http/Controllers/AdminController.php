@@ -79,7 +79,7 @@ class AdminController extends Controller{
       $item_subcostPrice = $requests->subcostPrice_item;
       $item_sellingPrice = $requests->sellingPrice_item;
       $editItem = Items::where('item_id','=',$item_id)->update(['item_name'=>$item_name,'item_quantity'=>$item_quantity,
-    'item_costPrice'=>$item_costPrice],'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice]'=>$item_sellingPrice]);
+    'item_costPrice'=>$item_costPrice,'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice'=>$item_sellingPrice]);
       return redirect()->back();
     }
 
