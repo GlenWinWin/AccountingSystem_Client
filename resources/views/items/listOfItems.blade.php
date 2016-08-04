@@ -41,8 +41,10 @@
              </ul>
 						 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
              <div class="search" style="display:block;">
-             <input type="text" name="name" value="">
-             <input type="button" name="name" value="Search" class="btn btn-primary btn-md">
+							 {!! Form::open(array('action' => 'AdminController@searchItems' , 'method' => 'post'))!!}
+					 				<input type="text" name="search" placeholder="Search...">
+					 				<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+					 		{!! Form::close()!!}
              </div>
 
          </div>
@@ -71,7 +73,7 @@
 				<td>PHP {{$itemss->item_subcostPrice}}</td>
 				<td>PHP {{$itemss->item_sellingPrice}}</td>
 				<td><input type="button" name="name" value="Edit" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm"></td>
+				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm" onclick="delete_Clerk_Distributor_Item({{$itemss->id}})"></td>
 			</tr>
 			@endforeach
 		</tbody>

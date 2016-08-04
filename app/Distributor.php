@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Distributor extends Model
 {
   protected $fillable = [
+    'id',
     'fname',
     'lname',
     'username',
@@ -17,6 +18,7 @@ class Distributor extends Model
     'totalSales',
     'profile_path',
     'channelPosition',
+    'typeOfUser',
   ];
 
   public $timestamps = false;

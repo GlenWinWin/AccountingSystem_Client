@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-         <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css') }}" media="screen" title="no title" charset="utf-8">
-         <link rel="stylesheet" href="{{ URL::asset('assets/fonts/css/font-awesome.min.css') }}" media="screen" title="no title" charset="utf-8">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+         <link rel="stylesheet" href="assets/css/style.css" media="screen" title="no title" charset="utf-8">
+         <link rel="stylesheet" href="assets/fonts/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
     <title>@yield('title')</title>
   </head>
   <body>
@@ -40,7 +40,7 @@
 
     	<div id="sidebar-wrapper" class="sidebar-toggle">
     			<div class="profile-userpic">
-    				<img src="{{ URL::asset('assets/images/admin.png')}}" class="img-responsive" alt="">
+    				<img src="assets/images/admin.png" class="img-responsive" alt="">
     			</div>
     			<div class="profile-usertitle">
     				<div class="profile-usertitle-name">
@@ -70,9 +70,11 @@
     @yield('body-content')
   </body>
 </html>
-<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
-  <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
-  <script src="{{ URL::asset('assets/js/sidebar.js') }}"></script>
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/sidebar.js"></script>
+  <script src="assets/js/myUtilities.js"></script>
+
   <!--  modal-->
 	<script type="text/javascript">
 	$(document).ready(function(){

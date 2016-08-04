@@ -51,8 +51,8 @@
 				<td>{{$clerkss->email}}</td>
 				<td>{{$clerkss->address}}</td>
 				<td>{{$clerkss->username}}</td>
-				<td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
-				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
+				<td><input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
+				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$clerkss->id}})" value="Delete"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" value="Manage Privileges"></td>
 			</tr>
 			@endforeach
@@ -236,9 +236,14 @@
 
 
 							<div class="modal-footer">
-			 <button type="button" class="btn btn-primary">Yes</button>
+        {!! Form::open(array('action' => 'AdminController@removeClerk' , 'method' => 'post'))!!}
+        <input type="hidden" name="the_id" id="specific_id">
+       <button type="submit" class="btn btn-primary">Yes</button>
 			 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-							</div>
+
+       {!! Form::close()!!}
+
+        			</div>
 					</div>
 			</div>
 	</div>

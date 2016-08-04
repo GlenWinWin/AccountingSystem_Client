@@ -49,27 +49,39 @@ class UserTAbleSeeder extends Seeder
       //   'item_subcostPrice' => 207.00,
       //   'item_sellingPrice' => 280.00,
       //   ]);
-      // DB::table('users')->insert([
-      // 	'email' => 'marcobarrera@gmail.com',
-      //   'username' => 'c_mbarrera',
-      //   'fname' => 'Marco',
-      //   'lname' => 'Barrera',
-      //   'contact' => '09488867723',
-      //   'address' => 'Boxing St. Suntukan Manila',
-      // 	'password' => Hash::make('marco'),
-      //   'profile_path' => 'assets/images/user.png',
-      //   'typeOfUser' => 1
-      // 	]);
       DB::table('users')->insert([
-        'email' => 'freedy@gmail.com',
-        'username' => 'c_frmorales',
-        'fname' => 'Freedy',
-        'lname' => 'Morales',
-        'contact' => '09352347890',
-        'address' => 'Free Place',
-        'password' => Hash::make('freedy'),
+      	'email' => 'marcobarrera@gmail.com',
+        'username' => 'c_mbarrera',
+        'fname' => 'Marco',
+        'lname' => 'Barrera',
+        'contact' => '09488867723',
+        'address' => 'Boxing St. Suntukan Manila',
+      	'password' => Hash::make('marco'),
         'profile_path' => 'assets/images/user.png',
         'typeOfUser' => 1
-        ]);
+      	]);
+      // DB::table('users')->insert([
+      //   'email' => 'freedy@gmail.com',
+      //   'username' => 'c_frmorales',
+      //   'fname' => 'Freedy',
+      //   'lname' => 'Morales',
+      //   'contact' => '09352347890',
+      //   'address' => 'Free Place',
+      //   'password' => Hash::make('freedy'),
+      //   'profile_path' => 'assets/images/user.png',
+      //   'typeOfUser' => 1
+      //   ]);
+      // DB::table('users')->insert([
+      // 	'email' => 'frankmoses@gmail.com',
+      //   'username' => 'd_fmoses',
+      //   'fname' => 'Frank',
+      //   'lname' => 'Moses',
+      //   'address' => 'Dublin,Ireland',
+      //   'contact' => '09358827765',
+      // 	'password' => Hash::make('frank'),
+      //   'typeOfUser' => 2,
+      //   'totalSales' => 50000,
+      //   'profile_path' => 'assets/images/user.png'
+      // 	]);
     }
 }

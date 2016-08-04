@@ -1,17 +1,28 @@
 @extends('layouts.mylayout')
 
 @section('title')
-	List of Distributor
+@if(isset($title))
+	{{$title}}
+@else
+List of Distributors
+@endif
 @stop
 
 @section('body-content')
 <div class="col-lg-9">
-	<center><h1 style="padding-bottom:20px;">List of Distributor</h1></center>
+	<center><h1 style="padding-bottom:20px;">
+		@if(isset($title))
+		{{$title}}
+		@else
+		List of Distributors
+		@endif</h1></center>
 	<hr>
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
 	<div class="search">
-	<input type="text" name="name" value="">
-	<input type="button" name="name" value="Search" class="btn btn-primary btn-md">
+		{!! Form::open(array('action' => 'AdminController@searchDistributor' , 'method' => 'post'))!!}
+	<input type="text" name="search" placeholder="Search...">
+	<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">
 	<table class="table" id="tab1">
@@ -39,8 +50,8 @@
 				<td>{{$distributorss->address}}</td>
 				<td>PHP {{$distributorss->totalSales}}</td>
 				<td>{{$distributorss->username}}</td>
-        <td>    <input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
-				<td>    <input type="button" class="btn btn-sm btn-primary open-modal-delete" value="Delete"></td>
+        <td><input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
+				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$distributorss->id}})" value="Delete"></td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -122,8 +133,11 @@
 
 
             <div class="modal-footer">
-     <button type="button" class="btn btn-primary">Yes</button>
+							{!! Form::open(array('action' => 'AdminController@removeDistributor' , 'method' => 'post'))!!}
+			        <input type="hidden" name="the_id" id="specific_id">
+     <button type="submit" class="btn btn-primary">Yes</button>
      <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+		 {!! Form::close()!!}
             </div>
         </div>
     </div>

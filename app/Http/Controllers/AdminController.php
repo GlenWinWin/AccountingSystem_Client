@@ -27,6 +27,18 @@ class AdminController extends Controller{
       $title = "Results for search...";
       return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title);
     }
+    public function searchDistributor(Request $requests){
+      $keyword = $requests->search;
+      $searchDistributor = Distributor::where('typeOfUser','=',2)->where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->get();
+      $title = "Results for search...";
+      return view('distributor.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title);
+    }
+    public function searchItems(Request $requests){
+      $keyword = $requests->search;
+      $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->get();
+      $title = "Results for search...";
+      return view('items.listOfItems')->with('items',$searchItems)->with('title',$title);
+    }
     public function addClerk(){
       return view('clerk.addClerk');
     }
@@ -52,6 +64,21 @@ class AdminController extends Controller{
       $addClerkQuery->save();
 
       return redirect('list_clerk');
+    }
+    public function removeClerk(Request $requests){
+      $id = $requests->the_id;
+      $deleteClerk = Clerk::where('id','=',$id)->delete();
+      return redirect('list_clerk');
+    }
+    public function removeDistributor(Request $requests){
+      $id = $requests->the_id;
+      $deleteDistributor = Distributor::where('id','=',$id)->delete();
+      return redirect('list_distributor');
+    }
+    public function removeItem(Request $requests){
+      $id = $requests->the_id;
+      $deleteItem = Items::where('item_id','=',$id)->delete();
+      return redirect('list_items');
     }
     public function createRandomPassword() {
 

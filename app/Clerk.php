@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Clerk extends Model
 {
   protected $fillable = [
+    'id',
     'fname',
     'lname',
     'username',
