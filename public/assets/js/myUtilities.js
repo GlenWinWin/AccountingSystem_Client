@@ -4,22 +4,27 @@ function delete_Clerk_Distributor_Item(id){
 function manage_privileges(id){
   $("input[id=clerkId]").val(id);
 }
+function setClerkIdforChangePasswordAccount(id){
+  $("input[id=myClerkId]").val(id);
+}
 function validateChangePasswordForm(){
   var pword = document.getElementById("inputPassword").value;
   var repeat_pword = document.getElementById("inputPasswordRepeat").value;
   var admin_pword = document.getElementById("inputPasswordAdmin").value;
-  var adminPassword = "adminako";
+  var adminPassword = document.getElementById("adminPassword").value;
   var repeatCounter = 0;
   var adminCounter = 0;
   if(pword.localeCompare(repeat_pword) != 0){
     document.getElementById("showErrorRepeat").innerHTML = "Passwords do not match!";
-    // repeatCounter = 1;
+    repeatCounter = 1;
   }
-  if(repeatCounter == adminCounter){
+  if(admin_pword.localeCompare(adminPassword) != 0){
     document.getElementById("showErrorAdmin").innerHTML = "Wrong admin password!";
     adminCounter = 1;
   }
-
+  if(adminCounter == 0 && repeatCounter == 0){
+    $('#changePasswordAccountForm').submit();
+  }
 }
 function ableChangePasswordButton(){
   var pword = document.getElementById("inputPassword").value;
@@ -44,4 +49,14 @@ function enableSearchBtn(){
   else{
       document.getElementById('searchButton').disabled = false;
   }
+}
+function deleteModify(){
+  var ids = document.getElementsByName('specific_ids');
+  var temp = '';
+  for(var i = 0; i < ids.length;i++){
+    if(tags[i].checked){
+      temp += tags[i].value;
+    }
+  }
+  alert('gg ' + temp);
 }

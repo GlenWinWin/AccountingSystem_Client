@@ -19,12 +19,12 @@
 	</h1></center>
 <hr>
 	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
-	<input type="button" name="name" value="Manage Priviliges" class="btn btn-primary btn-md">
-	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
+	<input type="button" name="name" value="Manage Priviliges" onclick="deleteModify()" class="btn btn-primary btn-md">
+	<input type="button" name="name" value="Delete" onclick="deleteModify()" class="btn btn-primary btn-md">
 	<div class="search">
 		{!! Form::open(array('action' => 'AdminController@searchClerk' , 'method' => 'post'))!!}
-	<input type="text" name="search" id="searchField" onkeyup="enableSearchBtn" placeholder="Search...">
-	<input type="submit" name="name" value="Search" id="searchButton" class="btn btn-primary btn-md">
+		<input type="text" name="search" required="" placeholder="Search...">
+		<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
 		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">
@@ -45,13 +45,13 @@
 		<tbody>
 			@foreach($clerks as $clerkss)
 			<tr>
-				<td><input type="checkbox" name="name" value="" id="checkone"></td>
+				<td><input type="checkbox" name="specific_ids[]" value="{{$clerkss->id}}" id="checkone"></td>
 				<th scope="row">{{$clerkss->fname}} {{$clerkss->lname}}</th>
 				<td>{{$clerkss->contact}}</td>
 				<td>{{$clerkss->email}}</td>
 				<td>{{$clerkss->address}}</td>
 				<td>{{$clerkss->username}}</td>
-				<td><input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
+				<td><input type="button" class="btn btn-primary btn-sm open-modal-password" onclick="setClerkIdforChangePasswordAccount({{$clerkss->id}})" value="Change Password"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$clerkss->id}})" value="Delete"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" onclick="manage_privileges({{$clerkss->id}})" value="Manage Privileges"></td>
 			</tr>
@@ -82,28 +82,28 @@
 		                </div>
 							<div class="form-group">
 										{!! Form::open(array('action' => 'AdminController@changePasswordAccount' , 'method' => 'post' , 'id' => 'changePasswordAccountForm'))!!}
+										<input type="hidden" id="adminPassword" value="{{$password}}">
+										<input type="hidden" name="specific_id" id="myClerkId">
 								<center>
 									<label for="inputPassword3">New Password</label>
 								<br>
-							<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline" required=""></center>
+							<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
 								 <center>
 								<label for="inputPassword4">Repeat Password</label>
 								<br>
-							<input type="password" id="inputPasswordRepeat" name="new_pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline" required=""></center>
+							<input type="password" id="inputPasswordRepeat" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
 								<small id="passwordHelpInline" class="text-muted">
 									<center>
-										<b>
 											<i>
 												<h4 id="showErrorRepeat" style="color:red;">
 												</h4>
 											</i>
-										</b>
 									</center>
 								</small>
 								 	<center>
 								<label for="inputPassword4">Admin Password</label>
 								<br>
-								<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline" required="">	</center>
+								<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
 								<small id="passwordHelpInline" class="text-muted">
 									<center>
 										<i>

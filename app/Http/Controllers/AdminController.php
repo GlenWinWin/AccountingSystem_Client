@@ -9,25 +9,49 @@ use App\Distributor;
 use App\Items;
 use App\ManagePrivileges;
 use App\User;
+use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Auth;
+use Hash;
+
+
 
 class AdminController extends Controller{
     public function listOfClerk(){
-      $clerks = Clerk::where('typeOfUser', '=', 1)->get();
-      return view('clerk.listClerk')->with('clerks',$clerks);
+      try{
+        $decryptedPassword = Crypt::decrypt(Auth::user()->password_text);
+        $clerks = Clerk::where('typeOfUser', '=', 1)->get();
+        return view('clerk.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
+      }
+      catch(DecryptException $e){
+        echo $e;
+      }
     }
     public function listOfItems(){
       $items = Items::all();
       return view('items.listOfItems')->with('items',$items);
     }
     public function listOfDistributor(){
-      $distributors = Distributor::where('typeOfUser', '=', 2)->get();
-      return view('distributor.listOfDistributor')->with('distributors',$distributors);
+      try{
+        $decryptedPassword = Crypt::decrypt(Auth::user()->password_text);
+        $distributors = Distributor::where('typeOfUser', '=', 2)->get();
+        return view('distributor.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword);
+      }
+      catch(DecryptException $e){
+        echo $e;
+      }
     }
     public function searchClerk(Request $requests){
-      $keyword = $requests->search;
-      $searchClerk = Clerk::where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->where('typeOfUser','=',1)->get();
-      $title = "Results for search...";
-      return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title);
+      try{
+        $decryptedPassword = Crypt::decrypt(Auth::user()->password_text);
+        $keyword = $requests->search;
+        $searchClerk = Clerk::where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->where('typeOfUser','=',1)->get();
+        $title = "Results for search...";
+        return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
+      }
+      catch(DecryptException $e){
+        echo $e;
+      }
     }
     public function searchDistributor(Request $requests){
       $keyword = $requests->search;

@@ -87,13 +87,6 @@
     		document.getElementById('changePasswordBtn').disabled = true;
     }
 
-    //this method is for disabling and enabling button in search
-    var search = document.getElementById("searchField1").value;
-
-    if(search == null || search == ""){
-    		document.getElementById('searchButton1').disabled = true;
-    }
-
     //modal for changing password
 		$('.open-modal-password').click(function(){
 			$('#myModal-password').modal('show');
