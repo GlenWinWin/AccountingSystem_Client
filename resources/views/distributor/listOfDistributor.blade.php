@@ -20,8 +20,8 @@ List of Distributors
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
 	<div class="search">
 		{!! Form::open(array('action' => 'AdminController@searchDistributor' , 'method' => 'post'))!!}
-	<input type="text" name="search" placeholder="Search...">
-	<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+		<input type="text" name="search" id="searchField1" onkeyup="enableSearchBtn" placeholder="Search...">
+		<input type="submit" name="name" value="Search" id="searchButton1" class="btn btn-primary btn-md">
 		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">

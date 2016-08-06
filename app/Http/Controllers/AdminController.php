@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Clerk;
 use App\Distributor;
 use App\Items;
+use App\ManagePrivileges;
+use App\User;
 
 class AdminController extends Controller{
     public function listOfClerk(){
@@ -23,13 +25,13 @@ class AdminController extends Controller{
     }
     public function searchClerk(Request $requests){
       $keyword = $requests->search;
-      $searchClerk = Clerk::where('typeOfUser','=',1)->where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->get();
+      $searchClerk = Clerk::where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->where('typeOfUser','=',1)->get();
       $title = "Results for search...";
       return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title);
     }
     public function searchDistributor(Request $requests){
       $keyword = $requests->search;
-      $searchDistributor = Distributor::where('typeOfUser','=',2)->where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->get();
+      $searchDistributor = Distributor::where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->get();
       $title = "Results for search...";
       return view('distributor.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title);
     }
@@ -39,10 +41,7 @@ class AdminController extends Controller{
       $title = "Results for search...";
       return view('items.listOfItems')->with('items',$searchItems)->with('title',$title);
     }
-    public function addClerk(){
-      return view('clerk.addClerk');
-    }
-    public function addClerkProcess(Request $requests){
+    public function addClerk(Request $requests){
       $fname = $requests->fname;
       $lname = $requests->lname;
       $username = 'c_'.substr(strtolower($fname),0,1).strtolower($lname);
@@ -97,6 +96,35 @@ class AdminController extends Controller{
       $id = $requests->the_id;
       $deleteItem = Items::where('item_id','=',$id)->delete();
       return redirect('list_items');
+    }
+
+    public function managePrivileges(Request $requests){
+      $id = $requests->clerkId;
+      $sales_encoding = ($requests->sales_encoding != '') ? 1 : 0;
+      $account_registration = ($requests->account_registration != '') ? 1 : 0;
+      $add_clerk = ($requests->add_clerk != '') ? 1 : 0;
+      $use_inventory = ($requests->use_inventory != '') ? 1 : 0;
+      $generate_report = ($requests->generate_report != '') ? 1 : 0;
+
+      $selectifHasClerk = ManagePrivileges::where('clerk_id','=',$id)->get();
+      if(count($selectifHasClerk) == 1){
+        $managePrivileges = ManagePrivileges::where('clerk_id','=',$id)->update(['sales_encoding'=>$sales_encoding,'account_registration'=>$account_registration,
+      'add_clerk'=>$add_clerk,'use_inventory'=>$use_inventory,'generate_report'=>$generate_report]);
+
+      return redirect('list_clerk');
+      }
+      else{
+        $addPrivilegesforClerk = new ManagePrivileges;
+        $addPrivilegesforClerk->clerk_id = $id;
+        $addPrivilegesforClerk->sales_encoding = $sales_encoding;
+        $addPrivilegesforClerk->account_registration = $account_registration;
+        $addPrivilegesforClerk->add_clerk = $add_clerk;
+        $addPrivilegesforClerk->use_inventory = $use_inventory;
+        $addPrivilegesforClerk->generate_report = $generate_report;
+        $addPrivilegesforClerk->save();
+
+        return redirect('list_clerk');
+      }
     }
     public function createRandomPassword() {
 

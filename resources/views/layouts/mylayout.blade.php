@@ -40,7 +40,7 @@
 
     	<div id="sidebar-wrapper" class="sidebar-toggle">
     			<div class="profile-userpic">
-    				<img src="assets/images/admin.png" class="img-responsive" alt="">
+    				<img src="{{ Auth::user()->profile_path }}" class="img-responsive" alt="">
     			</div>
     			<div class="profile-usertitle">
     				<div class="profile-usertitle-name">
@@ -78,6 +78,23 @@
   <!--  modal-->
 	<script type="text/javascript">
 	$(document).ready(function(){
+    //this method is for disabling and enabling button in change password modal
+    var pword = document.getElementById("inputPassword").value;
+    var repeat_pword = document.getElementById("inputPasswordRepeat").value;
+    var admin_pword = document.getElementById("inputPasswordAdmin").value;
+
+    if((pword == null || pword == "") && (repeat_pword == null || repeat_pword == "") && (admin_pword == null || admin_pword == "")){
+    		document.getElementById('changePasswordBtn').disabled = true;
+    }
+
+    //this method is for disabling and enabling button in search
+    var search = document.getElementById("searchField1").value;
+
+    if(search == null || search == ""){
+    		document.getElementById('searchButton1').disabled = true;
+    }
+
+    //modal for changing password
 		$('.open-modal-password').click(function(){
 			$('#myModal-password').modal('show');
 		});

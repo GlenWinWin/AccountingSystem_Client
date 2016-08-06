@@ -15,7 +15,7 @@ class CreateTableManagePrivileges extends Migration
       Schema::create('manage_privileges', function (Blueprint $table) {
         $table->integer('clerk_id');
         $table->integer('sales_encoding');
-        $table->integer('accout_registration');
+        $table->integer('account_registration');
         $table->integer('add_clerk');
         $table->integer('use_inventory');
         $table->integer('generate_report');

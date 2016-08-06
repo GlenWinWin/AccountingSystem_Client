@@ -13,7 +13,7 @@ Edit Profile
     </div>
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-        <img src="assets/images/joyth.jpg" class="edit-image" alt="avatar">
+        <img src="{{ Auth::user()->profile_path }}" class="edit-image" alt="avatar">
         <h6>Upload a different photo</h6>
         <center><input type="file" class="text-center upload"></center>
       </div>

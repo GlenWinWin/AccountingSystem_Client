@@ -42,8 +42,8 @@
 						 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
              <div class="search" style="display:block;">
 							 {!! Form::open(array('action' => 'AdminController@searchItems' , 'method' => 'post'))!!}
-					 				<input type="text" name="search" placeholder="Search...">
-					 				<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+							 <input type="text" name="search" id="searchField" onkeyup="enableSearchBtn" placeholder="Search...">
+							 <input type="submit" name="name" value="Search" id="searchButton" class="btn btn-primary btn-md">
 					 		{!! Form::close()!!}
              </div>
 

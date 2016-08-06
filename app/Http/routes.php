@@ -1,7 +1,7 @@
 <?php
 
 //Add functions
-Route::post('clerk_add', 'AdminController@addClerkProcess');
+Route::post('clerk_add', 'AdminController@addClerk');
 
 //Search functions
 Route::post('clerk_search', 'AdminController@searchClerk');
@@ -11,7 +11,15 @@ Route::post('items_search', 'AdminController@searchItems');
 //login and logout functions
 Route::get('login', function () {
   if(Auth::check()){
-		return redirect('home');
+		if(Auth::user()->typeOfUser == 0){
+      return redirect('list_clerk');
+    }
+    else if(Auth::user()->typeOfUser == 1){
+      return 'Clerk is here';
+    }
+    else if(Auth::user()->typeOfUser == 2){
+      return 'Distributor is here';
+    }
 	}
 	else{
 		return view('auth.login');
@@ -53,6 +61,8 @@ Route::post('clerk_remove', 'AdminController@removeClerk');
 Route::post('distributor_remove', 'AdminController@removeDistributor');
 Route::post('items_remove', 'AdminController@removeItem');
 
+//Manage Privileges function
+Route::post('manage_privileges', 'AdminController@managePrivileges');
 
 Route::get('subCategory_head',[
   'middleware' => 'auth',

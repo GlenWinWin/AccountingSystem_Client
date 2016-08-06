@@ -35,7 +35,15 @@ class UserController extends Controller
             'password' => $requests->password,
           ]);
           if($attempt){
-            return redirect('list_clerk');
+            if(Auth::user()->typeOfUser == 0){
+              return redirect('list_clerk');
+            }
+            else if(Auth::user()->typeOfUser == 1){
+              
+            }
+            else if(Auth::user()->typeOfUser == 2){
+
+            }
           }
           else{
             Session::flash('flash_message','Credentials Invalid');

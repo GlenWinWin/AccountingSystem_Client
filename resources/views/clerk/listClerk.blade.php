@@ -23,8 +23,8 @@
 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
 	<div class="search">
 		{!! Form::open(array('action' => 'AdminController@searchClerk' , 'method' => 'post'))!!}
-	<input type="text" name="search" placeholder="Search...">
-	<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+	<input type="text" name="search" id="searchField" onkeyup="enableSearchBtn" placeholder="Search...">
+	<input type="submit" name="name" value="Search" id="searchButton" class="btn btn-primary btn-md">
 		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">
@@ -53,7 +53,7 @@
 				<td>{{$clerkss->username}}</td>
 				<td><input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$clerkss->id}})" value="Delete"></td>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" value="Manage Privileges"></td>
+				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" onclick="manage_privileges({{$clerkss->id}})" value="Manage Privileges"></td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -80,45 +80,44 @@
 					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		                <h4 class="modal-title">Fill-up the fields:</h4>
 		                </div>
-
 							<div class="form-group">
-							 <form class="form-inline">
-
-								<center>	<label for="inputPassword4">Password</label>
+										{!! Form::open(array('action' => 'AdminController@changePasswordAccount' , 'method' => 'post' , 'id' => 'changePasswordAccountForm'))!!}
+								<center>
+									<label for="inputPassword3">New Password</label>
 								<br>
-							<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline"></center>
-								<small id="passwordHelpInline" class="text-muted">
-								</small>
-								</form>
-							</div>
-
-							<div class="form-group">
-							 <form class="form-inline">
+							<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline" required=""></center>
 								 <center>
 								<label for="inputPassword4">Repeat Password</label>
 								<br>
-							<input type="password1" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+							<input type="password" id="inputPasswordRepeat" name="new_pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline" required=""></center>
 								<small id="passwordHelpInline" class="text-muted">
+									<center>
+										<b>
+											<i>
+												<h4 id="showErrorRepeat" style="color:red;">
+												</h4>
+											</i>
+										</b>
+									</center>
 								</small>
-								</form>
-							</div>
-
-							<div class="form-group">
-							 <form class="form-inline">
 								 	<center>
 								<label for="inputPassword4">Admin Password</label>
 								<br>
-								<input type="password2" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+								<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline" required="">	</center>
 								<small id="passwordHelpInline" class="text-muted">
+									<center>
+										<i>
+											<h4 id="showErrorAdmin" style="color:red;">
+											</h4>
+										</i>
+									</center>
 								</small>
-								</form>
-							</div>
-
-
 		                <div class="modal-footer">
-						 <button type="button" class="btn btn-primary">Save changes</button>
-		                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						 				<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
+		                 <button class="btn btn-default" data-dismiss="modal">Close</button>
 		                </div>
+										{!! Form::close()!!}
+									</div>
 		            </div>
 		        </div>
 		    </div>
@@ -131,13 +130,13 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Check the privileges you will allow:</h4>
 						</div>
-
-
+{!! Form::open(array('action' => 'AdminController@managePrivileges' , 'method' => 'post'))!!}
+		<input type="hidden" name="clerkId" value="" id="clerkId">
 		 <div class="modal-body">
 								<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
-										<label><input type="checkbox"/>Sales Encoding</label>
+										<label><input type="checkbox" name="sales_encoding" value="1"/>Sales Encoding</label>
 									</div>
 								</div>
 							</div>
@@ -148,7 +147,7 @@
 								<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
-										<label><input type="checkbox"/>Account Registration</label>
+										<label><input type="checkbox" name="account_registration" value="1"/>Account Registration</label>
 									</div>
 								</div>
 							</div>
@@ -159,7 +158,7 @@
 								<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
-										<label><input type="checkbox"/>Add Clerk</label>
+										<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
 									</div>
 								</div>
 							</div>
@@ -170,7 +169,7 @@
 								<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
-										<label><input type="checkbox"/>Use Inventory</label>
+										<label><input type="checkbox" name="use_inventory" value="1"/>Use Inventory</label>
 									</div>
 								</div>
 							</div>
@@ -180,16 +179,17 @@
 								<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
-										<label><input type="checkbox"/>Generate Reports</label>
+										<label><input type="checkbox" name="generate_report" value="1"/>Generate Reports</label>
 									</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="modal-footer">
-		 <button type="button" class="btn btn-primary">Save changes</button>
+		 <button type="submit" class="btn btn-primary">Save changes</button>
 						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
+						{!! Form::close()!!}
 				</div>
 		</div>
 </div>
@@ -205,13 +205,13 @@
 
 						<div class="modal-body">
 								<div class="form-group">
-									{!! Form::open(array('action' => 'AdminController@addClerkProcess' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
+									{!! Form::open(array('action' => 'AdminController@addClerk' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
 											<input type="text" name="fname" placeholder="First Name" required=""><br>
 											<input type="text" name="lname" placeholder="Last Name" required=""><br>
 											<input type="text" name="contact" placeholder="Contact Number" required=""><br>
 											<input type="email" name="email" placeholder="Email Address" required=""><br>
 											<textarea name="address" placeholder="Address here..." rows="8" cols="40" required=""></textarea><br>
-											<button>Add Clerk</button>
+											<button class="btn btn-success">Add Clerk</button>
 									{!! Form::close()!!}
 								</div>
 						</div>
