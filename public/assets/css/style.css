@@ -348,3 +348,9 @@ border-color: #2d4668;
   width:100%;
     margin-top: 20px;
 }
+@media (min-width: 1200px){
+  .upload-clerk{
+    margin-left: -70px;
+    margin-top: 80px;
+  }
+}
