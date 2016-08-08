@@ -37,7 +37,9 @@ Route::get('login', function () {
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
-
+Route::get('try', function(){
+  return view('clerk.try');
+});
 
 //View functions
 Route::get('list_distributor', [
