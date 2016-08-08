@@ -135,6 +135,16 @@
 		});
 	});
 	</script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.open-modal-deleteItem').click(function(){
+      $('#myModal-deleteItem').modal('show');
+    });
+      $("#myModal-deleteItem").on('hidden.bs.modal', function(){
+      <!--alert("Modal window has been completely closed.");-->
+    });
+  });
+  </script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$('.open-modal-delete').click(function(){
