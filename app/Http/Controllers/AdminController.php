@@ -19,8 +19,8 @@ use Hash;
 class AdminController extends Controller{
     public function listOfClerk(){
       try{
-        $decryptedPassword = Crypt::decrypt(Auth::user()->password_text);
-        $clerks = Clerk::where('typeOfUser', '=', 1)->get();
+        $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+        $clerks = Clerk::where('typeOfUser', '=', 1)->paginate(5);
         return view('clerk.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
@@ -28,13 +28,13 @@ class AdminController extends Controller{
       }
     }
     public function listOfItems(){
-      $items = Items::all();
+      $items = Items::paginate(5);
       return view('items.listOfItems')->with('items',$items);
     }
     public function listOfDistributor(){
       try{
-        $decryptedPassword = Crypt::decrypt(Auth::user()->password_text);
-        $distributors = Distributor::where('typeOfUser', '=', 2)->get();
+        $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+        $distributors = Distributor::where('typeOfUser', '=', 2)->paginate(5);
         return view('distributor.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
@@ -43,10 +43,10 @@ class AdminController extends Controller{
     }
     public function searchClerk(Request $requests){
       try{
-        $decryptedPassword = Crypt::decrypt(Auth::user()->password_text);
+        $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
         $keyword = $requests->search;
-        $searchClerk = Clerk::where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->where('typeOfUser','=',1)->get();
-        $title = "Results for search...";
+        $searchClerk = Clerk::where('typeOfUser','=',1)->where('name','LIKE','%'.$keyword.'%')->paginate(5);
+        $title = "Results for clerks...";
         return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
@@ -54,15 +54,21 @@ class AdminController extends Controller{
       }
     }
     public function searchDistributor(Request $requests){
-      $keyword = $requests->search;
-      $searchDistributor = Distributor::where('fname','LIKE','%'.$keyword.'%')->orWhere('lname','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->get();
-      $title = "Results for search...";
-      return view('distributor.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title);
+      try{
+        $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+        $keyword = $requests->search;
+        $searchDistributor = Distributor::where('name','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->paginate(5);
+        $title = "Results for distributors...";
+        return view('distributor.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title)->with('password',$decryptedPassword);
+      }
+      catch(DecryptException $e){
+        echo $e;
+      }
     }
     public function searchItems(Request $requests){
       $keyword = $requests->search;
-      $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->get();
-      $title = "Results for search...";
+      $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->paginate(5);
+      $title = "Results for items...";
       return view('items.listOfItems')->with('items',$searchItems)->with('title',$title);
     }
     public function addClerk(Request $requests){
@@ -121,7 +127,15 @@ class AdminController extends Controller{
       $deleteItem = Items::where('item_id','=',$id)->delete();
       return redirect('list_items');
     }
-
+    public function removeMultipleUsers(Request $requests){
+      $ids = explode(',',$requests->ids_to_be_delete);
+      foreach($ids as $value){
+        if($value != 0){
+          $usertoDelete = User::where('id','=',$value)->delete();
+        }
+      }
+      return redirect()->back();
+    }
     public function managePrivileges(Request $requests){
       $id = $requests->clerkId;
       $sales_encoding = ($requests->sales_encoding != '') ? 1 : 0;
@@ -149,6 +163,30 @@ class AdminController extends Controller{
 
         return redirect('list_clerk');
       }
+    }
+    public function multiplemanagePrivileges(Request $requests){
+      $sales_encoding = ($requests->sales_encoding != '') ? 1 : 0;
+      $account_registration = ($requests->account_registration != '') ? 1 : 0;
+      $add_clerk = ($requests->add_clerk != '') ? 1 : 0;
+      $use_inventory = ($requests->use_inventory != '') ? 1 : 0;
+      $generate_report = ($requests->generate_report != '') ? 1 : 0;
+      $ids = explode(',',$requests->ids_to_be_manage);
+      foreach($ids as $value){
+        if($value != 0){
+          $addPrivilegesforClerk = new ManagePrivileges;
+          $addPrivilegesforClerk->clerk_id = $value;
+          $addPrivilegesforClerk->sales_encoding = $sales_encoding;
+          $addPrivilegesforClerk->account_registration = $account_registration;
+          $addPrivilegesforClerk->add_clerk = $add_clerk;
+          $addPrivilegesforClerk->use_inventory = $use_inventory;
+          $addPrivilegesforClerk->generate_report = $generate_report;
+          $addPrivilegesforClerk->save();
+        }
+      }
+      return redirect()->back();
+    }
+    public function backFunction(){
+      return redirect()->action('AdminController@listOfClerk');
     }
     public function createRandomPassword() {
 

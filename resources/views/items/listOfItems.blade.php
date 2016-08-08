@@ -26,24 +26,24 @@
                <li class="dropdown-submenu">
                  <a tabindex="-1" href="#">Safety Equipments</a>
                  <ul class="dropdown-menu">
-                   <li><a tabindex="-1" href="subCategory_head">Head</a></li>
-                   <li><a href="subCategory_eye">Eye</a></li>
-                   <li><a href="#">Eyewash</a></li>
-                   <li><a href="#">Ear</a></li>
-                   <li><a href="#">Respiratory</a></li>
-                   <li><a href="#">Body</a></li>
-                   <li><a href="#">Full</a></li>
-                   <li><a href="#">Hand</a></li>
-                   <li><a href="#">Safety Shoes</a></li>
-                   <li><a href="#">Rescue</a></li>
+                   <li><a tabindex="-1" href="filterItems?cat=0&sub=1">Head</a></li>
+                   <li><a href="filterItems?cat=0&sub=2">Eye</a></li>
+                   <li><a href="filterItems?cat=0&sub=3">Eyewash</a></li>
+                   <li><a href="filterItems?cat=0&sub=4">Ear</a></li>
+                   <li><a href="filterItems?cat=0&sub=5">Respiratory</a></li>
+                   <li><a href="filterItems?cat=0&sub=6">Body</a></li>
+                   <li><a href="filterItems?cat=0&sub=7">Full</a></li>
+                   <li><a href="filterItems?cat=0&sub=8">Hand</a></li>
+                   <li><a href="filterItems?cat=0&sub=9">Safety Shoes</a></li>
+                   <li><a href="filterItems?cat=0&sub=10">Rescue</a></li>
                  </ul>
                </li>
              </ul>
 						 	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
              <div class="search" style="display:block;">
-							 {!! Form::open(array('action' => 'AdminController@searchItems' , 'method' => 'post'))!!}
+							 {!! Form::open(array('action' => 'AdminController@searchItems' , 'method' => 'get'))!!}
 							 <input type="text" name="search" required="" placeholder="Search...">
-					 		<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+					 		<input type="submit" value="Search" class="btn btn-primary btn-md">
 					 		{!! Form::close()!!}
              </div>
 
@@ -81,15 +81,7 @@
 
 	</div>
 	<center>
-		<ul class="pagination pagination-color">
-			<li ><a href="#"><<</a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">>></a></li>
-		</ul>
+		{{$items->links()}}
 	</center>
 </div>
 @stop

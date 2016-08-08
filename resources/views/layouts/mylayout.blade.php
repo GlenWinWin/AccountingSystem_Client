@@ -86,7 +86,6 @@
     if((pword == null || pword == "") && (repeat_pword == null || repeat_pword == "") && (admin_pword == null || admin_pword == "")){
     		document.getElementById('changePasswordBtn').disabled = true;
     }
-
     //modal for changing password
 		$('.open-modal-password').click(function(){
 			$('#myModal-password').modal('show');
@@ -96,6 +95,16 @@
 		});
 	});
 	</script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.open-modal-managePrivilegesMultipleTimes').click(function(){
+      $('#myModal-multiplePrivileges').modal('show');
+    });
+      $("#myModal-multiplePrivileges").on('hidden.bs.modal', function(){
+      <!--alert("Modal window has been completely closed.");-->
+    });
+  });
+  </script>
   <script type="text/javascript">
 	$(document).ready(function(){
 		$('.open-modal-addClerk').click(function(){
@@ -126,6 +135,16 @@
 		});
 	});
 	</script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.open-modal-deleteMultipleUsers').click(function(){
+      $('#myModal-deleteMultiple').modal('show');
+    });
+      $("#myModal-deleteMultiple").on('hidden.bs.modal', function(){
+      <!--alert("Modal window has been completely closed.");-->
+    });
+  });
+  </script>
   <!--  modal-->
   <!-- active-sidebar -->
 <script type="text/javascript">

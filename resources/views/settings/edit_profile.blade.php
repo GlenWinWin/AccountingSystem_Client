@@ -5,8 +5,6 @@ Edit Profile
 @section('body-content')
 <div class="col-lg-9">
   <center>
-<form class="form-labels-on-top" method="post" action="#">
-
     <div class="form-title-row">
         <h1>Edit Profile</h1>
         <hr>
@@ -27,50 +25,46 @@ Edit Profile
       </div>
 <h2>Personal Info</h2>
 <center>
+  {!! Form::open(array('action' => 'UserController@bagong_dp' , 'method' => 'post'))!!}
   <div class="form-group">
            <label class="col-lg-3 control-label">First name:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text">
+             <input class="form-control" type="text" required="" name="fname" value="{{Auth::user()->fname}}">
            </div>
   </div>
   <div class="form-group">
            <label class="col-lg-3 control-label">Last name:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text">
+             <input class="form-control" type="text" required="" name="lname" value="{{Auth::user()->lname}}">
            </div>
   </div>
   <div class="form-group">
            <label class="col-lg-3 control-label">Contact Number:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text">
+             <input class="form-control" type="text" name="contact" required="" value="{{Auth::user()->contact}}">
            </div>
   </div>
   <div class="form-group">
            <label class="col-lg-3 control-label">Address:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text">
+             <input class="form-control" name="address" type="text" value="{{Auth::user()->address}}">
            </div>
   </div>
   <div class="form-group">
            <label class="col-lg-3 control-label">Email Address:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text">
+             <input class="form-control" name="email" type="email" required="" value="{{Auth::user()->email}}">
            </div>
   </div>
 
 <div class="form-row" style="margin-bottom:20px;">
       <center>
-        <button type="submit" class="btn btn-primary btn-md edit-btn">Submit Form</button>
-        <button type="submit" class="btn btn-secondary btn-md edit-btn">Cancel</button>
+        <input type="submit" class="btn btn-primary btn-md edit-btn" value="Submit Form">
+        <a href="back" class="btn btn-secondary btn-md edit-btn">Cancel</a>
       </center>
     </div>
-
-
-
-
-
   </div>
-</form>
+  {!! Form::close()!!}
 </center>
 </div>
 @stop

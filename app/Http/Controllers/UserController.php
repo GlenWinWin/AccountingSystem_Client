@@ -39,7 +39,7 @@ class UserController extends Controller
               return redirect('list_clerk');
             }
             else if(Auth::user()->typeOfUser == 1){
-              
+
             }
             else if(Auth::user()->typeOfUser == 2){
 
@@ -63,5 +63,16 @@ class UserController extends Controller
     }
     public function edit_profile(){
       return view('settings.edit_profile');
+    }
+    public function bagong_dp(Request $requests){
+      $id = Auth::user()->id;
+      $fname = $requests->fname;
+      $lname = $requests->lname;
+      $address = $requests->address;
+      $contact = $requests->contact;
+      $email = $requests->email;
+      $updateProfile = User::where('id','=',$id)->update(['fname'=>$fname,'lname'=>$lname,
+    'address'=>$address,'contact'=>$contact,'email'=>$email]);
+      return redirect()->back();
     }
 }

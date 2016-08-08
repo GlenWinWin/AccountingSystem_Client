@@ -22,6 +22,10 @@ function validateChangePasswordForm(){
     document.getElementById("showErrorAdmin").innerHTML = "Wrong admin password!";
     adminCounter = 1;
   }
+  else if(admin_pword.localeCompare(adminPassword) == 0){
+    document.getElementById("showErrorAdmin").innerHTML = "";
+    adminCounter = 0;
+  }
   if(adminCounter == 0 && repeatCounter == 0){
     $('#changePasswordAccountForm').submit();
   }
@@ -40,23 +44,40 @@ function ableChangePasswordButton(){
     document.getElementById('changePasswordBtn').disabled = false;
   }
 }
-function enableSearchBtn(){
-  var search = document.getElementById("searchField").value;
-
-  if(search == null || search == ""){
-      document.getElementById('searchButton').disabled = true;
-  }
-  else{
-      document.getElementById('searchButton').disabled = false;
-  }
+function doMultipleSelectionOfIdsManage(){
+  var listIds = "";
+  $('input:checkbox[name=specific_ids]').each(function()
+{
+    if($(this).is(':checked'))
+    listIds += $(this).val() + ",";
+});
+if(listIds == null || listIds == ""){
+  document.getElementById('btnManagePrivilegesMultiple').disabled = true;
+  document.getElementById('toManagePrivileges').innerHTML = "If Save Changes button is disabled, make sure there are selected users.";
 }
-function deleteModify(){
-  var ids = document.getElementsByName('specific_ids');
-  var temp = '';
-  for(var i = 0; i < ids.length;i++){
-    if(tags[i].checked){
-      temp += tags[i].value;
-    }
-  }
-  alert('gg ' + temp);
+else{
+  document.getElementById('btnManagePrivilegesMultiple').disabled = false;
+  document.getElementById('toManagePrivileges').innerHTML = "";
+  $("input[id=manageIdsPrivileges]").val(listIds);
+}
+}
+function doMultipleSelectionOfIdsDelete(){
+  var listIds = "";
+  $('input:checkbox[name=specific_ids]').each(function()
+{
+    if($(this).is(':checked'))
+    listIds += $(this).val() + ",";
+});
+if(listIds == null || listIds == ""){
+  document.getElementById('btnDeleteMultiple').disabled = true;
+  document.getElementById('toshowEnabledeleteMultipleUserButton').innerHTML = "No selected users!";
+  document.getElementById('changeifHasSelected').innerHTML = "Close";
+
+}
+else{
+  document.getElementById('btnDeleteMultiple').disabled = false;
+  document.getElementById('changeifHasSelected').innerHTML = "No";
+  document.getElementById('toshowEnabledeleteMultipleUserButton').innerHTML = "Are you sure you want to delete the selected users?";
+  $("input[id=idstoDelete]").val(listIds);
+}
 }

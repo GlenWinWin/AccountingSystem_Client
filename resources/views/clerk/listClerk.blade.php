@@ -19,12 +19,12 @@
 	</h1></center>
 <hr>
 	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
-	<input type="button" name="name" value="Manage Priviliges" onclick="deleteModify()" class="btn btn-primary btn-md">
-	<input type="button" name="name" value="Delete" onclick="deleteModify()" class="btn btn-primary btn-md">
+	<input type="button" name="name" value="Manage Priviliges" onclick="doMultipleSelectionOfIdsManage()" class="btn btn-primary btn-md open-modal-managePrivilegesMultipleTimes">
+	<input type="button" name="name" value="Delete" onclick="doMultipleSelectionOfIdsDelete()" class="btn btn-primary btn-md open-modal-deleteMultipleUsers">
 	<div class="search">
-		{!! Form::open(array('action' => 'AdminController@searchClerk' , 'method' => 'post'))!!}
+		{!! Form::open(array('action' => 'AdminController@searchClerk' , 'method' => 'get'))!!}
 		<input type="text" name="search" required="" placeholder="Search...">
-		<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+		<input type="submit" value="Search" class="btn btn-primary btn-md">
 		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">
@@ -45,7 +45,7 @@
 		<tbody>
 			@foreach($clerks as $clerkss)
 			<tr>
-				<td><input type="checkbox" name="specific_ids[]" value="{{$clerkss->id}}" id="checkone"></td>
+				<td><input type="checkbox" name="specific_ids" value="{{$clerkss->id}}" id="checkone"></td>
 				<th scope="row">{{$clerkss->fname}} {{$clerkss->lname}}</th>
 				<td>{{$clerkss->contact}}</td>
 				<td>{{$clerkss->email}}</td>
@@ -60,15 +60,7 @@
 	</table>
 	</div>
 	<center>
-		<ul class="pagination pagination-color">
-			<li><a href="#"><<</a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">>></a></li>
-		</ul>
+		{{$clerks->links()}}
 	</center>
 </div>
 
@@ -194,6 +186,77 @@
 		</div>
 </div>
 <!--  modal priviliges-->
+<div id="myModal-multiplePrivileges" class="modal fade">
+		<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Check the privileges you will allow to the selected users:</h4>
+						</div>
+						<center><h4 style="color:red" id="toManagePrivileges"><i><i></h4></center>
+{!! Form::open(array('action' => 'AdminController@multiplemanagePrivileges' , 'method' => 'post'))!!}
+		<input type="hidden" name="ids_to_be_manage" id="manageIdsPrivileges">
+		 <div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="sales_encoding" value="1"/>Sales Encoding</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="account_registration" value="1"/>Account Registration</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="use_inventory" value="1"/>Use Inventory</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+		<div class="modal-body">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="generate_report" value="1"/>Generate Reports</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+		 <button type="submit" id="btnManagePrivilegesMultiple" title="Make sure there are selected users" class="btn btn-primary">Save changes</button>
+						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+						{!! Form::close()!!}
+				</div>
+		</div>
+</div>
 <!--  Modal Add Clerks-->
 <div id="myModal-addClerk" class="modal fade">
 		<div class="modal-dialog">
@@ -241,6 +304,26 @@
        <button type="submit" class="btn btn-primary">Yes</button>
 			 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
 
+       {!! Form::close()!!}
+
+        			</div>
+					</div>
+			</div>
+	</div>
+	<div id="myModal-deleteMultiple" class="modal fade">
+			<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+							<div class="modal-header" style="color:#b3cccc";>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="toshowEnabledeleteMultipleUserButton"></h4>
+							</div>
+
+
+							<div class="modal-footer">
+        {!! Form::open(array('action' => 'AdminController@removeMultipleUsers' , 'method' => 'post'))!!}
+        <input type="hidden" name="ids_to_be_delete" id="idstoDelete">
+       <button type="submit" id="btnDeleteMultiple" class="btn btn-primary">Yes</button>
+			 <button type="button" class="btn btn-primary" id="changeifHasSelected" data-dismiss="modal">No</button>
        {!! Form::close()!!}
 
         			</div>

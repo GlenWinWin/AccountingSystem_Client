@@ -17,11 +17,11 @@ List of Distributors
 		List of Distributors
 		@endif</h1></center>
 	<hr>
-	<input type="button" name="name" value="Delete" class="btn btn-primary btn-md">
+	<input type="button" name="name" value="Delete" onclick="doMultipleSelectionOfIdsDelete()" class="btn btn-primary btn-md open-modal-deleteMultipleUsers">
 	<div class="search">
-		{!! Form::open(array('action' => 'AdminController@searchDistributor' , 'method' => 'post'))!!}
+		{!! Form::open(array('action' => 'AdminController@searchDistributor' , 'method' => 'get'))!!}
 		<input type="text" name="search" required="" placeholder="Search...">
-		<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+		<input type="submit" value="Search" class="btn btn-primary btn-md">
 		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">
@@ -43,7 +43,7 @@ List of Distributors
 		<tbody>
 			@foreach($distributors as $distributorss)
       <tr>
-				<td><input type="checkbox" name="name" value="" id="checkone"></td>
+				<td><input type="checkbox" name="specific_ids" value="{{$distributorss->id}}" id="checkone"></td>
 				<th scope="row">{{$distributorss->fname}} {{$distributorss->lname}}</th>
 				<td>{{$distributorss->contact}}</td>
 				<td>{{$distributorss->email}}</td>
@@ -58,15 +58,7 @@ List of Distributors
 	</table>
 	</div>
 	<center>
-		<ul class="pagination pagination-color">
-			<li ><a href="#"><<</a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">>></a></li>
-		</ul>
+		{{$distributors->links()}}
 	</center>
 
 </div>
@@ -78,45 +70,44 @@ List of Distributors
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Fill-up the fields:</h4>
 						</div>
-
 			<div class="form-group">
-			 <form class="form-inline">
-
-				<center>	<label for="inputPassword4">Password</label>
+						{!! Form::open(array('action' => 'AdminController@changePasswordAccount' , 'method' => 'post' , 'id' => 'changePasswordAccountForm'))!!}
+						<input type="hidden" id="adminPassword" value="{{$password}}">
+						<input type="hidden" name="specific_id" id="myClerkId">
+				<center>
+					<label for="inputPassword3">New Password</label>
 				<br>
-			<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline"></center>
-				<small id="passwordHelpInline" class="text-muted">
-				</small>
-				</form>
-			</div>
-
-			<div class="form-group">
-			 <form class="form-inline">
+			<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
 				 <center>
 				<label for="inputPassword4">Repeat Password</label>
 				<br>
-			<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+			<input type="password" id="inputPasswordRepeat" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
 				<small id="passwordHelpInline" class="text-muted">
+					<center>
+							<i>
+								<h4 id="showErrorRepeat" style="color:red;">
+								</h4>
+							</i>
+					</center>
 				</small>
-				</form>
-			</div>
-
-			<div class="form-group">
-			 <form class="form-inline">
 					<center>
 				<label for="inputPassword4">Admin Password</label>
 				<br>
-				<input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">	</center>
+				<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
 				<small id="passwordHelpInline" class="text-muted">
+					<center>
+						<i>
+							<h4 id="showErrorAdmin" style="color:red;">
+							</h4>
+						</i>
+					</center>
 				</small>
-				</form>
-			</div>
-
-
 						<div class="modal-footer">
-		 <button type="button" class="btn btn-primary">Save changes</button>
-						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
+						 <button class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
+						{!! Form::close()!!}
+					</div>
 				</div>
 		</div>
 </div>
@@ -141,6 +132,26 @@ List of Distributors
             </div>
         </div>
     </div>
+</div>
+<div id="myModal-deleteMultiple" class="modal fade">
+		<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+						<div class="modal-header" style="color:#b3cccc";>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="toshowEnabledeleteMultipleUserButton"></h4>
+						</div>
+
+
+						<div class="modal-footer">
+			{!! Form::open(array('action' => 'AdminController@removeMultipleUsers' , 'method' => 'post'))!!}
+			<input type="hidden" name="ids_to_be_delete" id="idstoDelete">
+		 <button type="submit" id="btnDeleteMultiple" class="btn btn-primary">Yes</button>
+		 <button type="button" class="btn btn-primary" id="changeifHasSelected" data-dismiss="modal">No</button>
+		 {!! Form::close()!!}
+
+						</div>
+				</div>
+		</div>
 </div>
 <!-- Modal Delete -->
   Home

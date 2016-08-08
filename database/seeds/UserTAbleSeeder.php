@@ -17,13 +17,15 @@ class UserTAbleSeeder extends Seeder
       //   'fname' => 'Glenwin',
       //   'lname' => 'Bernabe',
       // 	'password' => Hash::make('admin'),
-      //   'profile_path' => 'assets/images/admin.png'
+      //   'profile_path' => 'assets/images/admin.png',
+      //   'passsword_text' => Crypt::encrypt('admin')
       // 	]);
       // DB::table('users')->insert([
       // 	'email' => 'frankmoses@gmail.com',
       //   'username' => 'd_fmoses',
       //   'fname' => 'Frank',
       //   'lname' => 'Moses',
+      //  'name' => 'Frank Moses',
       //   'address' => 'Dublin,Ireland',
       //   'contact' => '09358827769',
       // 	'password' => Hash::make('frank'),
@@ -49,27 +51,29 @@ class UserTAbleSeeder extends Seeder
       //   'item_subcostPrice' => 207.00,
       //   'item_sellingPrice' => 280.00,
       //   ]);
-      // DB::table('users')->insert([
-      // 	'email' => 'marcobarrera@gmail.com',
-      //   'username' => 'c_mbarrera',
-      //   'fname' => 'Marco',
-      //   'lname' => 'Barrera',
-      //   'contact' => '09488867723',
-      //   'address' => 'Boxing St. Suntukan Manila',
-      // 	'password' => Hash::make('marco'),
-      //   'profile_path' => 'assets/images/user.png',
-      //   'typeOfUser' => 1
-      // 	]);
-      // DB::table('users')->insert([
-      //   'email' => 'freedy@gmail.com',
-      //   'username' => 'c_frmorales',
-      //   'fname' => 'Freedy',
-      //   'lname' => 'Morales',
-      //   'contact' => '09352347890',
-      //   'address' => 'Free Place',
-      //   'password' => Hash::make('freedy'),
-      //   'profile_path' => 'assets/images/user.png',
-      //   'typeOfUser' => 1
-      //   ]);
+      DB::table('users')->insert([
+      	'email' => 'marcobarrera@gmail.com',
+        'username' => 'c_mbarrera',
+        'fname' => 'Marco',
+        'lname' => 'Barrera',
+       'name' => 'Marco Barrera',
+        'contact' => '09488867723',
+        'address' => 'Boxing St. Suntukan Manila',
+      	'password' => Hash::make('marco'),
+        'profile_path' => 'assets/images/user.png',
+        'typeOfUser' => 1
+      	]);
+      DB::table('users')->insert([
+        'email' => 'freedy@gmail.com',
+        'username' => 'c_frmorales',
+       'name' => 'Freedy Morales',
+        'fname' => 'Freedy',
+        'lname' => 'Morales',
+        'contact' => '09352347890',
+        'address' => 'Free Place',
+        'password' => Hash::make('freedy'),
+        'profile_path' => 'assets/images/user.png',
+        'typeOfUser' => 1
+        ]);
     }
 }

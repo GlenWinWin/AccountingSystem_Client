@@ -8,14 +8,11 @@ use App\Items;
 
 class ItemsController extends Controller
 {
-    public function subCategory_head(){
-      $title = "Sub Category Head";
-      $items = Items::where('item_sub_category', '=', 'HEAD')->get();
-      return view('items.listOfItems')->with('items',$items)->with('title',$title);
-    }
-    public function subCategory_eye(){
-      $title = "Sub Category Eye";
-      $items = Items::where('item_sub_category', '=', 'EYE')->get();
+    public function filterItems(Request $requests){
+      $category = $requests->cat;
+      $sub_category = $requests->sub;
+      $title = "Results for Filtering...";
+      $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
       return view('items.listOfItems')->with('items',$items)->with('title',$title);
     }
 }

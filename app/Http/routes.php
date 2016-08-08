@@ -4,9 +4,18 @@
 Route::post('clerk_add', 'AdminController@addClerk');
 
 //Search functions
-Route::post('clerk_search', 'AdminController@searchClerk');
-Route::post('distributor_search', 'AdminController@searchDistributor');
-Route::post('items_search', 'AdminController@searchItems');
+Route::get('clerk_search',[
+  'middleware' => 'auth',
+  'uses' => 'AdminController@searchClerk'
+]);
+Route::get('distributor_search',[
+  'middleware' => 'auth',
+  'uses' => 'AdminController@searchDistributor'
+]);
+Route::get('items_search',[
+  'middleware' => 'auth',
+  'uses' => 'AdminController@searchItems'
+]);
 
 //login and logout functions
 Route::get('login', function () {
@@ -44,11 +53,12 @@ Route::get('list_items',[
   'uses' => 'AdminController@listOfItems'
 ]);
 
-//Edit Profile function view
+//Edit Profile functions
 Route::get('edit_profile',[
   'middleware' => 'auth',
   'uses' => 'UserController@edit_profile'
 ]);
+Route::post('bagong_dp', 'UserController@bagong_dp');
 
 //Edit Functions
 Route::post('update_item', 'AdminController@editItem');
@@ -60,20 +70,22 @@ Route::post('change_password_account', 'AdminController@changePasswordAccount');
 Route::post('clerk_remove', 'AdminController@removeClerk');
 Route::post('distributor_remove', 'AdminController@removeDistributor');
 Route::post('items_remove', 'AdminController@removeItem');
+Route::post('multiple_remove_users', 'AdminController@removeMultipleUsers');
 
 //Manage Privileges function
 Route::post('manage_privileges', 'AdminController@managePrivileges');
+Route::post('multiple_manage_privileges', 'AdminController@multiplemanagePrivileges');
 
-Route::get('subCategory_head',[
-  'middleware' => 'auth',
-  'uses' => 'ItemsController@subCategory_head'
+//Back function
+Route::get('back',[
+  'uses' => 'AdminController@backFunction'
 ]);
 
-Route::get('subCategory_eye',[
+//Filter per items
+Route::get('filterItems',[
   'middleware' => 'auth',
-  'uses' => 'ItemsController@subCategory_eye'
+  'uses' => 'ItemsController@filterItems'
 ]);
-
 Route::resource('user','UserController',['only' => ['store']]);
 Route::resource('admin','AdminController');
 Route::resource('items','ItemsController');
