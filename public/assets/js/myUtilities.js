@@ -53,11 +53,9 @@ function doMultipleSelectionOfIdsManage(){
 });
 if(listIds == null || listIds == ""){
   document.getElementById('btnManagePrivilegesMultiple').disabled = true;
-  document.getElementById('toManagePrivileges').innerHTML = "If Save Changes button is disabled, make sure there are selected users.";
 }
 else{
   document.getElementById('btnManagePrivilegesMultiple').disabled = false;
-  document.getElementById('toManagePrivileges').innerHTML = "";
   $("input[id=manageIdsPrivileges]").val(listIds);
 }
 }

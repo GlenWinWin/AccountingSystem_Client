@@ -179,52 +179,60 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Add Clerk</h4>
 						</div>
+						{!! Form::open(array('action' => 'AdminController@addClerk' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
             <div class="col-lg-12">
                 <center>
               <div class="col-lg-7" style="    padding-top: 12px;">
-                  <img src="{{ Auth::user()->profile_path }}" class="edit-image" alt="avatar">
+                  <img src="assets/images/user.png" class="edit-image" alt="avatar">
                     </div>
                   <div class="col-lg-5 upload-clerk">
                   <h6>Upload a different photo</h6>
-                <input type="file" class="text-center upload">
+                <input type="file" class="text-center upload" name="profile_pic">
                   </div>
                   </center>
 </div>
 <div class="col-lg-12">
 
 						<div class="modal-body">
-              <div class="form-group">
+							<div class="form-group">
+                       <label class="col-lg-4 control-label">First name:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="text" name="fname">
+                       </div>
+              </div>
+							<div class="form-group">
                        <label class="col-lg-4 control-label">Last name:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text">
+                         <input class="form-control" type="text" name="lname">
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Contact Number:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text">
+                         <input class="form-control" type="text" name="contact">
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Address:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text">
+                         <input class="form-control" type="text" name="address">
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Email Address:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text">
+                         <input class="form-control" type="email" name="email">
                        </div>
               </div>
 						</div>
             </div>
 						<div class="modal-footer">
-              
+
 		 <button type="button" class="btn btn-primary">Submit</button>
 						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 				</div>
+				{!! Form::close()!!}
 		</div>
 </div>
 <!--  modal add clerk-->

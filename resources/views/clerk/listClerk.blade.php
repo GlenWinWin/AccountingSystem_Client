@@ -116,147 +116,53 @@
 <!--  Modal Change Password-->
 <!--  Modal Change Priviliges-->
 <div id="myModal-priviliges" class="modal fade">
-		<div class="modal-dialog">
-				<div class="modal-content">
-						<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Check the privileges you will allow:</h4>
-						</div>
+	<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+					<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Check the privileges you will allow:</h4>
+					</div>
 {!! Form::open(array('action' => 'AdminController@managePrivileges' , 'method' => 'post'))!!}
-		<input type="hidden" name="clerkId" value="" id="clerkId">
-		 <div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="sales_encoding" value="1"/>Sales Encoding</label>
-									</div>
+	<input type="hidden" name="clerkId" value="" id="clerkId">
+	 <div class="">
+							<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox" name="sales_encoding" value="1"/>Sales Encoding</label>
+								</div>
+							</div>
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox" name="account_registration" value="1"/>Account Registration</label>
+								</div>
+							</div>
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
+								</div>
+							</div>
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox" name="use_inventory" value="1"/>Use Inventory</label>
+								</div>
+							</div>
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox" name="generate_report" value="1"/>Generate Reports</label>
 								</div>
 							</div>
 						</div>
+					</div>
+					<div style="padding: 15px;  text-align: right;">
+	 <button type="submit" class="btn btn-primary">Save changes</button>
+					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+					{!! Form::close()!!}
 
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="account_registration" value="1"/>Account Registration</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="use_inventory" value="1"/>Use Inventory</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="generate_report" value="1"/>Generate Reports</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-		 <button type="submit" class="btn btn-primary">Save changes</button>
-						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-						{!! Form::close()!!}
-				</div>
-		</div>
+			</div>
+	</div>
 </div>
 <!--  modal priviliges-->
-<div id="myModal-multiplePrivileges" class="modal fade">
-		<div class="modal-dialog">
-				<div class="modal-content">
-						<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Check the privileges you will allow to the selected users:</h4>
-						</div>
-						<center><h4 style="color:red" id="toManagePrivileges"><i><i></h4></center>
-{!! Form::open(array('action' => 'AdminController@multiplemanagePrivileges' , 'method' => 'post'))!!}
-		<input type="hidden" name="ids_to_be_manage" id="manageIdsPrivileges">
-		 <div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="sales_encoding" value="1"/>Sales Encoding</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="account_registration" value="1"/>Account Registration</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="use_inventory" value="1"/>Use Inventory</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-		<div class="modal-body">
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div class="checkbox">
-										<label><input type="checkbox" name="generate_report" value="1"/>Generate Reports</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-		 <button type="submit" id="btnManagePrivilegesMultiple" title="Make sure there are selected users" class="btn btn-primary">Save changes</button>
-						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-						{!! Form::close()!!}
-				</div>
-		</div>
-</div>
 <!--  Modal Add Clerks-->
 <div id="myModal-addClerk" class="modal fade">
 		<div class="modal-dialog">
@@ -265,24 +171,60 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Add Clerk</h4>
 						</div>
+						{!! Form::open(array('action' => 'AdminController@addClerk' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
+            <div class="col-lg-12">
+                <center>
+              <div class="col-lg-7" style="    padding-top: 12px;">
+                  <img src="assets/images/user.png" class="edit-image" alt="avatar">
+                    </div>
+                  <div class="col-lg-5 upload-clerk">
+                  <h6>Upload a different photo</h6>
+                <input type="file" class="text-center upload" name="profile_pic">
+                  </div>
+                  </center>
+</div>
+<div class="col-lg-12">
 
 						<div class="modal-body">
-								<div class="form-group">
-									{!! Form::open(array('action' => 'AdminController@addClerk' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
-											<input type="text" name="fname" placeholder="First Name" required=""><br>
-											<input type="text" name="lname" placeholder="Last Name" required=""><br>
-											<input type="text" name="contact" placeholder="Contact Number" required=""><br>
-											<input type="email" name="email" placeholder="Email Address" required=""><br>
-											<textarea name="address" placeholder="Address here..." rows="8" cols="40" required=""></textarea><br>
-											<button class="btn btn-success">Add Clerk</button>
-									{!! Form::close()!!}
-								</div>
+							<div class="form-group">
+                       <label class="col-lg-4 control-label">First name:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="text" name="fname" required="">
+                       </div>
+              </div>
+							<div class="form-group">
+                       <label class="col-lg-4 control-label">Last name:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="text" name="lname" required="">
+                       </div>
+              </div>
+              <div class="form-group">
+                       <label class="col-lg-4 control-label">Contact Number:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="text" name="contact" required="">
+                       </div>
+              </div>
+              <div class="form-group">
+                       <label class="col-lg-4 control-label">Address:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="text" name="address">
+                       </div>
+              </div>
+              <div class="form-group">
+                       <label class="col-lg-4 control-label">Email Address:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="email" name="email" required="">
+                       </div>
+              </div>
 						</div>
+            </div>
 						<div class="modal-footer">
-		 <button type="button" class="btn btn-primary">Submit</button>
+
+		 <button type="submit" class="btn btn-primary">Submit</button>
 						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 				</div>
+				{!! Form::close()!!}
 		</div>
 </div>
 <!--  modal add clerk-->
@@ -325,10 +267,55 @@
        <button type="submit" id="btnDeleteMultiple" class="btn btn-primary">Yes</button>
 			 <button type="button" class="btn btn-primary" id="changeifHasSelected" data-dismiss="modal">No</button>
        {!! Form::close()!!}
-
         			</div>
 					</div>
 			</div>
 	</div>
 	<!-- Modal Delete -->
+	<div id="myModal-multiplePrivileges" class="modal fade">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Check the privileges you will allow to the selected users:</h4>
+					</div>
+				{!! Form::open(array('action' => 'AdminController@multiplemanagePrivileges' , 'method' => 'post'))!!}
+				<input type="hidden" name="ids_to_be_manage" id="manageIdsPrivileges">
+		 <div class="">
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="sales_encoding" value="1"/>Sales Encoding</label>
+									</div>
+								</div>
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="account_registration" value="1"/>Account Registration</label>
+									</div>
+								</div>
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
+									</div>
+								</div>
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="use_inventory" value="1"/>Use Inventory</label>
+									</div>
+								</div>
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label><input type="checkbox" name="generate_report" value="1"/>Generate Reports</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="padding: 15px;  text-align: right;">
+							<button type="submit" id="btnManagePrivilegesMultiple" class="btn btn-primary">Save changes</button>
+							 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+						{!! Form::close()!!}
+				</div>
+ 			</div>
+	</div>
 @stop
