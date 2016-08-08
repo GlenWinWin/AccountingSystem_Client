@@ -53,7 +53,7 @@
 				<td>{{$clerkss->username}}</td>
 				<td><input type="button" class="btn btn-primary btn-sm open-modal-password" onclick="setClerkIdforChangePasswordAccount({{$clerkss->id}})" value="Change Password"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$clerkss->id}})" value="Delete"></td>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" onclick="manage_privileges({{$clerkss->id}})" value="Manage Privileges"></td>
+				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" onclick="manage_privileges({{$clerkss->id}},{{$clerkss->sales_encoding}},{{$clerkss->account_registration}},{{$clerkss->add_clerk}},{{$clerkss->use_inventory}},{{$clerkss->generate_report}})" value="Manage Privileges"></td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -79,7 +79,7 @@
 								<center>
 									<label for="inputPassword3">New Password</label>
 								<br>
-							<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+							<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control " aria-describedby="passwordHelpInline"></center>
 								 <center>
 								<label for="inputPassword4">Repeat Password</label>
 								<br>
@@ -128,27 +128,27 @@
 							<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label><input type="checkbox" name="sales_encoding" value="1"/>Sales Encoding</label>
+									<label><input type="checkbox" id="salesEncodingCheckBox" name="sales_encoding" value="1"/>Sales Encoding</label>
 								</div>
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label><input type="checkbox" name="account_registration" value="1"/>Account Registration</label>
+									<label><input type="checkbox" id="accountRegistrationCheckBox" name="account_registration" value="1"/>Account Registration</label>
 								</div>
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
+									<label><input type="checkbox" id="addClerkCheckBox" name="add_clerk" value="1"/>Add Clerk</label>
 								</div>
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label><input type="checkbox" name="use_inventory" value="1"/>Use Inventory</label>
+									<label><input type="checkbox" id="useInventoryCheckBox" name="use_inventory" value="1"/>Use Inventory</label>
 								</div>
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label><input type="checkbox" name="generate_report" value="1"/>Generate Reports</label>
+									<label><input type="checkbox" id="generateReportCheckBox" name="generate_report" value="1"/>Generate Reports</label>
 								</div>
 							</div>
 						</div>

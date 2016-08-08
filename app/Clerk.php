@@ -10,6 +10,7 @@ class Clerk extends Model
     'id',
     'fname',
     'lname',
+    'name',
     'username',
     'password',
     'email',

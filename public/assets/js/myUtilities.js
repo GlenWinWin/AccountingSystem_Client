@@ -1,7 +1,22 @@
 function delete_Clerk_Distributor_Item(id){
   $("input[id=specific_id]").val(id);
 }
-function manage_privileges(id){
+function manage_privileges(id,se,ar,ac,ui,gr){
+  if(se == 1){
+    $("#salesEncodingCheckBox").prop('checked', true);
+  }
+  if(ar == 1){
+    $("#accountRegistrationCheckBox").prop('checked', true);
+  }
+  if(ac == 1){
+    $("#addClerkCheckBox").prop('checked', true);
+  }
+  if(ui == 1){
+    $("#useInventoryCheckBox").prop('checked', true);
+  }
+  if(gr == 1){
+    $("#generateReportCheckBox").prop('checked', true);
+  }
   $("input[id=clerkId]").val(id);
 }
 function setClerkIdforChangePasswordAccount(id){

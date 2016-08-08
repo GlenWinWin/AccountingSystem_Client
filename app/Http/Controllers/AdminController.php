@@ -13,6 +13,7 @@ use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Auth;
 use Hash;
+use DB;
 
 
 
@@ -20,7 +21,8 @@ class AdminController extends Controller{
     public function listOfClerk(){
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        $clerks = Clerk::where('typeOfUser', '=', 1)->paginate(10);
+        $clerks = DB::table('users')->groupBy('manage_privileges.clerk_id')
+    ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->paginate(10);
         return view('clerk.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
@@ -83,14 +85,27 @@ class AdminController extends Controller{
       $addClerkQuery = new Clerk;
       $addClerkQuery->fname = $fname;
       $addClerkQuery->lname = $lname;
+      $addClerkQuery->name = $fname . ' ' . $lname;
       $addClerkQuery->email = $email;
       $addClerkQuery->username = $username;
-      $addClerkQuery->password = $password;
+      $addClerkQuery->password = Hash::make($password);
       $addClerkQuery->contact = $contact;
       $addClerkQuery->address = $address;
       $addClerkQuery->typeOfUser = 1;
       $addClerkQuery->profile_path = 'assets/images/user.png';
       $addClerkQuery->save();
+
+      $latestClerk = Clerk::where('typeOfUser','=',1)->orderBy('id','desc')->first();
+      //add priviliges
+
+      $addPrivilegesforClerk = new ManagePrivileges;
+      $addPrivilegesforClerk->clerk_id = $latestClerk->id;
+      $addPrivilegesforClerk->sales_encoding = 0;
+      $addPrivilegesforClerk->account_registration = 0;
+      $addPrivilegesforClerk->add_clerk = 0;
+      $addPrivilegesforClerk->use_inventory = 0;
+      $addPrivilegesforClerk->generate_report = 0;
+      $addPrivilegesforClerk->save();
 
       return redirect('list_clerk');
     }
