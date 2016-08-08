@@ -66,55 +66,55 @@
 	</center>
 </div>
 
-		    <!-- Modal Password -->
-		    <div id="myModal-password" class="modal fade">
-		        <div class="modal-dialog modal-sm">
-		            <div class="modal-content">
-		                <div class="modal-header" style="color:#b3cccc";>
-					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title">Fill-up the fields:</h4>
-		                </div>
-							<div class="form-group">
-										<input type="hidden" id="adminPassword" value="">
-										<input type="hidden" name="specific_id" id="myClerkId">
-								<center>
-									<label for="inputPassword3">New Password</label>
-								<br>
-							<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
-								 <center>
-								<label for="inputPassword4">Repeat Password</label>
-								<br>
-							<input type="password" id="inputPasswordRepeat" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
-								<small id="passwordHelpInline" class="text-muted">
+			    <!-- Modal Password -->
+			    <div id="myModal-password" class="modal fade">
+			        <div class="modal-dialog modal-sm">
+			            <div class="modal-content">
+			                <div class="modal-header" style="color:#b3cccc";>
+						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			                <h4 class="modal-title">Fill-up the fields:</h4>
+			                </div>
+								<div class="form-group">
+											<input type="hidden" id="adminPassword" value="">
+											<input type="hidden" name="specific_id" id="myClerkId">
 									<center>
+										<label for="inputPassword3">New Password</label>
+									<br>
+								<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+									 <center>
+									<label for="inputPassword4">Repeat Password</label>
+									<br>
+								<input type="password" id="inputPasswordRepeat" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+									<small id="passwordHelpInline" class="text-muted">
+										<center>
+												<i>
+													<h4 id="showErrorRepeat" style="color:red;">
+													</h4>
+												</i>
+										</center>
+									</small>
+									 	<center>
+									<label for="inputPassword4">Admin Password</label>
+									<br>
+									<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
+									<small id="passwordHelpInline" class="text-muted">
+										<center>
 											<i>
-												<h4 id="showErrorRepeat" style="color:red;">
+												<h4 id="showErrorAdmin" style="color:red;">
 												</h4>
 											</i>
-									</center>
-								</small>
-								 	<center>
-								<label for="inputPassword4">Admin Password</label>
-								<br>
-								<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
-								<small id="passwordHelpInline" class="text-muted">
-									<center>
-										<i>
-											<h4 id="showErrorAdmin" style="color:red;">
-											</h4>
-										</i>
-									</center>
-								</small>
-		                <div class="modal-footer">
-						 				<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
-		                 <button class="btn btn-default" data-dismiss="modal">Close</button>
-		                </div>
+										</center>
+									</small>
+			                <div class="modal-footer">
+							 				<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
+			                 <button class="btn btn-default" data-dismiss="modal">Close</button>
+			                </div>
 
-									</div>
-		            </div>
-		        </div>
-		    </div>
-<!--  Modal Change Password-->
+										</div>
+			            </div>
+			        </div>
+			    </div>
+	<!--  Modal Change Password-->
 <!--  Modal Change Priviliges-->
 <div id="myModal-priviliges" class="modal fade">
 		<div class="modal-dialog modal-sm">
