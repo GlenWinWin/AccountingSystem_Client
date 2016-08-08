@@ -20,7 +20,7 @@ class AdminController extends Controller{
     public function listOfClerk(){
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        $clerks = Clerk::where('typeOfUser', '=', 1)->paginate(5);
+        $clerks = Clerk::where('typeOfUser', '=', 1)->paginate(10);
         return view('clerk.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
@@ -28,13 +28,13 @@ class AdminController extends Controller{
       }
     }
     public function listOfItems(){
-      $items = Items::paginate(5);
+      $items = Items::paginate(10);
       return view('items.listOfItems')->with('items',$items);
     }
     public function listOfDistributor(){
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        $distributors = Distributor::where('typeOfUser', '=', 2)->paginate(5);
+        $distributors = Distributor::where('typeOfUser', '=', 2)->paginate(10);
         return view('distributor.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
@@ -45,7 +45,7 @@ class AdminController extends Controller{
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
         $keyword = $requests->search;
-        $searchClerk = Clerk::where('typeOfUser','=',1)->where('name','LIKE','%'.$keyword.'%')->paginate(5);
+        $searchClerk = Clerk::where('typeOfUser','=',1)->where('name','LIKE','%'.$keyword.'%')->paginate(10);
         $title = "Results for clerks...";
         return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
       }
@@ -57,7 +57,7 @@ class AdminController extends Controller{
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
         $keyword = $requests->search;
-        $searchDistributor = Distributor::where('name','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->paginate(5);
+        $searchDistributor = Distributor::where('name','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->paginate(10);
         $title = "Results for distributors...";
         return view('distributor.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title)->with('password',$decryptedPassword);
       }
@@ -67,7 +67,7 @@ class AdminController extends Controller{
     }
     public function searchItems(Request $requests){
       $keyword = $requests->search;
-      $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->paginate(5);
+      $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->paginate(10);
       $title = "Results for items...";
       return view('items.listOfItems')->with('items',$searchItems)->with('title',$title);
     }

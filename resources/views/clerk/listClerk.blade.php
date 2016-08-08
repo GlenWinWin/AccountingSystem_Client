@@ -238,8 +238,6 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title">Are you sure you want to delete?</h4>
 							</div>
-
-
 							<div class="modal-footer">
         {!! Form::open(array('action' => 'AdminController@removeClerk' , 'method' => 'post'))!!}
         <input type="hidden" name="the_id" id="specific_id">

@@ -66,14 +66,14 @@
 		<tbody>
 			@foreach($items as $itemss)
 			<tr>
-				<td><input type="checkbox" id="checkone" value=""></td>
+				<td><input type="checkbox" name="items_ids" id="checkone" value="{{$itemss->item_id}}"></td>
 				<td>{{$itemss->item_name}}</td>
 				<td>{{$itemss->item_quantity}}</td>
 				<td>PHP {{$itemss->item_costPrice}}</td>
 				<td>PHP {{$itemss->item_subcostPrice}}</td>
 				<td>PHP {{$itemss->item_sellingPrice}}</td>
 				<td><input type="button" name="name" value="Edit" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" name="name" value="Delete" class="btn btn-primary btn-sm" onclick="delete_Clerk_Distributor_Item({{$itemss->id}})"></td>
+				<td><input type="button" name="name" value="Delete" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})"></td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -83,5 +83,22 @@
 	<center>
 		{{$items->links()}}
 	</center>
+</div>
+<div id="myModal-delete" class="modal fade">
+		<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+						<div class="modal-header" style="color:#b3cccc";>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Are you sure you want to delete?</h4>
+						</div>
+						<div class="modal-footer">
+			{!! Form::open(array('action' => 'AdminController@removeItem' , 'method' => 'post'))!!}
+			<input type="hidden" name="the_id" id="specific_id">
+		 <button type="submit" class="btn btn-primary">Yes</button>
+		 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+		 {!! Form::close()!!}
+						</div>
+				</div>
+		</div>
 </div>
 @stop
