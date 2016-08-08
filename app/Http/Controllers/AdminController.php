@@ -15,14 +15,12 @@ use Auth;
 use Hash;
 use DB;
 
-
-
 class AdminController extends Controller{
     public function listOfClerk(){
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
         $clerks = DB::table('users')->groupBy('manage_privileges.clerk_id')
-    ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->paginate(10);
+    ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
         return view('clerk.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
@@ -147,6 +145,15 @@ class AdminController extends Controller{
       foreach($ids as $value){
         if($value != 0){
           $usertoDelete = User::where('id','=',$value)->delete();
+        }
+      }
+      return redirect()->back();
+    }
+    public function removeMultipleItems(Request $requests){
+      $ids = explode(',',$requests->ids_to_be_delete);
+      foreach($ids as $value){
+        if($value != 0){
+          $itemtoDelete = Items::where('item_id','=',$value)->delete();
         }
       }
       return redirect()->back();

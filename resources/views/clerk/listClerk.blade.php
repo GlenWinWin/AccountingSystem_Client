@@ -79,11 +79,11 @@
 								<center>
 									<label for="inputPassword3">New Password</label>
 								<br>
-							<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control " aria-describedby="passwordHelpInline"></center>
+							<input type="password" id="inputPassword" style="width:70%" name="pword" onkeyup="ableChangePasswordButton()" class="form-control " aria-describedby="passwordHelpInline"></center>
 								 <center>
 								<label for="inputPassword4">Repeat Password</label>
 								<br>
-							<input type="password" id="inputPasswordRepeat" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+							<input type="password" id="inputPasswordRepeat" style="width:70%" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
 								<small id="passwordHelpInline" class="text-muted">
 									<center>
 											<i>
@@ -95,7 +95,7 @@
 								 	<center>
 								<label for="inputPassword4">Admin Password</label>
 								<br>
-								<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
+								<input type="password" id="inputPasswordAdmin" style="width:70%" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
 								<small id="passwordHelpInline" class="text-muted">
 									<center>
 										<i>
@@ -155,7 +155,7 @@
 					</div>
 					<div style="padding: 15px;  text-align: right;">
 	 <button type="submit" class="btn btn-primary">Save changes</button>
-					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					 <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearPrivileges()">Close</button>
 					</div>
 					{!! Form::close()!!}
 
@@ -236,7 +236,7 @@
 					<div class="modal-content">
 							<div class="modal-header" style="color:#b3cccc";>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Are you sure you want to delete?</h4>
+							<h4 class="modal-title">Are you sure you want to delete this clerk?</h4>
 							</div>
 							<div class="modal-footer">
         {!! Form::open(array('action' => 'AdminController@removeClerk' , 'method' => 'post'))!!}
@@ -275,7 +275,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Check the privileges you will allow to the selected users:</h4>
+					<h4 class="modal-title">Check the privileges you will allow to the selected clerks:</h4>
 					</div>
 				{!! Form::open(array('action' => 'AdminController@multiplemanagePrivileges' , 'method' => 'post'))!!}
 				<input type="hidden" name="ids_to_be_manage" id="manageIdsPrivileges">

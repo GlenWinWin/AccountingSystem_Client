@@ -77,11 +77,11 @@
 					<center>
 						<label for="inputPassword3">New Password</label>
 					<br>
-				<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+				<input type="password" id="inputPassword" name="pword" style="width:70%" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
 					 <center>
 					<label for="inputPassword4">Repeat Password</label>
 					<br>
-				<input type="password" id="inputPasswordRepeat" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+				<input type="password" id="inputPasswordRepeat" name="new_password" style="width:70%" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
 					<small id="passwordHelpInline" class="text-muted">
 						<center>
 								<i>
@@ -93,7 +93,7 @@
 						<center>
 					<label for="inputPassword4">Admin Password</label>
 					<br>
-					<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
+					<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" style="width:70%" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
 					<small id="passwordHelpInline" class="text-muted">
 						<center>
 							<i>
@@ -119,10 +119,8 @@
 	        <div class="modal-content">
 	            <div class="modal-header" style="color:#b3cccc";>
 	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	            <h4 class="modal-title">Are you sure you want to delete?</h4>
+	            <h4 class="modal-title">Are you sure you want to delete this distributor?</h4>
 	            </div>
-
-
 	            <div class="modal-footer">
 								{!! Form::open(array('action' => 'AdminController@removeDistributor' , 'method' => 'post'))!!}
 				        <input type="hidden" name="the_id" id="specific_id">

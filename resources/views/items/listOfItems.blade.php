@@ -39,7 +39,7 @@
                  </ul>
                </li>
              </ul>
-						 <input type="button" class="btn btn-md btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item()" value="Delete">
+						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Delete">
              <div class="search" style="display:block;">
 							 {!! Form::open(array('action' => 'AdminController@searchItems' , 'method' => 'get'))!!}
 							 <input type="text" name="search" required="" placeholder="Search...">
@@ -72,7 +72,7 @@
 				<td>PHP {{$itemss->item_costPrice}}</td>
 				<td>PHP {{$itemss->item_subcostPrice}}</td>
 				<td>PHP {{$itemss->item_sellingPrice}}</td>
-				<td><input type="button" name="name" value="Edit Items" class="btn btn-primary btn-sm open-modal-editItems"></td>
+				<td><input type="button" value="Edit Items" class="btn btn-primary btn-sm open-modal-editItems" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_quantity}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
 			</tr>
 			@endforeach
@@ -141,38 +141,38 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Edit Items</h4>
 						</div>
-
+{!! Form::open(array('action' => 'AdminController@editItem' , 'method' => 'post'))!!}
 <div class="col-lg-12">
-
+						<input type="hidden" name="id_item" id="item_id" value="">
 						<div class="modal-body">
 							<div class="form-group">
                        <label class="col-lg-4 control-label">Item name:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="fname" required="">
+                         <input class="form-control" id="itemNameId" value="" type="text" name="name_item" required="">
                        </div>
               </div>
 							<div class="form-group">
                        <label class="col-lg-4 control-label">Quantity:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="lname" required="">
+                         <input class="form-control" id="itemQuantityId" value="" type="text" name="quantity_item" required="">
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Cost Price:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="contact" required="">
+                         <input class="form-control" type="text" id="itemCostId" value="" name="costPrice_item" required="">
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Sub Cost Price:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="address">
+                         <input class="form-control" type="text" id="itemSubCostId" value="" name="subcostPrice_item" required="">
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Selling Price:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="Selling Price" required="">
+                         <input class="form-control" type="text" id="itemSellingId" value="" name="sellingPrice_item" required="">
                        </div>
               </div>
 						</div>
@@ -193,12 +193,10 @@
         <div class="modal-content">
             <div class="modal-header" style="color:#b3cccc";>
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Are you sure you want to delete?</h4>
+            <h4 class="modal-title">Are you sure you want to delete this item?</h4>
             </div>
-
-
             <div class="modal-footer">
-							{!! Form::open(array('action' => 'AdminController@removeDistributor' , 'method' => 'post'))!!}
+							{!! Form::open(array('action' => 'AdminController@removeItem' , 'method' => 'post'))!!}
 			        <input type="hidden" name="the_id" id="specific_id">
      <button type="submit" class="btn btn-primary">Yes</button>
      <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
@@ -206,5 +204,23 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="myModal-deleteMultiple" class="modal fade">
+		<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+						<div class="modal-header" style="color:#b3cccc";>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="toDeleteMultipleItemsTitle"></h4>
+						</div>
+						<div class="modal-footer">
+			{!! Form::open(array('action' => 'AdminController@removeMultipleItems' , 'method' => 'post'))!!}
+			<input type="hidden" name="ids_to_be_delete" id="itemstoDelete">
+		 <button type="submit" id="btnDeleteMultiple" class="btn btn-primary">Yes</button>
+		 <button type="button" class="btn btn-primary" id="changeifSelected" data-dismiss="modal"></button>
+		 {!! Form::close()!!}
+						</div>
+				</div>
+		</div>
 </div>
 @stop

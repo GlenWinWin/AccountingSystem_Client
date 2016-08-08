@@ -73,6 +73,7 @@ Route::post('clerk_remove', 'AdminController@removeClerk');
 Route::post('distributor_remove', 'AdminController@removeDistributor');
 Route::post('items_remove', 'AdminController@removeItem');
 Route::post('multiple_remove_users', 'AdminController@removeMultipleUsers');
+Route::post('multiple_remove_items', 'AdminController@removeMultipleItems');
 
 //Manage Privileges function
 Route::post('manage_privileges', 'AdminController@managePrivileges');

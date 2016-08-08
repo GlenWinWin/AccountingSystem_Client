@@ -19,6 +19,13 @@ function manage_privileges(id,se,ar,ac,ui,gr){
   }
   $("input[id=clerkId]").val(id);
 }
+function clearPrivileges(){
+  $("#salesEncodingCheckBox").prop('checked', false);
+  $("#accountRegistrationCheckBox").prop('checked', false);
+  $("#addClerkCheckBox").prop('checked', false);
+  $("#useInventoryCheckBox").prop('checked', false);
+  $("#generateReportCheckBox").prop('checked', false);
+}
 function setClerkIdforChangePasswordAccount(id){
   $("input[id=myClerkId]").val(id);
 }
@@ -93,4 +100,31 @@ else{
   document.getElementById('toshowEnabledeleteMultipleUserButton').innerHTML = "Are you sure you want to delete the selected users?";
   $("input[id=idstoDelete]").val(listIds);
 }
+}
+function doMultipleSelectionItemsToDelete(){
+  var listIds = "";
+  $('input:checkbox[name=items_ids]').each(function()
+{
+    if($(this).is(':checked'))
+    listIds += $(this).val() + ",";
+});
+  if(listIds == null || listIds == ""){
+    document.getElementById('btnDeleteMultiple').disabled = true;
+    document.getElementById('toDeleteMultipleItemsTitle').innerHTML = "No selected items!";
+    document.getElementById('changeifSelected').innerHTML = "Close";
+  }
+  else{
+    document.getElementById('btnDeleteMultiple').disabled = false;
+    document.getElementById('changeifSelected').innerHTML = "No";
+    document.getElementById('toDeleteMultipleItemsTitle').innerHTML = "Are you sure you want to delete the selected items?";
+    $("input[id=itemstoDelete]").val(listIds);
+  }
+}
+function editSpecificItem(item_id,item_name,item_quantity,item_costPrice,item_subcostPrice,item_sellingPrice){
+  $("input[id=item_id]").val(item_id);
+  $("input[id=itemNameId]").val(item_name);
+  $("input[id=itemQuantityId]").val(item_quantity);
+  $("input[id=itemCostId]").val(item_costPrice);
+  $("input[id=itemSubCostId]").val(item_subcostPrice);
+  $("input[id=itemSellingId]").val(item_sellingPrice);
 }
