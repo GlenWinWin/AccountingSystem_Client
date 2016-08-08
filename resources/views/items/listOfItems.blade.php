@@ -72,13 +72,8 @@
 				<td>PHP {{$itemss->item_costPrice}}</td>
 				<td>PHP {{$itemss->item_subcostPrice}}</td>
 				<td>PHP {{$itemss->item_sellingPrice}}</td>
-<<<<<<< HEAD
 				<td><input type="button" name="name" value="Edit Items" class="btn btn-primary btn-sm open-modal-editItems"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
-=======
-				<td><input type="button" value="Edit" class="btn btn-primary btn-sm"></td>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-deleteItem" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
->>>>>>> e74c2ba6f2f225838b812a0cdaa584935e3ef67f
 			</tr>
 			@endforeach
 		</tbody>
@@ -89,7 +84,6 @@
 		{{$items->links()}}
 	</center>
 </div>
-<<<<<<< HEAD
 <!-- Modal Password -->
 <div id="myModal-password" class="modal fade">
 		<div class="modal-dialog modal-sm">
@@ -137,24 +131,6 @@
 					</div>
 				</div>
 		</div>
-=======
-<div id="myModal-deleteItem" class="modal fade">
-    <div class="modal-dialog  modal-sm">
-        <div class="modal-content">
-            <div class="modal-header" style="color:#b3cccc";>
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Are you sure you want to delete this item?</h4>
-            </div>
-            <div class="modal-footer">
-							{!! Form::open(array('action' => 'AdminController@removeItem' , 'method' => 'post'))!!}
-			        <input type="hidden" name="the_id" id="specific_id">
-     <button type="submit" class="btn btn-primary">Yes</button>
-     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-		 {!! Form::close()!!}
-            </div>
-        </div>
-    </div>
->>>>>>> e74c2ba6f2f225838b812a0cdaa584935e3ef67f
 </div>
 <!--  Modal Change Password-->
 <!--  Modal Edit Items-->
