@@ -14,12 +14,13 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Auth;
 use Hash;
 use DB;
+use Input;
 
 class AdminController extends Controller{
     public function listOfClerk(){
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        $clerks = DB::table('users')->groupBy('manage_privileges.clerk_id')
+        $clerks = DB::table('users')->where('users.typeOfUser',1)->groupBy('manage_privileges.clerk_id')
     ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
         return view('clerk.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
       }
@@ -45,7 +46,8 @@ class AdminController extends Controller{
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
         $keyword = $requests->search;
-        $searchClerk = Clerk::where('typeOfUser','=',1)->where('name','LIKE','%'.$keyword.'%')->paginate(10);
+        $searchClerk = DB::table('users')->where('users.typeOfUser',1)->where('users.name','LIKE','%'.$keyword.'%')->groupBy('manage_privileges.clerk_id')
+    ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
         $title = "Results for clerks...";
         return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
       }
@@ -80,19 +82,36 @@ class AdminController extends Controller{
       $email = $requests->email;
       $address = $requests->address;
 
-      $addClerkQuery = new Clerk;
-      $addClerkQuery->fname = $fname;
-      $addClerkQuery->lname = $lname;
-      $addClerkQuery->name = $fname . ' ' . $lname;
-      $addClerkQuery->email = $email;
-      $addClerkQuery->username = $username;
-      $addClerkQuery->password = Hash::make($password);
-      $addClerkQuery->contact = $contact;
-      $addClerkQuery->address = $address;
-      $addClerkQuery->typeOfUser = 1;
-      $addClerkQuery->profile_path = 'assets/images/user.png';
-      $addClerkQuery->save();
-
+      if(Input::hasFile('clerk_pic')){
+        $clerk_pic = Input::file('clerk_pic');
+        $clerk_pic->move('assets/images/profile_pictures',$clerk_pic->getClientOriginalName());
+        $addClerkQuery = new Clerk;
+        $addClerkQuery->fname = $fname;
+        $addClerkQuery->lname = $lname;
+        $addClerkQuery->name = $fname . ' ' . $lname;
+        $addClerkQuery->email = $email;
+        $addClerkQuery->username = $username;
+        $addClerkQuery->password = Hash::make($password);
+        $addClerkQuery->contact = $contact;
+        $addClerkQuery->address = $address;
+        $addClerkQuery->typeOfUser = 1;
+        $addClerkQuery->profile_path = 'assets/images/profile_pictures/'.$clerk_pic->getClientOriginalName();
+        $addClerkQuery->save();
+      }
+      else{
+        $addClerkQuery = new Clerk;
+        $addClerkQuery->fname = $fname;
+        $addClerkQuery->lname = $lname;
+        $addClerkQuery->name = $fname . ' ' . $lname;
+        $addClerkQuery->email = $email;
+        $addClerkQuery->username = $username;
+        $addClerkQuery->password = Hash::make($password);
+        $addClerkQuery->contact = $contact;
+        $addClerkQuery->address = $address;
+        $addClerkQuery->typeOfUser = 1;
+        $addClerkQuery->profile_path = 'assets/images/user.png';
+        $addClerkQuery->save();
+      }
       $latestClerk = Clerk::where('typeOfUser','=',1)->orderBy('id','desc')->first();
       //add priviliges
 

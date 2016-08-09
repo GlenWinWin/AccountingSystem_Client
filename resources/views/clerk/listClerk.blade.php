@@ -171,15 +171,16 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Add Clerk</h4>
 						</div>
-						{!! Form::open(array('action' => 'AdminController@addClerk' , 'method' => 'post' , 'id' => 'formQuestion'))!!}
-            <div class="col-lg-12">
+						<form action="{{ URL::to('clerk_add') }}" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="col-lg-12">
                 <center>
               <div class="col-lg-7" style="    padding-top: 12px;">
                   <img src="assets/images/user.png" class="edit-image" alt="avatar">
                     </div>
                   <div class="col-lg-5 upload-clerk">
                   <h6>Upload a different photo</h6>
-                <input type="file" class="text-center upload" name="profile_pic">
+                <input type="file" name="clerk_pic" class="text-center upload" name="profile_pic">
                   </div>
                   </center>
 </div>
@@ -224,7 +225,7 @@
 						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 				</div>
-				{!! Form::close()!!}
+			</form>
 		</div>
 </div>
 <!--  modal add clerk-->

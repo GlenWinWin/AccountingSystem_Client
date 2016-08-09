@@ -8,6 +8,7 @@ use App\User;
 use Auth;
 use Validator;
 use Session;
+use Input;
 
 class UserController extends Controller
 {
@@ -65,14 +66,30 @@ class UserController extends Controller
       return view('settings.edit_profile');
     }
     public function bagong_dp(Request $requests){
-      $id = Auth::user()->id;
-      $fname = $requests->fname;
-      $lname = $requests->lname;
-      $address = $requests->address;
-      $contact = $requests->contact;
-      $email = $requests->email;
-      $updateProfile = User::where('id','=',$id)->update(['fname'=>$fname,'lname'=>$lname,
-    'address'=>$address,'contact'=>$contact,'email'=>$email]);
-      return redirect()->back();
+      if(Input::hasFile('new_dp')){
+        $newPic = Input::file('new_dp');
+        $newPic->move('assets/images/profile_pictures',$newPic->getClientOriginalName());
+        $id = Auth::user()->id;
+        $fname = $requests->fname;
+        $lname = $requests->lname;
+        $address = $requests->address;
+        $contact = $requests->contact;
+        $email = $requests->email;
+        $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,
+      'address'=>$address,'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/profile_pictures/'.$newPic->getClientOriginalName()]);
+        return redirect()->back();
+      }
+      else{
+        $id = Auth::user()->id;
+        $fname = $requests->fname;
+        $lname = $requests->lname;
+        $address = $requests->address;
+        $contact = $requests->contact;
+        $email = $requests->email;
+        $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,
+      'address'=>$address,'contact'=>$contact,'email'=>$email]);
+        return redirect()->back();
+      }
+
     }
 }
