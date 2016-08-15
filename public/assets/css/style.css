@@ -101,6 +101,9 @@ body{
    overflow-y: auto;
 
 }
+.col-lg-3>#sidebar-wrapper>.nav{
+  overflow-y: auto;
+}
 .sidebar-nav {
   position: absolute;
   top: 0;
@@ -109,6 +112,7 @@ body{
   width: 250px;
   list-style: none;
 }
+
 .sidebar-nav li {
   text-indent: 20px;
   line-height: 50px;

@@ -49,22 +49,55 @@
     			</div>
     		<ul class="nav">
     			<li>
-    				<a href="list_clerk" >
+    				<a href="home_clerk">
     				<i class="glyphicon glyphicon-user"></i>
-    				Clerks </a>
+    			Clerk</a>
     			</li>
-    			<li >
-    				<a href="list_distributor">
-    				<i class="glyphicon glyphicon-user"></i>
-    			Distributors</a>
-    			</li>
-    			<li>
-    				<a href="list_items">
-    				<i class="glyphicon glyphicon-user"></i>
-    			Items</a>
-    			</li>
+          <li >
+            <a href="list_distributor">
+            <i class="glyphicon glyphicon-user"></i>
+        Distributors</a>
+          </li>
+          <li>
+            <a href="list_items">
+            <i class="glyphicon glyphicon-user"></i>
+          Inventory</a>
+          </li>
+          <li>
+            <a href="list_clerk" >
+            <i class="glyphicon glyphicon-user"></i>
+           Sales Encoding</a>
+          </li>
 
-
+          <li>
+            <a href="list_items">
+            <i class="glyphicon glyphicon-user"></i>
+          Reports</a>
+          </li>
+          <li>
+            <a href="list_items">
+            <i class="glyphicon glyphicon-user"></i>
+          Sales</a>
+          </li>
+          <li>
+            <a href="list_clerk" >
+            <i class="glyphicon glyphicon-user"></i>
+          Receiving</a>
+          </li>
+          <li class="visible-xs visible-md visible-sm">
+            <a href="list_clerk" >
+            <i class="glyphicon glyphicon-user"></i>
+          Edit Profile</a>
+          </li>
+          <li class="visible-xs visible-md visible-sm">
+            <a href="list_clerk" >
+            <i class="glyphicon glyphicon-user"></i>
+          Log Out</a>
+          </li>
+          <br>
+          <br>
+          <br>
+        </ul>
     	</div>
     </div>
     @yield('body-content')
