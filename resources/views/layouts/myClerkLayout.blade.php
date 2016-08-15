@@ -55,43 +55,43 @@
     			</li>
           <li >
             <a href="list_distributor">
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-users"></i>
         Distributors</a>
           </li>
           <li>
             <a href="list_items">
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-list"></i>
           Inventory</a>
           </li>
           <li>
             <a href="list_clerk" >
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-keyboard-o"></i>
            Sales Encoding</a>
           </li>
 
           <li>
             <a href="list_items">
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-bar-chart"></i>
           Reports</a>
           </li>
           <li>
             <a href="list_items">
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-line-chart"></i>
           Sales</a>
           </li>
           <li>
             <a href="list_clerk" >
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-archive"></i>
           Receiving</a>
           </li>
           <li class="visible-xs visible-md visible-sm">
             <a href="list_clerk" >
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-pencil"></i>
           Edit Profile</a>
           </li>
           <li class="visible-xs visible-md visible-sm">
             <a href="list_clerk" >
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="fa fa-sign-out"></i>
           Log Out</a>
           </li>
           <br>

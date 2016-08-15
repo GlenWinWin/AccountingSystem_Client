@@ -55,16 +55,29 @@
     			</li>
     			<li >
     				<a href="list_distributor">
-    				<i class="glyphicon glyphicon-user"></i>
+    				<i class="fa fa-users"></i>
     			Distributors</a>
     			</li>
     			<li>
     				<a href="list_items">
-    				<i class="glyphicon glyphicon-user"></i>
+    				<i class="fa fa-list"></i>
     			Items</a>
     			</li>
 
-
+          <li class="visible-xs visible-md visible-sm">
+            <a href="list_clerk" >
+            <i class="fa fa-pencil"></i>
+          Edit Profile</a>
+          </li>
+          <li class="visible-xs visible-md visible-sm">
+            <a href="list_clerk" >
+            <i class="fa fa-sign-out"></i>
+          Log Out</a>
+          </li>
+          <br>
+          <br>
+          <br>
+        </ul>
     	</div>
     </div>
     @yield('body-content')
