@@ -43,7 +43,7 @@ class UserController extends Controller
               return redirect('list_clerk');
             }
             else if(Auth::user()->typeOfUser == 1){
-
+              return redirect('home_clerk');
             }
             else if(Auth::user()->typeOfUser == 2){
 

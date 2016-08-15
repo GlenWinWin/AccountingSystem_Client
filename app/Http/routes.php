@@ -17,6 +17,11 @@ Route::get('items_search',[
   'uses' => 'AdminController@searchItems'
 ]);
 
+//Home page for clerks and distributors
+Route::get('home_clerk',[
+  'uses' => 'ClerkController@clerk_home'
+]);
+
 //login and logout functions
 Route::get('login', function () {
   if(Auth::check()){
@@ -24,7 +29,7 @@ Route::get('login', function () {
       return redirect('list_clerk');
     }
     else if(Auth::user()->typeOfUser == 1){
-      return 'Clerk is here';
+      return redirect('home_clerk');
     }
     else if(Auth::user()->typeOfUser == 2){
       return 'Distributor is here';
