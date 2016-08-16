@@ -19,6 +19,8 @@ class Distributor extends Model
     'profile_path',
     'channelPosition',
     'typeOfUser',
+    'distributor_id',
+    'connectCounter',
   ];
 
   public $timestamps = false;

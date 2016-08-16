@@ -128,3 +128,7 @@ function editSpecificItem(item_id,item_name,item_quantity,item_costPrice,item_su
   $("input[id=itemSubCostId]").val(item_subcostPrice);
   $("input[id=itemSellingId]").val(item_sellingPrice);
 }
+function makeBold(){
+  var contactField = document.getElementById('contactField').value;
+  contactField.innerHTML = '<b>'+contactField+'</b>';
+}
