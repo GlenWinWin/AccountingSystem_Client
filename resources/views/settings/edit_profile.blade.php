@@ -42,7 +42,7 @@ Edit Profile
   <div class="form-group">
            <label class="col-lg-3 control-label">Contact Number:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text" name="contact" required="" pattern="[0][9][0-9]{9}" title="Valid is 9358217701" maxlength="11" value="{{Auth::user()->contact}}">
+             <input class="form-control" type="text" name="contact" required="" pattern="[0][9][0-9]{9}" title="Valid is 09358217701" maxlength="11" value="{{Auth::user()->contact}}">
            </div>
   </div>
   <div class="form-group">
@@ -55,6 +55,25 @@ Edit Profile
            <label class="col-lg-3 control-label">Email Address:</label>
            <div class="col-lg-9">
              <input class="form-control" name="email" type="email" required="" value="{{Auth::user()->email}}">
+           </div>
+  </div>
+  <div class="form-group">
+            <input type="hidden" id="hiddenPassword" value="{{$password}}">
+           <label class="col-lg-3 control-label">Old Password</label>
+           <div class="col-lg-9">
+             <input class="form-control" name="old_password" id="passwordField" type="password" oninput="checkOldPasswordInput(this);">
+           </div>
+  </div>
+  <div class="form-group">
+           <label class="col-lg-3 control-label">New Password</label>
+           <div class="col-lg-9">
+             <input class="form-control" name="new_password" id="newPasswordField" type="password" oninput="InvalidMsg(this);">
+           </div>
+  </div>
+  <div class="form-group">
+           <label class="col-lg-3 control-label">Confirm Password</label>
+           <div class="col-lg-9">
+             <input class="form-control" name="confirm_password" oninvalid="InvalidMsg(this);" id="confirmPasswordField" type="password" oninput="InvalidMsg(this);">
            </div>
   </div>
 

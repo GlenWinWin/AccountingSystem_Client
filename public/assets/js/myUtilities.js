@@ -128,7 +128,50 @@ function editSpecificItem(item_id,item_name,item_quantity,item_costPrice,item_su
   $("input[id=itemSubCostId]").val(item_subcostPrice);
   $("input[id=itemSellingId]").val(item_sellingPrice);
 }
-function makeBold(){
-  var contactField = document.getElementById('contactField').value;
-  contactField.innerHTML = '<b>'+contactField+'</b>';
+function InvalidMsg(textbox){
+  var p = document.getElementById("passwordField").value
+  var new_p = document.getElementById("newPasswordField").value;
+  var con_p = document.getElementById("confirmPasswordField").value
+  if(new_p == '' && con_p == '' && p == ''){
+      document.getElementById("passwordField").required = false;
+      document.getElementById("newPasswordField").required = false;
+      document.getElementById("confirmPasswordField").required = false;
+      textbox.setCustomValidity('');
+      return false;
+  }
+  else if(new_p != '' && con_p != ''){
+    if(new_p.localeCompare(con_p) != 0){
+      textbox.setCustomValidity('Password do not match');
+      return true;
+    }
+    else if(new_p.localeCompare(con_p) == 0){
+      textbox.setCustomValidity('');
+      return false;
+    }
+  }
+  else{
+      document.getElementById("passwordField").required = true;
+      document.getElementById("newPasswordField").required = true;
+      document.getElementById("confirmPasswordField").required = true;
+  }
+}
+function checkOldPasswordInput(passwordko){
+  var current = document.getElementById("hiddenPassword").value;
+  var input = document.getElementById("passwordField").value;
+  if(input == ''){
+    passwordko.setCustomValidity('');
+    document.getElementById("newPasswordField").required = false;
+    document.getElementById("confirmPasswordField").required = false;
+    return false;
+  }
+  else if(input.localeCompare(current) != 0){
+    passwordko.setCustomValidity('Input is not equal to current password');
+    return true;
+  }
+  else if(input.localeCompare(current) == 0){
+    passwordko.setCustomValidity('');
+    document.getElementById("newPasswordField").required = true;
+    document.getElementById("confirmPasswordField").required = true;
+    return false;
+  }
 }

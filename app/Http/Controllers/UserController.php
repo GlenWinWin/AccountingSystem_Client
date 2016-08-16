@@ -9,6 +9,9 @@ use Auth;
 use Validator;
 use Session;
 use Input;
+use Crypt;
+use Hash;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class UserController extends Controller
 {
@@ -63,9 +66,16 @@ class UserController extends Controller
       return redirect('login');
     }
     public function edit_profile(){
-      return view('settings.edit_profile');
+      try{
+        $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+        return view('settings.edit_profile')->with('password',$decryptedPassword);
+      }
+      catch(DecryptException $e){
+        echo $e;
+      }
     }
     public function bagong_dp(Request $requests){
+
       if(Input::hasFile('new_dp')){
         $newPic = Input::file('new_dp');
         $newPic->move('assets/images/profile_pictures',$newPic->getClientOriginalName());
@@ -75,8 +85,22 @@ class UserController extends Controller
         $address = $requests->address;
         $contact = $requests->contact;
         $email = $requests->email;
-        $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,
-      'address'=>$address,'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/profile_pictures/'.$newPic->getClientOriginalName()]);
+        $username = "";
+        if(Auth::user()->typeOfUser == 0){
+          $username = Auth::user()->username;
+        }
+        else{
+          $username = Auth::user()->typeOfUser == 1 ? 'c_'.substr(strtolower($fname),0,1).strtolower($lname) : 'd_'.substr(strtolower($fname),0,1).strtolower($lname);
+        }
+        $newPassword = $requests->new_password;
+        if($newPassword != ''){
+          $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,'username'=>$username,
+        'address'=>$address,'password'=>Hash::make($newPassword),'passsword_text'=>Crypt::encrypt($newPassword),'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/profile_pictures/'.$newPic->getClientOriginalName()]);
+        }
+        else{
+          $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,'username'=>$username,
+        'address'=>$address,'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/profile_pictures/'.$newPic->getClientOriginalName()]);
+        }
         return redirect()->back();
       }
       else{
@@ -86,8 +110,22 @@ class UserController extends Controller
         $address = $requests->address;
         $contact = $requests->contact;
         $email = $requests->email;
-        $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,
-      'address'=>$address,'contact'=>$contact,'email'=>$email]);
+        $username = "";
+        if(Auth::user()->typeOfUser == 0){
+          $username = Auth::user()->username;
+        }
+        else{
+          $username = Auth::user()->typeOfUser == 1 ? 'c_'.substr(strtolower($fname),0,1).strtolower($lname) : 'd_'.substr(strtolower($fname),0,1).strtolower($lname);
+        }
+        $newPassword = $requests->new_password;
+        if($newPassword != ''){
+          $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,'username'=>$username,
+        'address'=>$address,'password'=>Hash::make($newPassword),'passsword_text'=>Crypt::encrypt($newPassword),'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/user.png']);
+        }
+        else{
+          $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,'username'=>$username,
+        'address'=>$address,'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/user.png']);
+        }
         return redirect()->back();
       }
 
