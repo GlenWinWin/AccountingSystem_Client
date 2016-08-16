@@ -14,6 +14,9 @@ use Input;
 
 class ClerkController extends Controller
 {
+      public function clerk_home(){
+        return view('clerk.clerkHome');
+      }
       public function accountRegistration(Request $requests){
 
       }
