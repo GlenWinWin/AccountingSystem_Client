@@ -20,8 +20,8 @@ use Mail;
 class ClerkController extends Controller
 {
       public function clerk_home(){
-  return view('clerk.clerkHome');
-}
+        return view('clerk.clerkHome');
+      }
       public function accountRegistration(Request $requests){
 
       }
@@ -80,8 +80,10 @@ class ClerkController extends Controller
         $addPrivilegesforClerk->generate_report = 0;
         $addPrivilegesforClerk->save();
 
-        Mail::send('email.sendClerkEmail',['name'=> $fname . ' ' . $lname,'username'=>$username,'password'=>$password],function($message){
-          $message->to($email,$fname . ' ' . $lname)->from('admin@gmail.com')->subject('Login with your temporary username and password');
+        $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+
+        Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+          $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
         });
 
         return redirect('home_clerk');

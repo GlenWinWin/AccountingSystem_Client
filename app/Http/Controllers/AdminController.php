@@ -84,7 +84,11 @@ class AdminController extends Controller{
       $address = $requests->address;
       $addClerkQuery = new Clerk;
       $pass_text = Crypt::encrypt($password);
+      $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
 
+      Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+        $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+      });
       if(Input::hasFile('clerk_pic')){
         $clerk_pic = Input::file('clerk_pic');
         $clerk_pic->move('assets/images/profile_pictures',$clerk_pic->getClientOriginalName());
@@ -125,10 +129,6 @@ class AdminController extends Controller{
       $addPrivilegesforClerk->use_inventory = 0;
       $addPrivilegesforClerk->generate_report = 0;
       $addPrivilegesforClerk->save();
-
-      Mail::send('email.sendClerkEmail',['name'=> $fname . ' ' . $lname,'username'=>$username,'password'=>$password],function($message){
-        $message->to($email,$fname . ' ' . $lname)->from('admin@gmail.com')->subject('Login with your temporary username and password');
-      });
 
       return redirect('list_clerk');
     }
