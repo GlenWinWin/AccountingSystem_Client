@@ -15,6 +15,7 @@ use Auth;
 use Hash;
 use DB;
 use Input;
+use Mail
 
 class AdminController extends Controller{
     public function listOfClerk(){
@@ -253,11 +254,11 @@ class AdminController extends Controller{
         return $pass;
 
     }
-}
-public function filterItems(Request $requests){
-  $category = $requests->cat;
-  $sub_category = $requests->sub;
-  $title = "Results for Filtering...";
-  $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
-  return view('admin.listOfItems')->with('items',$items)->with('title',$title);
-}
+    public function filterItems(Request $requests){
+      $category = $requests->cat;
+      $sub_category = $requests->sub;
+      $title = "Results for Filtering...";
+      $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
+      return view('admin.listOfItems')->with('items',$items)->with('title',$title);
+    }
+  }

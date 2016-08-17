@@ -15,6 +15,7 @@ use Auth;
 use Hash;
 use DB;
 use Input;
+use Mail;
 
 class ClerkController extends Controller
 {
@@ -79,7 +80,11 @@ class ClerkController extends Controller
         $addPrivilegesforClerk->generate_report = 0;
         $addPrivilegesforClerk->save();
 
-        return redirect('list_clerk');
+        Mail::send('email.sendClerkEmail',['name'=> $fname . ' ' . $lname,'username'=>$username,'password'=>$password],function($message){
+          $message->to($email,$fname . ' ' . $lname)->from('admin@gmail.com')->subject('Login with your temporary username and password');
+        });
+
+        return redirect('home_clerk');
       }
       /*
       public function generateReport(Request $requests){
