@@ -22,7 +22,7 @@ class AdminController extends Controller{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
         $clerks = DB::table('users')->where('users.typeOfUser',1)->groupBy('manage_privileges.clerk_id')
     ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
-        return view('clerk.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
+        return view('admin.listClerk')->with('clerks',$clerks)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
         echo $e;
@@ -30,13 +30,13 @@ class AdminController extends Controller{
     }
     public function listOfItems(){
       $items = Items::paginate(10);
-      return view('items.listOfItems')->with('items',$items);
+      return view('admin.listOfItems')->with('items',$items);
     }
     public function listOfDistributor(){
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
         $distributors = Distributor::where('typeOfUser', '=', 2)->paginate(10);
-        return view('distributor.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword);
+        return view('admin.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
         echo $e;
@@ -49,7 +49,7 @@ class AdminController extends Controller{
         $searchClerk = DB::table('users')->where('users.typeOfUser',1)->where('users.name','LIKE','%'.$keyword.'%')->groupBy('manage_privileges.clerk_id')
     ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
         $title = "Results for clerks...";
-        return view('clerk.listClerk')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
+        return view('admin.listClerk')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
         echo $e;
@@ -61,7 +61,7 @@ class AdminController extends Controller{
         $keyword = $requests->search;
         $searchDistributor = Distributor::where('name','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->paginate(10);
         $title = "Results for distributors...";
-        return view('distributor.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title)->with('password',$decryptedPassword);
+        return view('admin.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title)->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
         echo $e;
@@ -71,7 +71,7 @@ class AdminController extends Controller{
       $keyword = $requests->search;
       $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->paginate(10);
       $title = "Results for items...";
-      return view('items.listOfItems')->with('items',$searchItems)->with('title',$title);
+      return view('admin.listOfItems')->with('items',$searchItems)->with('title',$title);
     }
     public function addClerk(Request $requests){
       $fname = $requests->fname;
@@ -249,4 +249,11 @@ class AdminController extends Controller{
         return $pass;
 
     }
+}
+public function filterItems(Request $requests){
+  $category = $requests->cat;
+  $sub_category = $requests->sub;
+  $title = "Results for Filtering...";
+  $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
+  return view('admin.listOfItems')->with('items',$items)->with('title',$title);
 }

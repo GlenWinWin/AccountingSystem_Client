@@ -54,12 +54,12 @@
     			Clerk</a>
     			</li>
           <li >
-            <a href="list_distributor">
+            <a href="distributor_list">
             <i class="fa fa-users"></i>
         Distributors</a>
           </li>
           <li>
-            <a href="list_items">
+            <a href="inventory">
             <i class="fa fa-list"></i>
           Inventory</a>
           </li>

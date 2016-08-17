@@ -3,7 +3,7 @@
 //Add functions
 Route::post('clerk_add', 'AdminController@addClerk');
 
-//Search functions
+//Search functions of admin
 Route::get('clerk_search',[
   'middleware' => 'auth',
   'uses' => 'AdminController@searchClerk'
@@ -16,7 +16,15 @@ Route::get('items_search',[
   'middleware' => 'auth',
   'uses' => 'AdminController@searchItems'
 ]);
-
+//Search functions of admin
+Route::get('search_distributor',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@searchDistributor'
+]);
+Route::get('items_search',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@searchItems'
+]);
 //Home page for clerks and distributors
 Route::get('home_clerk',[
   'uses' => 'ClerkController@clerk_home'
@@ -42,11 +50,9 @@ Route::get('login', function () {
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
-Route::get('try', function(){
-  return view('clerk.try');
-});
 
-//View functions
+
+//View functions of admin
 Route::get('list_distributor', [
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfDistributor'
@@ -58,6 +64,16 @@ Route::get('list_clerk',[
 Route::get('list_items',[
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfItems'
+]);
+
+// view functions of Controller
+Route::get('distributor_list', [
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@listOfDistributor'
+]);
+Route::get('inventory',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@listOfItems'
 ]);
 
 //Edit Profile functions
@@ -96,7 +112,11 @@ Route::get('back',[
 //Filter per items
 Route::get('filterItems',[
   'middleware' => 'auth',
-  'uses' => 'ItemsController@filterItems'
+  'uses' => 'AdminController@filterItems'
+]);
+Route::get('ItemsFilter',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@filterItems'
 ]);
 Route::resource('user','UserController',['only' => ['store']]);
 Route::resource('admin','AdminController');

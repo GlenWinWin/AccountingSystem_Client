@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Distributor;
 use App\Clerk;
-use App\ManagePrivileges;
-use App\Transactions;
+use App\Distributor;
 use App\Items;
+use App\ManagePrivileges;
+use App\User;
+use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Auth;
 use Hash;
+use DB;
 use Input;
 
 class ClerkController extends Controller
@@ -82,6 +86,47 @@ class ClerkController extends Controller
 
       }
       */
+      public function listOfDistributor(){
+        try{
+          $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+          $distributors = Distributor::where('typeOfUser', '=', 2)->paginate(10);
+          return view('clerk.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword);
+        }
+        catch(DecryptException $e){
+          echo $e;
+        }
+      }
+      public function searchDistributor(Request $requests){
+        try{
+          $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+          $keyword = $requests->search;
+          $searchDistributor = Distributor::where('name','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->paginate(10);
+          $title = "Results for distributors...";
+          return view('clerk.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title)->with('password',$decryptedPassword);
+        }
+        catch(DecryptException $e){
+          echo $e;
+        }
+      }
+
+      public function listOfItems(){
+        $items = Items::paginate(10);
+        return view('clerk.listOfItems')->with('items',$items);
+      }
+      public function searchItems(Request $requests){
+        $keyword = $requests->search;
+        $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->paginate(10);
+        $title = "Results for items...";
+        return view('clerk.listOfItems')->with('items',$searchItems)->with('title',$title);
+      }
+      public function filterItems(Request $requests){
+        $category = $requests->cat;
+        $sub_category = $requests->sub;
+        $title = "Results for Filtering...";
+        $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
+        return view('clerk.listOfItems')->with('items',$items)->with('title',$title);
+      }
+
       public function createRandomPassword() {
 
       $chars = "abcdefghijkmnopqrstuvwxyz0123456789";
