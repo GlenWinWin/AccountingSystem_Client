@@ -125,6 +125,10 @@ class AdminController extends Controller{
       $addPrivilegesforClerk->generate_report = 0;
       $addPrivilegesforClerk->save();
 
+      Mail::send('email.sendClerkEmail',['name'=> $fname . ' ' . $lname,'username'=>$username,'password'=>$password],function($message){
+        $message->to($email,$fname . ' ' . $lname)->from('admin@gmail.com')->subject('Login with your temporary username and password');
+      });
+
       return redirect('list_clerk');
     }
     public function changePasswordAccount(Request $requests){
