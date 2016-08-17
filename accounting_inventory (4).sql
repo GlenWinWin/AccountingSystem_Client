@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2016 at 05:33 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.5
+-- Generation Time: Aug 17, 2016 at 08:37 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `accounting_inventory`
@@ -26,24 +26,25 @@ SET time_zone = "+00:00";
 -- Table structure for table `items`
 --
 
-CREATE TABLE `items` (
-  `item_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `items` (
+  `item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `item_category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `item_sub_category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `item_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `item_quantity` int(11) NOT NULL,
   `item_costPrice` double NOT NULL,
   `item_subcostPrice` double NOT NULL,
-  `item_sellingPrice` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `item_sellingPrice` double NOT NULL,
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `items`
 --
 
 INSERT INTO `items` (`item_id`, `item_category`, `item_sub_category`, `item_name`, `item_quantity`, `item_costPrice`, `item_subcostPrice`, `item_sellingPrice`) VALUES
-(1, 'Safety Equipments', 'EYE', 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 34, 25, 28.75, 100),
-(2, 'Safety Equipments', 'HEAD', 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 17, 180, 207, 280);
+(1, '0', '2', 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 34, 25, 28.75, 100),
+(2, '0', '1', 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 17, 180, 207, 280);
 
 -- --------------------------------------------------------
 
@@ -51,7 +52,7 @@ INSERT INTO `items` (`item_id`, `item_category`, `item_sub_category`, `item_name
 -- Table structure for table `manage_privileges`
 --
 
-CREATE TABLE `manage_privileges` (
+CREATE TABLE IF NOT EXISTS `manage_privileges` (
   `clerk_id` int(11) NOT NULL,
   `sales_encoding` int(11) NOT NULL,
   `account_registration` int(11) NOT NULL,
@@ -74,7 +75,7 @@ INSERT INTO `manage_privileges` (`clerk_id`, `sales_encoding`, `account_registra
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE `migrations` (
+CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -101,10 +102,12 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE `password_resets` (
+CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -113,7 +116,7 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `receivings`
 --
 
-CREATE TABLE `receivings` (
+CREATE TABLE IF NOT EXISTS `receivings` (
   `clerk_id` int(11) NOT NULL,
   `receiving_id` int(11) NOT NULL,
   `receiving_time` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -125,14 +128,15 @@ CREATE TABLE `receivings` (
 -- Table structure for table `receiving_details`
 --
 
-CREATE TABLE `receiving_details` (
-  `receiving_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `receiving_details` (
+  `receiving_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `item_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `receive_quantity` int(11) NOT NULL,
   `receive_subtotal` double NOT NULL,
-  `receive_total` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `receive_total` double NOT NULL,
+  PRIMARY KEY (`receiving_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -140,12 +144,13 @@ CREATE TABLE `receiving_details` (
 -- Table structure for table `sales`
 --
 
-CREATE TABLE `sales` (
-  `sales_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `sales` (
+  `sales_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `distributor_id` int(11) NOT NULL,
   `clerk_id` int(11) NOT NULL,
-  `sale_time` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `sale_time` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`sales_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -153,14 +158,15 @@ CREATE TABLE `sales` (
 -- Table structure for table `sales_details`
 --
 
-CREATE TABLE `sales_details` (
-  `sales_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `sales_details` (
+  `sales_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `item_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sales_quantity` int(11) NOT NULL,
   `sales_total` double NOT NULL,
-  `sales_subtotal` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `sales_subtotal` double NOT NULL,
+  PRIMARY KEY (`sales_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -168,11 +174,12 @@ CREATE TABLE `sales_details` (
 -- Table structure for table `transactions`
 --
 
-CREATE TABLE `transactions` (
-  `transaction_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `transactions` (
+  `transaction_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `distributor_id` int(11) NOT NULL,
-  `transaction_date` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `transaction_date` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`transaction_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -180,7 +187,7 @@ CREATE TABLE `transactions` (
 -- Table structure for table `transaction_details`
 --
 
-CREATE TABLE `transaction_details` (
+CREATE TABLE IF NOT EXISTS `transaction_details` (
   `transaction_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `item_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -195,8 +202,8 @@ CREATE TABLE `transaction_details` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `lname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -218,101 +225,21 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `passsword_text` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `passsword_text` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `name`, `username`, `email`, `password`, `address`, `contact`, `typeOfUser`, `channelPosition`, `distributor_id`, `connectCounter`, `monthCounter`, `totalSalesMonth`, `totalSales`, `totalNewMemberMonth`, `totalNewMember`, `profile_path`, `remember_token`, `created_at`, `updated_at`, `passsword_text`) VALUES
-(1, 'Glenwin', 'Bernabe', 'Glenwin Bernabe', 'admin', 'glenwinbernabe@gmail.com', '$2y$10$66aI.poQ60pXCleIi65ei.ygA2l7CkpNIrYkI9oEj8MjJg98lIATS', '', '09358217701', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/admin.png', 'k1zI83AMpKxFIlPqjvbax8OAMTWYy8B4ZJ8xc2H0LOBFHc8hDpa6q9TeKHr7', NULL, '2016-08-15 07:14:03', 'eyJpdiI6IklrdDhjb3h5ZktEeXU1eHUxM0xsc3c9PSIsInZhbHVlIjoiK2VwVFZPbTdCWDJsK0U5K2drQzVMdz09IiwibWFjIjoiZTAyYjMzMWYzZDdhNzk0ZmQyMWNhZjU5Mjk1YWI2YjMzMTlkOTJiOTE5YTk4MmIxMTUxMjAxYzE3YWQxZWNkNiJ9'),
-(2, 'Frank', 'Moses', 'Frank Moses', 'd_fmoses', 'frankmoses@gmail.com', '$2y$10$pvpDfv1FswPmQHn.izhd8OvE3KHhV5w8Sbn4GIpiEz8zBpkqRXs6i', 'Dublin,Ireland', '09358827769', 2, 0, 0, 0, 0, 0, 30000, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, ''),
-(3, 'Marco', 'Barrera', 'Marco Barrera', 'c_mbarrera', 'marcobarrera@gmail.com', '$2y$10$rFPiinGJocogc5DRAYUVm.X3VNpeExxfiyJrQjY.j3CZoIZt1fr7S', 'Boxing St. Suntukan Manila', '09488867723', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', 'kMvZbPqM5TBwWlB9JdzXCeR2n8XJBmwlBzqU9r0hG7J5H975ObpCkWfoIn3p', NULL, NULL, ''),
-(4, 'Freedy', 'Morales', 'Freedy Morales', 'c_frmorales', 'freedy@gmail.com', '$2y$10$PB0oYRZvCOa0ZlUNNN3Zie6v3cUuf9mxI0F3SGqheOl6qWDpUPk7u', 'Free Place', '09352347890', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, '');
+(1, 'Glenwin', 'Bernabe', '', 'admin', 'glenwinbernabe@gmail.com', '$2y$10$14KSBsz0jco.2dk92qyn3.MCjTZzGwkP7UeuI4f0q8WjbAYOwXSra', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/admin.png', 'HwYQIGpu1KoLKEtkSkI2ssSXpB40iwjSAtTibQ4JXX8gGdiqK5zHqupAWvJr', NULL, NULL, 'eyJpdiI6IkJSXC9Yc1AzYUVZZWR4ZStMbFUxM3ZnPT0iLCJ2YWx1ZSI6ImEyT28wYWJIOFNpXC94WUJFSWNMam53PT0iLCJtYWMiOiJiYTk5ZDFmOTM4Zjk3MTY3ZjFkNjIwMzhkZThlYTY3OTc0YzRmZWU0ZGZkY2E3ZGEzYWY4NjkwYjIxNWU2NGY2In0='),
+(2, 'Frank', 'Moses', 'Frank Moses', 'd_fmoses', 'frankmoses@gmail.com', '$2y$10$i.QJfD061U8mc4xcFxr5zeZR/hHbgUZrdHfaA2wSThemzu.CEBre2', 'Dublin,Ireland', '09358827769', 2, 0, 0, 0, 0, 0, 30000, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6InZzdjN5V3h3K1dVeHIra1RcL3R4VjNRPT0iLCJ2YWx1ZSI6InA5aWpLcFljTWV5MG03VEl5c0xVYVE9PSIsIm1hYyI6ImZhZTYxMGUxOGZjOGE1ZDE1ODFhODJiZjQ0ZWNiMWY2NmFmOGI1OTlkNWRjMDM3M2Y1OGRkYTVlMjk0NmNiMjQifQ=='),
+(3, 'Marco', 'Barrera', 'Marco Barrera', 'c_mbarrera', 'marcobarrera@gmail.com', '$2y$10$tHdPEbSJkeHpbRyH98jM3e5CXVOebavKpSBFr8NIhZ2EcmI4PJmQq', 'Boxing St. Suntukan Manila', '09488867723', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6InJSRlFLRWZUS2Y2bGh6RmRnM3pPM2c9PSIsInZhbHVlIjoiVXpWRVNYTlh0TXpCXC9aSUJpUUVOMmc9PSIsIm1hYyI6IjE5MDBjM2JhOWM0MGQzYmFiY2NhZmU1M2QyNGYyZjZmZjRiMzM2ZjViMTZkZGQwOTVlMjFjZjg5M2YxOTg0MmEifQ=='),
+(4, 'Freedy', 'Morales', 'Freedy Morales', 'c_frmorales', 'freedy@gmail.com', '$2y$10$OdPte6gcgzcbyJ1UmhNWfe5nGjxJtlUM/s4vkW9aqnFF/AcBoI6xq', 'Free Place', '09352347890', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6IlFtd0NSaVRJeEVWTlRiZENhOVJtNGc9PSIsInZhbHVlIjoiMHRHSE5EK0FsbUVaQjlcLzRTUU9pMUE9PSIsIm1hYyI6IjFmMWNjYjE0M2FhMThlNzQ3NWM4NGJlM2NkYTllNmFmMThjYTZiZTVlMzJhZTM5ZmNiMWE3Y2I0ZTA1MWU4OTAifQ==');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `items`
---
-ALTER TABLE `items`
-  ADD PRIMARY KEY (`item_id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`),
-  ADD KEY `password_resets_token_index` (`token`);
-
---
--- Indexes for table `receiving_details`
---
-ALTER TABLE `receiving_details`
-  ADD PRIMARY KEY (`receiving_id`);
-
---
--- Indexes for table `sales`
---
-ALTER TABLE `sales`
-  ADD PRIMARY KEY (`sales_id`);
-
---
--- Indexes for table `sales_details`
---
-ALTER TABLE `sales_details`
-  ADD PRIMARY KEY (`sales_id`);
-
---
--- Indexes for table `transactions`
---
-ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`transaction_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `items`
---
-ALTER TABLE `items`
-  MODIFY `item_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `receiving_details`
---
-ALTER TABLE `receiving_details`
-  MODIFY `receiving_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `sales`
---
-ALTER TABLE `sales`
-  MODIFY `sales_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `sales_details`
---
-ALTER TABLE `sales_details`
-  MODIFY `sales_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `transactions`
---
-ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

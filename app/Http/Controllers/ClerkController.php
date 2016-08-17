@@ -31,6 +31,7 @@ class ClerkController extends Controller
         $contact = $requests->contact;
         $email = $requests->email;
         $address = $requests->address;
+        $pass_text = Crypt::encrypt($password);
         $addClerkQuery = new Clerk;
 
         if(Input::hasFile('clerk_pic')){
@@ -46,6 +47,7 @@ class ClerkController extends Controller
           $addClerkQuery->address = $address;
           $addClerkQuery->typeOfUser = 1;
           $addClerkQuery->profile_path = 'assets/images/profile_pictures/'.$clerk_pic->getClientOriginalName();
+          $addClerkQuery->passsword_text = $pass_text;
           $addClerkQuery->save();
         }
         else{
@@ -59,6 +61,7 @@ class ClerkController extends Controller
           $addClerkQuery->address = $address;
           $addClerkQuery->typeOfUser = 1;
           $addClerkQuery->profile_path = 'assets/images/user.png';
+          $addClerkQuery->passsword_text = $pass_text;
           $addClerkQuery->save();
         }
         //add priviliges

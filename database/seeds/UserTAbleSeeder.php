@@ -31,12 +31,13 @@ class UserTAbleSeeder extends Seeder
       	'password' => Hash::make('frank'),
         'typeOfUser' => 2,
         'totalSales' => 30000,
-        'profile_path' => 'assets/images/user.png'
+        'profile_path' => 'assets/images/user.png',
+        'passsword_text' => Crypt::encrypt('frank')
       	]);
       DB::table('items')->insert([
       	'item_name' => 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR',
-        'item_category' => 'Safety Equipments',
-        'item_sub_category' => 'EYE',
+        'item_category' => 0,
+        'item_sub_category' => 2,
         'item_quantity' => 34,
         'item_costPrice' => 25.00,
         'item_subcostPrice' => 28.75,
@@ -44,8 +45,8 @@ class UserTAbleSeeder extends Seeder
       	]);
       DB::table('items')->insert([
         'item_name' => 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP',
-        'item_category' => 'Safety Equipments',
-        'item_sub_category' => 'HEAD',
+        'item_category' => 0,
+        'item_sub_category' => 1,
         'item_quantity' => 17,
         'item_costPrice' => 180.00,
         'item_subcostPrice' => 207.00,
@@ -61,7 +62,8 @@ class UserTAbleSeeder extends Seeder
         'address' => 'Boxing St. Suntukan Manila',
       	'password' => Hash::make('marco'),
         'profile_path' => 'assets/images/user.png',
-        'typeOfUser' => 1
+        'typeOfUser' => 1,
+        'passsword_text' => Crypt::encrypt('marco')
       	]);
       DB::table('users')->insert([
         'email' => 'freedy@gmail.com',
@@ -73,7 +75,24 @@ class UserTAbleSeeder extends Seeder
         'address' => 'Free Place',
         'password' => Hash::make('freedy'),
         'profile_path' => 'assets/images/user.png',
-        'typeOfUser' => 1
+        'typeOfUser' => 1,
+        'passsword_text' => Crypt::encrypt('freedy')
         ]);
+        DB::table('manage_privileges')->insert([
+          'clerk_id' => 3,
+          'sales_encoding' => 0,
+          'account_registration' => 0,
+          'add_clerk' => 0,
+          'use_inventory' => 0,
+          'generate_report' => 0
+          ]);
+          DB::table('manage_privileges')->insert([
+            'clerk_id' => 4,
+            'sales_encoding' => 0,
+            'account_registration' => 0,
+            'add_clerk' => 0,
+            'use_inventory' => 0,
+            'generate_report' => 0
+            ]);
     }
 }

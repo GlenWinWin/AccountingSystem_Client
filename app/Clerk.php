@@ -18,6 +18,7 @@ class Clerk extends Model
     'contact',
     'profile_path',
     'typeOfUser',
+    'passsword_text',
   ];
 
   public $timestamps = false;

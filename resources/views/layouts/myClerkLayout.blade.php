@@ -27,7 +27,7 @@
     				<li class="dropdown">
     											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
     											<ul class="dropdown-menu">
-    												<li><a href="edit_profile">Edit Profile</a></li>
+    												<li><a href="profile_edit">Edit Profile</a></li>
     												<li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
     											</ul>
     										</li>
@@ -85,12 +85,12 @@
           Receiving</a>
           </li>
           <li class="visible-xs visible-md visible-sm">
-            <a href="list_clerk" >
+            <a href="profile_edit" >
             <i class="fa fa-pencil"></i>
           Edit Profile</a>
           </li>
           <li class="visible-xs visible-md visible-sm">
-            <a href="list_clerk" >
+            <a href="logout" >
             <i class="fa fa-sign-out"></i>
           Log Out</a>
           </li>

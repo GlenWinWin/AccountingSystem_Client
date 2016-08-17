@@ -74,6 +74,15 @@ class UserController extends Controller
         echo $e;
       }
     }
+    public function edit_profile_clerk(){
+      try{
+        $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+        return view('settings.edit_profile')->with('password',$decryptedPassword);
+      }
+      catch(DecryptException $e){
+        echo $e;
+      }
+    }
     public function bagong_dp(Request $requests){
 
       if(Input::hasFile('new_dp')){

@@ -65,12 +65,12 @@
     			</li>
 
           <li class="visible-xs visible-md visible-sm">
-            <a href="list_clerk" >
+            <a href="edit_profile" >
             <i class="fa fa-pencil"></i>
           Edit Profile</a>
           </li>
           <li class="visible-xs visible-md visible-sm">
-            <a href="list_clerk" >
+            <a href="logout" >
             <i class="fa fa-sign-out"></i>
           Log Out</a>
           </li>

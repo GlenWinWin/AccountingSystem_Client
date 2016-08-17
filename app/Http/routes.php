@@ -65,6 +65,10 @@ Route::get('edit_profile',[
   'middleware' => 'auth',
   'uses' => 'UserController@edit_profile'
 ]);
+Route::get('profile_edit',[
+  'middleware' => 'auth',
+  'uses' => 'UserController@edit_profile_clerk'
+]);
 Route::post('bagong_dp', 'UserController@bagong_dp');
 
 //Edit Functions
