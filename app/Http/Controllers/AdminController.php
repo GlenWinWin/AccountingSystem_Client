@@ -15,6 +15,7 @@ use Auth;
 use Hash;
 use DB;
 use Input;
+use Mail;
 
 class AdminController extends Controller{
     public function listOfClerk(){
@@ -83,7 +84,11 @@ class AdminController extends Controller{
       $address = $requests->address;
       $addClerkQuery = new Clerk;
       $pass_text = Crypt::encrypt($password);
+      $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
 
+      Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+        $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+      });
       if(Input::hasFile('clerk_pic')){
         $clerk_pic = Input::file('clerk_pic');
         $clerk_pic->move('assets/images/profile_pictures',$clerk_pic->getClientOriginalName());
@@ -249,11 +254,11 @@ class AdminController extends Controller{
         return $pass;
 
     }
-}
-public function filterItems(Request $requests){
-  $category = $requests->cat;
-  $sub_category = $requests->sub;
-  $title = "Results for Filtering...";
-  $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
-  return view('admin.listOfItems')->with('items',$items)->with('title',$title);
-}
+    public function filterItems(Request $requests){
+      $category = $requests->cat;
+      $sub_category = $requests->sub;
+      $title = "Results for Filtering...";
+      $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
+      return view('admin.listOfItems')->with('items',$items)->with('title',$title);
+    }
+  }

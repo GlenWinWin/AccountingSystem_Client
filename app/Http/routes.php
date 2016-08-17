@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+
 //Add functions
 Route::post('clerk_add', 'AdminController@addClerk');
 
@@ -122,6 +124,7 @@ Route::get('ItemsFilter',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@filterItems'
 ]);
+
 Route::resource('user','UserController',['only' => ['store']]);
 Route::resource('admin','AdminController');
 Route::resource('items','ItemsController');
