@@ -18,6 +18,7 @@
 		@endif
 	</h1></center>
 	<hr>
+
   <div class="dropdown">
              <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#" href="/page.html">
                  Category<span class="caret"></span>
@@ -39,8 +40,9 @@
                  </ul>
                </li>
              </ul>
+						 	<input type="button" name="name" value="Add an Item" class="btn btn-primary btn-md open-modal-addClerk">
 						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Delete">
-						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Add an Item">
+
              <div class="search" style="display:block;">
 							 {!! Form::open(array('action' => 'ClerkController@searchItems' , 'method' => 'get'))!!}
 							 <input type="text" name="search" required="" placeholder="Search...">
@@ -224,4 +226,62 @@
 				</div>
 		</div>
 </div>
+
+<!--  Modal Add Clerks-->
+<div id="myModal-addClerk" class="modal fade">
+		<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Add an Item</h4>
+						</div>
+						<form action="{{ URL::to('clerk_add') }}" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+<div class="col-lg-12">
+
+						<div class="modal-body">
+							<div class="form-group">
+                       <label class="col-lg-4 control-label">Item name:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="text" name="fname" required="" style="width:95%;">
+                       </div>
+              </div>
+							<div class="form-group">
+                       <label class="col-lg-4 control-label">Quantity:</label>
+                       <div class="col-lg-8">
+                         <input class="form-control" type="number" name="quantity" required="" style="width:95%;">
+                       </div>
+              </div>
+              <div class="form-group">
+                       <label class="col-lg-4 control-label">Cost Price:</label>
+											 <div class="col-lg-8" style="inline-block">
+											<div style="display:inline;;">PHP. &emsp;</div><input class="form-control" type="number" name="cost" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
+											 </div>
+              </div>
+							<div class="form-group">
+											 <label class="col-lg-4 control-label">Sub Cost Price:</label>
+											 <div class="col-lg-8" style="inline-block">
+											<div style="display:inline;;">PHP. &emsp;</div><input class="form-control" type="number" name="subcost" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
+											 </div>
+							</div>
+							<div class="form-group">
+											 <label class="col-lg-4 control-label">Selling Price:</label>
+											 <div class="col-lg-8" style="inline-block">
+											<div style="display:inline;;">PHP. &emsp;</div><input class="form-control" type="number" name="selling" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
+											 </div>
+							</div>
+
+						</div>
+            </div>
+						<div class="modal-footer">
+
+		 <button type="submit" class="btn btn-primary">Submit</button>
+						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+				</div>
+			</form>
+		</div>
+</div>
+<!--  modal add clerk-->
 @stop

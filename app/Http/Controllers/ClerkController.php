@@ -18,9 +18,17 @@ use Input;
 
 class ClerkController extends Controller
 {
-      public function clerk_home(){
-  return view('clerk.clerkHome');
-}
+  public function clerk_home(){
+    try{
+      $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+      $clerks = DB::table('users')->where('users.typeOfUser',1)->groupBy('manage_privileges.clerk_id')
+  ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
+      return view('clerk.clerkHome')->with('clerks',$clerks)->with('password',$decryptedPassword);
+    }
+    catch(DecryptException $e){
+      echo $e;
+    }
+  }
       public function accountRegistration(Request $requests){
 
       }
@@ -79,13 +87,26 @@ class ClerkController extends Controller
         $addPrivilegesforClerk->generate_report = 0;
         $addPrivilegesforClerk->save();
 
-        return redirect('list_clerk');
+        return redirect('clerkHome');
       }
       /*
       public function generateReport(Request $requests){
 
       }
       */
+      public function searchClerk(Request $requests){
+        try{
+          $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+          $keyword = $requests->search;
+          $searchClerk = DB::table('users')->where('users.typeOfUser',1)->where('users.name','LIKE','%'.$keyword.'%')->groupBy('manage_privileges.clerk_id')
+      ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
+          $title = "Results for clerks...";
+          return view('clerk.clerkHome')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
+        }
+        catch(DecryptException $e){
+          echo $e;
+        }
+      }
       public function listOfDistributor(){
         try{
           $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);

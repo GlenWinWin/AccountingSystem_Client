@@ -1,22 +1,30 @@
 @extends('layouts.myClerkLayout')
 
+
 @section('title')
-	Home
+	@if(isset($title))
+		{{$title}}
+	@else
+	List of Clerks
+	@endif
 @stop
 
 @section('body-content')
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">
+		@if(isset($title))
+			{{$title}}
+		@else
 		List of Clerks
-
+		@endif
 	</h1></center>
 <hr>
 	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
 	<div class="search">
-
+		{!! Form::open(array('action' => 'ClerkController@searchClerk' , 'method' => 'get'))!!}
 		<input type="text" name="search" required="" placeholder="Search...">
 		<input type="submit" value="Search" class="btn btn-primary btn-md">
-
+		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">
 	<table class="table" id="tab1">
@@ -27,75 +35,80 @@
 				<th>Email</th>
 				<th>Address</th>
 				<th>Username</th>
+
 			</tr>
 		</thead>
 		<tbody>
-
+			@foreach($clerks as $clerkss)
 			<tr>
-				<th scope="row">Name</th>
-				<td>Name</td>
-				<td>Name</td>
-				<td>Name</td>
-				<td>Name</td>
+
+				<th scope="row">{{$clerkss->fname}} {{$clerkss->lname}}</th>
+				<td>{{$clerkss->contact}}</td>
+				<td>{{$clerkss->email}}</td>
+				<td>{{$clerkss->address}}</td>
+				<td>{{$clerkss->username}}</td>
 
 			</tr>
-
+			@endforeach
 		</tbody>
 	</table>
 	</div>
 	<center>
-
+		{{$clerks->links()}}
 	</center>
 </div>
-<!-- Modal Password -->
-<div id="myModal-password" class="modal fade">
-		<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-						<div class="modal-header" style="color:#b3cccc";>
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Fill-up the fields:</h4>
-						</div>
-			<div class="form-group">
-						<input type="hidden" id="adminPassword" value="">
-						<input type="hidden" name="specific_id" id="myClerkId">
-				<center>
-					<label for="inputPassword3">New Password</label>
-				<br>
-			<input type="password" id="inputPassword" style="width:70%" name="pword" onkeyup="ableChangePasswordButton()" class="form-control " aria-describedby="passwordHelpInline"></center>
-				 <center>
-				<label for="inputPassword4">Repeat Password</label>
-				<br>
-			<input type="password" id="inputPasswordRepeat" style="width:70%" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
-				<small id="passwordHelpInline" class="text-muted">
-					<center>
-							<i>
-								<h4 id="showErrorRepeat" style="color:red;">
-								</h4>
-							</i>
-					</center>
-				</small>
-					<center>
-				<label for="inputPassword4">Admin Password</label>
-				<br>
-				<input type="password" id="inputPasswordAdmin" style="width:70%" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
-				<small id="passwordHelpInline" class="text-muted">
-					<center>
-						<i>
-							<h4 id="showErrorAdmin" style="color:red;">
-							</h4>
-						</i>
-					</center>
-				</small>
-						<div class="modal-footer">
-						<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
-						 <button class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
 
-					</div>
-				</div>
-		</div>
-</div>
+		    <!-- Modal Password -->
+		    <div id="myModal-password" class="modal fade">
+		        <div class="modal-dialog modal-sm">
+		            <div class="modal-content">
+		                <div class="modal-header" style="color:#b3cccc";>
+					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">Fill-up the fields:</h4>
+		                </div>
+							<div class="form-group">
+										{!! Form::open(array('action' => 'AdminController@changePasswordAccount' , 'method' => 'post' , 'id' => 'changePasswordAccountForm'))!!}
+										<input type="hidden" id="adminPassword" value="{{$password}}">
+										<input type="hidden" name="specific_id" id="myClerkId">
+								<center>
+									<label for="inputPassword3">New Password</label>
+								<br>
+							<input type="password" id="inputPassword" style="width:70%" name="pword" onkeyup="ableChangePasswordButton()" class="form-control " aria-describedby="passwordHelpInline"></center>
+								 <center>
+								<label for="inputPassword4">Repeat Password</label>
+								<br>
+							<input type="password" id="inputPasswordRepeat" style="width:70%" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+								<small id="passwordHelpInline" class="text-muted">
+									<center>
+											<i>
+												<h4 id="showErrorRepeat" style="color:red;">
+												</h4>
+											</i>
+									</center>
+								</small>
+								 	<center>
+								<label for="inputPassword4">Admin Password</label>
+								<br>
+								<input type="password" id="inputPasswordAdmin" style="width:70%" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
+								<small id="passwordHelpInline" class="text-muted">
+									<center>
+										<i>
+											<h4 id="showErrorAdmin" style="color:red;">
+											</h4>
+										</i>
+									</center>
+								</small>
+		                <div class="modal-footer">
+						 				<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
+		                 <button class="btn btn-default" data-dismiss="modal">Close</button>
+		                </div>
+										{!! Form::close()!!}
+									</div>
+		            </div>
+		        </div>
+		    </div>
 <!--  Modal Change Password-->
+
 <!--  Modal Add Clerks-->
 <div id="myModal-addClerk" class="modal fade">
 		<div class="modal-dialog">
@@ -104,8 +117,8 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Add Clerk</h4>
 						</div>
-						<form action="" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="_token" value="">
+						<form action="{{ URL::to('clerk_add') }}" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="col-lg-12">
                 <center>
               <div class="col-lg-7" style="    padding-top: 12px;">

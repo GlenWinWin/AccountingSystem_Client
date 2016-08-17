@@ -16,10 +16,14 @@ Route::get('items_search',[
   'middleware' => 'auth',
   'uses' => 'AdminController@searchItems'
 ]);
-//Search functions of admin
+//Search functions of clerk
 Route::get('search_distributor',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@searchDistributor'
+]);
+Route::get('search_clerk',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@searchClerk'
 ]);
 Route::get('items_search',[
   'middleware' => 'auth',
