@@ -25,17 +25,17 @@
      		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                <li class="dropdown-submenu">
                  <a tabindex="-1" href="#">Safety Equipments</a>
-                 <ul class="dropdown-menu">
-                   <li><a tabindex="-1" href="filterItems?cat=0&sub=1">Head</a></li>
-                   <li><a href="filterItems?cat=0&sub=2">Eye</a></li>
-                   <li><a href="filterItems?cat=0&sub=3">Eyewash</a></li>
-                   <li><a href="filterItems?cat=0&sub=4">Ear</a></li>
-                   <li><a href="filterItems?cat=0&sub=5">Respiratory</a></li>
-                   <li><a href="filterItems?cat=0&sub=6">Body</a></li>
-                   <li><a href="filterItems?cat=0&sub=7">Full</a></li>
-                   <li><a href="filterItems?cat=0&sub=8">Hand</a></li>
-                   <li><a href="filterItems?cat=0&sub=9">Safety Shoes</a></li>
-                   <li><a href="filterItems?cat=0&sub=10">Rescue</a></li>
+								 <ul class="dropdown-menu">
+                   <li><a tabindex="-1" href="ItemsFilter?cat=1&sub=1">Head</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=2">Eye</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=3">Eyewash</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=4">Ear</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=5">Respiratory</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=6">Body</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=7">Full</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=8">Hand</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=9">Safety Shoes</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=10">Rescue</a></li>
                  </ul>
                </li>
              </ul>

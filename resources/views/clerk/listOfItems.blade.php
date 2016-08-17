@@ -27,16 +27,16 @@
                <li class="dropdown-submenu">
                  <a tabindex="-1" href="#">Safety Equipments</a>
                  <ul class="dropdown-menu">
-                   <li><a tabindex="-1" href="ItemsFilter?cat=0&sub=1">Head</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=2">Eye</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=3">Eyewash</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=4">Ear</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=5">Respiratory</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=6">Body</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=7">Full</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=8">Hand</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=9">Safety Shoes</a></li>
-                   <li><a href="ItemsFilter?cat=0&sub=10">Rescue</a></li>
+                   <li><a tabindex="-1" href="ItemsFilter?cat=1&sub=1">Head</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=2">Eye</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=3">Eyewash</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=4">Ear</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=5">Respiratory</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=6">Body</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=7">Full</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=8">Hand</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=9">Safety Shoes</a></li>
+                   <li><a href="ItemsFilter?cat=1&sub=10">Rescue</a></li>
                  </ul>
                </li>
              </ul>
@@ -241,6 +241,25 @@
 <div class="col-lg-12">
 
 						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-lg-4 control-label">Item Category</label>
+								<div class="col-lg-8">
+									<select id="category" name="category" class="form-control" style="width:95%;">
+			    		    	  <option>Select Category</option>
+			    		        <option value="1">Toyota</option>
+			    		        <option value="2">Honda</option>
+			    		        <option value="3">Mercedes</option>
+			    		    </select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-4 control-label">Item Sub Category</label>
+								<div class="col-lg-8">
+									<select id="sub" name="sub" class="form-control" style="width:95%;">
+			    		    	<option>Select Sub Category</option>
+			    		    </select>
+								</div>
+							</div>
 							<div class="form-group">
                        <label class="col-lg-4 control-label">Item name:</label>
                        <div class="col-lg-8">
