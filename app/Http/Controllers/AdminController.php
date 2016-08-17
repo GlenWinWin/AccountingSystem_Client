@@ -15,7 +15,7 @@ use Auth;
 use Hash;
 use DB;
 use Input;
-use Mail
+use Mail;
 
 class AdminController extends Controller{
     public function listOfClerk(){
