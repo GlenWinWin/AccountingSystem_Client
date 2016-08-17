@@ -40,6 +40,7 @@
                </li>
              </ul>
 						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Delete">
+						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Add an Item">
              <div class="search" style="display:block;">
 							 {!! Form::open(array('action' => 'ClerkController@searchItems' , 'method' => 'get'))!!}
 							 <input type="text" name="search" required="" placeholder="Search...">
