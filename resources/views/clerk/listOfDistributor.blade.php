@@ -17,8 +17,8 @@
 			List of Distributors
 			@endif</h1></center>
 		<hr>
-		<input type="button" name="name" value="Delete" onclick="doMultipleSelectionOfIdsDelete()" class="btn btn-primary btn-md open-modal-deleteMultipleUsers">
-		<div class="search">
+
+		<div class="search" style="padding-bottom:20px;">
 			{!! Form::open(array('action' => 'ClerkController@searchDistributor' , 'method' => 'get'))!!}
 			<input type="text" name="search" required="" placeholder="Search...">
 			<input type="submit" value="Search" class="btn btn-primary btn-md">
