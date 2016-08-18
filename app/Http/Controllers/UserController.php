@@ -77,7 +77,7 @@ class UserController extends Controller
     public function edit_profile_clerk(){
       try{
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        return view('settings.edit_profile')->with('password',$decryptedPassword);
+        return view('clerk.editprofile')->with('password',$decryptedPassword);
       }
       catch(DecryptException $e){
         echo $e;

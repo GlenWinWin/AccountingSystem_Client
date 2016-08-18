@@ -16,15 +16,30 @@ use Hash;
 use DB;
 use Input;
 use Mail;
+use App\Category;
+use App\SubCategory;
 
 class ClerkController extends Controller
 {
   public function clerk_home(){
     try{
+      $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+      $salesEncoding = 0;
+      $accountRegistration = 0;
+      $addClerk = 0;
+      $useInventory = 0;
+      $generateReport = 0;
+      foreach($privileges as $priv){
+        $salesEncoding = $priv->sales_encoding;
+        $accountRegistration = $priv->account_registration;
+        $addClerk = $priv->add_clerk;
+        $useInventory = $priv->use_inventory;
+        $generateReport = $priv->generate_report;
+      }
       $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
       $clerks = DB::table('users')->where('users.typeOfUser',1)->groupBy('manage_privileges.clerk_id')
   ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
-      return view('clerk.clerkHome')->with('clerks',$clerks)->with('password',$decryptedPassword);
+      return view('clerk.clerkHome')->with('clerks',$clerks)->with('password',$decryptedPassword)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
     }
     catch(DecryptException $e){
       echo $e;
@@ -103,9 +118,22 @@ class ClerkController extends Controller
       */
       public function listOfDistributor(){
         try{
+          $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+          $salesEncoding = 0;
+          $accountRegistration = 0;
+          $addClerk = 0;
+          $useInventory = 0;
+          $generateReport = 0;
+          foreach($privileges as $priv){
+            $salesEncoding = $priv->sales_encoding;
+            $accountRegistration = $priv->account_registration;
+            $addClerk = $priv->add_clerk;
+            $useInventory = $priv->use_inventory;
+            $generateReport = $priv->generate_report;
+          }
           $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
           $distributors = Distributor::where('typeOfUser', '=', 2)->paginate(10);
-          return view('clerk.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword);
+          return view('clerk.listOfDistributor')->with('distributors',$distributors)->with('password',$decryptedPassword)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
         }
         catch(DecryptException $e){
           echo $e;
@@ -113,11 +141,24 @@ class ClerkController extends Controller
       }
       public function searchDistributor(Request $requests){
         try{
+          $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+          $salesEncoding = 0;
+          $accountRegistration = 0;
+          $addClerk = 0;
+          $useInventory = 0;
+          $generateReport = 0;
+          foreach($privileges as $priv){
+            $salesEncoding = $priv->sales_encoding;
+            $accountRegistration = $priv->account_registration;
+            $addClerk = $priv->add_clerk;
+            $useInventory = $priv->use_inventory;
+            $generateReport = $priv->generate_report;
+          }
           $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
           $keyword = $requests->search;
           $searchDistributor = Distributor::where('name','LIKE','%'.$keyword.'%')->where('typeOfUser','=',2)->paginate(10);
           $title = "Results for distributors...";
-          return view('clerk.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title)->with('password',$decryptedPassword);
+          return view('clerk.listOfDistributor')->with('distributors',$searchDistributor)->with('title',$title)->with('password',$decryptedPassword)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
         }
         catch(DecryptException $e){
           echo $e;
@@ -125,35 +166,99 @@ class ClerkController extends Controller
       }
       public function searchClerk(Request $requests){
         try{
+          $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+          $salesEncoding = 0;
+          $accountRegistration = 0;
+          $addClerk = 0;
+          $useInventory = 0;
+          $generateReport = 0;
+          foreach($privileges as $priv){
+            $salesEncoding = $priv->sales_encoding;
+            $accountRegistration = $priv->account_registration;
+            $addClerk = $priv->add_clerk;
+            $useInventory = $priv->use_inventory;
+            $generateReport = $priv->generate_report;
+          }
           $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
           $keyword = $requests->search;
           $searchClerk = DB::table('users')->where('users.typeOfUser',1)->where('users.name','LIKE','%'.$keyword.'%')->groupBy('manage_privileges.clerk_id')
       ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
           $title = "Results for clerks...";
-          return view('clerk.clerkHome')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword);
+          return view('clerk.clerkHome')->with('clerks',$searchClerk)->with('title',$title)->with('password',$decryptedPassword)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
         }
         catch(DecryptException $e){
           echo $e;
         }
       }
       public function listOfItems(){
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
+        $categories = Category::all();
         $items = Items::paginate(10);
-        return view('clerk.listOfItems')->with('items',$items);
+        return view('clerk.listOfItems')->with('items',$items)->with('categories',$categories)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
       }
       public function searchItems(Request $requests){
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
+        $categories = Category::all();
         $keyword = $requests->search;
         $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->paginate(10);
         $title = "Results for items...";
-        return view('clerk.listOfItems')->with('items',$searchItems)->with('title',$title);
+        return view('clerk.listOfItems')->with('items',$searchItems)->with('categories',$categories)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
       }
       public function filterItems(Request $requests){
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
+        $categories = Category::all();
         $category = $requests->cat;
         $sub_category = $requests->sub;
-        $title = "Results for Filtering...";
-        $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
-        return view('clerk.listOfItems')->with('items',$items)->with('title',$title);
+        $cat = Category::where('id','=',$category)->first();
+        $sub_cat = SubCategory::where('id','=',$sub_category)->first();
+        $title = "Results for ".$cat->category_name." - ".$sub_cat->subcategory_name;
+        $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(10);
+        return view('clerk.listOfItems')->with('items',$items)->with('categories',$categories)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
       }
+      public function selectSubCategory(){
+        $id = Input::get('id');
+        $sub_categories = SubCategory::where('category_id','=',$id)->get();
+        return $sub_categories;
+      }
+      public function addItem(Request $requests){
 
+      }
       public function createRandomPassword() {
 
       $chars = "abcdefghijkmnopqrstuvwxyz0123456789";
