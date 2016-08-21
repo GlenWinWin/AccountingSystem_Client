@@ -57,7 +57,10 @@ Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
 
+Route::get('try', function () {
+		return view('clerk.try');
 
+});
 //View functions of admin
 Route::get('list_distributor', [
   'middleware' => 'auth',

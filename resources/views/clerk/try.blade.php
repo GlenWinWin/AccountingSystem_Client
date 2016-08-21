@@ -1,4 +1,4 @@
-@extends('layouts.mylayout')
+@extends('layouts.myClerklayout')
 
 @section('title')
 
@@ -12,58 +12,82 @@
 
 	</h1></center>
 <hr>
-	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
-	<input type="button" name="name" value="Manage Priviliges" onclick="deleteModify()" class="btn btn-primary btn-md">
-	<input type="button" name="name" value="Delete" onclick="deleteModify()" class="btn btn-primary btn-md">
-	<div class="search">
 
-		<input type="text" name="search" required="" placeholder="Search...">
-		<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
 
-	</div>
+	<div class=" col-lg-8">
+
+		<div class="search" style="float:none;">
+
+			<input type="text" name="search" required="" placeholder="Search..." class="form-control" style="width:200px;margin-bottom: 0px;display:inline;">
+			<input type="submit" name="name" value="Search" class="btn btn-primary btn-md">
+
+		</div>
 	<div class="table-responsive">
 	<table class="table" id="tab1">
 		<thead class="thead">
 			<tr >
-				<th><input type="checkbox" name="name" value="" name="checkAll" id="checkAll"></th>
-				<th>Name</th>
-				<th>Contact</th>
-				<th>Email</th>
-				<th>Address</th>
-				<th>Username</th>
-				<th>Password</th>
-				<th>Delete</th>
-				<th>Manage Priviliges</th>
+				<th>Cancel</th>
+				<th>Item Name</th>
+				<th>Price</th>
+					<th>Quantity</th>
+				<th>Total</th>
 			</tr>
 		</thead>
 		<tbody>
 
 			<tr>
-				<td><input type="checkbox" name="specific_ids[]" value="" id="checkone"></td>
-				<th scope="row">ds</th>
-				<td>dsds</td>
-				<td>dsds</td>
-        <td>dsds</td>
-        <td>dsds</td>
-				<td><input type="button" class="btn btn-primary btn-sm open-modal-password" onclick="setClerkIdforChangePasswordAccount()" value="Change Password"></td>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item()" value="Delete"></td>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-priviliges" onclick="manage_privileges()" value="Manage Privileges"></td>
+				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" style="padding:8px 12px;" onclick="delete_Clerk_Distributor_Item()" value="Cancel"></td>
+				<td style="padding-top:15px">Head Gear</td>
+				<td>PHP. &emsp;<input type="number" name="name" value="" class="value" placeholder='0.00' step="0.01"></td>
+				<td>X &emsp;<input type="number" name="name" value="" class="value" placeholder='0'  style="width:70px"></td>
+        <td style="padding-top:15px;font-weight:bold;">PHP. 1,000,000,000.00</td>
 			</tr>
 
 		</tbody>
 	</table>
 	</div>
-	<center>
-		<ul class="pagination pagination-color">
-			<li><a href="#"><<</a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">>></a></li>
-		</ul>
-	</center>
+
+		</div>
+		<div class="col-lg-4 price" >
+			<div class="table-responsive">
+			<table class="table" id="tab1">
+				<thead>
+					<tr >
+						<th>Item Name</th>
+						<th>Quantity</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Head Gears</td>
+						<td>x1</td>
+						<td>PHP. 5,000,000.00</td>
+					</tr>
+					<tr>
+						<td>Head Gears</td>
+						<td>x1</td>
+						<td>PHP. 5,000,000.00</td>
+					</tr>
+					<tr>
+						<td>Head Gears</td>
+						<td>x1</td>
+						<td>PHP. 5,000,000.00</td>
+					</tr>
+					<tr>
+						<td>Head Gears</td>
+						<td>x1</td>
+						<td>PHP. 5,000,000.00</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">Total</td>
+						<td></td>
+						<td>PHP. 5,000,000.00</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
 </div>
 
 			    <!-- Modal Password -->
