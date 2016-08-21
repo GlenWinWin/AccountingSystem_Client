@@ -16,6 +16,8 @@ use Hash;
 use DB;
 use Input;
 use Mail;
+use App\Category;
+use App\SubCategory;
 
 class AdminController extends Controller{
     public function listOfClerk(){
@@ -257,8 +259,10 @@ class AdminController extends Controller{
     public function filterItems(Request $requests){
       $category = $requests->cat;
       $sub_category = $requests->sub;
-      $title = "Results for Filtering...";
-      $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(5);
+      $cat = Category::where('id','=',$category)->first();
+      $sub_cat = SubCategory::where('id','=',$sub_category)->first();
+      $title = "Results for ".$cat->category_name." - ".$sub_cat->subcategory_name;
+      $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(10);
       return view('admin.listOfItems')->with('items',$items)->with('title',$title);
     }
   }

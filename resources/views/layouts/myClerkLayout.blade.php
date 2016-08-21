@@ -48,31 +48,32 @@
     				</div>
     			</div>
     		<ul class="nav">
-    			<li>
-    				<a href="home_clerk">
-    				<i class="glyphicon glyphicon-user"></i>
-    			Clerk</a>
-    			</li>
-          <li >
-            <a href="distributor_list">
-            <i class="fa fa-users"></i>
-        Distributors</a>
-          </li>
+          @if($ac == 1)
+      			<li>
+      				<a href="home_clerk">
+      				<i class="glyphicon glyphicon-user"></i>
+      			     Clerk</a>
+      			</li>
+          @endif
+          @if($ar == 1)
+            <li >
+              <a href="distributor_list">
+              <i class="fa fa-users"></i>
+              Distributors</a>
+            </li>
+          @endif
+          @if($se == 1)
+            <li>
+              <a href="sales_encoding" >
+              <i class="fa fa-keyboard-o"></i>
+             Sales Encoding</a>
+            </li>
+          @endif
+          @if($ui == 1)
           <li>
             <a href="inventory">
             <i class="fa fa-list"></i>
           Inventory</a>
-          </li>
-          <li>
-            <a href="list_clerk" >
-            <i class="fa fa-keyboard-o"></i>
-           Sales Encoding</a>
-          </li>
-
-          <li>
-            <a href="list_items">
-            <i class="fa fa-bar-chart"></i>
-          Reports</a>
           </li>
           <li>
             <a href="list_items">
@@ -84,6 +85,14 @@
             <i class="fa fa-archive"></i>
           Receiving</a>
           </li>
+          @endif
+          @if($gr == 1)
+          <li>
+            <a href="list_items">
+            <i class="fa fa-bar-chart"></i>
+          Reports</a>
+          </li>
+          @endif
           <li class="visible-xs visible-md visible-sm">
             <a href="profile_edit" >
             <i class="fa fa-pencil"></i>
@@ -240,3 +249,23 @@ $("#tab1 #checkone").click(function () {
 });
 </script>
 <!-- check all -->
+<!-- Script for chaining of dropdowns -->
+<script>
+$(document).ready(function($){
+  $('#category').change(function(){
+    $.get("{{ url('dropdown')}}?id="+$(this).val(),
+  				function(data) {
+  					$('#subCategory').empty();
+            var id = $( "#category" ).val();
+            if(id == 0){
+                $('#subCategory').append("<option value='"+ 0 +"'>" + 'Select Sub Category' + "</option>");
+            }
+            else{
+    					$.each(data, function(index, element) {
+    			            $('#subCategory').append("<option value='"+ element.id +"'>" + element.subcategory_name + "</option>");
+    			    });
+            }
+  	});
+  });
+});
+</script>

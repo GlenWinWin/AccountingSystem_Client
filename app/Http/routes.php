@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Mail;
-
 //Add functions
 Route::post('clerk_add', 'AdminController@addClerk');
 
@@ -52,6 +50,11 @@ Route::get('login', function () {
 	else{
 		return view('auth.login');
 	}
+});
+
+Route::get('try', function () {
+		return view('email.sendClerkEmail');
+
 });
 Route::get('logout',[
   'uses' => 'UserController@logout'
@@ -127,6 +130,10 @@ Route::get('ItemsFilter',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@filterItems'
 ]);
+
+//Function for chaining of dropdowns
+Route::get('/dropdown', ['uses' => 'ClerkController@selectSubCategory']);
+
 
 Route::resource('user','UserController',['only' => ['store']]);
 Route::resource('admin','AdminController');
