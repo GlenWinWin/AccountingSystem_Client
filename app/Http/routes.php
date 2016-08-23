@@ -143,9 +143,6 @@ Route::get('ItemsFilter',[
   'uses' => 'ClerkController@filterbySubCategory'
 ]);
 
-//function for autocomplete
-Route::get('search/autocomplete', ['uses' => 'AdminController@autocomplete']);
-
 //function for sales encoding
 Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
 Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);
