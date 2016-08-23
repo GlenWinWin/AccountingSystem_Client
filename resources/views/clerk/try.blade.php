@@ -8,7 +8,7 @@
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">
 
-		List of Clerks
+		Sales
 
 	</h1></center>
 <hr>
@@ -30,7 +30,7 @@
 				<th>Item Name</th>
 				<th>Price</th>
 					<th>Quantity</th>
-				<th>Total</th>
+				<th>Sub Total</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,7 +38,7 @@
 			<tr>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" style="padding:8px 12px;" onclick="delete_Clerk_Distributor_Item()" value="Cancel"></td>
 				<td style="padding-top:15px">Head Gear</td>
-				<td>PHP. &emsp;<input type="number" name="name" value="" class="value" placeholder='0.00' step="0.01"></td>
+				<td style="padding-top:15px">PHP. 1,000,000,000.00</td>
 				<td>X &emsp;<input type="number" name="name" value="" class="value" placeholder='0'  style="width:70px"></td>
         <td style="padding-top:15px;font-weight:bold;">PHP. 1,000,000,000.00</td>
 			</tr>
@@ -55,7 +55,7 @@
 					<tr >
 						<th>Item Name</th>
 						<th>Quantity</th>
-						<th>Price</th>
+						<th>Sub Total</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -77,16 +77,23 @@
 					<tr>
 						<td>Head Gears</td>
 						<td>x1</td>
-						<td>PHP. 5,000,000.00</td>
+						<td>PHP. 500,000.00</td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">Total</td>
+						<td style="font-weight:bold;font-size:15px;">Total</td>
 						<td></td>
 						<td>PHP. 5,000,000.00</td>
 					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><input type="button" class="btn btn-md btn-primary" style="padding:8px 12px;" onclick="delete_Clerk_Distributor_Item()" value="Submit"></td>
+					</tr>
 				</tbody>
 			</table>
+
 			</div>
+
 		</div>
 </div>
 
