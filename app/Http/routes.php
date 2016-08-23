@@ -59,20 +59,6 @@ Route::get('login', function () {
 });
 
 Route::get('try', function () {
-  $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
-  $salesEncoding = 0;
-  $accountRegistration = 0;
-  $addClerk = 0;
-  $useInventory = 0;
-  $generateReport = 0;
-  foreach($privileges as $priv){
-    $salesEncoding = $priv->sales_encoding;
-    $accountRegistration = $priv->account_registration;
-    $addClerk = $priv->add_clerk;
-    $useInventory = $priv->use_inventory;
-    $generateReport = $priv->generate_report;
-  }
-		return view('clerk.try')->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
 
 });
 Route::get('logout',[
@@ -161,9 +147,12 @@ Route::get('ItemsFilter',[
 Route::get('search/autocomplete', ['uses' => 'AdminController@autocomplete']);
 
 //function for sales encoding
-Route::post('sales_encoding', ['uses' => 'ClerkController@salesEncoding']);
-
+Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
+Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);
 //Function for chaining of dropdowns
-Route::get('/dropdown', ['uses' => 'ClerkController@selectSubCategory']);
+Route::get('/dropdown', [[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@selectSubCategory'
+]]);
 
 Route::resource('user','UserController',['only' => ['store']]);

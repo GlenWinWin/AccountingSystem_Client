@@ -55,13 +55,6 @@
               Distributors</a>
             </li>
           @endif
-          @if($se == 1)
-            <li>
-              <a href="sales_encoding" >
-              <i class="fa fa-keyboard-o"></i>
-             Sales Encoding</a>
-            </li>
-          @endif
           @if($ui == 1)
           <li>
             <a href="inventory">
@@ -69,7 +62,7 @@
           Inventory</a>
           </li>
           <li>
-            <a href="list_items">
+            <a href="sales_viewing">
             <i class="fa fa-line-chart"></i>
           Sales</a>
           </li>

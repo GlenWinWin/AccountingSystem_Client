@@ -55,8 +55,21 @@ class ClerkController extends Controller
       public function accountRegistration(Request $requests){
         $deleteAllTemporarySales = TemporarySales::query()->truncate();
       }
-      public function viewEmptyTemporarySales(){
-
+      public function viewTemporarySales(){
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
+        return view('clerk.salesClerk')->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
       }
       public function salesEncoding(Request $requests){
           $selectTemporarySales = TemporarySalesDetails::where('id','=',$requests->hiddenID)->get();
