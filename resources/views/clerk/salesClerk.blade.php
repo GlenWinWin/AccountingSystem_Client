@@ -18,8 +18,12 @@
 
 		<div class="search" style="float:none;">
 
-			<input type="text" name="search" required="" id="searchname" placeholder="Search..." class="form-control" style="width:74%;margin-bottom: 0px;display:inline;">
+
+      {!! Form::open(array('action' => 'ClerkController@searchItems' , 'method' => 'get'))!!}
+			<input type="text" name="search" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:74%;margin-bottom: 0px;display:inline;">
 			<input type="submit" name="name" value="Add" class="btn btn-primary btn-md" style="width:25%;">
+      {!! Form::close()!!}
+
 
 		</div>
 	<div class="table-responsive">
