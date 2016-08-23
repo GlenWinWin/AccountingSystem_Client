@@ -18,7 +18,7 @@
 
 		<div class="search" style="float:none;">
 
-			<input type="text" name="search" required="" id="searchname" placeholder="Search..." class="form-control" style="width:200px;margin-bottom: 0px;display:inline;">
+			<input type="text" name="search" required="" id="searchname" placeholder="Search..." class="form-control" style="width:300px;margin-bottom: 0px;display:inline;">
 			<input type="submit" name="name" value="Add" class="btn btn-primary btn-md">
 
 		</div>
