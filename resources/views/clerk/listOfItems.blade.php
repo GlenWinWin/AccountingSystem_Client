@@ -20,27 +20,12 @@
 	<hr>
 
   <div class="dropdown">
-             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#" href="/page.html">
+             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#">
                  Category<span class="caret"></span>
              </a>
      		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                <li class="dropdown-submenu">
-                 <a href="gl">Safety Equipments</a>
-                 <ul class="dropdown-menu">
-                   <li><a href="ItemsFilter?cat=1&sub=1">Head</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=2">Eye</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=3">Eyewash</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=4">Ear</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=5">Respiratory</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=6">Body</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=7">Full</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=8">Hand</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=9">Safety Shoes</a></li>
-                   <li><a href="ItemsFilter?cat=1&sub=10">Rescue</a></li>
-                 </ul>
-               </li>
-							 <li class="dropdown-submenu">
-                 <a href="gg">Safety Equipments</a>
+                 <a href="Category_filter?cat=1">Safety Equipments</a>
                  <ul class="dropdown-menu">
                    <li><a href="ItemsFilter?cat=1&sub=1">Head</a></li>
                    <li><a href="ItemsFilter?cat=1&sub=2">Eye</a></li>
@@ -57,8 +42,7 @@
              </ul>
 						 	<input type="button" name="name" value="Add an Item" class="btn btn-primary btn-md open-modal-addClerk">
 						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Delete">
-
-             <div class="search" style="display:block;">
+						 <div class="search" style="display:block;">
 							 {!! Form::open(array('action' => 'ClerkController@searchItems' , 'method' => 'get'))!!}
 							 <input type="text" name="search" required="" placeholder="Search...">
 					 		<input type="submit" value="Search" class="btn btn-primary btn-md">
@@ -82,18 +66,32 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($items as $itemss)
-			<tr>
-				<td><input type="checkbox" name="items_ids" id="checkone" value="{{$itemss->item_id}}"></td>
-				<td>{{$itemss->item_name}}</td>
-				<td>{{$itemss->item_quantity}}</td>
-				<td>PHP {{$itemss->item_costPrice}}</td>
-				<td>PHP {{$itemss->item_subcostPrice}}</td>
-				<td>PHP {{$itemss->item_sellingPrice}}</td>
-				<td><input type="button" value="Edit Items" class="btn btn-primary btn-sm open-modal-editItems" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_quantity}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')"></td>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
-			</tr>
-			@endforeach
+			@if(count($items) > 0)
+				@foreach($items as $itemss)
+				<tr>
+					<td><input type="checkbox" name="items_ids" id="checkone" value="{{$itemss->item_id}}"></td>
+					<td>{{$itemss->item_name}}</td>
+					<td>{{$itemss->item_quantity}}</td>
+					<td>PHP {{$itemss->item_costPrice}}</td>
+					<td>PHP {{$itemss->item_subcostPrice}}</td>
+					<td>PHP {{$itemss->item_sellingPrice}}</td>
+					<td><input type="button" value="Edit Items" class="btn btn-primary btn-sm open-modal-editItems" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')"></td>
+					<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
+				</tr>
+				@endforeach
+			@elseif(isset($title))
+				<tr>
+					<td>
+						<h4 style="text-align:center"><i>No results found</i></h4>
+					</td>
+				</tr>
+			@else
+				<tr>
+					<td>
+						No Items found
+					</td>
+				</tr>
+			@endif
 		</tbody>
 	</table>
 
@@ -169,28 +167,22 @@
                          <input class="form-control" id="itemNameId" value="" type="text" name="name_item" required="">
                        </div>
               </div>
-							<div class="form-group">
-                       <label class="col-lg-4 control-label">Quantity:</label>
-                       <div class="col-lg-8">
-                         <input class="form-control" id="itemQuantityId" value="" type="text" name="quantity_item" required="">
-                       </div>
-              </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Cost Price:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" id="itemCostId" value="" name="costPrice_item" required="">
+                         <input class="form-control" type="number" id="itemCostId" value="" name="costPrice_item" required="" step='0.01' placeholder='0.00'>
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Sub Cost Price:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" id="itemSubCostId" value="" name="subcostPrice_item" required="">
+                         <input class="form-control" type="number" id="itemSubCostId" value="" name="subcostPrice_item" required="" step='0.01' placeholder='0.00'>
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Selling Price:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" id="itemSellingId" value="" name="sellingPrice_item" required="">
+                         <input class="form-control" type="number" id="itemSellingId" value="" name="sellingPrice_item" required="" step='0.01' placeholder='0.00'>
                        </div>
               </div>
 						</div>
@@ -250,8 +242,7 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Add an Item</h4>
 						</div>
-						<form action="{{ URL::to('clerk_add') }}" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						{!! Form::open(array('action' => 'ClerkController@addItem' , 'method' => 'post'))!!}
 
 <div class="col-lg-12">
 
@@ -259,7 +250,7 @@
 							<div class="form-group">
 								<label class="col-lg-4 control-label">Item Category</label>
 								<div class="col-lg-8">
-									<select id="category" name="category" class="form-control" style="width:95%;">
+									<select id="category" name="category" class="form-control" style="width:95%;" onchange="checkIfselectedCategory()">
 			    		    	  <option value="0">Select Category</option>
 											@foreach($categories as $cat)
 			    		        <option value="{{$cat->id}}">{{$cat->category_name}}</option>
@@ -278,31 +269,25 @@
 							<div class="form-group">
                        <label class="col-lg-4 control-label">Item name:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="fname" required="" style="width:95%;">
-                       </div>
-              </div>
-							<div class="form-group">
-                       <label class="col-lg-4 control-label">Quantity:</label>
-                       <div class="col-lg-8">
-                         <input class="form-control" type="number" name="quantity" required="" style="width:95%;">
+                         <input class="form-control" type="text" name="item_name" required="" style="width:95%;">
                        </div>
               </div>
               <div class="form-group">
                        <label class="col-lg-4 control-label">Cost Price:</label>
 											 <div class="col-lg-8" style="inline-block">
-											<div style="display:inline;;">PHP. &emsp;</div><input class="form-control" type="number" name="cost" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
+											<div style="display:inline;">PHP. &emsp;</div><input class="form-control" type="number" name="cost" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
 											 </div>
               </div>
 							<div class="form-group">
 											 <label class="col-lg-4 control-label">Sub Cost Price:</label>
 											 <div class="col-lg-8" style="inline-block">
-											<div style="display:inline;;">PHP. &emsp;</div><input class="form-control" type="number" name="subcost" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
+											<div style="display:inline;">PHP. &emsp;</div><input class="form-control" type="number" name="subcost" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
 											 </div>
 							</div>
 							<div class="form-group">
 											 <label class="col-lg-4 control-label">Selling Price:</label>
 											 <div class="col-lg-8" style="inline-block">
-											<div style="display:inline;;">PHP. &emsp;</div><input class="form-control" type="number" name="selling" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
+											<div style="display:inline;">PHP. &emsp;</div><input class="form-control" type="number" name="selling_price" required="" style="width:80%;display:inline" step='0.01' placeholder='0.00'>
 											 </div>
 							</div>
 
@@ -310,11 +295,11 @@
             </div>
 						<div class="modal-footer">
 
-		 <button type="submit" class="btn btn-primary">Submit</button>
+		 <button type="submit" class="btn btn-primary" id="addItemBtn">Submit</button>
 						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 				</div>
-			</form>
+			{!! Form::close()!!}
 		</div>
 </div>
 <!--  modal add clerk-->

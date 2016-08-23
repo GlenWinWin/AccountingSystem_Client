@@ -1,6 +1,5 @@
 @extends('layouts.myClerkLayout')
 
-
 @section('title')
 	@if(isset($title))
 		{{$title}}
@@ -19,7 +18,9 @@
 		@endif
 	</h1></center>
 <hr>
-	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
+	@if($ac == 1)
+		<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
+	@endif
 	<div class="search">
 		{!! Form::open(array('action' => 'ClerkController@searchClerk' , 'method' => 'get'))!!}
 		<input type="text" name="search" required="" placeholder="Search...">
@@ -57,58 +58,55 @@
 		{{$clerks->links()}}
 	</center>
 </div>
+<!-- Modal Password -->
+<div id="myModal-password" class="modal fade">
+		<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+						<div class="modal-header" style="color:#b3cccc";>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Fill-up the fields:</h4>
+						</div>
+			<div class="form-group">
+						<input type="hidden" id="adminPassword" value="">
+						<input type="hidden" name="specific_id" id="myClerkId">
+				<center>
+					<label for="inputPassword3">New Password</label>
+				<br>
+			<input type="password" id="inputPassword" name="pword" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+				 <center>
+				<label for="inputPassword4">Repeat Password</label>
+				<br>
+			<input type="password" id="inputPasswordRepeat" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
+				<small id="passwordHelpInline" class="text-muted">
+					<center>
+							<i>
+								<h4 id="showErrorRepeat" style="color:red;">
+								</h4>
+							</i>
+					</center>
+				</small>
+					<center>
+				<label for="inputPassword4">Admin Password</label>
+				<br>
+				<input type="password" id="inputPasswordAdmin" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
+				<small id="passwordHelpInline" class="text-muted">
+					<center>
+						<i>
+							<h4 id="showErrorAdmin" style="color:red;">
+							</h4>
+						</i>
+					</center>
+				</small>
+						<div class="modal-footer">
+						<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
+						 <button class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
 
-		    <!-- Modal Password -->
-		    <div id="myModal-password" class="modal fade">
-		        <div class="modal-dialog modal-sm">
-		            <div class="modal-content">
-		                <div class="modal-header" style="color:#b3cccc";>
-					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title">Fill-up the fields:</h4>
-		                </div>
-							<div class="form-group">
-										{!! Form::open(array('action' => 'AdminController@changePasswordAccount' , 'method' => 'post' , 'id' => 'changePasswordAccountForm'))!!}
-										<input type="hidden" id="adminPassword" value="{{$password}}">
-										<input type="hidden" name="specific_id" id="myClerkId">
-								<center>
-									<label for="inputPassword3">New Password</label>
-								<br>
-							<input type="password" id="inputPassword" style="width:70%" name="pword" onkeyup="ableChangePasswordButton()" class="form-control " aria-describedby="passwordHelpInline"></center>
-								 <center>
-								<label for="inputPassword4">Repeat Password</label>
-								<br>
-							<input type="password" id="inputPasswordRepeat" style="width:70%" name="new_password" onkeyup="ableChangePasswordButton()" class="form-control" aria-describedby="passwordHelpInline"></center>
-								<small id="passwordHelpInline" class="text-muted">
-									<center>
-											<i>
-												<h4 id="showErrorRepeat" style="color:red;">
-												</h4>
-											</i>
-									</center>
-								</small>
-								 	<center>
-								<label for="inputPassword4">Admin Password</label>
-								<br>
-								<input type="password" id="inputPasswordAdmin" style="width:70%" onkeyup="ableChangePasswordButton()" name="admin_pword" class="form-control" aria-describedby="passwordHelpInline">	</center>
-								<small id="passwordHelpInline" class="text-muted">
-									<center>
-										<i>
-											<h4 id="showErrorAdmin" style="color:red;">
-											</h4>
-										</i>
-									</center>
-								</small>
-		                <div class="modal-footer">
-						 				<input type="button" onclick="validateChangePasswordForm()" id="changePasswordBtn" class="btn btn-primary" value="Save Changes">
-		                 <button class="btn btn-default" data-dismiss="modal">Close</button>
-		                </div>
-										{!! Form::close()!!}
-									</div>
-		            </div>
-		        </div>
-		    </div>
+					</div>
+				</div>
+		</div>
+</div>
 <!--  Modal Change Password-->
-
 <!--  Modal Add Clerks-->
 <div id="myModal-addClerk" class="modal fade">
 		<div class="modal-dialog">
@@ -178,5 +176,4 @@
 		</div>
 </div>
 <!--  modal add clerk-->
-
 @stop

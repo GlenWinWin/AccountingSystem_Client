@@ -1,7 +1,10 @@
 <?php
 
-//Add functions
+//Add clerk for admin and clerk
 Route::post('clerk_add', 'AdminController@addClerk');
+
+//Add items for clerk
+Route::post('add_item', 'ClerkController@addItem');
 
 //Search functions of admin
 Route::get('clerk_search',[
@@ -16,6 +19,7 @@ Route::get('items_search',[
   'middleware' => 'auth',
   'uses' => 'AdminController@searchItems'
 ]);
+
 //Search functions of clerk
 Route::get('search_distributor',[
   'middleware' => 'auth',
@@ -25,7 +29,7 @@ Route::get('search_clerk',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@searchClerk'
 ]);
-Route::get('items_search',[
+Route::get('search_items',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@searchItems'
 ]);
@@ -51,11 +55,6 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
-
-Route::get('try', function () {
-		return view('email.sendClerkEmail');
-
-});
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
@@ -75,7 +74,7 @@ Route::get('list_items',[
   'uses' => 'AdminController@listOfItems'
 ]);
 
-// view functions of Controller
+// view functions of clerk
 Route::get('distributor_list', [
   'middleware' => 'auth',
   'uses' => 'ClerkController@listOfDistributor'
@@ -118,20 +117,33 @@ Route::get('back',[
   'uses' => 'AdminController@backFunction'
 ]);
 
-//Filter per items
+//Filter per category or sub category for admin
 Route::get('filterItems',[
   'middleware' => 'auth',
-  'uses' => 'AdminController@filterItems'
+  'uses' => 'AdminController@filterbySubCategory'
+]);
+Route::get('filterbyCategory',[
+  'middleware' => 'auth',
+  'uses' => 'AdminController@filterbyCategory'
+]);
+
+//Filter per category or sub category for clerk
+Route::get('Category_filter',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@filterbyCategory'
 ]);
 Route::get('ItemsFilter',[
   'middleware' => 'auth',
-  'uses' => 'ClerkController@filterItems'
+  'uses' => 'ClerkController@filterbySubCategory'
 ]);
+
+//function for autocomplete
+Route::get('search/autocomplete', ['uses' => 'AdminController@autocomplete']);
+
+//function for sales encoding
+Route::post('sales_encoding', ['uses' => 'ClerkController@salesEncoding']);
 
 //Function for chaining of dropdowns
 Route::get('/dropdown', ['uses' => 'ClerkController@selectSubCategory']);
 
-
 Route::resource('user','UserController',['only' => ['store']]);
-Route::resource('admin','AdminController');
-Route::resource('items','ItemsController');

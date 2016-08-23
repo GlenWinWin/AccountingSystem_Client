@@ -3,12 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Clerk;
-use App\Distributor;
-use App\Items;
-use App\ManagePrivileges;
-use App\User;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Auth;
@@ -16,8 +10,21 @@ use Hash;
 use DB;
 use Input;
 use Mail;
+use App\Http\Requests;
+use App\Clerk;
+use App\Distributor;
+use App\Items;
+use App\ManagePrivileges;
+use App\User;
 use App\Category;
 use App\SubCategory;
+use App\TemporarySales;
+use App\TemporarySalesDetails;
+use App\Transactions;
+use App\TransactionDetails;
+use App\Sales;
+use App\SalesDetails;
+
 
 class ClerkController extends Controller
 {
@@ -46,10 +53,92 @@ class ClerkController extends Controller
     }
   }
       public function accountRegistration(Request $requests){
+        $deleteAllTemporarySales = TemporarySales::query()->truncate();
+      }
+      public function viewEmptyTemporarySales(){
 
       }
       public function salesEncoding(Request $requests){
+          $selectTemporarySales = TemporarySalesDetails::where('id','=',$requests->hiddenID)->get();
 
+          $addNewTransaction = new Transactions;
+          $addNewTransaction->distributor_id = isset($requests->distributorID) ? $requests->distributorID : 2;
+          $addNewTransaction->transaction_date = date('l jS \of F Y').' '.(date('H')-4).date(':i:s A');
+          $addNewTransaction->save();
+
+          $transID = $addNewTransaction->id;
+
+          $transactID  = "TRANS-".str_pad($transID,10,"0",STR_PAD_LEFT);
+          $updateTransactID = Transactions::where('id','=',$transID)->update(['transactID'=>$transactID]);
+
+          $addNewSales = new Sales;
+          $addNewSales->distributor_id = isset($requests->distributorID) ? $requests->distributorID : 2;
+          $addNewSales->clerk_id = Auth::user()->id;
+          $addNewSales->sale_time = date('l jS \of F Y') .' '.(date('H')-4) . date(':i:s A');
+          $addNewSales->save();
+
+          foreach($selectTemporarySales as $transaction_details){
+            $addTransactionDetails = new TransactionDetails;
+            $addTransactionDetails->transaction_id = $transactID;
+            $addTransactionDetails->item_id = $transaction_details->item_id;
+            $addTransactionDetails->item_name = $transaction_details->item_name;
+            $addTransactionDetails->transaction_quantity = $transaction_details->item_quantity;
+            $addTransactionDetails->transaction_costPrice = $transaction_details->item_costPrice;
+            $addTransactionDetails->transaction_subtotal = ($transaction_details->item_quantity * $transaction_details->item_costPrice);
+            $addTransactionDetails->save();
+
+            $addSalesDetails = new SalesDetails;
+            $addSalesDetails->sales_id = $addNewSales->id;
+            $addSalesDetails->item_id = $transaction_details->item_id;
+            $addSalesDetails->item_name = $transaction_details->item_name;
+            $addSalesDetails->sales_quantity = $transaction_details->item_quantity;
+            $addSalesDetails->sales_price = $transaction_details->item_costPrice;
+            $addSalesDetails->sales_subtotal = ($transaction_details->item_quantity * $transaction_details->item_costPrice);
+            $addSalesDetails->save();
+            $selectItem = Items::where('item_id','=',$transaction_details->item_id)->get();
+            $itemQuantity = 0;
+            foreach($selectItem as $item){
+              $itemQuantity = $item->item_quantity;
+            }
+            $updateQuantityforItems = Items::where('item_id','=',$transaction_details->item_id)->update(['item_quantity'=> ($itemQuantity - $transaction_details->item_quantity)]);
+          }
+          $deleteTemporarySales = TemporarySales::where('id','=',$requests->hiddenID)->delete();
+          $deleteTemporarySalesDetails = TemporarySalesDetails::where('id','=',$requests->hiddenID)->delete();
+          return redirect('inventory');
+      }
+      public function addItemtoSales(Request $requests){
+        $id = 0;
+        if($requests->hiddenID == 0){
+          $addTemporarySalesID = new TemporarySales;
+          $addTemporarySalesID->save();
+          $id = $addTemporarySalesID->id;
+        }
+        else{
+          $id = $requests->hiddenID;
+        }
+        $selectItems = Items::where('item_name','=',$requests->itemName)->get();
+        $itemId = 0;
+        $itemName = "";
+        $itemQuantity = 0;
+        $itemPrice = 0;
+        foreach($selectItems as $item){
+          $itemId = $item->item_id;
+          $itemName = $item->item_name;
+          $itemQuantity = $item->item_quantity;
+          $itemPrice = $item->item_costPrice;
+        }
+        $addTemporarySales = new TemporarySalesDetails;
+        $addTemporarySales->id = $id;
+        $addTemporarySales->item_id = $itemId;
+        $addTemporarySales->item_name = $itemName;
+        $addTemporarySales->item_quantity = $itemQuantity;
+        $addTemporarySales->item_costPrice = $itemPrice;
+        $addTemporarySales->save();
+
+        $this->setIDforTemporarySales($id);
+      }
+      public function setIDforTemporarySales($tempo_id){
+        $selectTemporarySales = TemporarySalesDetails::where('id','=',$tempo_id)->paginate(10);
       }
       public function addClerk(Request $requests){
         $fname = $requests->fname;
@@ -111,11 +200,27 @@ class ClerkController extends Controller
 
         return redirect('home_clerk');
       }
-      /*
-      public function generateReport(Request $requests){
+      public function addItem(Request $requests){
+        echo 'Category = ' . $requests->category.'<br>';
+        echo 'Sub Category = ' . $requests->subCategory.'<br>';
+        echo 'Item Name = ' . $requests->item_name.'<br>';
+        echo 'Cost = ' . $requests->cost.'<br>';
+        echo 'Sub Cost = ' . $requests->subcost.'<br>';
+        echo 'Selling Price = ' . $requests->selling_price;
+
+        $addItem = new Items;
+        $addItem->item_category = $requests->category;
+        $addItem->item_sub_category = $requests->subCategory;
+        $addItem->item_name = $requests->item_name;
+        $addItem->item_quantity = 1;
+        $addItem->item_costPrice = $requests->cost;
+        $addItem->item_subcostPrice = $requests->subcost;
+        $addItem->item_sellingPrice = $requests->selling_price;
+        $addItem->save();
+
+        return redirect()->back();
 
       }
-      */
       public function listOfDistributor(){
         try{
           $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
@@ -228,7 +333,28 @@ class ClerkController extends Controller
         $title = "Results for items...";
         return view('clerk.listOfItems')->with('items',$searchItems)->with('categories',$categories)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
       }
-      public function filterItems(Request $requests){
+      public function filterbyCategory(Request $requests){
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        $categories = Category::all();
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
+        $category = $requests->cat;
+        $cat = Category::where('id','=',$category)->first();
+        $title = "Results for ".$cat->category_name;
+        $items = Items::where('item_category', '=', $category)->paginate(10);
+        return view('clerk.listOfItems')->with('items',$items)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('categories',$categories);
+      }
+      public function filterbySubCategory(Request $requests){
         $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
         $salesEncoding = 0;
         $accountRegistration = 0;
@@ -255,9 +381,6 @@ class ClerkController extends Controller
         $id = Input::get('id');
         $sub_categories = SubCategory::where('category_id','=',$id)->get();
         return $sub_categories;
-      }
-      public function addItem(Request $requests){
-
       }
       public function createRandomPassword() {
 

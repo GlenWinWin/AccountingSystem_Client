@@ -1,7 +1,9 @@
 @extends('layouts.mylayout')
+
 @section('title')
 Edit Profile
 @stop
+
 @section('body-content')
 <div class="col-lg-9">
   <center>

@@ -12,6 +12,7 @@ use Input;
 use Crypt;
 use Hash;
 use Illuminate\Contracts\Encryption\DecryptException;
+use App\ManagePrivileges;
 
 class UserController extends Controller
 {
@@ -67,8 +68,9 @@ class UserController extends Controller
     }
     public function edit_profile(){
       try{
+        $typeOfUser = Auth::user()->typeOfUser;
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        return view('settings.edit_profile')->with('password',$decryptedPassword);
+        return view('admin.edit_profile')->with('password',$decryptedPassword)->with('typeOfUser',$typeOfUser);
       }
       catch(DecryptException $e){
         echo $e;
@@ -76,8 +78,22 @@ class UserController extends Controller
     }
     public function edit_profile_clerk(){
       try{
+        $typeOfUser = Auth::user()->typeOfUser;
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        return view('clerk.editprofile')->with('password',$decryptedPassword);
+        return view('clerk.editprofile')->with('password',$decryptedPassword)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('typeOfUser',$typeOfUser);
       }
       catch(DecryptException $e){
         echo $e;
@@ -110,7 +126,6 @@ class UserController extends Controller
           $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,'username'=>$username,
         'address'=>$address,'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/profile_pictures/'.$newPic->getClientOriginalName()]);
         }
-        return redirect()->back();
       }
       else{
         $id = Auth::user()->id;
@@ -129,14 +144,18 @@ class UserController extends Controller
         $newPassword = $requests->new_password;
         if($newPassword != ''){
           $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,'username'=>$username,
-        'address'=>$address,'password'=>Hash::make($newPassword),'passsword_text'=>Crypt::encrypt($newPassword),'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/user.png']);
+        'address'=>$address,'password'=>Hash::make($newPassword),'passsword_text'=>Crypt::encrypt($newPassword),'contact'=>$contact,'email'=>$email]);
         }
         else{
           $updateProfile = User::where('id','=',$id)->update(['name' => $fname . ' ' . $lname,'fname'=>$fname,'lname'=>$lname,'username'=>$username,
-        'address'=>$address,'contact'=>$contact,'email'=>$email,'profile_path' => 'assets/images/user.png']);
+        'address'=>$address,'contact'=>$contact,'email'=>$email]);
         }
-        return redirect()->back();
       }
-
+      if(Auth::user()->typeOfUser == 0){
+        return redirect('list_clerk');
+      }
+      else{
+        return redirect('home_clerk');
+      }
     }
 }

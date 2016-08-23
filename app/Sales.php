@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transactions extends Model
+class Sales extends Model
 {
   protected $fillable = [
     'distributor_id',
-    'transaction_date',
-    'transactID',
+    'clerk_id',
+    'sale_time',
   ];
 
   public $timestamps = false;
 
-  protected $table = 'transactions';
+  protected $table = 'sales';
 }

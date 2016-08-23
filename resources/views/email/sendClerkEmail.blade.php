@@ -42,7 +42,7 @@ margin-left: auto;
     <div class="cover-container">
   <div class="inner cover">
 
-      <center><h1>Greetings Jason! </h1>  </center>
+      <center><h1>Greetings {{$name}}! </h1>  </center>
     <p style="text-align:justify;">
       &emsp;  &emsp;Details Details Details Details Details Details Details Details Details
       Details Details Details Details Details Details Details Details Details Details
@@ -63,8 +63,8 @@ margin-left: auto;
 
     <div class="col-lg-12">
       <center>
-        <h4>Your Username: Jeysooooown</h4>
-          <h4>Your Temporary Password: dsadsadsa</h4>
+        <h4>Your Username: {{$username}}</h4>
+          <h4>Your Temporary Password: {{$password}}</h4>
       <a href="http://localhost:8000/login" class="btn btn-primary btn-lg">Log In</a><center>
     </div>
 </div>
@@ -76,4 +76,3 @@ margin-left: auto;
 </html>
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  

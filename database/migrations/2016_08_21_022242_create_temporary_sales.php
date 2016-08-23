@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableTransactionDetails extends Migration
+class CreateTemporarySales extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateTableTransactionDetails extends Migration
      */
     public function up()
     {
-      Schema::create('transaction_details', function (Blueprint $table) {
-        $table->string('transaction_id');
+      Schema::create('temporary_sales_details', function (Blueprint $table) {
+        $table->increments('temporary_sales_details_id');
+        $table->integer('id');
         $table->integer('item_id');
         $table->string('item_name');
-        $table->integer('transaction_quantity');
-        $table->double('transaction_costPrice');
-        $table->double('transaction_subtotal');
+        $table->integer('item_quantity');
+        $table->double('item_costPrice');
       });
     }
 
@@ -29,6 +29,6 @@ class CreateTableTransactionDetails extends Migration
      */
     public function down()
     {
-        Schema::drop('transaction_details');
+        Schema::drop('temporary_sales_details');
     }
 }

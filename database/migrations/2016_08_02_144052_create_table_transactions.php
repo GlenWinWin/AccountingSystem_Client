@@ -13,8 +13,9 @@ class CreateTableTransactions extends Migration
     public function up()
     {
       Schema::create('transactions', function (Blueprint $table) {
-        $table->increments('transaction_id');
+        $table->increments('id');
         $table->integer('distributor_id');
+        $table->string('transactID');
         $table->string('transaction_date');
       });
     }

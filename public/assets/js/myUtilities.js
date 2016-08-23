@@ -120,10 +120,9 @@ function doMultipleSelectionItemsToDelete(){
     $("input[id=itemstoDelete]").val(listIds);
   }
 }
-function editSpecificItem(item_id,item_name,item_quantity,item_costPrice,item_subcostPrice,item_sellingPrice){
+function editSpecificItem(item_id,item_name,item_costPrice,item_subcostPrice,item_sellingPrice){
   $("input[id=item_id]").val(item_id);
   $("input[id=itemNameId]").val(item_name);
-  $("input[id=itemQuantityId]").val(item_quantity);
   $("input[id=itemCostId]").val(item_costPrice);
   $("input[id=itemSubCostId]").val(item_subcostPrice);
   $("input[id=itemSellingId]").val(item_sellingPrice);
@@ -165,7 +164,7 @@ function checkOldPasswordInput(passwordko){
     return false;
   }
   else if(input.localeCompare(current) != 0){
-    passwordko.setCustomValidity('Input is not equal to current password');
+    passwordko.setCustomValidity('The old password you entered was incorrect');
     return true;
   }
   else if(input.localeCompare(current) == 0){
@@ -173,5 +172,14 @@ function checkOldPasswordInput(passwordko){
     document.getElementById("newPasswordField").required = true;
     document.getElementById("confirmPasswordField").required = true;
     return false;
+  }
+}
+function checkIfselectedCategory(){
+  var id = $( "#category" ).val();
+  if(id == 0){
+    document.getElementById('addItemBtn').disabled = true;
+  }
+  else{
+    document.getElementById('addItemBtn').disabled = false;
   }
 }

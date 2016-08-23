@@ -13,11 +13,11 @@ class CreateTableSalesDetails extends Migration
      public function up()
      {
        Schema::create('sales_details', function (Blueprint $table) {
-         $table->increments('sales_id');
+         $table->integer('sales_id');
          $table->integer('item_id');
-         $table->string('item_description');
+         $table->string('item_name');
          $table->integer('sales_quantity');
-         $table->double('sales_total');
+         $table->double('sales_price');
          $table->double('sales_subtotal');
        });
      }

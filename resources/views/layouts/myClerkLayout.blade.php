@@ -18,7 +18,7 @@
     						<span class="icon-bar"></span>
     						<span class="icon-bar"></span>
     		</a>
-    			<a class="navbar-brand" href="list_clerk">
+    			<a class="navbar-brand" href="home_clerk">
     				logo
     			</a>
     		</div>
@@ -48,13 +48,6 @@
     				</div>
     			</div>
     		<ul class="nav">
-          @if($ac == 1)
-      			<li>
-      				<a href="home_clerk">
-      				<i class="glyphicon glyphicon-user"></i>
-      			     Clerk</a>
-      			</li>
-          @endif
           @if($ar == 1)
             <li >
               <a href="distributor_list">
@@ -99,7 +92,7 @@
           Edit Profile</a>
           </li>
           <li class="visible-xs visible-md visible-sm">
-            <a href="logout" >
+            <a href="logout" onclick=" return confirm('Are you sure you want to logout?')">
             <i class="fa fa-sign-out"></i>
           Log Out</a>
           </li>
@@ -120,14 +113,7 @@
   <!--  modal-->
 	<script type="text/javascript">
 	$(document).ready(function(){
-    //this method is for disabling and enabling button in change password modal
-    var pword = document.getElementById("inputPassword").value;
-    var repeat_pword = document.getElementById("inputPasswordRepeat").value;
-    var admin_pword = document.getElementById("inputPasswordAdmin").value;
-
-    if((pword == null || pword == "") && (repeat_pword == null || repeat_pword == "") && (admin_pword == null || admin_pword == "")){
-    		document.getElementById('changePasswordBtn').disabled = true;
-    }
+    document.getElementById('addItemBtn').disabled = true;
     //modal for changing password
 		$('.open-modal-password').click(function(){
 			$('#myModal-password').modal('show');
@@ -250,7 +236,7 @@ $("#tab1 #checkone").click(function () {
 </script>
 <!-- check all -->
 <!-- Script for chaining of dropdowns -->
-<script>
+<script type="text/javascript">
 $(document).ready(function($){
   $('#category').change(function(){
     $.get("{{ url('dropdown')}}?id="+$(this).val(),

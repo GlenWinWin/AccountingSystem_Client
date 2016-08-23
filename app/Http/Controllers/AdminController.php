@@ -143,12 +143,11 @@ class AdminController extends Controller{
     public function editItem(Request $requests){
       $item_id = $requests->id_item;
       $item_name = $requests->name_item;
-      $item_quantity = $requests->quantity_item;
       $item_costPrice = $requests->costPrice_item;
       $item_subcostPrice = $requests->subcostPrice_item;
       $item_sellingPrice = $requests->sellingPrice_item;
-      $editItem = Items::where('item_id','=',$item_id)->update(['item_name'=>$item_name,'item_quantity'=>$item_quantity,
-    'item_costPrice'=>$item_costPrice,'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice'=>$item_sellingPrice]);
+      $editItem = Items::where('item_id','=',$item_id)->update(['item_name'=>$item_name,'item_costPrice'=>$item_costPrice,
+      'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice'=>$item_sellingPrice]);
       return redirect()->back();
     }
 
@@ -237,7 +236,12 @@ class AdminController extends Controller{
       return redirect()->back();
     }
     public function backFunction(){
-      return redirect()->action('AdminController@listOfClerk');
+      if(Auth::user()->typeOfUser == 0){
+          return redirect('list_clerk');
+      }
+      else if(Auth::user()->typeOfUser == 1){
+          return redirect('home_clerk');
+      }
     }
     public function createRandomPassword() {
 
@@ -256,7 +260,28 @@ class AdminController extends Controller{
         return $pass;
 
     }
-    public function filterItems(Request $requests){
+    public function autocomplete(){
+    	$term = Input::get('term');
+
+      $searchresultsforClerk = DB::table('users')->where('users.typeOfUser',1)->where('users.name','LIKE','%'.$term.'%')->groupBy('manage_privileges.clerk_id')
+  ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
+
+      $results = array();
+
+      foreach ($searchresultsforClerk as $query)
+      {
+          $results[] = [ 'id' => $query->id, 'value' => 'gg' ];
+      }
+      return Response::json($results);
+    }
+    public function filterbyCategory(Request $requests){
+      $category = $requests->cat;
+      $cat = Category::where('id','=',$category)->first();
+      $title = "Results for ".$cat->category_name;
+      $items = Items::where('item_category', '=', $category)->paginate(10);
+      return view('admin.listOfItems')->with('items',$items)->with('title',$title);
+    }
+    public function filterbySubCategory(Request $requests){
       $category = $requests->cat;
       $sub_category = $requests->sub;
       $cat = Category::where('id','=',$category)->first();

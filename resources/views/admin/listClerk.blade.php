@@ -23,7 +23,7 @@
 	<input type="button" name="name" value="Delete" onclick="doMultipleSelectionOfIdsDelete()" class="btn btn-primary btn-md open-modal-deleteMultipleUsers">
 	<div class="search">
 		{!! Form::open(array('action' => 'AdminController@searchClerk' , 'method' => 'get'))!!}
-		<input type="text" name="search" required="" placeholder="Search...">
+		<input type="text" id="searchClerk" name="search" required="" placeholder="Search...">
 		<input type="submit" value="Search" class="btn btn-primary btn-md">
 		{!! Form::close()!!}
 	</div>

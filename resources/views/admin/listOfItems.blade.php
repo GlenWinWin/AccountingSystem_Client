@@ -19,14 +19,14 @@
 	</h1></center>
 	<hr>
   <div class="dropdown">
-             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#" href="/page.html">
+             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#">
                  Category<span class="caret"></span>
              </a>
      		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                <li class="dropdown-submenu">
-                 <a href="gg">Safety Equipments</a>
+                 <a href="filterbyCategory?cat=1">Safety Equipments</a>
 								 <ul class="dropdown-menu">
-                   <li><a tabindex="-1" href="filterItems?cat=1&sub=1">Head</a></li>
+                   <li><a href="filterItems?cat=1&sub=1">Head</a></li>
                    <li><a href="filterItems?cat=1&sub=2">Eye</a></li>
                    <li><a href="filterItems?cat=1&sub=3">Eyewash</a></li>
                    <li><a href="filterItems?cat=1&sub=4">Ear</a></li>
@@ -64,6 +64,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			@if(count($items) > 0)
 			@foreach($items as $itemss)
 			<tr>
 				<td><input type="checkbox" name="items_ids" id="checkone" value="{{$itemss->item_id}}"></td>
@@ -72,10 +73,23 @@
 				<td>PHP {{$itemss->item_costPrice}}</td>
 				<td>PHP {{$itemss->item_subcostPrice}}</td>
 				<td>PHP {{$itemss->item_sellingPrice}}</td>
-				<td><input type="button" value="Edit Items" class="btn btn-primary btn-sm open-modal-editItems" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_quantity}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')"></td>
+				<td><input type="button" value="Edit Items" class="btn btn-primary btn-sm open-modal-editItems" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')"></td>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
 			</tr>
 			@endforeach
+			@elseif(isset($title))
+				<tr>
+					<td>
+						<h4 style="text-align:center"><i>No results found</i></h4>
+					</td>
+				</tr>
+			@else
+				<tr>
+					<td>
+						No Items found
+					</td>
+				</tr>
+			@endif
 		</tbody>
 	</table>
 
@@ -149,12 +163,6 @@
                        <label class="col-lg-4 control-label">Item name:</label>
                        <div class="col-lg-8">
                          <input class="form-control" id="itemNameId" value="" type="text" name="name_item" required="">
-                       </div>
-              </div>
-							<div class="form-group">
-                       <label class="col-lg-4 control-label">Quantity:</label>
-                       <div class="col-lg-8">
-                         <input class="form-control" id="itemQuantityId" value="" type="text" name="quantity_item" required="">
                        </div>
               </div>
               <div class="form-group">

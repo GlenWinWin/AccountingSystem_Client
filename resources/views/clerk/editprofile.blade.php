@@ -1,7 +1,9 @@
 @extends('layouts.myClerkLayout')
+
 @section('title')
-Edit Profile
-@stops
+  Edit Profile
+@stop
+
 @section('body-content')
 <div class="col-lg-9">
   <center>
