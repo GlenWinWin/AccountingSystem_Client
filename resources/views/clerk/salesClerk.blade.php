@@ -17,9 +17,10 @@
 	<div class=" col-lg-8">
 
 		<div class="search" style="float:none;">
-
-			<input type="text" name="search" required="" id="searchname" placeholder="Search..." class="form-control" style="width:200px;margin-bottom: 0px;display:inline;">
+      {!! Form::open(array('action' => 'ClerkController@searchItems' , 'method' => 'get'))!!}
+			<input type="text" name="search" required="" id="searchitem" placeholder="Search...items" class="form-control" style="width:200px;margin-bottom: 0px;display:inline;" required="">
 			<input type="submit" name="name" value="Add" class="btn btn-primary btn-md">
+      {!! Form::close()!!}
 
 		</div>
 	<div class="table-responsive">

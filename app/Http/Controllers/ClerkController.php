@@ -55,6 +55,19 @@ class ClerkController extends Controller
       public function accountRegistration(Request $requests){
         $deleteAllTemporarySales = TemporarySales::query()->truncate();
       }
+      public function autocomplete(Request $request){
+      	$term = $request->term;
+
+      	$results = array();
+
+      	$searchItems = Items::where('item_name','LIKE','%'.$term.'%')->get();
+
+      	foreach ($searchItems as $item)
+      	{
+      	    $results[] = [ 'value' => $item->item_name];
+      	}
+      return response()->json($results);
+      }
       public function viewTemporarySales(){
         $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
         $salesEncoding = 0;

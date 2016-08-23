@@ -57,7 +57,7 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
-Route::get('search/autocomplete', 'SearchController@autocomplete');
+Route::get('search/autocomplete', 'ClerkController@autocomplete');
 
 Route::get('try', function () {
   $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();

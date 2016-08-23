@@ -252,7 +252,7 @@ $(document).ready(function($){
 });
 </script>
 <script type="text/javascript">
-$('#searchname').autocomplete({
+$('#searchitem').autocomplete({
 
   source:"search/autocomplete",
   minlenght:1,
@@ -260,7 +260,7 @@ $('#searchname').autocomplete({
   select:function(event,ui){
     console.log(ui.item.value);
     event.preventDefault();
-    $('#searchname').val(ui.item.value);
+    $('#searchitem').val(ui.item.value);
   }
 });
 </script>
