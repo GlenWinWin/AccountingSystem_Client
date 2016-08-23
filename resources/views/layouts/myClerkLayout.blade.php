@@ -6,6 +6,8 @@
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
          <link rel="stylesheet" href="assets/css/style.css" media="screen" title="no title" charset="utf-8">
          <link rel="stylesheet" href="assets/fonts/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" />
+
     <title>@yield('title')</title>
   </head>
   <body>
@@ -98,10 +100,11 @@
     @yield('body-content')
   </body>
 </html>
-<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="assets/js/sidebar.js"></script>
   <script src="assets/js/myUtilities.js"></script>
+  <script type="text/javascript" src="//codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
 
   <!--  modal-->
 	<script type="text/javascript">
@@ -246,5 +249,18 @@ $(document).ready(function($){
             }
   	});
   });
+});
+</script>
+<script type="text/javascript">
+$('#searchname').autocomplete({
+
+  source:"search/autocomplete",
+  minlenght:1,
+  autoFocus:true,
+  select:function(event,ui){
+    console.log(ui.item.value);
+    event.preventDefault();
+    $('#searchname').val(ui.item.value);
+  }
 });
 </script>

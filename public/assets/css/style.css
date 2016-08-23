@@ -358,6 +358,8 @@ border-color: #2d4668;
     margin-top: 80px;
   }
 }
+.ui-autocomplete { max-height: 200px; overflow-y: auto; }
+
 .price{
   border: 2px solid #2d4668;
   overflow-y: auto;

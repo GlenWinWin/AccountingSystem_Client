@@ -57,10 +57,28 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
+Route::get('search/autocomplete', 'SearchController@autocomplete');
 
 Route::get('try', function () {
-
+  $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+  $salesEncoding = 0;
+  $accountRegistration = 0;
+  $addClerk = 0;
+  $useInventory = 0;
+  $generateReport = 0;
+  foreach($privileges as $priv){
+    $salesEncoding = $priv->sales_encoding;
+    $accountRegistration = $priv->account_registration;
+    $addClerk = $priv->add_clerk;
+    $useInventory = $priv->use_inventory;
+    $generateReport = $priv->generate_report;
+  }
+  $clerks = DB::table('users')->where('users.typeOfUser',1)->groupBy('manage_privileges.clerk_id')
+->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
+  return view('clerk.try')->with('clerks',$clerks)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
 });
+
+
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
