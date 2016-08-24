@@ -1,7 +1,7 @@
 @extends('layouts.myClerklayout')
 
 @section('title')
-
+	Sales
 @stop
 
 @section('body-content')
@@ -18,10 +18,10 @@
 
 		<div class="search" style="float:none;">
 
-
-      {!! Form::open(array('action' => 'ClerkController@searchItems' , 'method' => 'get'))!!}
-			<input type="text" name="search" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:74%;margin-bottom: 0px;display:inline;">
-			<input type="submit" name="name" value="Add" class="btn btn-primary btn-md" style="width:25%;">
+      {!! Form::open(array('action' => 'ClerkController@addItemtoSales' , 'method' => 'post' , 'id' => 'formAddItemtoSales'))!!}
+			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:74%;margin-bottom: 0px;display:inline;">
+			<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
+			<input type="submit" onclick="" name="name" value="Add" class="btn btn-primary btn-md" style="width:25%;">
       {!! Form::close()!!}
 
 
@@ -38,15 +38,15 @@
 			</tr>
 		</thead>
 		<tbody>
-
+      @foreach($temporary_sales as $sale)
 			<tr>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" style="padding:8px 12px;" onclick="delete_Clerk_Distributor_Item()" value="Cancel"></td>
-				<td style="padding-top:15px">Head Gear</td>
-				<td style="padding-top:15px">PHP. 1,000,000,000.00</td>
-				<td>X &emsp;<input type="number" name="name" value="" class="value" placeholder='0'  style="width:70px"></td>
-        <td style="padding-top:15px;font-weight:bold;">PHP. 1,000,000,000.00</td>
+				<td style="padding-top:15px">{{$sale->item_name}}</td>
+				<td style="padding-top:15px">PHP. {{$sale->item_costPrice}}</td>
+				<td><input type="number" name="name" id="quantityField" min="1" value="{{$sale->item_quantity}}" class="value" style="width:70px"></td>
+        <td style="padding-top:15px;font-weight:bold;">{{ $sale->item_costPrice * $sale->item_quantity }}</td>
 			</tr>
-
+      @endforeach
 		</tbody>
 	</table>
 	</div>
@@ -63,35 +63,29 @@
 					</tr>
 				</thead>
 				<tbody>
+					<?php $totalSales = 0;?>
+					@foreach($temporary_sales as $sale)
 					<tr>
-						<td>Head Gears</td>
-						<td>x1</td>
-						<td>PHP. 5,000,000.00</td>
+						<td>{{$sale->item_name}}</td>
+						<td>x{{$sale->item_quantity}}</td>
+						<td>{{ $sale->item_costPrice * $sale->item_quantity }}</td>
 					</tr>
-					<tr>
-						<td>Head Gears</td>
-						<td>x1</td>
-						<td>PHP. 5,000,000.00</td>
-					</tr>
-					<tr>
-						<td>Head Gears</td>
-						<td>x1</td>
-						<td>PHP. 5,000,000.00</td>
-					</tr>
-					<tr>
-						<td>Head Gears</td>
-						<td>x1</td>
-						<td>PHP. 500,000.00</td>
-					</tr>
+					<?php $totalSales += $sale->item_costPrice * $sale->item_quantity; ?>
+					@endforeach
 					<tr>
 						<td style="font-weight:bold;font-size:15px;">Total</td>
 						<td></td>
-						<td>PHP. 5,000,000.00</td>
+						<td>PHP {{$totalSales}}</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td></td>
-						<td><input type="button" class="btn btn-md btn-primary" style="padding:8px 12px;" onclick="delete_Clerk_Distributor_Item()" value="Submit"></td>
+						<td>
+							{!! Form::open(array('action' => 'ClerkController@salesEncoding' , 'method' => 'post'))!!}
+							<input type="submit" onclick=" return confirm('Are you sure you about the sales, this cannot be undone?')" class="btn btn-md btn-primary" style="padding:8px 12px;" value="Submit">
+							<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
+							{!! Form::close()!!}
+						</td>
 					</tr>
 				</tbody>
 			</table>

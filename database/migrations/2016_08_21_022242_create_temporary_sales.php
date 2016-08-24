@@ -19,6 +19,7 @@ class CreateTemporarySales extends Migration
         $table->string('item_name');
         $table->integer('item_quantity');
         $table->double('item_costPrice');
+        $table->integer('clerk_id');
       });
     }
 

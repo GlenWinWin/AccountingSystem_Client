@@ -258,9 +258,13 @@ $('#searchitem').autocomplete({
   minlenght:1,
   autoFocus:true,
   select:function(event,ui){
-    console.log(ui.item.value);
     event.preventDefault();
-    $('#searchitem').val(ui.item.value);
+    if(ui.item.value == ''){
+      $('#searchitem').val('No results found');
+    }
+    else{
+      $('#searchitem').val(ui.item.value);
+    }
   }
 });
 </script>

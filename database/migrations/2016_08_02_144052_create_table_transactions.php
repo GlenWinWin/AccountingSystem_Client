@@ -16,7 +16,8 @@ class CreateTableTransactions extends Migration
         $table->increments('id');
         $table->integer('distributor_id');
         $table->string('transactID');
-        $table->string('transaction_date');
+        $table->integer('typeOfTransaction');
+        $table->timestamps();
       });
     }
 

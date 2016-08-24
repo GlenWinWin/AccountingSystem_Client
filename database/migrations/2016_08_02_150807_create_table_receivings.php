@@ -13,9 +13,10 @@ class CreateTableReceivings extends Migration
      public function up()
      {
        Schema::create('receivings', function (Blueprint $table) {
+         $table->increments('receiving_id');
          $table->integer('clerk_id');
-         $table->integer('receiving_id');
-         $table->string('receiving_time');
+         $table->string('trans_ID');
+         $table->timestamps();
        });
      }
 

@@ -3,11 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTemporarySalesMainTable extends Migration
+class CreateTemporaryReceivings extends Migration
 {
   public function up()
   {
-    Schema::create('temporary_sales', function (Blueprint $table) {
+    Schema::create('temporary_receivings', function (Blueprint $table) {
       $table->increments('id');
       $table->timestamps();
     });
@@ -15,6 +15,7 @@ class CreateTemporarySalesMainTable extends Migration
 
   public function down()
   {
-      Schema::drop('temporary_sales');
+      Schema::drop('temporary_receivings');
   }
+
 }

@@ -13,12 +13,13 @@ class CreateTableReceivingDetails extends Migration
      public function up()
      {
        Schema::create('receiving_details', function (Blueprint $table) {
-         $table->increments('receiving_id');
+         $table->increments('receiving_detail_id');
+         $table->integer('receiving_id');
          $table->integer('item_id');
          $table->string('item_name');
+         $table->double('receive_price');
          $table->integer('receive_quantity');
          $table->double('receive_subtotal');
-         $table->double('receive_total');
        });
      }
 

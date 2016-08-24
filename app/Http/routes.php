@@ -57,9 +57,8 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
+
 Route::get('search/autocomplete', 'ClerkController@autocomplete');
-
-
 
 Route::get('logout',[
   'uses' => 'UserController@logout'
@@ -146,6 +145,10 @@ Route::get('ItemsFilter',[
 //function for sales encoding
 Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
 Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);
+
+//function for adding temporary_sales
+Route::post('adding_sales', ['uses' => 'ClerkController@addItemtoSales']);
+
 //Function for chaining of dropdowns
 Route::get('/dropdown', [[
   'middleware' => 'auth',

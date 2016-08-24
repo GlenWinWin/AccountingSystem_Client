@@ -20,6 +20,8 @@ use App\Category;
 use App\SubCategory;
 use App\TemporarySales;
 use App\TemporarySalesDetails;
+use App\TemporaryReceivings;
+use App\TemporaryReceivingsDetails;
 use App\Transactions;
 use App\TransactionDetails;
 use App\Sales;
@@ -82,14 +84,40 @@ class ClerkController extends Controller
           $useInventory = $priv->use_inventory;
           $generateReport = $priv->generate_report;
         }
-        return view('clerk.salesClerk')->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
+        $selectTemporarySales = TemporarySalesDetails::where('clerk_id','=',Auth::user()->id)->paginate(10);
+        $existing_id = 0;
+        foreach ($selectTemporarySales as $key => $value) {
+          $existing_id = $value->id;
+        }
+        return view('clerk.salesClerk')->with('temporary_sales',$selectTemporarySales)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
+      }
+      public function viewTemporaryReceivings(){
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
+        $selectTemporaryReceivings = TemporaryReceivingsDetails::where('clerk_id','=',Auth::user()->id)->paginate(10);
+        $existing_id = 0;
+        foreach ($selectTemporaryReceivings as $key => $value) {
+          $existing_id = $value->id;
+        }
+        return view('clerk.salesClerk')->with('temporary_receivings',$selectTemporaryReceivings)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
       }
       public function salesEncoding(Request $requests){
           $selectTemporarySales = TemporarySalesDetails::where('id','=',$requests->hiddenID)->get();
 
           $addNewTransaction = new Transactions;
           $addNewTransaction->distributor_id = isset($requests->distributorID) ? $requests->distributorID : 2;
-          $addNewTransaction->transaction_date = date('l jS \of F Y').' '.(date('H')-4).date(':i:s A');
+          $addNewTransaction->typeOfTransaction = 0;
           $addNewTransaction->save();
 
           $transID = $addNewTransaction->id;
@@ -100,7 +128,7 @@ class ClerkController extends Controller
           $addNewSales = new Sales;
           $addNewSales->distributor_id = isset($requests->distributorID) ? $requests->distributorID : 2;
           $addNewSales->clerk_id = Auth::user()->id;
-          $addNewSales->sale_time = date('l jS \of F Y') .' '.(date('H')-4) . date(':i:s A');
+          $addNewSales->trans_ID = "TRANS-".str_pad($transID,10,"0",STR_PAD_LEFT);
           $addNewSales->save();
 
           foreach($selectTemporarySales as $transaction_details){
@@ -132,6 +160,53 @@ class ClerkController extends Controller
           $deleteTemporarySalesDetails = TemporarySalesDetails::where('id','=',$requests->hiddenID)->delete();
           return redirect('inventory');
       }
+      public function receivingsAdding(Request $requests){
+          $selectTemporaryReceivings = TemporaryReceivingsDetails::where('id','=',$requests->hiddenID)->get();
+
+          $addNewTransaction = new Transactions;
+          $addNewTransaction->distributor_id = isset($requests->distributorID) ? $requests->distributorID : 2;
+          $addNewTransaction->typeOfTransaction = 1;
+          $addNewTransaction->save();
+
+          $transID = $addNewTransaction->id;
+
+          $transactID  = "TRANS-".str_pad($transID,10,"0",STR_PAD_LEFT);
+          $updateTransactID = Transactions::where('id','=',$transID)->update(['transactID'=>$transactID]);
+
+          $addNewReceivings = new Receivings;
+          $addNewReceivings->clerk_id = Auth::user()->id;
+          $addNewReceivings->trans_ID = "TRANS-".str_pad($transID,10,"0",STR_PAD_LEFT);
+          $addNewReceivings->save();
+
+          foreach($selectTemporaryReceivings as $transaction_details){
+            $addTransactionDetails = new TransactionDetails;
+            $addTransactionDetails->transaction_id = $transactID;
+            $addTransactionDetails->item_id = $transaction_details->item_id;
+            $addTransactionDetails->item_name = $transaction_details->item_name;
+            $addTransactionDetails->transaction_quantity = $transaction_details->item_quantity;
+            $addTransactionDetails->transaction_costPrice = $transaction_details->item_costPrice;
+            $addTransactionDetails->transaction_subtotal = ($transaction_details->item_quantity * $transaction_details->item_costPrice);
+            $addTransactionDetails->save();
+
+            $addReceivingsDetails = new ReceivingsDetails;
+            $addReceivingsDetails->receiving_id = $addNewReceivings->id;
+            $addReceivingsDetails->item_id = $transaction_details->item_id;
+            $addReceivingsDetails->item_name = $transaction_details->item_name;
+            $addReceivingsDetails->receive_quantity = $transaction_details->item_quantity;
+            $addReceivingsDetails->receive_price = $transaction_details->item_costPrice;
+            $addReceivingsDetails->receive_subtotal = ($transaction_details->item_quantity * $transaction_details->item_costPrice);
+            $addReceivingsDetails->save();
+            $selectItem = Items::where('item_id','=',$transaction_details->item_id)->get();
+            $itemQuantity = 0;
+            foreach($selectItem as $item){
+              $itemQuantity = $item->item_quantity;
+            }
+            $updateQuantityforItems = Items::where('item_id','=',$transaction_details->item_id)->update(['item_quantity'=> ($itemQuantity + $transaction_details->item_quantity)]);
+          }
+          $deleteTemporaryReceivings = TemporaryReceivings::where('id','=',$requests->hiddenID)->delete();
+          $deleteTemporaryReceivingsDetails = TemporaryReceivingsDetails::where('id','=',$requests->hiddenID)->delete();
+          return redirect('inventory');
+      }
       public function addItemtoSales(Request $requests){
         $id = 0;
         if($requests->hiddenID == 0){
@@ -153,18 +228,52 @@ class ClerkController extends Controller
           $itemQuantity = $item->item_quantity;
           $itemPrice = $item->item_costPrice;
         }
-        $addTemporarySales = new TemporarySalesDetails;
-        $addTemporarySales->id = $id;
-        $addTemporarySales->item_id = $itemId;
-        $addTemporarySales->item_name = $itemName;
-        $addTemporarySales->item_quantity = $itemQuantity;
-        $addTemporarySales->item_costPrice = $itemPrice;
-        $addTemporarySales->save();
-
-        $this->setIDforTemporarySales($id);
+        $selectTemporarySales = TemporarySalesDetails::where('item_name','=',$itemName)->get();
+        if(count($selectTemporarySales) == 0){
+          $addTemporarySales = new TemporarySalesDetails;
+          $addTemporarySales->id = $id;
+          $addTemporarySales->item_id = $itemId;
+          $addTemporarySales->item_name = $itemName;
+          $addTemporarySales->item_quantity = $itemQuantity;
+          $addTemporarySales->item_costPrice = $itemPrice;
+          $addTemporarySales->clerk_id = Auth::user()->id;
+          $addTemporarySales->save();
+        }
+        return redirect('sales_viewing');
       }
-      public function setIDforTemporarySales($tempo_id){
-        $selectTemporarySales = TemporarySalesDetails::where('id','=',$tempo_id)->paginate(10);
+      public function addItemtoReceivings(Request $requests){
+        $id = 0;
+        if($requests->hiddenID == 0){
+          $addTemporaryReceivings = new TemporaryReceivings;
+          $addTemporaryReceivings->save();
+          $id = $addTemporaryReceivings->id;
+        }
+        else{
+          $id = $requests->hiddenID;
+        }
+        $selectItems = Items::where('item_name','=',$requests->itemName)->get();
+        $itemId = 0;
+        $itemName = "";
+        $itemQuantity = 0;
+        $itemPrice = 0;
+        foreach($selectItems as $item){
+          $itemId = $item->item_id;
+          $itemName = $item->item_name;
+          $itemQuantity = $item->item_quantity;
+          $itemPrice = $item->item_costPrice;
+        }
+        $selectTemporaryReceivings = TemporaryReceivingsDetails::where('item_name','=',$itemName)->get();
+        if(count($selectTemporaryReceivings) == 0){
+          $addTemporaryReceivings = new TemporaryReceivingsDetails;
+          $addTemporaryReceivings->id = $id;
+          $addTemporaryReceivings->item_id = $itemId;
+          $addTemporaryReceivings->item_name = $itemName;
+          $addTemporaryReceivings->item_quantity = $itemQuantity;
+          $addTemporaryReceivings->item_costPrice = $itemPrice;
+          $addTemporaryReceivings->clerk_id = Auth::user()->id;
+          $addTemporaryReceivings->save();
+        }
+        return redirect('receivings_viewing');
       }
       public function addClerk(Request $requests){
         $fname = $requests->fname;

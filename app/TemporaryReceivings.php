@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TemporarySalesDetails extends Model
+class TemporaryReceivings extends Model
 {
   protected $fillable = [
     'id',
@@ -14,8 +14,7 @@ class TemporarySalesDetails extends Model
     'item_costPrice',
     'clerk_id',
   ];
+  public $timestamps = true;
 
-  public $timestamps = false;
-
-  protected $table = 'temporary_sales_details';
+  protected $table = 'temporary_receivings';
 }

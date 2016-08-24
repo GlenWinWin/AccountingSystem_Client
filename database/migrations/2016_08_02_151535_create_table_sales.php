@@ -16,7 +16,9 @@ class CreateTableSales extends Migration
          $table->increments('id');
          $table->integer('distributor_id');
          $table->integer('clerk_id');
-         $table->string('sale_time');
+         $table->string('trans_ID');
+         $table->timestamps();
+
        });
      }
 
