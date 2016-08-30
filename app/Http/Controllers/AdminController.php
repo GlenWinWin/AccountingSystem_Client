@@ -137,7 +137,7 @@ class AdminController extends Controller{
           return redirect('list_clerk');
         }
         else{
-          return view('errors.404');
+          return view('errors.internetError');
         }
     }
     public function changePasswordAccount(Request $requests){
