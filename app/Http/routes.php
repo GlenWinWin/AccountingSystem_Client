@@ -147,14 +147,28 @@ Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
 Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);
 
 // function for receivingsAdding
+Route::post('receivings', ['uses' => 'ClerkController@receivingsAdding']);
 Route::get('receivings_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporaryReceivings']);
 //function for adding temporary_sales
 Route::post('adding_sales', ['uses' => 'ClerkController@addItemtoSales']);
 
+Route::post('adding_receivings', ['uses' => 'ClerkController@addItemtoReceivings']);
 //Function for chaining of dropdowns
-Route::get('/dropdown', [[
+Route::get('/dropdown', [
   'middleware' => 'auth',
   'uses' => 'ClerkController@selectSubCategory'
-]]);
+]);
+
+//function for removing items in sales or receivingsAdding
+
+Route::get('remove_temp_sale_item', [
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@removeSales_Item'
+]);
+
+Route::get('remove_temp_receiving_item', [
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@removeReceivings_Item'
+]);
 
 Route::resource('user','UserController',['only' => ['store']]);

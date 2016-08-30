@@ -40,7 +40,7 @@
 		<tbody>
       @foreach($temporary_sales as $sale)
 			<tr>
-				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" style="padding:8px 12px;" onclick="delete_Clerk_Distributor_Item()" value="Cancel"></td>
+				<td><a href="remove_temp_sale_item?id={{$sale->temporary_sales_details_id}}&temp_id={{$sale->id}}" class="btn btn-sm btn-primary " style="padding:8px 12px;">Cancel</a></td>
 				<td style="padding-top:15px">{{$sale->item_name}}</td>
 				<td style="padding-top:15px">PHP. {{$sale->item_costPrice}}</td>
 				<td><input type="number" name="name" id="quantityField" min="1" value="{{$sale->item_quantity}}" class="value" style="width:70px"></td>

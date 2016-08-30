@@ -50,6 +50,11 @@
     				</div>
     			</div>
     		<ul class="nav">
+            <li>
+              <a href="home_clerk">
+              <i class="fa fa-group"></i>
+              Clerks</a>
+            </li>
           @if($ar == 1)
             <li >
               <a href="distributor_list">

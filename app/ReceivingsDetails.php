@@ -16,7 +16,7 @@ class ReceivingsDetails extends Model
 
   ];
 
-  public $timestamps = true;
+  public $timestamps = false;
 
-  protected $table = 'sales';
+  protected $table = 'receiving_details';
 }

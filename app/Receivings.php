@@ -13,5 +13,5 @@ class Receivings extends Model
 
   public $timestamps = true;
 
-  protected $table = 'sales';
+  protected $table = 'receivings';
 }
