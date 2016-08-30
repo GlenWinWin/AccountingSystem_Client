@@ -40,7 +40,7 @@
                  </ul>
                </li>
              </ul>
-						 	<input type="button" name="name" value="Add an Item" class="btn btn-primary btn-md open-modal-addClerk">
+						 	<input type="button" name="name" value="Add an Item" class="btn btn-primary btn-md open-modal-addItems">
 						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Delete">
 					 	</div>
 						 <div class="col-lg-3 col-md-3 col-sm-4 search-small" >
@@ -235,8 +235,8 @@
 		</div>
 </div>
 
-<!--  Modal Add Clerks-->
-<div id="myModal-addClerk" class="modal fade">
+<!--  Modal Add items-->
+<div id="myModal-addItems" class="modal fade">
 		<div class="modal-dialog">
 				<div class="modal-content">
 						<div class="modal-header">
@@ -303,5 +303,5 @@
 			{!! Form::close()!!}
 		</div>
 </div>
-<!--  modal add clerk-->
+<!--  modal add items-->
 @stop

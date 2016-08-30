@@ -46,8 +46,12 @@
     			</div>
     			<div class="profile-usertitle">
     				<div class="profile-usertitle-name">
-    					Clerk
+    					Jason Lopez
     				</div>
+            <div class="profile-usertitle-job">
+              Clerk
+            </div>
+
     			</div>
     		<ul class="nav">
             <li>
@@ -144,6 +148,16 @@
 		});
 	});
 	</script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.open-modal-addItems').click(function(){
+      $('#myModal-addItems').modal('show');
+    });
+      $("#myModal-addItems").on('hidden.bs.modal', function(){
+      <!--alert("Modal window has been completely closed.");-->
+    });
+  });
+  </script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.open-modal-editItems').click(function(){
