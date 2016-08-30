@@ -3,6 +3,52 @@
     width: 20%;
     float: left;
 }
+.checkbox1{
+  display: block;
+width: 100%;
+height: 34px;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+color: #555;
+background-color: #fff;
+background-image: none;
+
+}
+.checkbox label, .radio label{
+  margin-bottom: -15px;
+}
+@media(min-width:400px){
+  .checkbox2{
+    width:65%;
+
+
+  }
+}
+@media(min-width:768px){
+.distributor-sales{
+  padding-left: 39px;
+}
+}
+@media(min-width:1200px){
+.distributor-sales{
+  padding-left: 50px;
+}
+}
+
+
+@media(max-width:400px){
+  .checkbox2{
+    width:61%;
+
+  }
+}
+@media(max-width:350px){
+  .checkbox2{
+    width:54%;
+
+  }
+}
 /*collapse sidebar*/
 @media (max-width: 1200px) {
   .navbar-header {

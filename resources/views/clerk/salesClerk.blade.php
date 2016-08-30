@@ -15,8 +15,17 @@
 
 
 	<div class=" col-lg-8">
-
-		<div class="search" style="float:none;text-align:center;">
+		<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12" >
+			<div class="checkbox" >
+	  <label class="checkbox1"><input type="checkbox" value="">New Distributor?</label>
+		</div>
+		</div>
+		<div class="col-lg-7 col-md-6 col-sm-6 col-xs-12 distributor-sales">
+			<div class="checkbox" >
+		<label style="padding-left:0px;">Distributor ID: &emsp;<input type="text" name="name" value="" class="form-control checkbox2" style="display:inline;"></label>
+		</div>
+		</div>
+		<div style="float:none;text-align:center;">
 
       {!! Form::open(array('action' => 'ClerkController@addItemtoSales' , 'method' => 'post' , 'id' => 'formAddItemtoSales'))!!}
 			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:70%;margin-bottom: 0px;display:inline;">
@@ -26,7 +35,7 @@
 
 
 		</div>
-	<div class="table-responsive">
+	<div class="table-responsive" style="margin-top: 5px;">
 	<table class="table" id="tab1">
 		<thead class="thead">
 			<tr >
