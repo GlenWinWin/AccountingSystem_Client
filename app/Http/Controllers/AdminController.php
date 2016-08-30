@@ -86,59 +86,61 @@ class AdminController extends Controller{
       $address = $requests->address;
       $addClerkQuery = new Clerk;
       $pass_text = Crypt::encrypt($password);
-      $bIsConnected = $this->check_internet_connection();
-      if($bIsConnected){
-          $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+      $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
 
-          Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
-            $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
-          });
-          if(Input::hasFile('clerk_pic')){
-            $clerk_pic = Input::file('clerk_pic');
-            $clerk_pic->move('assets/images/profile_pictures',$clerk_pic->getClientOriginalName());
-            $addClerkQuery->fname = $fname;
-            $addClerkQuery->lname = $lname;
-            $addClerkQuery->name = $fname . ' ' . $lname;
-            $addClerkQuery->email = $email;
-            $addClerkQuery->username = $username;
-            $addClerkQuery->password = Hash::make($password);
-            $addClerkQuery->contact = '0'.$contact;
-            $addClerkQuery->address = $address;
-            $addClerkQuery->typeOfUser = 1;
-            $addClerkQuery->profile_path = 'assets/images/profile_pictures/'.$clerk_pic->getClientOriginalName();
-            $addClerkQuery->passsword_text = $pass_text;
-            $addClerkQuery->save();
-          }
-          else{
-            $addClerkQuery->fname = $fname;
-            $addClerkQuery->lname = $lname;
-            $addClerkQuery->name = $fname . ' ' . $lname;
-            $addClerkQuery->email = $email;
-            $addClerkQuery->username = $username;
-            $addClerkQuery->password = Hash::make($password);
-            $addClerkQuery->contact = '0'.$contact;
-            $addClerkQuery->address = $address;
-            $addClerkQuery->typeOfUser = 1;
-            $addClerkQuery->profile_path = 'assets/images/user.png';
-            $addClerkQuery->passsword_text = $pass_text;
-            $addClerkQuery->save();
-          }
-          //add priviliges
+      Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+        $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+      });
+      if(Input::hasFile('clerk_pic')){
+        $clerk_pic = Input::file('clerk_pic');
+        $clerk_pic->move('assets/images/profile_pictures',$clerk_pic->getClientOriginalName());
+        $addClerkQuery->fname = $fname;
+        $addClerkQuery->lname = $lname;
+        $addClerkQuery->name = $fname . ' ' . $lname;
+        $addClerkQuery->email = $email;
+        $addClerkQuery->username = $username;
+        $addClerkQuery->password = Hash::make($password);
+        $addClerkQuery->contact = '0'.$contact;
+        $addClerkQuery->address = $address;
+        $addClerkQuery->typeOfUser = 1;
+        $addClerkQuery->profile_path = 'assets/images/profile_pictures/'.$clerk_pic->getClientOriginalName();
+        $addClerkQuery->passsword_text = $pass_text;
+        $addClerkQuery->save();
+      }
+      else{
+        $addClerkQuery->fname = $fname;
+        $addClerkQuery->lname = $lname;
+        $addClerkQuery->name = $fname . ' ' . $lname;
+        $addClerkQuery->email = $email;
+        $addClerkQuery->username = $username;
+        $addClerkQuery->password = Hash::make($password);
+        $addClerkQuery->contact = '0'.$contact;
+        $addClerkQuery->address = $address;
+        $addClerkQuery->typeOfUser = 1;
+        $addClerkQuery->profile_path = 'assets/images/user.png';
+        $addClerkQuery->passsword_text = $pass_text;
+        $addClerkQuery->save();
+      }
+      //add priviliges
 
-          $addPrivilegesforClerk = new ManagePrivileges;
-          $addPrivilegesforClerk->clerk_id = $addClerkQuery->id;
-          $addPrivilegesforClerk->sales_encoding = 0;
-          $addPrivilegesforClerk->account_registration = 0;
-          $addPrivilegesforClerk->add_clerk = 0;
-          $addPrivilegesforClerk->use_inventory = 0;
-          $addPrivilegesforClerk->generate_report = 0;
-          $addPrivilegesforClerk->save();
+      $addPrivilegesforClerk = new ManagePrivileges;
+      $addPrivilegesforClerk->clerk_id = $addClerkQuery->id;
+      $addPrivilegesforClerk->sales_encoding = 0;
+      $addPrivilegesforClerk->account_registration = 0;
+      $addPrivilegesforClerk->add_clerk = 0;
+      $addPrivilegesforClerk->use_inventory = 0;
+      $addPrivilegesforClerk->generate_report = 0;
+      $addPrivilegesforClerk->save();
 
+<<<<<<< HEAD
           return redirect('list_clerk');
         }
         else{
           return view('errors.internetError');
         }
+=======
+      return redirect('list_clerk');
+>>>>>>> 8ac3fd70b23630cf4774fde7d064a748db45796b
     }
     public function changePasswordAccount(Request $requests){
       $id = $requests->specific_id;
@@ -295,8 +297,5 @@ class AdminController extends Controller{
       $title = "Results for ".$cat->category_name." - ".$sub_cat->subcategory_name;
       $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(10);
       return view('admin.listOfItems')->with('items',$items)->with('title',$title);
-    }
-    function check_internet_connection($sCheckHost = 'facebook.com') {
-        return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
     }
   }

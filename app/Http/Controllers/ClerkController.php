@@ -26,8 +26,6 @@ use App\Transactions;
 use App\TransactionDetails;
 use App\Sales;
 use App\SalesDetails;
-use App\Receivings;
-use App\ReceivingsDetails;
 
 
 class ClerkController extends Controller
@@ -271,30 +269,10 @@ class ClerkController extends Controller
           $addTemporaryReceivings->id = $id;
           $addTemporaryReceivings->item_id = $itemId;
           $addTemporaryReceivings->item_name = $itemName;
-          $addTemporaryReceivings->item_quantity = 1;
+          $addTemporaryReceivings->item_quantity = $itemQuantity;
           $addTemporaryReceivings->item_costPrice = $itemPrice;
           $addTemporaryReceivings->clerk_id = Auth::user()->id;
           $addTemporaryReceivings->save();
-        }
-        return redirect('receivings_viewing');
-      }
-      public function removeSales_Item(Request $requests){
-        $id = $requests->id;
-        $temp_id = $requests->temp_id;
-        $removeTemporarySaleItem = TemporarySalesDetails::where('temporary_sales_details_id','=',$id)->delete();
-        $selectTemporarySales = TemporarySalesDetails::where('id','=',$temp_id)->get();
-        if(count($selectTemporarySales) == 0){
-          $removeTemporarySaleItem = TemporarySales::where('id','=',$temp_id)->delete();
-        }
-        return redirect('sales_viewing');
-      }
-      public function removeReceivings_Item(Request $requests){
-        $id = $requests->id;
-        $temp_id = $requests->temp_id;
-        $removeTemporaryReceivingItem = TemporaryReceivingsDetails::where('temporary_receivings_details_id','=',$id)->delete();
-        $selectTemporaryReceivings = TemporaryReceivingsDetails::where('id','=',$temp_id)->get();
-        if(count($selectTemporaryReceivings) == 0){
-          $removeTemporaryReceiving = TemporaryReceivings::where('id','=',$temp_id)->delete();
         }
         return redirect('receivings_viewing');
       }
