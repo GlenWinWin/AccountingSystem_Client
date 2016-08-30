@@ -46,7 +46,7 @@
     			</div>
     			<div class="profile-usertitle">
     				<div class="profile-usertitle-name">
-    					Jason Lopez
+    					{{Auth::user()->name}}
     				</div>
             <div class="profile-usertitle-job">
               Clerk
