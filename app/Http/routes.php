@@ -146,6 +146,8 @@ Route::get('ItemsFilter',[
 Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
 Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);
 
+// function for receivingsAdding
+Route::get('receivings_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporaryReceivings']);
 //function for adding temporary_sales
 Route::post('adding_sales', ['uses' => 'ClerkController@addItemtoSales']);
 

@@ -18,13 +18,17 @@
 		@endif
 	</h1></center>
 <hr>
+<div class="dropdown col-lg-8 col-md-8 col-sm-8">
+
 	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
-	<input type="button" name="name" value="Manage Priviliges" onclick="doMultipleSelectionOfIdsManage()" class="btn btn-primary btn-md open-modal-managePrivilegesMultipleTimes">
+	<input type="button" name="name" value="Manage Priviliges" onclick="doMultipleSelectionOfIdsManage()" class="btn btn-primary btn-md open-modal-managePrivilegesMultipleTimes s5-360">
 	<input type="button" name="name" value="Delete" onclick="doMultipleSelectionOfIdsDelete()" class="btn btn-primary btn-md open-modal-deleteMultipleUsers">
-	<div class="search">
+
+</div>
+	<div class="col-lg-3 col-md-3 col-sm-4 search-small">
 		{!! Form::open(array('action' => 'AdminController@searchClerk' , 'method' => 'get'))!!}
-		<input type="text" id="searchClerk" name="search" required="" placeholder="Search...">
-		<input type="submit" value="Search" class="btn btn-primary btn-md">
+		<input type="text" name="search" required="" placeholder="Search..." class="form-control" style="width:70%;display:inline;">
+	 <input type="submit" value="Search" class="btn btn-primary btn-md" style="width:28%">
 		{!! Form::close()!!}
 	</div>
 	<div class="table-responsive">

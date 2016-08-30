@@ -347,6 +347,36 @@ border-color: #2d4668;
 
   }
 }
+
+.search-small{
+float:right;
+}
+@media(max-width:750px){
+  .search-small{
+    float: none;
+    padding-top: 10px;
+    padding-bottom: -10px;
+  }
+  .dropdown{
+    text-align: center;
+  }
+  .submit-center{
+    text-align: center;
+  }
+}
+@media(max-width:360px){
+  .s5-360{
+    width:44%;
+    text-align: center;
+  }
+}
+@media(max-width:320px){
+  .s5-360{
+    width: 50%;
+    text-align: center;
+    margin-bottom: 3px;
+  }
+}
 .table-responsive{
   overflow-y:auto;
   width:100%;

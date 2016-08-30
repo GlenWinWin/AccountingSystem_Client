@@ -69,7 +69,7 @@
           Sales</a>
           </li>
           <li>
-            <a href="list_clerk" >
+            <a href="receivings_viewing" >
             <i class="fa fa-archive"></i>
           Receiving</a>
           </li>

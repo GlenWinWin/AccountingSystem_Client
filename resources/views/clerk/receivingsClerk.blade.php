@@ -1,31 +1,33 @@
 @extends('layouts.myClerklayout')
 
 @section('title')
-	Sales
+	Receivings
 @stop
 
 @section('body-content')
 <div class="col-lg-9">
 	<center><h1 style="padding-bottom:20px;">
 
-		Sales
+Receivings
 
 	</h1></center>
 <hr>
 
 
-	<div class=" col-lg-8">
+	<div class=" col-lg-12">
 
-		<div class="search" style="float:none;text-align:center;">
+		<div class="col-lg-9 col-md-10 col-sm-10 col-xs-12" style="padding-left:0px;padding-right:0px;padding-bottom:5px;">
 
       {!! Form::open(array('action' => 'ClerkController@addItemtoSales' , 'method' => 'post' , 'id' => 'formAddItemtoSales'))!!}
-			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:70%;margin-bottom: 0px;display:inline;">
+			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:74%;margin-bottom: 0px;display:inline;">
 			<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
-			<input type="submit" onclick="" name="name" value="Add" class="btn btn-primary btn-md" style="width:25%;">
+			<input type="submit" onclick="" name="name" value="Add" class="btn btn-primary btn-md" style="width:24%;">
       {!! Form::close()!!}
 
-
 		</div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 submit-center" style="float:right;padding-bottom:10px;padding-left:0px;">
+      <input type="submit" name="name" value="Submit" class="btn btn-primary btn-md">
+    </div>
 	<div class="table-responsive">
 	<table class="table" id="tab1">
 		<thead class="thead">
@@ -38,7 +40,7 @@
 			</tr>
 		</thead>
 		<tbody>
-      @foreach($temporary_sales as $sale)
+      @foreach($temporary_receivings as $sale)
 			<tr>
 				<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" style="padding:8px 12px;" onclick="delete_Clerk_Distributor_Item()" value="Cancel"></td>
 				<td style="padding-top:15px">{{$sale->item_name}}</td>
@@ -50,47 +52,6 @@
 		</tbody>
 	</table>
 	</div>
-
-		</div>
-		<div class="col-lg-4 price" >
-			<div class="table-responsive">
-			<table class="table" id="tab1">
-				<thead>
-					<tr >
-						<th>Item Name</th>
-						<th>Quantity</th>
-						<th>Sub Total</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php $totalSales = 0;?>
-					@foreach($temporary_sales as $sale)
-					<tr>
-						<td>{{$sale->item_name}}</td>
-						<td>x{{$sale->item_quantity}}</td>
-						<td>{{ $sale->item_costPrice * $sale->item_quantity }}</td>
-					</tr>
-					<?php $totalSales += $sale->item_costPrice * $sale->item_quantity; ?>
-					@endforeach
-					<tr>
-						<td style="font-weight:bold;font-size:15px;">Total</td>
-						<td></td>
-						<td>PHP {{$totalSales}}</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td>
-							{!! Form::open(array('action' => 'ClerkController@salesEncoding' , 'method' => 'post'))!!}
-							<input type="submit" onclick=" return confirm('Are you sure you about the sales, this cannot be undone?')" class="btn btn-md btn-primary" style="padding:8px 12px;" value="Submit">
-							<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
-							{!! Form::close()!!}
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			</div>
 
 		</div>
 </div>

@@ -91,6 +91,7 @@ class ClerkController extends Controller
         }
         return view('clerk.salesClerk')->with('temporary_sales',$selectTemporarySales)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
       }
+
       public function viewTemporaryReceivings(){
         $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
         $salesEncoding = 0;
@@ -110,7 +111,7 @@ class ClerkController extends Controller
         foreach ($selectTemporaryReceivings as $key => $value) {
           $existing_id = $value->id;
         }
-        return view('clerk.salesClerk')->with('temporary_receivings',$selectTemporaryReceivings)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
+        return view('clerk.receivingsClerk')->with('temporary_receivings',$selectTemporaryReceivings)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
       }
       public function salesEncoding(Request $requests){
           $selectTemporarySales = TemporarySalesDetails::where('id','=',$requests->hiddenID)->get();
