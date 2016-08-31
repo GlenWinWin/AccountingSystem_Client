@@ -91,7 +91,22 @@ class ClerkController extends Controller
         }
         return view('clerk.salesClerk')->with('temporary_sales',$selectTemporarySales)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
       }
-
+      public function DistributorReg(){
+        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+        $salesEncoding = 0;
+        $accountRegistration = 0;
+        $addClerk = 0;
+        $useInventory = 0;
+        $generateReport = 0;
+        foreach($privileges as $priv){
+          $salesEncoding = $priv->sales_encoding;
+          $accountRegistration = $priv->account_registration;
+          $addClerk = $priv->add_clerk;
+          $useInventory = $priv->use_inventory;
+          $generateReport = $priv->generate_report;
+        }
+          return view('clerk.distributorReg')->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
+      }
       public function viewTemporaryReceivings(){
         $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
         $salesEncoding = 0;
