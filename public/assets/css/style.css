@@ -358,6 +358,25 @@ border-color: #2d4668;
 .modal-title{
   color:#000;
 }
+.alert-modal {
+  text-align: center;
+  padding: 0!important;
+  padding: 5px;
+}
+
+.alert-modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.alert-modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
 /*edit profile*/
 .control-label{
    text-align: right;

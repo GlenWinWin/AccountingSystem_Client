@@ -141,7 +141,8 @@ Route::get('ItemsFilter',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@filterbySubCategory'
 ]);
-
+// function for add distributor
+Route::get('Distributor_Registration', ['middleware' => 'auth','uses' => 'ClerkController@DistributorReg']);
 //function for sales encoding
 Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
 Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);
