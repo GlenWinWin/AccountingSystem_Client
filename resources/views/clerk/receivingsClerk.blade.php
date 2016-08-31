@@ -42,14 +42,17 @@ Receivings
 			</tr>
 		</thead>
 		<tbody>
+			<?php $counter=1;?>
       @foreach($temporary_receivings as $receiving)
 			<tr>
 				<td><input type="button" onclick="removeReceivingItem({{$receiving->temporary_receivings_details_id}},{{$receiving->id}})" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModalDeleteTemporaryReceivings" style="padding:8px 12px;" value="Cancel"/></td>
 				<td style="padding-top:15px">{{$receiving->item_name}}</td>
 				<td style="padding-top:15px">PHP. {{$receiving->item_costPrice}}</td>
-				<td><input type="number" name="name" id="quantityField" min="1" value="{{$receiving->item_quantity}}" class="value" style="width:70px"></td>
-        <td style="padding-top:15px;font-weight:bold;">{{ $receiving->item_costPrice * $receiving->item_quantity }}</td>
+				<td><input type="number" name="name" id="quantityField{{$counter}}" min="1" value="{{$receiving->item_quantity}}" style="width:70px" onchange="updateQuantityReceivings({{$counter}},{{$receiving->temporary_receivings_details_id}})"></td>
+				<input type="hidden" id="priceField{{$counter}}" value="{{$receiving->item_costPrice}}">
+        <td style="padding-top:15px;font-weight:bold;" id="subTotal{{$counter}}">{{ $receiving->item_costPrice * $receiving->item_quantity }}</td>
 			</tr>
+			<?php $counter++;?>
       @endforeach
 		</tbody>
 	</table>

@@ -58,7 +58,10 @@ Route::get('login', function () {
 	}
 });
 
-Route::get('search/autocomplete', 'ClerkController@autocomplete');
+Route::get('search/autocomplete',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@autocomplete'
+]);
 
 Route::get('logout',[
   'uses' => 'UserController@logout'
@@ -162,7 +165,11 @@ Route::get('/dropdown', [
 
 Route::get('/updateTemporaryQuantitySales', [
   'middleware' => 'auth',
-  'uses' => 'ClerkController@selectSubCategory'
+  'uses' => 'ClerkController@updateTemporarySales'
+]);
+Route::get('/updateTemporaryQuantityReceivings', [
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@updateTemporaryReceivings'
 ]);
 //function for removing items in sales or receivingsAdding
 

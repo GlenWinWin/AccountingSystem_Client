@@ -68,8 +68,9 @@ class ClerkController extends Controller
       	{
       	    $results[] = [ 'value' => $item->item_name];
       	}
-      return response()->json($results);
+        return response()->json($results);
       }
+
       public function viewTemporarySales(){
         $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
         $salesEncoding = 0;
@@ -528,6 +529,16 @@ class ClerkController extends Controller
         $id = Input::get('id');
         $sub_categories = SubCategory::where('category_id','=',$id)->get();
         return $sub_categories;
+      }
+      public function updateTemporarySales(){
+        $id = Input::get('id');
+        $quantity = Input::get('quantity');
+        $updateTemporarySalesById = TemporarySalesDetails::where('temporary_sales_details_id','=',$id)->update(['item_quantity'=>$quantity]);
+      }
+      public function updateTemporaryReceivings(){
+        $id = Input::get('id');
+        $quantity = Input::get('quantity');
+        $updateTemporarySalesById = TemporaryReceivingsDetails::where('temporary_receivings_details_id','=',$id)->update(['item_quantity'=>$quantity]);
       }
       public function createRandomPassword() {
 

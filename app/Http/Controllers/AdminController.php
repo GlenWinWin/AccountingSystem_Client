@@ -133,7 +133,7 @@ class AdminController extends Controller{
       $addPrivilegesforClerk->save();
 
       return redirect('list_clerk');
-    }  
+    }
     public function changePasswordAccount(Request $requests){
       $id = $requests->specific_id;
       $newPassword = $requests->new_password;
@@ -259,20 +259,6 @@ class AdminController extends Controller{
 
         return $pass;
 
-    }
-    public function autocomplete(){
-    	$term = Input::get('term');
-
-      $searchresultsforClerk = DB::table('users')->where('users.typeOfUser',1)->where('users.name','LIKE','%'.$term.'%')->groupBy('manage_privileges.clerk_id')
-  ->join('manage_privileges', 'manage_privileges.clerk_id', '=', 'users.id')->orderBy('manage_privileges.clerk_id', 'asc')->paginate(10);
-
-      $results = array();
-
-      foreach ($searchresultsforClerk as $query)
-      {
-          $results[] = [ 'id' => $query->id, 'value' => 'gg' ];
-      }
-      return Response::json($results);
     }
     public function filterbyCategory(Request $requests){
       $category = $requests->cat;

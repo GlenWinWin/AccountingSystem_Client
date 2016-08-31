@@ -197,6 +197,33 @@ function updateQuantity(counter,id){
   document.getElementById("subTotal"+counter).innerHTML = cost * quantity;
   document.getElementById("saleQuantity"+counter).innerHTML = "x" + quantity;
   document.getElementById("saleSubTotal"+counter).innerHTML = cost * quantity;
+  var dataString = "id="+id+"&quantity="+quantity;
+  var totalSales = 0;
+  $.ajax({
+    type: "GET",
+    url: "updateTemporaryQuantitySales",
+    dataType:"json",
+    data: dataString
+  });
+  var sales = +document.getElementById("quantitySale").value;
+  for(var i=1; i<=sales;i++){
+    var cost = document.getElementById("priceField"+i).value;
+    var quantity = +document.getElementById("quantityField"+i).value;
 
-  
+    totalSales += (cost * quantity);
+  }
+  document.getElementById("totalSalesID").innerHTML = "PHP " + totalSales;
+}
+function updateQuantityReceivings(counter,id){
+  var cost = document.getElementById("priceField"+counter).value;
+  var quantity = +document.getElementById("quantityField"+counter).value;
+  document.getElementById("subTotal"+counter).innerHTML = cost * quantity;
+
+  var dataString = "id="+id+"&quantity="+quantity;
+  $.ajax({
+    type: "GET",
+    url: "updateTemporaryQuantityReceivings",
+    dataType:"json",
+    data: dataString
+  });
 }
