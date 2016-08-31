@@ -44,7 +44,7 @@ Receivings
 		<tbody>
       @foreach($temporary_receivings as $receiving)
 			<tr>
-				<td><a href="remove_temp_receiving_item?id={{$receiving->temporary_receivings_details_id}}&temp_id={{$receiving->id}}" class="btn btn-sm btn-primary " style="padding:8px 12px;">Cancel</a></td>
+				<td><input type="button" onclick="removeReceivingItem({{$receiving->temporary_receivings_details_id}},{{$receiving->id}})" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModalDeleteTemporaryReceivings" style="padding:8px 12px;" value="Cancel"/></td>
 				<td style="padding-top:15px">{{$receiving->item_name}}</td>
 				<td style="padding-top:15px">PHP. {{$receiving->item_costPrice}}</td>
 				<td><input type="number" name="name" id="quantityField" min="1" value="{{$receiving->item_quantity}}" class="value" style="width:70px"></td>
@@ -57,5 +57,22 @@ Receivings
 	{!! Form::close()!!}
 		</div>
 </div>
-	
+<div id="myModalDeleteTemporaryReceivings" class="modal fade" role="dialog">
+		<div class="modal-dialog  modal-sm">
+				<div class="modal-content">
+						<div class="modal-header" style="color:#b3cccc";>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Are you sure you want to remove this from the receivings?</h4>
+						</div>
+						<div class="modal-footer">
+							{!! Form::open(array('action' => 'ClerkController@removeReceivings_Item' , 'method' => 'get'))!!}
+							<input type="hidden" name="id" id="temp_receiving_id">
+							<input type="hidden" name="temp_id" id="temp_id">
+							 <button type="submit" class="btn btn-primary">Yes</button>
+							 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+		 					{!! Form::close()!!}
+						</div>
+				</div>
+		</div>
+</div>
 @stop

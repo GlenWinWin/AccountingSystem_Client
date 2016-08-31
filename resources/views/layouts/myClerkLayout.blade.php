@@ -56,16 +56,14 @@
     		<ul class="nav">
             <li>
               <a href="home_clerk">
-              <i class="fa fa-group"></i>
+              <i class="fa fa-user"></i>
               Clerks</a>
             </li>
-          @if($ar == 1)
-            <li >
+            <li>
               <a href="distributor_list">
               <i class="fa fa-users"></i>
               Distributors</a>
             </li>
-          @endif
           @if($ui == 1)
           <li>
             <a href="inventory">

@@ -183,3 +183,11 @@ function checkIfselectedCategory(){
     document.getElementById('addItemBtn').disabled = false;
   }
 }
+function removeReceivingItem(temporary_receiving_id,temp_id){
+    $("input[id=temp_receiving_id]").val(temporary_receiving_id);
+    $("input[id=temp_id]").val(temp_id);
+}
+function removeSaleItem(temporary_sale_id,temp_id){
+    $("input[id=temp_sales_id]").val(temporary_sale_id);
+    $("input[id=temp_id]").val(temp_id);
+}

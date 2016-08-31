@@ -57,23 +57,4 @@
 		</center>
 
 	</div>
-	<!-- Modal delete -->
-	<!-- Modal HTML -->
-	<div id="myModal-delete" class="modal fade">
-	    <div class="modal-dialog  modal-sm">
-	        <div class="modal-content">
-	            <div class="modal-header" style="color:#b3cccc";>
-	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	            <h4 class="modal-title">Are you sure you want to delete this distributor?</h4>
-	            </div>
-	            <div class="modal-footer">
-								{!! Form::open(array('action' => 'AdminController@removeDistributor' , 'method' => 'post'))!!}
-				        <input type="hidden" name="the_id" id="specific_id">
-	     <button type="submit" class="btn btn-primary">Yes</button>
-	     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-			 {!! Form::close()!!}
-	            </div>
-	        </div>
-	    </div>
-	</div>
 	@stop

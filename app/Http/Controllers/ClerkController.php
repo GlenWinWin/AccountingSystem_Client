@@ -535,4 +535,24 @@ class ClerkController extends Controller
           return $pass;
 
       }
+      public function removeSales_Item(Request $requests){
+         $id = $requests->id;
+         $temp_id = $requests->temp_id;
+         $removeTemporarySaleItem = TemporarySalesDetails::where('temporary_sales_details_id','=',$id)->delete();
+         $selectTemporarySales = TemporarySalesDetails::where('id','=',$temp_id)->get();
+         if(count($selectTemporarySales) == 0){
+           $removeTemporarySaleItem = TemporarySales::where('id','=',$temp_id)->delete();
+         }
+         return redirect('sales_viewing');
+       }
+       public function removeReceivings_Item(Request $requests){
+         $id = $requests->id;
+         $temp_id = $requests->temp_id;
+         $removeTemporaryReceivingItem = TemporaryReceivingsDetails::where('temporary_receivings_details_id','=',$id)->delete();
+         $selectTemporaryReceivings = TemporaryReceivingsDetails::where('id','=',$temp_id)->get();
+         if(count($selectTemporaryReceivings) == 0){
+           $removeTemporaryReceiving = TemporaryReceivings::where('id','=',$temp_id)->delete();
+         }
+         return redirect('receivings_viewing');
+       }
 }
