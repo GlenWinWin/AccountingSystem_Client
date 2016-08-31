@@ -191,3 +191,12 @@ function removeSaleItem(temporary_sale_id,temp_id){
     $("input[id=temp_sales_id]").val(temporary_sale_id);
     $("input[id=temp_id]").val(temp_id);
 }
+function updateQuantity(counter,id){
+  var cost = document.getElementById("priceField"+counter).value;
+  var quantity = +document.getElementById("quantityField"+counter).value;
+  document.getElementById("subTotal"+counter).innerHTML = cost * quantity;
+  document.getElementById("saleQuantity"+counter).innerHTML = "x" + quantity;
+  document.getElementById("saleSubTotal"+counter).innerHTML = cost * quantity;
+
+  
+}

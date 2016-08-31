@@ -159,6 +159,10 @@ Route::get('/dropdown', [
   'uses' => 'ClerkController@selectSubCategory'
 ]);
 
+Route::get('/updateTemporaryQuantitySales', [
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@selectSubCategory'
+]);
 //function for removing items in sales or receivingsAdding
 
 Route::get('remove_temp_sale_item', [

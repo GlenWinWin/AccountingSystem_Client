@@ -221,12 +221,10 @@ class ClerkController extends Controller
         $selectItems = Items::where('item_name','=',$requests->itemName)->get();
         $itemId = 0;
         $itemName = "";
-        $itemQuantity = 0;
         $itemPrice = 0;
         foreach($selectItems as $item){
           $itemId = $item->item_id;
           $itemName = $item->item_name;
-          $itemQuantity = $item->item_quantity;
           $itemPrice = $item->item_costPrice;
         }
         $selectTemporarySales = TemporarySalesDetails::where('item_name','=',$itemName)->get();
@@ -235,7 +233,7 @@ class ClerkController extends Controller
           $addTemporarySales->id = $id;
           $addTemporarySales->item_id = $itemId;
           $addTemporarySales->item_name = $itemName;
-          $addTemporarySales->item_quantity = $itemQuantity;
+          $addTemporarySales->item_quantity = 1;
           $addTemporarySales->item_costPrice = $itemPrice;
           $addTemporarySales->clerk_id = Auth::user()->id;
           $addTemporarySales->save();
@@ -255,12 +253,10 @@ class ClerkController extends Controller
         $selectItems = Items::where('item_name','=',$requests->itemName)->get();
         $itemId = 0;
         $itemName = "";
-        $itemQuantity = 0;
         $itemPrice = 0;
         foreach($selectItems as $item){
           $itemId = $item->item_id;
           $itemName = $item->item_name;
-          $itemQuantity = $item->item_quantity;
           $itemPrice = $item->item_costPrice;
         }
         $selectTemporaryReceivings = TemporaryReceivingsDetails::where('item_name','=',$itemName)->get();
@@ -269,7 +265,7 @@ class ClerkController extends Controller
           $addTemporaryReceivings->id = $id;
           $addTemporaryReceivings->item_id = $itemId;
           $addTemporaryReceivings->item_name = $itemName;
-          $addTemporaryReceivings->item_quantity = $itemQuantity;
+          $addTemporaryReceivings->item_quantity = 1;
           $addTemporaryReceivings->item_costPrice = $itemPrice;
           $addTemporaryReceivings->clerk_id = Auth::user()->id;
           $addTemporaryReceivings->save();
