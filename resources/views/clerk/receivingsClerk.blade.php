@@ -57,4 +57,5 @@ Receivings
 	{!! Form::close()!!}
 		</div>
 </div>
+	
 @stop

@@ -132,16 +132,8 @@ class AdminController extends Controller{
       $addPrivilegesforClerk->generate_report = 0;
       $addPrivilegesforClerk->save();
 
-<<<<<<< HEAD
-          return redirect('list_clerk');
-        }
-        else{
-          return view('errors.internetError');
-        }
-=======
       return redirect('list_clerk');
->>>>>>> 8ac3fd70b23630cf4774fde7d064a748db45796b
-    }
+    }  
     public function changePasswordAccount(Request $requests){
       $id = $requests->specific_id;
       $newPassword = $requests->new_password;
