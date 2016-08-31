@@ -84,5 +84,63 @@
   </div>
 </form>
 </center>
+<button class="btn btn-primary" data-toggle="modal" data-target="#invalidPassword">
+	Invalid Password
+</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#clerkAdd">
+	Add Clerk
+</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#distributorAdd">
+	Add Distributor
+</button>
 </div>
+
+
+
+
+  <!-- Modal for Invalid Password-->
+  <div class="modal fade alert-modal" id="invalidPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog alert-modal-dialog">
+      <div class="modal-content" style="padding:50px;">
+          <center>
+						<img src="assets/images/x.png" alt="" style="height:150px;padding-bottom:20px;"/>
+						<h4 class="modal-title" id="myModalLabel"><b>Invalid Username/Password</b></h4></center>
+          <center>  <p style="font-size:18px">The email address or password that you've entered doesn't match any account!</p>  </center>
+            <center><button type="button" class="btn btn-primary btn-md edit-btn" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.Modal for Invalid Password -->
+	<!-- Modal for Add CLerk-->
+  <div class="modal fade alert-modal" id="clerkAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog alert-modal-dialog">
+      <div class="modal-content" style="padding:50px;">
+          <center>
+						<img src="assets/images/check.png" alt="" style="height:150px;padding-bottom:20px;"/>
+						<h4 class="modal-title" id="myModalLabel"><b>New Clerk Added</b></h4></center>
+          <center>  <p style="font-size:18px">A new clerk has been successfully added on the list. </p>  </center>
+            <center><button type="button" class="btn btn-primary btn-md edit-btn" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.Modal for Add CLerk -->
+	<!-- Modal for Add Distributor-->
+	<div class="modal fade alert-modal" id="distributorAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog alert-modal-dialog">
+			<div class="modal-content" style="padding:50px;">
+					<center>
+						<img src="assets/images/check.png" alt="" style="height:150px;padding-bottom:20px;"/>
+						<h4 class="modal-title" id="myModalLabel"><b>New Distributor Added</b></h4></center>
+					<center>  <p style="font-size:18px">A new Distributor has been successfully added on the list. </p>  </center>
+						<center><button type="button" class="btn btn-primary btn-md edit-btn" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.Modal for Add Distributor -->
 @stop
