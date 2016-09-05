@@ -2,7 +2,67 @@
 .col-xs-15 {
     width: 20%;
     float: left;
+    padding-left: 5px;
 }
+.col-xs-15>img{
+  height:170px;
+}
+.genealogy-main>img{
+  height:200px;
+}
+.vertical_line{
+  height:100px;
+  width:3px;
+  background:#444;
+}
+
+.hr-genealogy{
+  margin-top: 0px;
+margin-bottom: 20px;
+border: 0;
+border-top: 3px solid #444;
+width: 80%;
+}
+
+
+.col-xs-15>i{
+  font-size:40px;
+  margin-top:-5px;
+  color:#444;
+}
+@media(max-width:800px){
+  .col-xs-15>img{
+    height:120px;
+  }
+  .genealogy-main>img{
+    height:150px;
+  }
+  .vertical_line{
+    height:60px;
+  }
+  .col-xs-15>i{
+    font-size:20px;
+    margin-top:-5px;
+    color:#444;
+  }
+}
+@media(max-width:500px){
+  .col-xs-15>img{
+    height:60px;
+  }
+  .genealogy-main>img{
+    height:80px;
+  }
+  .vertical_line{
+    height:40px;
+  }
+  .col-xs-15>i{
+    font-size:20px;
+    margin-top:-5px;
+    color:#444;
+  }
+}
+
 .checkbox1{
   display: block;
 width: 100%;

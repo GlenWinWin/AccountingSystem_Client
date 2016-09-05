@@ -58,6 +58,11 @@ Route::get('login', function () {
 	}
 });
 
+//login and logout functions
+Route::get('try', function () {
+		return view('distributor.try');
+
+});
 Route::get('search/autocomplete', 'ClerkController@autocomplete');
 
 Route::get('logout',[
