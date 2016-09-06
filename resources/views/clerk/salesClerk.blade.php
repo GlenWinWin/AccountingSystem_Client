@@ -17,12 +17,12 @@
 	<div class=" col-lg-8">
 		<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12" >
 			<div class="checkbox" >
-	  <label class="checkbox1"><input type="checkbox" value="">New Distributor?</label>
+	  <label class="checkbox1"><input type="checkbox" id="newDistributor" value="0" onclick="changeValue()">New Distributor?</label>
 		</div>
 		</div>
 		<div class="col-lg-7 col-md-6 col-sm-6 col-xs-12 distributor-sales">
-			<div class="checkbox" >
-		<label style="padding-left:0px;">Distributor ID: &emsp;<input type="text" name="name" value="" class="form-control checkbox2" style="display:inline;"></label>
+			<div class="checkbox" id="divNewDistributor">
+		<label style="padding-left:0px;">Distributor ID: &emsp;<input type="text" name="name" oninput="copyValueToHiddenFields()" class="form-control checkbox2" id="inputDistributorID" style="display:inline;" required=""></label>
 		</div>
 		</div>
 		<div style="float:none;text-align:center;">
@@ -93,14 +93,17 @@
 						<td id="totalSalesID">PHP {{$totalSales}}</td>
 					</tr>
 					<tr>
+						{!! Form::open(array('action' => 'ClerkController@salesEncoding' , 'method' => 'post'))!!}
 						<td></td>
 						<td></td>
 						<td>
-							{!! Form::open(array('action' => 'ClerkController@salesEncoding' , 'method' => 'post'))!!}
-							<input type="submit" onclick=" return confirm('Are you sure you about the sales, this cannot be undone?')" class="btn btn-md btn-primary" style="padding:8px 12px;" value="Submit">
+							<input type="submit" onclick="return confirm('Are you sure you about the sales, this cannot be undone?')" class="btn btn-md btn-primary" style="padding:8px 12px;" id="btnSales" value="Submit">
 							<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
-							{!! Form::close()!!}
+							<input type="hidden" name="referralID" id="idReferral">
+							<input type="hidden" name="distributorID" id="hiddenDistributorID">
+							<input type="hidden" name="checkIfSelectedNewDistributor" id="checkBoxValue" value="0">
 						</td>
+						{!! Form::close()!!}
 					</tr>
 				</tbody>
 			</table>
@@ -127,4 +130,11 @@
 				</div>
 		</div>
 </div>
+@stop
+@section('javascript_part')
+<script type="text/javascript">
+	$(document).ready(function(){
+		document.getElementById('btnSales').disabled = true;
+	});
+</script>
 @stop

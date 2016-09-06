@@ -10,6 +10,9 @@
 
 @section('body-content')
 <div class="col-lg-9">
+	@if(Session::has('flash_message'))
+	<input type="hidden" value="{{Session::get('flash_message')}}" id="newClerk">
+	@endif
 	<center><h1 style="padding-bottom:20px;">
 		@if(isset($title))
 			{{$title}}
@@ -85,13 +88,13 @@
 							<div class="form-group">
                        <label class="col-lg-4 control-label">First name:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="fname" required="">
+                         <input class="form-control" type="text" name="fname" required="" onkeydown="return alphaOnly(event);">
                        </div>
               </div>
 							<div class="form-group">
                        <label class="col-lg-4 control-label">Last name:</label>
                        <div class="col-lg-8">
-                         <input class="form-control" type="text" name="lname" required="">
+                         <input class="form-control" type="text" name="lname" required="" onkeydown="return alphaOnly(event);">
                        </div>
               </div>
               <div class="form-group">
@@ -100,7 +103,7 @@
                          <font size="4px">+63</font>
                        </div>
 											 <div class="col-lg-4" style="margin-left:-55px">
-                         <input class="form-control" type="text" placeholder="9358217701" id="contactField" name="contact" required="" pattern="[9][0-9]{9}" title="Valid is 9358217701" maxlength="10" style="font-size:18px">
+                         <input class="form-control" type="text" id="contactField" name="contact" required="" pattern="[9][0-9]{9}" title="Valid is 9482468123" maxlength="10" style="font-size:18px">
                        </div>
               </div>
               <div class="form-group">
@@ -127,4 +130,21 @@
 		</div>
 </div>
 <!--  modal add clerk-->
+
+
+<!-- Modal for Add CLerk-->
+ <div class="modal fade alert-modal" id="clerkAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog alert-modal-dialog">
+      <div class="modal-content" style="padding:50px;">
+          <center>
+						<img src="assets/images/check.png" alt="" style="height:150px;padding-bottom:20px;"/>
+						<h4 class="modal-title" id="myModalLabel"><b>New Clerk Added</b></h4></center>
+          <center>  <p style="font-size:18px">A new clerk has been successfully added on the list. </p>  </center>
+            <center><button type="button" class="btn btn-primary btn-md edit-btn" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.Modal for Add CLerk -->
 @stop

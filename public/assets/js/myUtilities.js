@@ -203,7 +203,8 @@ function updateQuantity(counter,id){
     type: "GET",
     url: "updateTemporaryQuantitySales",
     dataType:"json",
-    data: dataString
+    data: dataString,
+    cache: false
   });
   var sales = +document.getElementById("quantitySale").value;
   for(var i=1; i<=sales;i++){
@@ -224,6 +225,34 @@ function updateQuantityReceivings(counter,id){
     type: "GET",
     url: "updateTemporaryQuantityReceivings",
     dataType:"json",
-    data: dataString
+    data: dataString,
+    cache: false
   });
+}
+function changeValue(){
+  var inputDistributorID = document.getElementById("inputDistributorID").value;
+  if($("#newDistributor").is(':checked')){
+    $("input[id=checkBoxValue]").val("1");
+    $("input[id=idReferral]").val(inputDistributorID);
+  }
+  else{
+    $("input[id=checkBoxValue]").val("0");
+  }
+}
+function copyValueToHiddenFields(){
+  var inputDistributorID = document.getElementById("inputDistributorID").value;
+  if(inputDistributorID != ''){
+    document.getElementById('btnSales').disabled = false;
+    $("input[id=hiddenDistributorID]").val(inputDistributorID);
+    $("input[id=idReferral]").val(inputDistributorID);
+  }
+  else{
+    document.getElementById('btnSales').disabled = true;
+    $("input[id=hiddenDistributorID]").val("");
+    $("input[id=idReferral]").val("");
+  }
+}
+function alphaOnly(event) {
+  var key = event.keyCode;
+  return ((key >= 65 && key <= 90) || key == 8);
 }

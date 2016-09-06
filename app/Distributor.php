@@ -21,6 +21,9 @@ class Distributor extends Model
     'typeOfUser',
     'distributor_id',
     'connectCounter',
+    'monthCounter',
+    'passsword_text',
+    'userID',
   ];
 
   public $timestamps = false;

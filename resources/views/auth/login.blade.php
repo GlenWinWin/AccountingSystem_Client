@@ -20,12 +20,8 @@
     </head>
 
     <body>
-      @if( (Session::has('flash_message')) && (Session::get('flash_message') != 'has-error') )
-    <div class="alert alert-{{ Session::get('type_message') }} alert-dismissible fade in" id="viewAlert" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-        </button>
-        <strong>{{ strtoupper(Session::get('type_message') == 'danger' ? 'error' : Session::get('type_message')) }} : </strong> {!! Session::get('flash_message') !!}
-    </div>
+      @if(Session::has('flash_message'))
+      <input type="hidden" value="{{Session::get('flash_message')}}" id="errorLogin">
 	   @endif
                             {!! Form::open(array('route' => 'user.store'))!!}
                             <!-- Top content -->
@@ -73,7 +69,21 @@
                             </div>
                                 {!! Form::close()!!}
 
-
+                                <!-- Modal for Invalid Password-->
+                                <div class="modal fade alert-modal" id="invalidPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog alert-modal-dialog">
+                                    <div class="modal-content" style="padding:50px;">
+                                        <center>
+                                          <img src="assets/images/x.png" alt="" style="height:150px;padding-bottom:20px;"/>
+                                          <h4 class="modal-title" id="myModalLabel"><b>Invalid Username/Password</b></h4></center>
+                                        <center>  <p style="font-size:18px">The email address or password that you've entered doesn't match any account!</p>  </center>
+                                          <center><button type="button" class="btn btn-primary btn-md edit-btn" data-dismiss="modal" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.Modal for Invalid Password -->
 
         <!-- Javascript -->
         <script type="text/javascript" src="assets/js/jquery.min.js"></script>
@@ -88,7 +98,9 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#viewAlert").fadeTo(3000, 500).fadeOut(500, function(){
-		});
+		var errorLogin = document.getElementById("errorLogin").value;
+    if(errorLogin != '' || errorLogin != null){
+      $("#invalidPassword").modal();
+    }
 	});
-	</script>
+</script>

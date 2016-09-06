@@ -32,19 +32,19 @@ Edit Profile
   <div class="form-group">
            <label class="col-lg-3 control-label">First name:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text" required="" name="fname" value="{{Auth::user()->fname}}">
+             <input class="form-control" type="text" required="" name="fname" value="{{Auth::user()->fname}}" onkeydown="return alphaOnly(event);">
            </div>
   </div>
   <div class="form-group">
            <label class="col-lg-3 control-label">Last name:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text" required="" name="lname" value="{{Auth::user()->lname}}">
+             <input class="form-control" type="text" required="" name="lname" value="{{Auth::user()->lname}}" onkeydown="return alphaOnly(event);">
            </div>
   </div>
   <div class="form-group">
            <label class="col-lg-3 control-label">Contact Number:</label>
            <div class="col-lg-9">
-             <input class="form-control" type="text" name="contact" required="" pattern="[0][9][0-9]{9}" title="Valid is 09358217701" maxlength="11" value="{{Auth::user()->contact}}">
+             <input class="form-control" type="text" name="contact" required="" pattern="[0][9][0-9]{9}" title="Valid is 09482468123" maxlength="11" value="{{Auth::user()->contact}}">
            </div>
   </div>
   <div class="form-group">

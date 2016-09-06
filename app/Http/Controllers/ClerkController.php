@@ -9,6 +9,7 @@ use Auth;
 use Hash;
 use DB;
 use Input;
+use Session;
 use Mail;
 use App\Http\Requests;
 use App\Clerk;
@@ -55,7 +56,9 @@ class ClerkController extends Controller
     }
   }
       public function accountRegistration(Request $requests){
-        $deleteAllTemporarySales = TemporarySales::query()->truncate();
+        //"DIST-".str_pad(2,7,"0",STR_PAD_LEFT)
+
+        // $deleteAllTemporarySales = TemporarySales::query()->truncate();
       }
       public function autocomplete(Request $request){
       	$term = $request->term;
@@ -92,7 +95,7 @@ class ClerkController extends Controller
         }
         return view('clerk.salesClerk')->with('temporary_sales',$selectTemporarySales)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
       }
-      public function DistributorReg(){
+      public function DistributorReg($transactionID,$referralID){
         $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
         $salesEncoding = 0;
         $accountRegistration = 0;
@@ -106,7 +109,7 @@ class ClerkController extends Controller
           $useInventory = $priv->use_inventory;
           $generateReport = $priv->generate_report;
         }
-          return view('clerk.distributorReg')->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
+          return view('clerk.distributorReg')->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('transID',$transactionID)->with('referralID',$referralID);
       }
       public function viewTemporaryReceivings(){
         $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
@@ -130,6 +133,7 @@ class ClerkController extends Controller
         return view('clerk.receivingsClerk')->with('temporary_receivings',$selectTemporaryReceivings)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
       }
       public function salesEncoding(Request $requests){
+        $ifTrue =  ($requests->checkIfSelectedNewDistributor == "0")  ? 'false':'true';
           $selectTemporarySales = TemporarySalesDetails::where('id','=',$requests->hiddenID)->get();
 
           $addNewTransaction = new Transactions;
@@ -166,22 +170,22 @@ class ClerkController extends Controller
             $addSalesDetails->sales_price = $transaction_details->item_costPrice;
             $addSalesDetails->sales_subtotal = ($transaction_details->item_quantity * $transaction_details->item_costPrice);
             $addSalesDetails->save();
-            $selectItem = Items::where('item_id','=',$transaction_details->item_id)->get();
-            $itemQuantity = 0;
-            foreach($selectItem as $item){
-              $itemQuantity = $item->item_quantity;
-            }
-            $updateQuantityforItems = Items::where('item_id','=',$transaction_details->item_id)->update(['item_quantity'=> ($itemQuantity - $transaction_details->item_quantity)]);
+            $updateQuantityforItems = Items::where('item_id','=',$transaction_details->item_id)->decrement('item_quantity',$transaction_details->item_quantity);
           }
           $deleteTemporarySales = TemporarySales::where('id','=',$requests->hiddenID)->delete();
           $deleteTemporarySalesDetails = TemporarySalesDetails::where('id','=',$requests->hiddenID)->delete();
+
+        if($ifTrue == 'false'){
           return redirect('inventory');
+        }
+        else{
+          return $this->DistributorReg($transactID,$requests->referralID);
+        }
       }
       public function receivingsAdding(Request $requests){
           $selectTemporaryReceivings = TemporaryReceivingsDetails::where('id','=',$requests->hiddenID)->get();
 
           $addNewTransaction = new Transactions;
-          $addNewTransaction->distributor_id = isset($requests->distributorID) ? $requests->distributorID : 2;
           $addNewTransaction->typeOfTransaction = 1;
           $addNewTransaction->save();
 
@@ -213,12 +217,8 @@ class ClerkController extends Controller
             $addReceivingsDetails->receive_price = $transaction_details->item_costPrice;
             $addReceivingsDetails->receive_subtotal = ($transaction_details->item_quantity * $transaction_details->item_costPrice);
             $addReceivingsDetails->save();
-            $selectItem = Items::where('item_id','=',$transaction_details->item_id)->get();
-            $itemQuantity = 0;
-            foreach($selectItem as $item){
-              $itemQuantity = $item->item_quantity;
-            }
-            $updateQuantityforItems = Items::where('item_id','=',$transaction_details->item_id)->update(['item_quantity'=> ($itemQuantity + $transaction_details->item_quantity)]);
+
+            $updateQuantityforItems = Items::where('item_id','=',$transaction_details->item_id)->increment('item_quantity',$transaction_details->item_quantity);
           }
           $deleteTemporaryReceivings = TemporaryReceivings::where('id','=',$requests->hiddenID)->delete();
           $deleteTemporaryReceivingsDetails = TemporaryReceivingsDetails::where('id','=',$requests->hiddenID)->delete();
@@ -289,8 +289,8 @@ class ClerkController extends Controller
         return redirect('receivings_viewing');
       }
       public function addClerk(Request $requests){
-        $fname = $requests->fname;
-        $lname = $requests->lname;
+        $fname = ucfirst($requests->fname);
+        $lname = ucfirst($requests->lname);
         $username = 'c_'.substr(strtolower($fname),0,1).strtolower($lname);
         $password = $this->createRandomPassword();
         $contact = $requests->contact;
@@ -347,6 +347,50 @@ class ClerkController extends Controller
         });
 
         return redirect('home_clerk');
+      }
+      public function addDistributor(Request $requests){
+        $referralID = $requests->referralID;
+        $fname = $requests->fname;
+        $lname = $requests->lname;
+        $username = 'd_'.substr(strtolower($fname),0,1).strtolower($lname);
+        $password = $this->createRandomPassword();
+        $contact = $requests->contact;
+        $email = $requests->email;
+        $address = $requests->address;
+        $pass_text = Crypt::encrypt($password);
+        $addDistributorQuery = new Distributor;
+
+        $addDistributorQuery->fname = ucfirst($fname);
+        $addDistributorQuery->lname = ucfirst($lname);
+        $addDistributorQuery->name = $fname . ' ' . $lname;
+        $addDistributorQuery->email = $email;
+        $addDistributorQuery->username = $username;
+        $addDistributorQuery->password = Hash::make($password);
+        $addDistributorQuery->contact = '0'.$contact;
+        $addDistributorQuery->distributor_id = $referralID;
+        $addDistributorQuery->address = $address;
+        $addDistributorQuery->channelPosition = "1";
+        $addDistributorQuery->typeOfUser = 2;
+        $addDistributorQuery->profile_path = 'assets/images/user.png';
+        $addDistributorQuery->passsword_text = $pass_text;
+        $addDistributorQuery->save();
+
+        $userIDGenerated  = "DIST-".str_pad($addDistributorQuery->id,7,"0",STR_PAD_LEFT);
+
+        $updateUSERID = Distributor::where('id','=',$addDistributorQuery->id)->update(['userID'=>$userIDGenerated]);
+
+        $updateconnectCounter = Distributor::where('userID','LIKE','%'.$referralID.'%')->increment('connectCounter');
+        $updateMonthCounter = Distributor::where('userID','LIKE','%'.$referralID.'%')->increment('monthCounter');
+
+        $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+
+        Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+          $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+        });
+
+        Session::flash('flash_message','success');
+
+        return redirect('distributor_list');
       }
       public function addItem(Request $requests){
         echo 'Category = ' . $requests->category.'<br>';

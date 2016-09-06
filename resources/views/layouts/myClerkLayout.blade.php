@@ -107,11 +107,13 @@
     @yield('body-content')
   </body>
 </html>
+
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/sidebar.js"></script>
   <script src="assets/js/myUtilities.js"></script>
   <script type="text/javascript" src="assets/js/ui.js"></script>
+  @yield('javascript_part')
 
   <!--  modal-->
 	<script type="text/javascript">

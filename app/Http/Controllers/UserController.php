@@ -105,8 +105,8 @@ class UserController extends Controller
         $newPic = Input::file('new_dp');
         $newPic->move('assets/images/profile_pictures',$newPic->getClientOriginalName());
         $id = Auth::user()->id;
-        $fname = $requests->fname;
-        $lname = $requests->lname;
+        $fname = ucfirst($requests->fname);
+        $lname = ucfirst($requests->lname);
         $address = $requests->address;
         $contact = $requests->contact;
         $email = $requests->email;
@@ -129,8 +129,8 @@ class UserController extends Controller
       }
       else{
         $id = Auth::user()->id;
-        $fname = $requests->fname;
-        $lname = $requests->lname;
+        $fname = ucfirst($requests->fname);
+        $lname = ucfirst($requests->lname);
         $address = $requests->address;
         $contact = $requests->contact;
         $email = $requests->email;
