@@ -33,6 +33,7 @@ Genealogy
                   </div>
     </center>
     <div class="table-responsive" style="padding-top:20px;">
+      @if(count($downlines) > 0)
     <table class="table" id="tab1">
       <thead class="thead">
         <tr>
@@ -40,20 +41,20 @@ Genealogy
           <th>Name</th>
           <th>Email</th>
           <th>Downlines</th>
-
         </tr>
       </thead>
       <tbody>
-
+        @foreach($downlines as $user)
         <tr>
-          <th scope="row">12345</th>
-          <td>Jason Lopez</td>
-          <td>jeysown@gmail.com</td>
-          <td>2</td>
+          <th scope="row">{{$user->userID}}</th>
+          <td>{{$user->name}}</td>
+          <td>{{$user->email}}</td>
+          <td>{{$user->connectCounter}}</td>
         </tr>
-
+        @endforeach
       </tbody>
     </table>
+    @endif
     </div>
     <center>
 

@@ -37,6 +37,6 @@ class DistributorController extends Controller
         }
         $i++;
       }
-      return view('distributor.genealogy')->with('image1',$image1)->with('image2',$image2)->with('image3',$image3)->with('image4',$image4)->with('image5',$image5);
+      return view('distributor.genealogy')->with('image1',$image1)->with('image2',$image2)->with('image3',$image3)->with('image4',$image4)->with('image5',$image5)->with('downlines',$selectDownlines);
     }
 }
