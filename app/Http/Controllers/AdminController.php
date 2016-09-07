@@ -86,7 +86,7 @@ class AdminController extends Controller{
       $address = $requests->address;
       $addClerkQuery = new Clerk;
       $pass_text = Crypt::encrypt($password);
-      $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+      $data = array( 'email' => $email, 'name' => ucfirst($fname) . ' ' . ucfirst($lname), 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
 
       Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
         $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
@@ -94,9 +94,9 @@ class AdminController extends Controller{
       if(Input::hasFile('clerk_pic')){
         $clerk_pic = Input::file('clerk_pic');
         $clerk_pic->move('assets/images/profile_pictures',$clerk_pic->getClientOriginalName());
-        $addClerkQuery->fname = $fname;
-        $addClerkQuery->lname = $lname;
-        $addClerkQuery->name = $fname . ' ' . $lname;
+        $addClerkQuery->fname = ucfirst($fname);
+        $addClerkQuery->lname = ucfirst($lname);
+        $addClerkQuery->name = ucfirst($fname) . ' ' . ucfirst($lname);
         $addClerkQuery->email = $email;
         $addClerkQuery->username = $username;
         $addClerkQuery->password = Hash::make($password);
@@ -108,9 +108,9 @@ class AdminController extends Controller{
         $addClerkQuery->save();
       }
       else{
-        $addClerkQuery->fname = $fname;
-        $addClerkQuery->lname = $lname;
-        $addClerkQuery->name = $fname . ' ' . $lname;
+        $addClerkQuery->fname = ucfirst($fname);
+        $addClerkQuery->lname = ucfirst($lname);
+        $addClerkQuery->name = ucfirst($fname) . ' ' . ucfirst($lname);
         $addClerkQuery->email = $email;
         $addClerkQuery->username = $username;
         $addClerkQuery->password = Hash::make($password);

@@ -297,6 +297,13 @@ class ClerkController extends Controller
         $email = $requests->email;
         $address = $requests->address;
         $pass_text = Crypt::encrypt($password);
+
+        $data = array( 'email' => $email, 'name' => ucfirst($fname) . ' ' . ucfirst($lname), 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+
+        Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+          $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+        });
+
         $addClerkQuery = new Clerk;
 
         if(Input::hasFile('clerk_pic')){
@@ -340,12 +347,6 @@ class ClerkController extends Controller
         $addPrivilegesforClerk->generate_report = 0;
         $addPrivilegesforClerk->save();
 
-        $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
-
-        Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
-          $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
-        });
-
         return redirect('home_clerk');
       }
       public function addDistributor(Request $requests){
@@ -358,11 +359,17 @@ class ClerkController extends Controller
         $email = $requests->email;
         $address = $requests->address;
         $pass_text = Crypt::encrypt($password);
-        $addDistributorQuery = new Distributor;
 
+        $data = array( 'email' => $email, 'name' => ucfirst($fname) . ' ' . ucfirst($lname), 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+
+        Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+          $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+        });
+
+        $addDistributorQuery = new Distributor;
         $addDistributorQuery->fname = ucfirst($fname);
         $addDistributorQuery->lname = ucfirst($lname);
-        $addDistributorQuery->name = $fname . ' ' . $lname;
+        $addDistributorQuery->name = ucfirst($fname) . ' ' . ucfirst($lname);
         $addDistributorQuery->email = $email;
         $addDistributorQuery->username = $username;
         $addDistributorQuery->password = Hash::make($password);
@@ -381,12 +388,6 @@ class ClerkController extends Controller
 
         $updateconnectCounter = Distributor::where('userID','LIKE','%'.$referralID.'%')->increment('connectCounter');
         $updateMonthCounter = Distributor::where('userID','LIKE','%'.$referralID.'%')->increment('monthCounter');
-
-        // $data = array( 'email' => $email, 'name' => $fname . ' ' . $lname, 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
-        //
-        // Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
-        //   $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
-        // });
 
         Session::flash('flash_message','success');
 
