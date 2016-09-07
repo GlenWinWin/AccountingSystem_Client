@@ -57,7 +57,7 @@
     				Genealogy </a>
     			</li>
     			<li >
-    				<a href="list_distributor">
+    				<a href="view_transactions">
     				<i class="fa fa-line-chart"></i>
     			Transactions</a>
     			</li>

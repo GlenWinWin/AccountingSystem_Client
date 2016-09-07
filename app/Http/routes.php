@@ -69,6 +69,10 @@ Route::get('genealogy', [
   'middleware' => 'auth',
   'uses' => 'DistributorController@genealogy']);
 
+  Route::get('view_transactions', [
+    'middleware' => 'auth',
+    'uses' => 'DistributorController@viewTransactions']);
+
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
