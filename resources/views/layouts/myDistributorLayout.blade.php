@@ -25,7 +25,7 @@
     		<div id="navbar" class="navbar-collapse collapse ">
     			<ul class="nav navbar-nav navbar-right">
     				<li class="dropdown">
-    											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+    											<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
     											<ul class="dropdown-menu">
     												<li><a href="edit_profile">Edit Profile</a></li>
     												<li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
@@ -44,7 +44,7 @@
     			</div>
     			<div class="profile-usertitle">
     				<div class="profile-usertitle-name">
-    					Jason Lopez
+    					{{ Auth::user()->name }}
     				</div>
             <div class="profile-usertitle-job">
     					Channel Builder
@@ -52,7 +52,7 @@
     			</div>
     		<ul class="nav">
     			<li>
-    				<a href="list_clerk" >
+    				<a href="genealogy" >
     				<i class="fa fa-users"></i>
     				Genealogy </a>
     			</li>

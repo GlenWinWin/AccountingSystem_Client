@@ -47,7 +47,7 @@ class UserController extends Controller
               return redirect('home_clerk');
             }
             else if(Auth::user()->typeOfUser == 2){
-
+              return redirect('genealogy');
             }
           }
           else{
@@ -154,8 +154,12 @@ class UserController extends Controller
       if(Auth::user()->typeOfUser == 0){
         return redirect('list_clerk');
       }
-      else{
-        return redirect('home_clerk');
+      else if(Auth::user()->typeOfUser == 1){
+          return redirect('home_clerk');
       }
+      else{
+          return redirect('genealogy');
+      }
+
     }
 }

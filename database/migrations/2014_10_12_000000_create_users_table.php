@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('contact',11);
             $table->integer('typeOfUser');
             $table->integer('channelPosition');
-            $table->string('distributor_id');
+            $table->integer('distributor_id');
             $table->integer('connectCounter');
             $table->integer('monthCounter');
             $table->double('totalSalesMonth');
