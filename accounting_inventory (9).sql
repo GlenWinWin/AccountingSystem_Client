@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2016 at 08:03 AM
+-- Generation Time: Sep 07, 2016 at 09:44 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_category`, `item_sub_category`, `item_name`, `item_quantity`, `item_costPrice`, `item_subcostPrice`, `item_sellingPrice`) VALUES
-(1, '1', '2', 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 10, 27.5, 30, 100),
+(1, '1', '2', 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 9, 27.5, 30, 100),
 (2, '1', '1', 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 9, 180, 207, 280),
 (3, '1', '3', 'GIDEON PORTABLE EYEWASH - YELLOW', 9, 4500, 5175, 14000);
 
@@ -177,20 +177,21 @@ CREATE TABLE IF NOT EXISTS `receiving_details` (
 
 CREATE TABLE IF NOT EXISTS `sales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `distributor_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `distributor_id` int(11) NOT NULL,
   `clerk_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `trans_ID` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `sales`
 --
 
 INSERT INTO `sales` (`id`, `distributor_id`, `clerk_id`, `created_at`, `trans_ID`, `updated_at`) VALUES
-(1, 'DIST-0000002', 3, '2016-09-04 05:15:49', 'TRANS-0000000001', '2016-09-04 05:15:49');
+(1, 2, 3, '2016-09-04 05:15:49', 'TRANS-0000000001', '2016-09-04 05:15:49'),
+(2, 2, 3, '2016-09-05 22:31:53', 'TRANS-0000000002', '2016-09-05 22:31:53');
 
 -- --------------------------------------------------------
 
@@ -207,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `sales_details` (
   `sales_subtotal` double NOT NULL,
   `sales_id` int(11) NOT NULL,
   PRIMARY KEY (`sale_detail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `sales_details`
@@ -215,7 +216,8 @@ CREATE TABLE IF NOT EXISTS `sales_details` (
 
 INSERT INTO `sales_details` (`sale_detail_id`, `item_id`, `item_name`, `sales_quantity`, `sales_price`, `sales_subtotal`, `sales_id`) VALUES
 (1, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 1, 180, 180, 1),
-(2, 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 4500, 4500, 1);
+(2, 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 4500, 4500, 1),
+(3, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 1, 27.5, 27.5, 2);
 
 -- --------------------------------------------------------
 
@@ -301,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `temporary_sales` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 -- --------------------------------------------------------
 
@@ -318,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `temporary_sales_details` (
   `item_costPrice` double NOT NULL,
   `clerk_id` int(11) NOT NULL,
   PRIMARY KEY (`temporary_sales_details_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
@@ -328,20 +330,21 @@ CREATE TABLE IF NOT EXISTS `temporary_sales_details` (
 
 CREATE TABLE IF NOT EXISTS `transactions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `distributor_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `distributor_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `transactID` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `typeOfTransaction` int(11) NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `transactions`
 --
 
 INSERT INTO `transactions` (`id`, `distributor_id`, `created_at`, `transactID`, `typeOfTransaction`, `updated_at`) VALUES
-(1, 'DIST-0000002', '2016-09-04 05:15:49', 'TRANS-0000000001', 0, '2016-09-04 05:15:49');
+(1, 2, '2016-09-04 05:15:49', 'TRANS-0000000001', 0, '2016-09-04 05:15:49'),
+(2, 2, '2016-09-05 22:31:52', 'TRANS-0000000002', 0, '2016-09-05 22:31:53');
 
 -- --------------------------------------------------------
 
@@ -364,7 +367,8 @@ CREATE TABLE IF NOT EXISTS `transaction_details` (
 
 INSERT INTO `transaction_details` (`transaction_id`, `item_id`, `item_name`, `transaction_quantity`, `transaction_costPrice`, `transaction_subtotal`) VALUES
 ('TRANS-0000000001', 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 1, 180, 180),
-('TRANS-0000000001', 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 4500, 4500);
+('TRANS-0000000001', 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 4500, 4500),
+('TRANS-0000000002', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 1, 27.5, 27.5);
 
 -- --------------------------------------------------------
 
@@ -384,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `contact` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `typeOfUser` int(11) NOT NULL,
   `channelPosition` int(11) NOT NULL,
-  `distributor_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `distributor_id` int(11) NOT NULL,
   `connectCounter` int(11) NOT NULL,
   `monthCounter` int(11) NOT NULL,
   `totalSalesMonth` double NOT NULL,
@@ -399,19 +403,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `userID` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `name`, `username`, `email`, `password`, `address`, `contact`, `typeOfUser`, `channelPosition`, `distributor_id`, `connectCounter`, `monthCounter`, `totalSalesMonth`, `totalSales`, `totalNewMemberMonth`, `totalNewMember`, `profile_path`, `remember_token`, `created_at`, `updated_at`, `passsword_text`, `userID`) VALUES
-(1, 'Glenwin', 'Bernabe', 'Glenwin Bernabe', 'admin', 'glenwinbernabe@gmail.com', '$2y$10$rPwvV.3D3Ip4uTzC6DIT4u17WqO7LJtjM0vk6LKhe/woaUQbHkucu', 'tondo', '09358217701', 0, 0, '0', 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/admin.png', '2He1oZoyKoLhMNMAM8zwPW3J9kEm618UWxJs2GNck4BP7RqOqUmzvl7Rjj9d', NULL, '2016-08-20 05:57:57', 'eyJpdiI6Ijd5SzhKZUpEV1Q3ck9yR2tLUXpuMEE9PSIsInZhbHVlIjoiTTNncHV2a2lvOEFcL0dDdWdhMGptXC93PT0iLCJtYWMiOiJkYWM3NDUzYmNmZTAyNDU1MzljMWU5NTUwMGYzNDNlZjEzNzRiZTJjYjc0NDQ5ZjM0MmI5NTE4YjRkOGVhZjQyIn0=', ''),
-(2, 'Frank', 'Moses', 'Frank Moses', 'd_fmoses', 'frankmoses@gmail.com', '$2y$10$i.QJfD061U8mc4xcFxr5zeZR/hHbgUZrdHfaA2wSThemzu.CEBre2', 'Dublin,Ireland', '09358827769', 2, 1, '0', 1, 1, 0, 30000, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6InZzdjN5V3h3K1dVeHIra1RcL3R4VjNRPT0iLCJ2YWx1ZSI6InA5aWpLcFljTWV5MG03VEl5c0xVYVE9PSIsIm1hYyI6ImZhZTYxMGUxOGZjOGE1ZDE1ODFhODJiZjQ0ZWNiMWY2NmFmOGI1OTlkNWRjMDM3M2Y1OGRkYTVlMjk0NmNiMjQifQ==', 'DIST-0000002\n'),
-(3, 'Marco', 'Barrera', 'Marco Barrera', 'c_mbarrera', 'marcobarrera@gmail.com', '$2y$10$hssQ.8assSnhk9CWlcAOK.5DN7XHlnrWFYLddXfhAM3d4ZfvVRgxG', 'Boxing St. Suntukan Manila', '09488867723', 1, 0, '0', 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/prof.jpg', 'bLjBLNDAEsIcN8aoCPcd055tYt4T0ieGv8nu51WnfM4SPLC0xVHwjMQAsFlw', NULL, '2016-08-20 06:02:45', 'eyJpdiI6InJSRlFLRWZUS2Y2bGh6RmRnM3pPM2c9PSIsInZhbHVlIjoiVXpWRVNYTlh0TXpCXC9aSUJpUUVOMmc9PSIsIm1hYyI6IjE5MDBjM2JhOWM0MGQzYmFiY2NhZmU1M2QyNGYyZjZmZjRiMzM2ZjViMTZkZGQwOTVlMjFjZjg5M2YxOTg0MmEifQ==', ''),
-(4, 'Freedy', 'Morales', 'Freedy Morales', 'c_frmorales', 'freedy@gmail.com', '$2y$10$OdPte6gcgzcbyJ1UmhNWfe5nGjxJtlUM/s4vkW9aqnFF/AcBoI6xq', 'Free Place', '09352347890', 1, 0, '0', 0, 0, 0, 0, 0, 0, 'assets/images/user.png', '32FiyhmZPClx7nocCzWfswov5Gp4J7znxbd7a6S7KcZ5egfMdkuaLBGC7xOH', NULL, NULL, 'eyJpdiI6IlFtd0NSaVRJeEVWTlRiZENhOVJtNGc9PSIsInZhbHVlIjoiMHRHSE5EK0FsbUVaQjlcLzRTUU9pMUE9PSIsIm1hYyI6IjFmMWNjYjE0M2FhMThlNzQ3NWM4NGJlM2NkYTllNmFmMThjYTZiZTVlMzJhZTM5ZmNiMWE3Y2I0ZTA1MWU4OTAifQ==', ''),
-(10, 'Dazzle', 'Turbo', 'Dazzle Turbo', 'c_dturbo', 'dazzlingturbo@gmail.com', '$2y$10$382V93bw5nkNXwTCC0l2KuEKdk/pr.xytSZoP/gCemfFlk9jW9prK', 'address', '09358217789', 1, 0, '0', 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6Ik4zYyswNlYrRzlqU09Wd1liUlBidVE9PSIsInZhbHVlIjoiOFUyZmh6aEYxbk9cLzYrNjJySG5GOUE9PSIsIm1hYyI6IjUwYzAwODVlMTUzYzcxNGMxZTYxNWRkNTI5MjJlMmMzMWY2MzhkOGE1MjY5MWJjNjk5YjA3YjQxNTIzZDU2ZGYifQ==', ''),
-(33, 'Geronima', 'Gonzalo', 'geronima gonzalo', 'd_ggonzalo', 'gemmapldt@yahoo.com', '$2y$10$nJ1j8cnFYnSuOzoM8I.pX.D6IdWBBHQ9ikdG1h.N2GmneuLuUOShm', 'tondo', '09081698150', 2, 1, 'DIST-0000002', 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6ImNISFBIQ3RnV0tXcHdMMzFXV0UxaXc9PSIsInZhbHVlIjoiZ3VHMkZ5N2NLWlN6UEJsWGZDaXpmZz09IiwibWFjIjoiNTRhMmRhNjMxZjg0MTE3NjNmNzk3NGQ4YjhiYzY0N2I1ZGVkNTY3NGY5ZDgwZmUyMWIxYTU1NTMyNzgwNmE0ZSJ9', 'DIST-0000033');
+(1, 'Glenwin', 'Bernabe', 'Glenwin Bernabe', 'admin', 'glenwinbernabe@gmail.com', '$2y$10$rPwvV.3D3Ip4uTzC6DIT4u17WqO7LJtjM0vk6LKhe/woaUQbHkucu', 'tondo', '09358217701', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/admin.png', 'GJd0Pv1wcP479Moz6bB3R4XGgTqHOdJoOaJGo6HYwMTfzd19lAxrGdHkHMJl', NULL, '2016-08-20 05:57:57', 'eyJpdiI6Ijd5SzhKZUpEV1Q3ck9yR2tLUXpuMEE9PSIsInZhbHVlIjoiTTNncHV2a2lvOEFcL0dDdWdhMGptXC93PT0iLCJtYWMiOiJkYWM3NDUzYmNmZTAyNDU1MzljMWU5NTUwMGYzNDNlZjEzNzRiZTJjYjc0NDQ5ZjM0MmI5NTE4YjRkOGVhZjQyIn0=', ''),
+(2, 'Frank', 'Moses', 'Frank Moses', 'd_fmoses', 'frankmoses@gmail.com', '$2y$10$i.QJfD061U8mc4xcFxr5zeZR/hHbgUZrdHfaA2wSThemzu.CEBre2', 'Dublin,Ireland', '09358827769', 2, 1, 0, 2, 2, 0, 30000, 0, 0, 'assets/images/profile_pictures/red.jpg', 'fCjusa7sVQKpBcVOQUenaEmKFUTpT7RFMYhW988LUkQUmZpcpjoJvnbvwYv6', NULL, '2016-09-06 22:42:34', 'eyJpdiI6InZzdjN5V3h3K1dVeHIra1RcL3R4VjNRPT0iLCJ2YWx1ZSI6InA5aWpLcFljTWV5MG03VEl5c0xVYVE9PSIsIm1hYyI6ImZhZTYxMGUxOGZjOGE1ZDE1ODFhODJiZjQ0ZWNiMWY2NmFmOGI1OTlkNWRjMDM3M2Y1OGRkYTVlMjk0NmNiMjQifQ==', 'DIST-0000002\n'),
+(3, 'Marco', 'Barrera', 'Marco Barrera', 'c_mbarrera', 'marcobarrera@gmail.com', '$2y$10$hssQ.8assSnhk9CWlcAOK.5DN7XHlnrWFYLddXfhAM3d4ZfvVRgxG', 'Boxing St. Suntukan Manila', '09488867723', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/prof.jpg', 'E7oiMY8DFi8C5LsseLGqRyULowLXWvMSKDyyjqmsCUSrvtlRM6JniVixmmdH', NULL, '2016-08-20 06:02:45', 'eyJpdiI6InJSRlFLRWZUS2Y2bGh6RmRnM3pPM2c9PSIsInZhbHVlIjoiVXpWRVNYTlh0TXpCXC9aSUJpUUVOMmc9PSIsIm1hYyI6IjE5MDBjM2JhOWM0MGQzYmFiY2NhZmU1M2QyNGYyZjZmZjRiMzM2ZjViMTZkZGQwOTVlMjFjZjg5M2YxOTg0MmEifQ==', ''),
+(4, 'Freedy', 'Morales', 'Freedy Morales', 'c_frmorales', 'freedy@gmail.com', '$2y$10$OdPte6gcgzcbyJ1UmhNWfe5nGjxJtlUM/s4vkW9aqnFF/AcBoI6xq', 'Free Place', '09352347890', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', '32FiyhmZPClx7nocCzWfswov5Gp4J7znxbd7a6S7KcZ5egfMdkuaLBGC7xOH', NULL, NULL, 'eyJpdiI6IlFtd0NSaVRJeEVWTlRiZENhOVJtNGc9PSIsInZhbHVlIjoiMHRHSE5EK0FsbUVaQjlcLzRTUU9pMUE9PSIsIm1hYyI6IjFmMWNjYjE0M2FhMThlNzQ3NWM4NGJlM2NkYTllNmFmMThjYTZiZTVlMzJhZTM5ZmNiMWE3Y2I0ZTA1MWU4OTAifQ==', ''),
+(10, 'Dazzle', 'Turbo', 'Dazzle Turbo', 'c_dturbo', 'dazzlingturbo@gmail.com', '$2y$10$382V93bw5nkNXwTCC0l2KuEKdk/pr.xytSZoP/gCemfFlk9jW9prK', 'address', '09358217789', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6Ik4zYyswNlYrRzlqU09Wd1liUlBidVE9PSIsInZhbHVlIjoiOFUyZmh6aEYxbk9cLzYrNjJySG5GOUE9PSIsIm1hYyI6IjUwYzAwODVlMTUzYzcxNGMxZTYxNWRkNTI5MjJlMmMzMWY2MzhkOGE1MjY5MWJjNjk5YjA3YjQxNTIzZDU2ZGYifQ==', ''),
+(33, 'Geronima', 'Gonzalo', 'geronima gonzalo', 'd_ggonzalo', 'gemmapldt@yahoo.com', '$2y$10$nJ1j8cnFYnSuOzoM8I.pX.D6IdWBBHQ9ikdG1h.N2GmneuLuUOShm', 'tondo', '09081698150', 2, 1, 2, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6ImNISFBIQ3RnV0tXcHdMMzFXV0UxaXc9PSIsInZhbHVlIjoiZ3VHMkZ5N2NLWlN6UEJsWGZDaXpmZz09IiwibWFjIjoiNTRhMmRhNjMxZjg0MTE3NjNmNzk3NGQ4YjhiYzY0N2I1ZGVkNTY3NGY5ZDgwZmUyMWIxYTU1NTMyNzgwNmE0ZSJ9', 'DIST-0000033'),
+(34, 'Jason', 'Lopez', 'Jason Lopez', 'd_jlopez', 'jeysownlopez@gmail.com', '$2y$10$hAPHN4wEgLsRQG1s83iaEOmepTGlxnxzUutMlx2rkfnPE2Eydh4PK', 'bacood', '09059242742', 2, 1, 2, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, NULL, NULL, 'eyJpdiI6ImRCbHQwdytFK1Z0TEE4eTlxVjFoTXc9PSIsInZhbHVlIjoiY1hZcm1hSTZ4UkMxNWZDcTB3Y2k1Zz09IiwibWFjIjoiNDcxMDkxYjBmMTk4MzM5N2YzYjM3YzE3Njc3Zjg4YTFiZTVhYjMwOWJjNzBiMDJlODBkNmFhNjYyZWUyMWMzNSJ9', 'DIST-0000034');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
