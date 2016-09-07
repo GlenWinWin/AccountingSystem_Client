@@ -130,7 +130,7 @@ border-color: #204d74;
 }
   </style>
   <body style="padding:0;">
-    <center><h3><b>September 7, 2016</b></h3></center>
+    <center><h3><b><?php echo date('F j,Y')?></b></h3></center>
     <div class="container">
 
 <div class="row">
@@ -158,7 +158,7 @@ border-color: #204d74;
     <div class="cover-container">
   <div class="inner cover">
 
-      <center><h1>Greetings  $name ! </h1>  </center>
+      <center><h1>Greetings  {{$name}} ! </h1>  </center>
     <p style="text-align:justify;">
       &emsp;  &emsp;Details Details Details Details Details Details Details Details Details
       Details Details Details Details Details Details Details Details Details Details
@@ -179,8 +179,8 @@ border-color: #204d74;
 
     <div class="col-lg-12">
       <center>
-        <h4>Your Username: username </h4>
-          <h4>Your Temporary Password: password </h4>
+        <h4>Your Username: {{$username}} </h4>
+          <h4>Your Temporary Password: {{$password}} </h4>
       <a href="http://localhost:8000/login" class="btn btn-primary btn-lg">Log In</a><center>
     </div>
 </div>

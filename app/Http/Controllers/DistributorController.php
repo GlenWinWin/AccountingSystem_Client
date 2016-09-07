@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Distributor;
-use App\User;
+use App\Transactions;
 use Auth;
 use DB;
 
@@ -40,6 +40,8 @@ class DistributorController extends Controller
       return view('distributor.genealogy')->with('image1',$image1)->with('image2',$image2)->with('image3',$image3)->with('image4',$image4)->with('image5',$image5)->with('downlines',$selectDownlines);
     }
     public function viewTransactions(){
-      return view('distributor.viewTransactions');
+      $allTransactions = Transactions::where('distributor_id','=',Auth::user()->id)->paginate(10);
+
+      return view('distributor.viewTransactions')->with('transactions',$allTransactions);
     }
 }
