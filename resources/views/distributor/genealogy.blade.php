@@ -1,4 +1,4 @@
-@extends('layouts.mylayout')
+@extends('layouts.myDistributorLayout')
 @section('title')
 Genealogy
 @stop
