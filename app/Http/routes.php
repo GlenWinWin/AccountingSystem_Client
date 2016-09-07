@@ -57,9 +57,6 @@ Route::get('login', function () {
 		return view('auth.login');
 	}
 });
-Route::get('try', function(){
-  return view('email.sendClerkEmail');
-});
 Route::get('search/autocomplete',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@autocomplete'
