@@ -63,10 +63,9 @@ Route::get('search/autocomplete',[
   'uses' => 'ClerkController@autocomplete'
 ]);
 //login and logout functions
-Route::get('try', function () {
-		return view('distributor.try');
-
-});
+Route::get('genealogy', [
+  'middleware' => 'auth',
+  'uses' => 'DistributorController@genealogy']);
 
 Route::get('logout',[
   'uses' => 'UserController@logout'
