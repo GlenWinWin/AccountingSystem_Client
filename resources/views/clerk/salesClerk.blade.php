@@ -82,7 +82,7 @@
 					<tr>
 						<td>{{$sale->item_name}}</td>
 						<td id="saleQuantity{{$counter}}">x{{$sale->item_quantity}}</td>
-						<td id="saleSubTotal{{$counter}}">{{ $sale->item_costPrice * $sale->item_quantity }}</td>
+						<td id="saleSubTotal{{$counter}}">PHP. {{ $sale->item_costPrice * $sale->item_quantity }}</td>
 					</tr>
 					<?php $totalSales += $sale->item_costPrice * $sale->item_quantity; ?>
 					<?php $counter++;?>
