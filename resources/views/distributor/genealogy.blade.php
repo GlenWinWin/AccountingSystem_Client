@@ -32,6 +32,34 @@ Genealogy
                   <img src="{{$image5}}" alt="" style="width:100%;"/>
                   </div>
     </center>
+    <div class="table-responsive" style="padding-top:20px;">
+    <table class="table" id="tab1">
+      <thead class="thead">
+        <tr>
+          <th>Distributor ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Downlines</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <th scope="row">12345</th>
+          <td>Jason Lopez</td>
+          <td>jeysown@gmail.com</td>
+          <td>2</td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div>
+    <center>
+
+    </center>
+
+  </div>
   </div>
 
 @stop
