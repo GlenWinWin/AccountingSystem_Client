@@ -6,8 +6,14 @@ Genealogy
 @section('body-content')
   <div class="col-lg-9">
     <center>
+      <div class="form-title-row">
+          <h1>Genealogy</h1>
+          <hr>
+      </div>
+    </center>
+    <center>
       <div class="col-xs-12 genealogy-main">
-        <img src="{{ Auth::user()->profile_path }}" alt="" style="padding-top:20px;"/>
+        <img src="{{ Auth::user()->profile_path }}" alt=""/>
         <div class="vertical_line"></div>
         <hr class="hr-genealogy" style="margin-bottom:0px;">
     </div>

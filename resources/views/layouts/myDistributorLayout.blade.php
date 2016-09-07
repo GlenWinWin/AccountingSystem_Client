@@ -52,7 +52,7 @@
     			</div>
     		<ul class="nav">
     			<li>
-    				<a href="genealogy" >
+    				<a href="genealogy">
     				<i class="fa fa-users"></i>
     				Genealogy </a>
     			</li>
@@ -94,3 +94,12 @@
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/sidebar.js"></script>
   <script src="assets/js/myUtilities.js"></script>
+  <!-- active-sidebar -->
+<script type="text/javascript">
+  var url = window.location;
+
+  $('ul.nav a[href="'+url+'"]').parent().addClass('active-sidebar');
+  $('ul.nav a').filter(function(){
+    return this.href == url;
+  }).parent().addClass('active-sidebar');
+</script>
