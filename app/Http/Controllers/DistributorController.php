@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Distributor;
 use App\Transactions;
+use App\TransactionDetails;
 use Auth;
 use DB;
+use Input;
 
 class DistributorController extends Controller
 {
@@ -43,5 +45,10 @@ class DistributorController extends Controller
       $allTransactions = Transactions::where('distributor_id','=',Auth::user()->id)->paginate(10);
 
       return view('distributor.viewTransactions')->with('transactions',$allTransactions);
+    }
+    public function selectDetailedTransaction(){
+      $transactID = Input::get('transactID');
+      $transaction_details = TransactionDetails::where('transaction_id','=',$transactID)->get();
+      return $transaction_details;
     }
 }

@@ -50,7 +50,7 @@ Route::get('login', function () {
       return redirect('home_clerk');
     }
     else if(Auth::user()->typeOfUser == 2){
-      return 'Distributor is here';
+      return redirect('genealogy');
     }
 	}
 	else{
@@ -168,6 +168,11 @@ Route::post('adding_receivings', ['uses' => 'ClerkController@addItemtoReceivings
 Route::get('/dropdown', [
   'middleware' => 'auth',
   'uses' => 'ClerkController@selectSubCategory'
+]);
+
+Route::get('/selectDetailedTransaction', [
+  'middleware' => 'auth',
+  'uses' => 'DistributorController@selectDetailedTransaction'
 ]);
 
 Route::get('/updateTemporaryQuantitySales', [

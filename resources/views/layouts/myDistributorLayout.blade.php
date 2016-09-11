@@ -103,3 +103,39 @@
     return this.href == url;
   }).parent().addClass('active-sidebar');
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+  for(var counter=1; counter<=2;counter++){
+    $('#viewDetailTransaction'+counter).click(function(){
+      $.get("{{ url('selectDetailedTransaction')}}?transactID="+$(this).val(),
+          function(data) {
+            var i=1;
+            var totalSales =0;
+            $.each(data, function(index, element) {
+                $('#transactionDetails').append("<tr>"+
+                "<td>"+element.item_name+"</td>"+
+                "<td>"+element.transaction_quantity+"</td>"+
+                "<td> PHP "+element.transaction_costPrice+"</td>"+
+                "<td> PHP "+element.transaction_subtotal+"</td>"+
+                "</tr>");
+                totalSales += element.transaction_subtotal;
+                i++;
+            });
+            if(i > 8){
+              $('#modalBody').style.height = '370px';
+              $('#modalBody').style.overflowY = 'auto';
+            }
+            document.getElementById("totalSalesPerTransaction").innerHTML = 'Total Sales : PHP ' + totalSales;
+      });
+    });
+  }
+  $('#modalCancel').click(function(){
+    $('#transactionDetails').empty();
+    document.getElementById("totalSalesPerTransaction").innerHTML = '';
+  });
+  $('#modalCancelUpper').click(function(){
+    $('#transactionDetails').empty();
+    document.getElementById("totalSalesPerTransaction").innerHTML = '';
+  });
+});
+</script>
