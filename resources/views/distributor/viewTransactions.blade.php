@@ -19,7 +19,6 @@ Transactions
         <tr>
           <th>Time and Date</th>
           <th>Transaction Code</th>
-          <th>Distributor ID</th>
           <th>View Details</th>
         </tr>
       </thead>
@@ -29,7 +28,6 @@ Transactions
         <tr>
           <td>{{$transaction->created_at}}</td>
           <th scope="row">{{$transaction->transactID}}</th>
-          <td>{{$transaction->distributor_id}}</td>
           <td><button type="button" value="{{$transaction->transactID}}" id="viewDetailTransaction{{$counter}}" class="btn btn-primary" data-toggle="modal" data-target="#myModalViewDetails" name="button">Details</button></td>
         </tr>
         <?php $counter++;?>
