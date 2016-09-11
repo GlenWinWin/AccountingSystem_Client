@@ -19,7 +19,7 @@ Transactions
           <th>Time and Date</th>
           <th>Transaction Code</th>
           <th>Distributor ID</th>
-          <th>Details</th>
+          <th>View Details</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +29,7 @@ Transactions
           <td>{{$transaction->created_at}}</td>
           <th scope="row">{{$transaction->transactID}}</th>
           <td>{{$transaction->distributor_id}}</td>
-          <td><button type="button" value="{{$transaction->transactID}}" id="viewDetailTransaction{{$counter}}" class="btn btn-primary" data-toggle="modal" data-target="#myModalViewDetails" name="button">View</button></td>
+          <td><button type="button" value="{{$transaction->transactID}}" id="viewDetailTransaction{{$counter}}" class="btn btn-primary" data-toggle="modal" data-target="#myModalViewDetails" name="button">Details</button></td>
         </tr>
         <?php $counter++;?>
         @endforeach
@@ -42,16 +42,19 @@ Transactions
     </center>
   </div>
   <div id="myModalViewDetails" class="modal fade" role="dialog">
-  		<div class="modal-dialog modal-lg">
-  				<div class="modal-content">
-  						<div class="modal-header" style="color:#b3cccc";>
-    			      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modalCancelUpper">&times;</button>
-    						<h4 class="modal-title" id="modalTitle">Transaction Details</h4>
-  						</div>
-              <div class="modal-body" id="modalBody">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <center><h4 class="modal-title">Detailed Transaction of 	TRANS-0000000001</h4></center>
+            </div>
+<div class="col-lg-12">
+
+            <div class="modal-body" id="modalBody">
+              <div class="table-responsive" style=" margin-top: 0px;">
               <table class="table" id="tab1">
-                <thead class="thead">
-                  <tr>
+                <thead>
+                  <tr >
                     <th>Item Name</th>
                     <th>Quantity</th>
                     <th>Cost Price</th>
@@ -59,15 +62,22 @@ Transactions
                   </tr>
                 </thead>
                 <tbody id="transactionDetails">
-
+                  <tr>
+                    <td style="font-weight:bold;font-size:15px;">Total</td>
+                    <td></td>
+                    <td id="totalSalesID">PHP 27.5</td>
+                  </tr>
+                  <tr>
+                  </tr>
                 </tbody>
               </table>
               </div>
-  						<div class="modal-footer">
-                <h3 id="totalSalesPerTransaction"></h3>
-  							 <button type="button" class="btn btn-primary" data-dismiss="modal" id="modalCancel">Cancel</button>
-  						</div>
-  				</div>
-  		</div>
+            </div>
+            </div>
+            <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
   </div>
 @stop
