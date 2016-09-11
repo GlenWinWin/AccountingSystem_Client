@@ -13,6 +13,7 @@ Transactions
     </center>
     <div class="table-responsive">
       @if(count($transactions))
+      <input type="hidden" id="countOfTransactions" value="{{count($transactions)}}">
     <table class="table" id="tab1">
       <thead class="thead">
         <tr>
@@ -45,8 +46,8 @@ Transactions
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <center><h4 class="modal-title">Detailed Transaction of 	TRANS-0000000001</h4></center>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modalCancelUpper">&times;</button>
+            <center><h4 class="modal-title" id="titleDetailedTransaction"></h4></center>
             </div>
 <div class="col-lg-12">
 
@@ -62,20 +63,13 @@ Transactions
                   </tr>
                 </thead>
                 <tbody id="transactionDetails">
-                  <tr>
-                    <td style="font-weight:bold;font-size:15px;">Total</td>
-                    <td></td>
-                    <td id="totalSalesID">PHP 27.5</td>
-                  </tr>
-                  <tr>
-                  </tr>
                 </tbody>
               </table>
               </div>
             </div>
             </div>
             <div class="modal-footer">
-             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCancel">Close</button>
             </div>
         </div>
     </div>

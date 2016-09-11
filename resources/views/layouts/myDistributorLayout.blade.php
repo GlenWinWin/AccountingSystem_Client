@@ -105,8 +105,11 @@
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-  for(var counter=1; counter<=2;counter++){
+  var transactID = "";
+  var countOfTransactions = +document.getElementById("countOfTransactions").value;
+  for(var counter=1; counter<=countOfTransactions;counter++){
     $('#viewDetailTransaction'+counter).click(function(){
+      transactID = $(this).val();
       $.get("{{ url('selectDetailedTransaction')}}?transactID="+$(this).val(),
           function(data) {
             var i=1;
@@ -121,21 +124,30 @@ $(document).ready(function(){
                 totalSales += element.transaction_subtotal;
                 i++;
             });
-            if(i > 8){
-              $('#modalBody').style.height = '370px';
+            $('#transactionDetails').append("<tr>"+
+              "<td style='font-weight:bold;font-size:15px;'>Total</td>"+
+              "<td></td>"+
+              "<td></td>"+
+              "<td id='totalSalesID'></td>"+
+              "</tr>");
+            if(i > 4){
+              $('#modalBody').style.height = '300px';
               $('#modalBody').style.overflowY = 'auto';
             }
-            document.getElementById("totalSalesPerTransaction").innerHTML = 'Total Sales : PHP ' + totalSales;
+            document.getElementById("totalSalesID").innerHTML = 'PHP ' + totalSales;
+            document.getElementById("titleDetailedTransaction").innerHTML = 'Detailed Transaction of ' + transactID;
       });
     });
   }
   $('#modalCancel').click(function(){
     $('#transactionDetails').empty();
-    document.getElementById("totalSalesPerTransaction").innerHTML = '';
+    document.getElementById("totalSalesID").innerHTML = '';
+    document.getElementById("titleDetailedTransaction").innerHTML = '';
   });
   $('#modalCancelUpper').click(function(){
     $('#transactionDetails').empty();
-    document.getElementById("totalSalesPerTransaction").innerHTML = '';
+    document.getElementById("totalSalesID").innerHTML = '';
+    document.getElementById("titleDetailedTransaction").innerHTML = '';
   });
 });
 </script>
