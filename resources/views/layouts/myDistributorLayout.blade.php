@@ -149,5 +149,10 @@ $(document).ready(function(){
     document.getElementById("totalSalesID").innerHTML = '';
     document.getElementById("titleDetailedTransaction").innerHTML = '';
   });
+  $(window).click(function() {
+    $('#transactionDetails').empty();
+    document.getElementById("totalSalesID").innerHTML = '';
+    document.getElementById("titleDetailedTransaction").innerHTML = '';
+  });
 });
 </script>

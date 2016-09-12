@@ -256,3 +256,6 @@ function alphaOnly(event) {
   var key = event.keyCode;
   return ((key >= 65 && key <= 90) || key == 8);
 }
+function viewOtherGenealogy(){
+  alert('clicked');
+}
