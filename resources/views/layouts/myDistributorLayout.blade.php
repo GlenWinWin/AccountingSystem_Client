@@ -62,7 +62,7 @@
     			Transactions</a>
     			</li>
     			<li>
-    				<a href="list_items">
+    				<a href="privileges_bonus">
     				<i class="fa fa-gift"></i>
     			Priviliges Bonus</a>
     			</li>

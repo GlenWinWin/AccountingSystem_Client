@@ -147,6 +147,10 @@ Route::get('Category_filter',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@filterbyCategory'
 ]);
+Route::get('privileges_bonus',[
+  'middleware' => 'auth',
+  'uses' => 'DistributorController@privilegesBonus'
+]);
 Route::get('ItemsFilter',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@filterbySubCategory'
