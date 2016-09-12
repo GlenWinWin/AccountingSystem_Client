@@ -15,9 +15,9 @@ Edit Profile
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-        <img src="{{ Auth::user()->profile_path }}" class="edit-image" alt="avatar">
+        <img id="blah" src="{{ Auth::user()->profile_path }}" class="edit-image" alt="avatar">
         <h6>Upload a different photo</h6>
-        <center><input type="file" name="new_dp" class="text-center upload"></center>
+        <center><input type="file" name="new_dp" class="text-center upload" id="imgInp" ></center>
       </div>
     </div>
   </center>
