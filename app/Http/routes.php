@@ -108,6 +108,10 @@ Route::get('profile_edit',[
   'middleware' => 'auth',
   'uses' => 'UserController@edit_profile_clerk'
 ]);
+Route::get('profile_distributor',[
+  'middleware' => 'auth',
+  'uses' => 'UserController@edit_profile_distributor'
+]);
 Route::post('bagong_dp', 'UserController@bagong_dp');
 
 //Edit Functions
@@ -157,6 +161,9 @@ Route::get('ItemsFilter',[
 ]);
 // function for add distributor
 Route::post('addDistributor', ['uses' => 'ClerkController@addDistributor']);
+
+//function for viewing different genealogies
+Route::post('viewDifferentGenealogy', ['uses' => 'DistributorController@viewOtherGenealogy']);
 //function for sales encoding
 Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
 Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);

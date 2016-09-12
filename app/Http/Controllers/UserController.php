@@ -99,6 +99,16 @@ class UserController extends Controller
         echo $e;
       }
     }
+    public function edit_profile_distributor(){
+      try{
+        $typeOfUser = Auth::user()->typeOfUser;
+        $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+        return view('distributor.editprofile')->with('password',$decryptedPassword)->with('typeOfUser',$typeOfUser);
+      }
+      catch(DecryptException $e){
+        echo $e;
+      }
+    }
     public function bagong_dp(Request $requests){
 
       if(Input::hasFile('new_dp')){

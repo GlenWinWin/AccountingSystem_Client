@@ -13,35 +13,35 @@ Genealogy
     </center>
     <center>
       <div class="col-xs-12 genealogy-main">
-        <img src="{{ Auth::user()->profile_path }}" alt=""/>
+        <img src="{{ isset($profile) ? $profile : Auth::user()->profile_path }}" alt="" onclick="viewOtherGenealogy({{ Auth::user()->id }})"/>
         <div class="vertical_line"></div>
         <hr class="hr-genealogy" style="margin-bottom:0px;">
-    </div>
-        <div class="col-xs-15" >
+      </div>
+        <div class="col-xs-15">
           <i class="fa fa-arrow-down" aria-hidden="true" style="margin-left:22px;"></i>
           <br>
-          <img src="{{$image1}}" alt=""/>
-          </div>
-          <div class="col-xs-15" >
-            <i class="fa fa-arrow-down" aria-hidden="true"></i>
-            <br>
-            <img src="{{$image2}}" alt="" />
-            </div>
-            <div class="col-xs-15">
-              <i class="fa fa-arrow-down" aria-hidden="true" style="margin-right:5px;"></i>
-              <br>
-              <img src="{{$image3}}" alt=""/>
-              </div>
-              <div class="col-xs-15">
-                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                <br>
-                <img src="{{$image4}}" alt=""/>
-                </div>
-                <div class="col-xs-15">
-                  <i class="fa fa-arrow-down" aria-hidden="true" style="margin-right:33px;"></i>
-                  <br>
-                  <img src="{{$image5}}" alt=""/>
-                  </div>
+          <img src="{{$image1}}" alt="" onclick="viewOtherGenealogy({{ $image1ID }})"/>
+        </div>
+        <div class="col-xs-15">
+          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          <br>
+          <img src="{{$image2}}" alt="" onclick="viewOtherGenealogy({{ $image2ID }})"/>
+        </div>
+        <div class="col-xs-15">
+          <i class="fa fa-arrow-down" aria-hidden="true" style="margin-right:5px;"></i>
+          <br>
+          <img src="{{$image3}}" alt="" onclick="viewOtherGenealogy({{ $image3ID }})"/>
+        </div>
+        <div class="col-xs-15">
+          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          <br>
+          <img src="{{$image4}}" alt="" onclick="viewOtherGenealogy({{ $image4ID }})"/>
+        </div>
+        <div class="col-xs-15">
+          <i class="fa fa-arrow-down" aria-hidden="true" style="margin-right:33px;"></i>
+          <br>
+          <img src="{{$image5}}" alt="" onclick="viewOtherGenealogy({{ $image5ID }})"/>
+        </div>
     </center>
     <div class="table-responsive" style="padding-top:20px;">
       @if(count($downlines) > 0)
@@ -73,5 +73,18 @@ Genealogy
 
   </div>
   </div>
-
+  {!! Form::open(array('action' => 'DistributorController@viewOtherGenealogy' , 'method' => 'post' , 'id' => 'formForOtherGenealogy'))!!}
+  <input type="hidden" name="distributorID" id="specific_id">
+  {!! Form::close()!!}
+  <div class="modal fade alert-modal" id="noDistributor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog alert-modal-dialog">
+      <div class="modal-content" style="padding:50px;">
+          <center>
+            <img src="assets/images/x.png" alt="" style="height:150px;padding-bottom:20px;"/>
+            <h4 class="modal-title" id="myModalLabel"><b>No Distributor</b></h4></center>
+          <center>  <p style="font-size:18px">There's no current distributor for this field</p>  </center>
+            <center><button type="button" class="btn btn-primary btn-md edit-btn" data-dismiss="modal" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
+      </div>
+    </div>
+  </div>
 @stop

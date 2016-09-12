@@ -27,10 +27,10 @@
     				<li class="dropdown">
     											<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
     											<ul class="dropdown-menu">
-    												<li><a href="edit_profile">Edit Profile</a></li>
+    												<li><a href="profile_distributor">Edit Profile</a></li>
     												<li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
     											</ul>
-    										</li>
+    										</li>     
 
     			</ul>
     		</div>
@@ -72,7 +72,7 @@
     			Help</a>
     			</li>
           <li class="visible-xs visible-md visible-sm">
-            <a href="edit_profile" >
+            <a href="profile_distributor" >
             <i class="fa fa-pencil"></i>
           Edit Profile</a>
           </li>
@@ -145,6 +145,11 @@ $(document).ready(function(){
     document.getElementById("titleDetailedTransaction").innerHTML = '';
   });
   $('#modalCancelUpper').click(function(){
+    $('#transactionDetails').empty();
+    document.getElementById("totalSalesID").innerHTML = '';
+    document.getElementById("titleDetailedTransaction").innerHTML = '';
+  });
+  $(window).click(function() {
     $('#transactionDetails').empty();
     document.getElementById("totalSalesID").innerHTML = '';
     document.getElementById("titleDetailedTransaction").innerHTML = '';
