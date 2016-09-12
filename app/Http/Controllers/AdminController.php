@@ -242,6 +242,9 @@ class AdminController extends Controller{
       else if(Auth::user()->typeOfUser == 1){
           return redirect('home_clerk');
       }
+      else{
+          return redirect('genealogy');
+      }
     }
     public function createRandomPassword() {
 

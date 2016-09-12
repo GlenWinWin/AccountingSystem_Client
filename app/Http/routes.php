@@ -108,6 +108,10 @@ Route::get('profile_edit',[
   'middleware' => 'auth',
   'uses' => 'UserController@edit_profile_clerk'
 ]);
+Route::get('profile_distributor',[
+  'middleware' => 'auth',
+  'uses' => 'UserController@edit_profile_distributor'
+]);
 Route::post('bagong_dp', 'UserController@bagong_dp');
 
 //Edit Functions
