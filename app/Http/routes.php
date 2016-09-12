@@ -73,8 +73,6 @@ Route::get('genealogy', [
 Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
-
-
 //View functions of admin
 Route::get('list_distributor', [
   'middleware' => 'auth',
@@ -151,9 +149,9 @@ Route::get('Category_filter',[
   'middleware' => 'auth',
   'uses' => 'ClerkController@filterbyCategory'
 ]);
-Route::get('privileges_bonus',[
+Route::get('priviliges_bonus',[
   'middleware' => 'auth',
-  'uses' => 'DistributorController@privilegesBonus'
+  'uses' => 'DistributorController@priviligesBonus'
 ]);
 Route::get('ItemsFilter',[
   'middleware' => 'auth',

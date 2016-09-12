@@ -107,7 +107,7 @@ class DistributorController extends Controller
       $transaction_details = TransactionDetails::where('transaction_id','=',$transactID)->get();
       return $transaction_details;
     }
-    public function privilegesBonus(){
-      return view('distributor.privilegesBonus');
+    public function priviligesBonus(){
+      return view('distributor.priviligesBonus');
     }
 }

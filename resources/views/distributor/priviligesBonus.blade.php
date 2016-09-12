@@ -1,6 +1,6 @@
 @extends('layouts.myDistributorLayout')
 @section('title')
-  Privileges Bonus
+  Priviliges Bonus
 @stop
 
 @section('body-content')

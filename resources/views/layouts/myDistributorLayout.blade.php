@@ -30,7 +30,7 @@
     												<li><a href="profile_distributor">Edit Profile</a></li>
     												<li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
     											</ul>
-    										</li>     
+    										</li>
 
     			</ul>
     		</div>
@@ -62,7 +62,7 @@
     			Transactions</a>
     			</li>
     			<li>
-    				<a href="privileges_bonus">
+    				<a href="priviliges_bonus">
     				<i class="fa fa-gift"></i>
     			Priviliges Bonus</a>
     			</li>
