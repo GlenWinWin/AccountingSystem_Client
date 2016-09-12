@@ -157,6 +157,9 @@ Route::get('ItemsFilter',[
 ]);
 // function for add distributor
 Route::post('addDistributor', ['uses' => 'ClerkController@addDistributor']);
+
+//function for viewing different genealogies
+Route::post('viewDifferentGenealogy', ['uses' => 'DistributorController@viewOtherGenealogy']);
 //function for sales encoding
 Route::post('sales', ['uses' => 'ClerkController@salesEncoding']);
 Route::get('sales_viewing', ['middleware' => 'auth','uses' => 'ClerkController@viewTemporarySales']);

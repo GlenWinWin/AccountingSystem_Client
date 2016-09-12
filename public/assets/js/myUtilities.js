@@ -256,6 +256,12 @@ function alphaOnly(event) {
   var key = event.keyCode;
   return ((key >= 65 && key <= 90) || key == 8);
 }
-function viewOtherGenealogy(){
-  alert('clicked');
+function viewOtherGenealogy(id){
+  if(id == 0){
+    $("#noDistributor").modal();
+  }
+  else{
+    $("input[id=specific_id]").val(id);
+    $('#formForOtherGenealogy').submit();
+  }
 }
