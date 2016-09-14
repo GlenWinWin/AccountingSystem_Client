@@ -110,4 +110,7 @@ class DistributorController extends Controller
     public function priviligesBonus(){
       return view('distributor.priviligesBonus');
     }
+    public function help(){
+      return view('distributor.help');
+    }
 }
