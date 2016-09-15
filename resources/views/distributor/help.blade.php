@@ -45,7 +45,7 @@
             15/1000 Stock Buyer Package
               </p>
         </p>
-        <center style="padding-top:130px;"><b>Cash to cash-basis/Non-vatable</b></center>
+        <center><b>Cash to cash-basis/Non-vatable</b></center>
       </div>
     </div>
     <div class="col-md-3 col-sm-6" style="padding-right:1px;padding-left: 0px;">
@@ -65,14 +65,14 @@
         1% Sales Share for Every 20,000-Up <br>
         Purchased of Channel Builder
           </p>
-          <p style="padding-top:80px;">
+          <p>
           <b>Requirements</b><br>
             </p>
           <p style="padding-left:30px;">
           CB Promotion Choice <br>
           300,000 Net Personal Sales
             </p>
-            <p style="padding-top:40px;">
+            <p>
             <b>Channel Activity</b><br>
               </p>
             <p style="padding-left:30px;">
@@ -103,14 +103,14 @@
         1% Sales share for every 20,000-Up <br>
         Purchased of Channel Builder
           </p>
-          <p style="padding-top:40px;">
+          <p >
           <b>Requirements</b><br>
             </p>
           <p style="padding-left:30px;">
           5 Direct CA <br>
           500,000 Net Personal Sales
             </p>
-            <p style="padding-top:40px;">
+            <p>
             <b>Channel Activity</b><br>
               </p>
             <p style="padding-left:30px;">

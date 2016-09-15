@@ -736,20 +736,19 @@ ul.checkout-bar li:nth-child(2):before {
 }
 .builder-content{
   border: 1px solid black;
+  height: 620px;
 
 }
 .channel-help>p{
   padding-left: 15px;
 }
-.channel-help{
-  padding-bottom: 10px;
-}
+
 .channel-help>h4{
   padding-left: 15px;
   font-weight: bold;
 }
 .channel-help>center>b{
-  padding-bottom: 15px;
+
   font-weight: bold;
 }
 @media (max-width:789px) {
