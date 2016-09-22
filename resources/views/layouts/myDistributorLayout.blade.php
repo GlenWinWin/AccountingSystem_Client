@@ -67,7 +67,7 @@
     			Priviliges Bonus</a>
     			</li>
           <li>
-    				<a href="list_items">
+    				<a href="help">
     				<i class="fa fa-info" style="font-size:20px;padding-right:5px;"></i>
     			Help</a>
     			</li>

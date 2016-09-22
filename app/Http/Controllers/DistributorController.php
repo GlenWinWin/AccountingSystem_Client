@@ -299,4 +299,7 @@ class DistributorController extends Controller
       $countCM = Distributor::where('distributor_id','=',Auth::user()->id)->where('channelPosition','=','3')->get();
       return view('distributor.priviligesBonus')->with('positionName',$positionName)->with('CA',count($countCA))->with('CM',count($countCM));
     }
+    public function help(){
+      return view('distributor.help');
+    }
 }
