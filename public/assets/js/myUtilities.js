@@ -214,6 +214,7 @@ function updateQuantity(counter,id){
     totalSales += (cost * quantity);
   }
   document.getElementById("totalSalesID").innerHTML = "PHP " + totalSales;
+  $("input[id=totalSalesHiddenInput]").val(totalSales);
 }
 function updateQuantityReceivings(counter,id){
   var cost = document.getElementById("priceField"+counter).value;

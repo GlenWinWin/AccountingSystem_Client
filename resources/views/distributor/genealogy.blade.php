@@ -4,6 +4,9 @@ Genealogy
 @stop
 
 @section('body-content')
+@if(isset($promoted))
+<input type="hidden" value="{{$promoted}}" id="promotion">
+@endif
   <div class="col-lg-9">
     <center>
       <div class="form-title-row">
@@ -87,4 +90,28 @@ Genealogy
       </div>
     </div>
   </div>
+  <div class="modal fade alert-modal" id="promotedDistributor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog alert-modal-dialog">
+      <div class="modal-content" style="padding:50px;">
+          <center>
+            <img src="assets/images/check.png" alt="" style="height:150px;padding-bottom:20px;"/>
+            <h4 class="modal-title" id="myModalLabel"><b>Congratulations!</b></h4></center>
+          <center>  <p style="font-size:18px" id="promotion_message"></p>  </center>
+            <center><a href="genealogy" type="button" class="btn btn-primary btn-md edit-btn" style="padding-left:30px;padding-right:30px;">OK</a>  </center>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+@stop
+@section('javascript_part')
+<script type="text/javascript">
+  $(document).ready(function(){
+    var promotion = document.getElementById("promotion").value;
+    if(promotion != '' && promotion != null){
+      document.getElementById("promotion_message").innerHTML = promotion;
+      $("#promotedDistributor").modal();
+    }
+  });
+</script>
 @stop

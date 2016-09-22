@@ -101,6 +101,7 @@
 							<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
 							<input type="hidden" name="referralID" id="idReferral">
 							<input type="hidden" name="distributorID" id="hiddenDistributorID">
+							<input type="hidden" name="totalSalesInput" id="totalSalesHiddenInput">
 							<input type="hidden" name="checkIfSelectedNewDistributor" id="checkBoxValue" value="0">
 						</td>
 						{!! Form::close()!!}

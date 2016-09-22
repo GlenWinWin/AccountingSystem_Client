@@ -20,6 +20,8 @@
     </head>
 
     <body>
+      
+      <!-- {{Crypt::decrypt('eyJpdiI6InpQSUg2MzB4N3FjUERhUkJRUlwvSEpRPT0iLCJ2YWx1ZSI6IkNjSVwvNEl2V0ZaZkZ5WXF3c1ArVDR3PT0iLCJtYWMiOiIwMGMyMGQ3OGQ3OGIxYTQxZjI0ZGYwZWIxODFjMmE4MTVhNWYwZDdiNTQ2NDY4ZTdiNTI1NTU3NTJjNTQxNWRhIn0=')}} -->
       @if(Session::has('flash_message'))
       <input type="hidden" value="{{Session::get('flash_message')}}" id="errorLogin">
 	   @endif

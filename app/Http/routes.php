@@ -4,6 +4,7 @@ use App\ManagePrivileges;
 
 //Add functions
 Route::post('clerk_add', 'AdminController@addClerk');
+Route::post('add_clerk', 'ClerkController@addClerk');
 
 //Add items for clerk
 Route::post('add_item', 'ClerkController@addItem');

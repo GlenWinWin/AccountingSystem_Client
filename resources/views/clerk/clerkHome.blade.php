@@ -69,7 +69,7 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Add Clerk</h4>
 						</div>
-						<form action="{{ URL::to('clerk_add') }}" method="post" enctype="multipart/form-data">
+						<form action="{{ URL::to('add_clerk') }}" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="col-lg-12">
                 <center>
@@ -140,11 +140,22 @@
 						<img src="assets/images/check.png" alt="" style="height:150px;padding-bottom:20px;"/>
 						<h4 class="modal-title" id="myModalLabel"><b>New Clerk Added</b></h4></center>
           <center>  <p style="font-size:18px">A new clerk has been successfully added on the list. </p>  </center>
-            <center><button type="button" class="btn btn-primary btn-md edit-btn" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
+            <center><button type="button" class="btn btn-primary btn-md edit-btn" data-dismiss="modal" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
       </div>
       <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
   </div>
   <!-- /.Modal for Add CLerk -->
+@stop
+@section('javascript_part')
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		var newClerk = document.getElementById("newClerk").value;
+		if(newClerk != '' || newClerk != null){
+		  $("#clerkAdd").modal();
+		}
+	});
+</script>
 @stop

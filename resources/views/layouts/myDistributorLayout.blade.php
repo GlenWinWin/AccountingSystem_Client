@@ -47,7 +47,7 @@
     					{{ Auth::user()->name }}
     				</div>
             <div class="profile-usertitle-job">
-    					Channel Builder
+              {{ $positionName }}
     				</div>
     			</div>
     		<ul class="nav">
@@ -93,7 +93,9 @@
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/sidebar.js"></script>
+  <script src="assets/js/numeral.min.js"></script>
   <script src="assets/js/myUtilities.js"></script>
+  @yield('javascript_part')
   <!-- active-sidebar -->
 <script type="text/javascript">
   var url = window.location;
@@ -173,4 +175,9 @@ function readURL(input) {
 $("#imgInp").change(function(){
   readURL(this);
 });
+</script>
+<script type="text/javascript">
+  var totalSales = numeral({{Auth::user()->totalPersonalSales}}).format('0,0.00');
+  var totalSalesMonth = numeral({{Auth::user()->totalSalesMonth}}).format('0,0.00');
+  document.getElementById("totalSalesMoney").innerHTML = 'PHP ' + totalSales + '/ PHP ' +totalSalesMonth;
 </script>

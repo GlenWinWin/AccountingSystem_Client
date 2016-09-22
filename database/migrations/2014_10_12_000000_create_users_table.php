@@ -36,6 +36,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('passsword_text');
             $table->string('userID');
+            $table->string('dateToFinish',15);
         });
     }
 

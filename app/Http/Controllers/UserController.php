@@ -101,9 +101,22 @@ class UserController extends Controller
     }
     public function edit_profile_distributor(){
       try{
+        $positionName = '';
+        if(Auth::user()->channelPosition == 1){
+          $positionName = 'CHANNEL BUILDER';
+        }
+        else if(Auth::user()->channelPosition == 2){
+          $positionName = 'CHANNEL ASSOCIATE';
+        }
+        else if(Auth::user()->channelPosition == 3){
+          $positionName = 'CHANNEL MANAGER';
+        }
+        else{
+          $positionName = 'CHANNEL DIRECTOR';
+        }
         $typeOfUser = Auth::user()->typeOfUser;
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        return view('distributor.editprofile')->with('password',$decryptedPassword)->with('typeOfUser',$typeOfUser);
+        return view('distributor.editprofile')->with('password',$decryptedPassword)->with('typeOfUser',$typeOfUser)->with('positionName',$positionName);
       }
       catch(DecryptException $e){
         echo $e;

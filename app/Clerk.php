@@ -21,7 +21,7 @@ class Clerk extends Model
     'passsword_text',
   ];
 
-  public $timestamps = false;
+  public $timestamps = true;
 
   protected $table = 'users';
 }

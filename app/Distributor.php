@@ -16,6 +16,7 @@ class Distributor extends Model
     'address',
     'contact',
     'totalSales',
+    'totalSalesMonth',
     'profile_path',
     'channelPosition',
     'typeOfUser',
@@ -24,9 +25,14 @@ class Distributor extends Model
     'monthCounter',
     'passsword_text',
     'userID',
+    'dateToFinish',
+    'totalNewMember',
+    'totalNewMemberMonth',
+    'totalPersonalSales',
+    'totalGroupSales',
   ];
 
-  public $timestamps = false;
+  public $timestamps = true;
 
   protected $table = 'users';
 }
