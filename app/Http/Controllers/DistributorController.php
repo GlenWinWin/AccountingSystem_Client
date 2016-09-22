@@ -300,6 +300,19 @@ class DistributorController extends Controller
       return view('distributor.priviligesBonus')->with('positionName',$positionName)->with('CA',count($countCA))->with('CM',count($countCM));
     }
     public function help(){
-      return view('distributor.help');
+      $positionName = '';
+      if(Auth::user()->channelPosition == 1){
+        $positionName = 'CHANNEL BUILDER';
+      }
+      else if(Auth::user()->channelPosition == 2){
+        $positionName = 'CHANNEL ASSOCIATE';
+      }
+      else if(Auth::user()->channelPosition == 3){
+        $positionName = 'CHANNEL MANAGER';
+      }
+      else{
+        $positionName = 'CHANNEL DIRECTOR';
+      }
+      return view('distributor.help')->with('positionName',$positionName);
     }
 }
