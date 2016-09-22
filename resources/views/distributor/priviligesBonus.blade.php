@@ -80,20 +80,25 @@
          @if(Auth::user()->channelPosition == 1)
          <tr>
            <td>Personal Sales</td>
-           <th scope="row" id="totalSalesMoney"></th>
+           <th scope="row" id="totalPersonalSales"></th>
            <th>{{ Auth::user()->totalPersonalSales  >= 300000 ? 'Done' : 'Not Yet'}}</th>
          </tr>
          @elseif(Auth::user()->channelPosition == 2)
          <tr>
            <td>Personal Sales</td>
-           <th scope="row" id="totalSalesMoney"></th>
+           <th scope="row" id="totalPersonalSales"></th>
            <th>{{ Auth::user()->totalPersonalSales  >= 500000 ? 'Done' : 'Not Yet'}}</th>
          </tr>
          @elseif(Auth::user()->channelPosition == 3)
          <tr>
            <td>Personal Sales</td>
-           <th scope="row" id="totalSalesMoney"></th>
+           <th scope="row" id="totalPersonalSales"></th>
            <th>{{ Auth::user()->totalPersonalSales  >= 1000000 ? 'Done' : 'Not Yet'}}</th>
+         </tr>
+         <tr>
+           <td>3 M Group Sales</td>
+           <th scope="row" id="totalGroupSalesMoney"></th>
+           <th>{{ Auth::user()->totalGroupSales  >= 3000000 ? 'Done' : 'Not Yet'}}</th>
          </tr>
          @endif
        </tbody>

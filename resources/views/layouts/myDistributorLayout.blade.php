@@ -179,5 +179,7 @@ $("#imgInp").change(function(){
 <script type="text/javascript">
   var totalSales = numeral({{Auth::user()->totalPersonalSales}}).format('0,0.00');
   var totalSalesMonth = numeral({{Auth::user()->totalSalesMonth}}).format('0,0.00');
-  document.getElementById("totalSalesMoney").innerHTML = 'PHP ' + totalSales + '/ PHP ' +totalSalesMonth;
+  var totalGroupSales = numeral({{Auth::user()->totalGroupSales}}).format('0,0.00');
+  document.getElementById("totalPersonalSales").innerHTML = 'PHP ' + totalSales + '/ PHP ' +totalSalesMonth;
+  document.getElementById("totalGroupSalesMoney").innerHTML = 'PHP ' + totalGroupSales;
 </script>

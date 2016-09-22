@@ -18,7 +18,7 @@ class DistributorController extends Controller
       $promoted = '';
       if($this->checkIfPromoted(Auth::user()->channelPosition,Auth::user()->id,Auth::user()->totalPersonalSales,Auth::user()->monthCounter,Auth::user()->dateToFinish,Auth::user()->totalPersonalSales) == 'yes'){
         if(Auth::user()->channelPosition == 1){
-          $distributorID = Auth::user()->distributor_id;
+          $distributorID = Auth::user()->id;
           do{
             $updatetotalCAMonth = Distributor::where('id','=',$distributorID)->increment('totalNewCAMonth',1);
             $selectUpline = Distributor::where('id','=',$distributorID)->get();
@@ -62,6 +62,7 @@ class DistributorController extends Controller
         if(Auth::user()->channelPosition == 1 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales >= 300000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           $updateMonth = Distributor::where('id','=',Auth::user()->id)->increment('monthCounter',1);
+          $promoted = "You've reached your " . ((Auth::user()->monthCounter == 0) ? "1st month":"2nd month");
         }
         else if(Auth::user()->channelPosition == 1 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales < 300000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
@@ -72,6 +73,7 @@ class DistributorController extends Controller
         else if(Auth::user()->channelPosition == 2 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales >= 500000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           $updateMonth = Distributor::where('id','=',Auth::user()->id)->increment('monthCounter',1);
+          $promoted = "You've reached your " . ((Auth::user()->monthCounter == 0) ? "1st month":"2nd month");
         }
         else if(Auth::user()->channelPosition == 2 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales < 500000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
@@ -82,6 +84,7 @@ class DistributorController extends Controller
         else if(Auth::user()->channelPosition == 3 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales >= 1000000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           $updateMonth = Distributor::where('id','=',Auth::user()->id)->increment('monthCounter',1);
+          $promoted = "You've reached your " . ((Auth::user()->monthCounter == 0) ? "1st month":"2nd month");
         }
         else if(Auth::user()->channelPosition == 3 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales < 1000000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
@@ -262,7 +265,7 @@ class DistributorController extends Controller
         }
       }
       else if($position == 4 && $dateFinished <= $todaysDate){
-        if($groupSales < 3500000 && $totalCAMonth < 5){
+        if($groupSales < 3000000 && $totalCAMonth < 5){
           $updateTotalMonthSales = Distributor::where('id','=',$DISTRIBUTOR_Id)->update(['totalSalesMonth'=>1000000]);
           $updateDistributor = Distributor::where('id','=',$DISTRIBUTOR_Id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish),'monthCounter'=>0]);
           $updatePosition = Distributor::where('id','=',Auth::user()->id)->decrement('channelPosition',1);
