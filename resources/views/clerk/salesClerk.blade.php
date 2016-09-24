@@ -114,7 +114,7 @@
 		</div>
 </div>
 <div id="myModalDeleteTemporarySales" class="modal fade" role="dialog">
-		<div class="modal-dialog  modal-sm">
+		<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 						<div class="modal-header" style="color:#b3cccc";>
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

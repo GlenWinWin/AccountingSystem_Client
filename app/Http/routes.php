@@ -2,6 +2,13 @@
 
 use App\ManagePrivileges;
 
+//Filter Items
+Route::post('filterItems', 'AdminController@filterByCategorySubCategory');
+Route::post('itemFilter', 'ClerkController@filterByCategorySubCategory');
+
+//Add Category
+Route::post('add_category', 'AdminController@addCategorySubCategory');
+
 //Add functions
 Route::post('clerk_add', 'AdminController@addClerk');
 Route::post('add_clerk', 'ClerkController@addClerk');
@@ -135,21 +142,6 @@ Route::get('back',[
   'uses' => 'AdminController@backFunction'
 ]);
 
-//Filter per category or sub category for admin
-Route::get('filterItems',[
-  'middleware' => 'auth',
-  'uses' => 'AdminController@filterbySubCategory'
-]);
-Route::get('filterbyCategory',[
-  'middleware' => 'auth',
-  'uses' => 'AdminController@filterbyCategory'
-]);
-
-//Filter per category or sub category for clerk
-Route::get('Category_filter',[
-  'middleware' => 'auth',
-  'uses' => 'ClerkController@filterbyCategory'
-]);
 Route::get('priviliges_bonus',[
   'middleware' => 'auth',
   'uses' => 'DistributorController@priviligesBonus'
@@ -158,10 +150,7 @@ Route::get('help',[
   'middleware' => 'auth',
   'uses' => 'DistributorController@help'
 ]);
-Route::get('ItemsFilter',[
-  'middleware' => 'auth',
-  'uses' => 'ClerkController@filterbySubCategory'
-]);
+
 // function for add distributor
 Route::post('addDistributor', ['uses' => 'ClerkController@addDistributor']);
 

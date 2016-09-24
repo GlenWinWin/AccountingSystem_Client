@@ -637,49 +637,51 @@ class ClerkController extends Controller
         $title = "Results for items...";
         return view('clerk.listOfItems')->with('items',$searchItems)->with('categories',$categories)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
       }
-      public function filterbyCategory(Request $requests){
-        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
-        $salesEncoding = 0;
-        $accountRegistration = 0;
-        $addClerk = 0;
-        $useInventory = 0;
-        $generateReport = 0;
-        $categories = Category::all();
-        foreach($privileges as $priv){
-          $salesEncoding = $priv->sales_encoding;
-          $accountRegistration = $priv->account_registration;
-          $addClerk = $priv->add_clerk;
-          $useInventory = $priv->use_inventory;
-          $generateReport = $priv->generate_report;
+      public function filterByCategorySubCategory(Request $requests){
+        if($requests->subCategory == 0){
+            $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+            $salesEncoding = 0;
+            $accountRegistration = 0;
+            $addClerk = 0;
+            $useInventory = 0;
+            $generateReport = 0;
+            $categories = Category::all();
+            foreach($privileges as $priv){
+              $salesEncoding = $priv->sales_encoding;
+              $accountRegistration = $priv->account_registration;
+              $addClerk = $priv->add_clerk;
+              $useInventory = $priv->use_inventory;
+              $generateReport = $priv->generate_report;
+            }
+            $category = $requests->category;
+            $cat = Category::where('id','=',$category)->first();
+            $title = "Results for ".$cat->category_name;
+            $items = Items::where('item_category', '=', $category)->paginate(10);
+            return view('clerk.listOfItems')->with('items',$items)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('categories',$categories);
         }
-        $category = $requests->cat;
-        $cat = Category::where('id','=',$category)->first();
-        $title = "Results for ".$cat->category_name;
-        $items = Items::where('item_category', '=', $category)->paginate(10);
-        return view('clerk.listOfItems')->with('items',$items)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('categories',$categories);
-      }
-      public function filterbySubCategory(Request $requests){
-        $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
-        $salesEncoding = 0;
-        $accountRegistration = 0;
-        $addClerk = 0;
-        $useInventory = 0;
-        $generateReport = 0;
-        foreach($privileges as $priv){
-          $salesEncoding = $priv->sales_encoding;
-          $accountRegistration = $priv->account_registration;
-          $addClerk = $priv->add_clerk;
-          $useInventory = $priv->use_inventory;
-          $generateReport = $priv->generate_report;
+        else{
+            $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+            $salesEncoding = 0;
+            $accountRegistration = 0;
+            $addClerk = 0;
+            $useInventory = 0;
+            $generateReport = 0;
+            foreach($privileges as $priv){
+              $salesEncoding = $priv->sales_encoding;
+              $accountRegistration = $priv->account_registration;
+              $addClerk = $priv->add_clerk;
+              $useInventory = $priv->use_inventory;
+              $generateReport = $priv->generate_report;
+            }
+            $categories = Category::all();
+            $category = $requests->category;
+            $sub_category = $requests->subCategory;
+            $cat = Category::where('id','=',$category)->first();
+            $sub_cat = SubCategory::where('id','=',$sub_category)->first();
+            $title = "Results for ".$cat->category_name." - ".$sub_cat->subcategory_name;
+            $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(10);
+            return view('clerk.listOfItems')->with('items',$items)->with('categories',$categories)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
         }
-        $categories = Category::all();
-        $category = $requests->cat;
-        $sub_category = $requests->sub;
-        $cat = Category::where('id','=',$category)->first();
-        $sub_cat = SubCategory::where('id','=',$sub_category)->first();
-        $title = "Results for ".$cat->category_name." - ".$sub_cat->subcategory_name;
-        $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(10);
-        return view('clerk.listOfItems')->with('items',$items)->with('categories',$categories)->with('title',$title)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
       }
       public function selectSubCategory(){
         $id = Input::get('id');

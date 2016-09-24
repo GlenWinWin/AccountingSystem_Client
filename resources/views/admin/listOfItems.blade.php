@@ -18,29 +18,11 @@
 		@endif
 	</h1></center>
 	<hr>
-  <div class="dropdown col-lg-8 col-md-8 col-sm-8">
-             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary btn-md" data-target="#">
-                 Category<span class="caret"></span>
+             <a data-toggle="modal" class="btn btn-primary btn-md" data-target="#myModalFilter">
+                 Filter Items
              </a>
-     		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-               <li class="dropdown-submenu">
-                 <a href="filterbyCategory?cat=1">Safety Equipments</a>
-								 <ul class="dropdown-menu">
-                   <li><a href="filterItems?cat=1&sub=1">Head</a></li>
-                   <li><a href="filterItems?cat=1&sub=2">Eye</a></li>
-                   <li><a href="filterItems?cat=1&sub=3">Eyewash</a></li>
-                   <li><a href="filterItems?cat=1&sub=4">Ear</a></li>
-                   <li><a href="filterItems?cat=1&sub=5">Respiratory</a></li>
-                   <li><a href="filterItems?cat=1&sub=6">Body</a></li>
-                   <li><a href="filterItems?cat=1&sub=7">Full</a></li>
-                   <li><a href="filterItems?cat=1&sub=8">Hand</a></li>
-                   <li><a href="filterItems?cat=1&sub=9">Safety Shoes</a></li>
-                   <li><a href="filterItems?cat=1&sub=10">Rescue</a></li>
-                 </ul>
-               </li>
-             </ul>
 						 <input type="button" class="btn btn-md btn-primary open-modal-deleteMultipleUsers" onclick="doMultipleSelectionItemsToDelete()" value="Delete">
-					 </div>
+						 <input type="button" name="name" value="Add Category" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModalAddCategory">
 						 <div class="col-lg-3 col-md-3 col-sm-4 search-small">
 							 {!! Form::open(array('action' => 'AdminController@searchItems' , 'method' => 'get'))!!}
 							 <input type="text" name="search" required="" placeholder="Search..." class="form-control" style="width:70%;display:inline;">
@@ -231,4 +213,92 @@
 				</div>
 		</div>
 </div>
+<div id="myModalAddCategory" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Add Category</h4>
+					</div>
+					{!! Form::open(array('action' => 'AdminController@addCategorySubCategory' , 'method' => 'post'))!!}
+<div class="col-lg-12">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="col-lg-4 control-label">Choose Category</label>
+							<div class="col-lg-8">
+								<select id="categoryList" name="category" class="form-control" style="width:95%;" onclick="checkIfselectedExistingCategory()">
+										<option value="0">Select Category</option>
+										@foreach($categories as $cat)
+										<option value="{{$cat->id}}">{{$cat->category_name}}</option>
+										@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-4 control-label">Add New Category</label>
+							<div class="col-lg-8">
+								<input class="form-control" type="text" id="newCategory" name="cat_new" required="" style="width:95%;">
+							</div>
+						</div>
+						<div class="form-group">
+										 <label class="col-lg-4 control-label">Add Sub Category</label>
+										 <div class="col-lg-8">
+											 <input class="form-control" type="text" id="newSubCategory" name="sub_new" required="" style="width:95%;">
+										 </div>
+						</div>
+					</div>
+					</div>
+					<div class="modal-footer">
+
+	 <button type="submit" class="btn btn-primary" id="addItemBtn">Submit</button>
+					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+			</div>
+		{!! Form::close()!!}
+	</div>
+</div>
+<div id="myModalFilter" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Filter Items</h4>
+					</div>
+					{!! Form::open(array('action' => 'AdminController@filterByCategorySubCategory' , 'method' => 'post'))!!}
+<div class="col-lg-12">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="col-lg-4 control-label">Category</label>
+							<div class="col-lg-8">
+								<select id="selectCategory" name="category" class="form-control" style="width:85%;" onclick="checkIfselectedCategory()">
+										<option value="0">Select Category</option>
+										@foreach($categories as $cat)
+										<option value="{{$cat->id}}">{{$cat->category_name}}</option>
+										@endforeach
+								</select>
+							</div>
+							<label class="col-lg-4 control-label">Sub Category</label>
+							<div class="col-lg-8">
+								<select id="subCategory" name="subCategory" class="form-control" style="width:85%;">
+									<option value="0">Select Sub Category</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="modal-footer">
+	 				<button type="submit" class="btn btn-primary" id="btnFilter">Submit</button>
+					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+			</div>
+		{!! Form::close()!!}
+	</div>
+</div>
+@stop
+@section('javascript_part')
+<script type="text/javascript">
+	$(document).ready(function(){
+		document.getElementById('btnFilter').disabled = true;
+	});
+</script>
 @stop

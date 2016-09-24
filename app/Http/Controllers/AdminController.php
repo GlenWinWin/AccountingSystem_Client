@@ -33,7 +33,8 @@ class AdminController extends Controller{
     }
     public function listOfItems(){
       $items = Items::paginate(10);
-      return view('admin.listOfItems')->with('items',$items);
+      $categories = Category::all();
+      return view('admin.listOfItems')->with('items',$items)->with('categories',$categories);
     }
     public function listOfDistributor(){
       try{
@@ -74,7 +75,8 @@ class AdminController extends Controller{
       $keyword = $requests->search;
       $searchItems = Items::where('item_name','LIKE','%'.$keyword.'%')->paginate(10);
       $title = "Results for items...";
-      return view('admin.listOfItems')->with('items',$searchItems)->with('title',$title);
+      $categories = Category::all();
+      return view('admin.listOfItems')->with('items',$searchItems)->with('title',$title)->with('categories',$categories);
     }
     public function addClerk(Request $requests){
       $fname = $requests->fname;
@@ -235,6 +237,26 @@ class AdminController extends Controller{
       }
       return redirect()->back();
     }
+    public function addCategorySubCategory(Request $requests){
+      if($requests->category == 0){
+
+        $addNewCategory = new Category;
+        $addNewCategory->category_name = $requests->cat_new;
+        $addNewCategory->save();
+
+        $addNewSubCategory = new SubCategory;
+        $addNewSubCategory->category_id = $addNewCategory->id;
+        $addNewSubCategory->subcategory_name = $requests->sub_new;
+        $addNewSubCategory->save();
+      }
+      else{
+        $addNewSubCategory = new SubCategory;
+        $addNewSubCategory->category_id = $requests->category;
+        $addNewSubCategory->subcategory_name = $requests->sub_new;
+        $addNewSubCategory->save();
+      }
+      return redirect()->back();
+    }
     public function backFunction(){
       if(Auth::user()->typeOfUser == 0){
           return redirect('list_clerk');
@@ -263,20 +285,24 @@ class AdminController extends Controller{
         return $pass;
 
     }
-    public function filterbyCategory(Request $requests){
-      $category = $requests->cat;
-      $cat = Category::where('id','=',$category)->first();
-      $title = "Results for ".$cat->category_name;
-      $items = Items::where('item_category', '=', $category)->paginate(10);
-      return view('admin.listOfItems')->with('items',$items)->with('title',$title);
-    }
-    public function filterbySubCategory(Request $requests){
-      $category = $requests->cat;
-      $sub_category = $requests->sub;
-      $cat = Category::where('id','=',$category)->first();
-      $sub_cat = SubCategory::where('id','=',$sub_category)->first();
-      $title = "Results for ".$cat->category_name." - ".$sub_cat->subcategory_name;
-      $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(10);
-      return view('admin.listOfItems')->with('items',$items)->with('title',$title);
+    public function filterByCategorySubCategory(Request $requests){
+      if($requests->subCategory == 0){
+          $category = $requests->category;
+          $cat = Category::where('id','=',$category)->first();
+          $title = "Results for ".$cat->category_name;
+          $items = Items::where('item_category', '=', $category)->paginate(10);
+          $categories = Category::all();
+          return view('admin.listOfItems')->with('items',$items)->with('title',$title)->with('categories',$categories);
+      }
+      else{
+          $category = $requests->category;
+          $sub_category = $requests->subCategory;
+          $cat = Category::where('id','=',$category)->first();
+          $sub_cat = SubCategory::where('id','=',$sub_category)->first();
+          $title = "Results for ".$cat->category_name." - ".$sub_cat->subcategory_name;
+          $items = Items::where('item_sub_category', '=', $sub_category)->where('item_category', '=', $category)->paginate(10);
+          $categories = Category::all();
+          return view('admin.listOfItems')->with('items',$items)->with('title',$title)->with('categories',$categories);
+      }
     }
   }

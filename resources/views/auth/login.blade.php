@@ -20,8 +20,7 @@
     </head>
 
     <body>
-      
-      <!-- {{Crypt::decrypt('eyJpdiI6InpQSUg2MzB4N3FjUERhUkJRUlwvSEpRPT0iLCJ2YWx1ZSI6IkNjSVwvNEl2V0ZaZkZ5WXF3c1ArVDR3PT0iLCJtYWMiOiIwMGMyMGQ3OGQ3OGIxYTQxZjI0ZGYwZWIxODFjMmE4MTVhNWYwZDdiNTQ2NDY4ZTdiNTI1NTU3NTJjNTQxNWRhIn0=')}} -->
+      <!--{{Crypt::decrypt('eyJpdiI6ImEzK25QejVBXC80dDVId1VSQW9VVFZnPT0iLCJ2YWx1ZSI6ImhXVjR2R2t0aStiaWZ0cENZSmVwUVE9PSIsIm1hYyI6IjRjNzEyMDEzYzhlZDE3OGI4MGE1MTcyMmQ3NWE2YTk0MWEyNTg0NjA2ZDViMWFhNTkyYzdjZTY4NWZkM2YwYTkifQ==')}}-->
       @if(Session::has('flash_message'))
       <input type="hidden" value="{{Session::get('flash_message')}}" id="errorLogin">
 	   @endif

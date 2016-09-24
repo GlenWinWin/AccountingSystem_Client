@@ -253,17 +253,44 @@ $("#tab1 #checkone").click(function () {
 <!-- Script for chaining of dropdowns -->
 <script type="text/javascript">
 $(document).ready(function($){
-  $('#category').change(function(){
+  $('#selectCategory').change(function(){
     $.get("{{ url('dropdown')}}?id="+$(this).val(),
   				function(data) {
   					$('#subCategory').empty();
-            var id = $( "#category" ).val();
+            var id = $("#selectCategory").val();
             if(id == 0){
                 $('#subCategory').append("<option value='"+ 0 +"'>" + 'Select Sub Category' + "</option>");
             }
             else{
     					$.each(data, function(index, element) {
     			            $('#subCategory').append("<option value='"+ element.id +"'>" + element.subcategory_name + "</option>");
+    			    });
+            }
+  	});
+  });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function($){
+  $('#category').change(function(){
+    var selectedId = $(this).val();
+    $.get("{{ url('dropdown')}}?id="+$(this).val(),
+  				function(data) {
+            if(selectedId == 0){
+              		document.getElementById('btnFilter').disabled = true;
+            }
+            else{
+              		document.getElementById('btnFilter').disabled = false;
+            }
+  					$('#subCat').empty();
+            var id = $("#category").val();
+            if(id == 0){
+                $('#subCat').append("<option value='"+ 0 +"'>" + 'Select Sub Category' + "</option>");
+            }
+            else{
+              $('#subCat').append("<option value='"+ 0 +"'>All</option>");
+    					$.each(data, function(index, element) {
+    			            $('#subCat').append("<option value='"+ element.id +"'>" + element.subcategory_name + "</option>");
     			    });
             }
   	});

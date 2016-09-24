@@ -175,12 +175,23 @@ function checkOldPasswordInput(passwordko){
   }
 }
 function checkIfselectedCategory(){
-  var id = $( "#category" ).val();
+  var id = $("#selectCategory").val();
   if(id == 0){
     document.getElementById('addItemBtn').disabled = true;
   }
   else{
     document.getElementById('addItemBtn').disabled = false;
+  }
+}
+function checkIfselectedExistingCategory(){
+  var id = $("#categoryList").val();
+  if(id == 0){
+    document.getElementById("newCategory").required = true;
+    document.getElementById("newSubCategory").required = true;
+  }
+  else{
+    document.getElementById("newCategory").required = false;
+    document.getElementById("newSubCategory").required = true;
   }
 }
 function removeReceivingItem(temporary_receiving_id,temp_id){

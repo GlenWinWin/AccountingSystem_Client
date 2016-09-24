@@ -87,6 +87,7 @@
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/sidebar.js"></script>
   <script src="assets/js/myUtilities.js"></script>
+  @yield('javascript_part')
 
   <!--  modal-->
 	<script type="text/javascript">
@@ -213,16 +214,32 @@ $("#tab1 #checkone").click(function () {
 </script>
 <!-- check all -->
 <script type="text/javascript">
-            $(function() {
-                $("#searchClerk").autocomplete({
-                    source: "search/autocomplete",
-                    minLength: 1,
-                    select: function( event, ui ) {
-                        $('#searchClerk').val(ui.item.id);
-                    }
-                });
-            });
-        </script>
+$(document).ready(function($){
+  $('#selectCategory').change(function(){
+    var selectedId = $(this).val();
+    $.get("{{ url('dropdown')}}?id="+$(this).val(),
+  				function(data) {
+            if(selectedId == 0){
+              		document.getElementById('btnFilter').disabled = true;
+            }
+            else{
+              		document.getElementById('btnFilter').disabled = false;
+            }
+  					$('#subCategory').empty();
+            var id = $("#selectCategory").val();
+            if(id == 0){
+                $('#subCategory').append("<option value='"+ 0 +"'>" + 'Select Sub Category' + "</option>");
+            }
+            else{
+              $('#subCategory').append("<option value='"+ 0 +"'>All</option>");
+    					$.each(data, function(index, element) {
+    			            $('#subCategory').append("<option value='"+ element.id +"'>" + element.subcategory_name + "</option>");
+    			    });
+            }
+  	});
+  });
+});
+</script>
 <script type="text/javascript">
 function readURL(input) {
 
@@ -236,7 +253,6 @@ function readURL(input) {
       reader.readAsDataURL(input.files[0]);
   }
 }
-
 $("#imgInp").change(function(){
   readURL(this);
 });
