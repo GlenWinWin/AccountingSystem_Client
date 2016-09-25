@@ -43,9 +43,12 @@
     				<img src="{{ Auth::user()->profile_path }}" class="img-responsive" alt="">
     			</div>
     			<div class="profile-usertitle">
-    				<div class="profile-usertitle-name">
+    				<div class="profile-usertitle-name" style="margin-bottom:0px;">
     					{{ Auth::user()->name }}
     				</div>
+            <div class="profile-usertitle-job" style="margin-bottom:8px;font-size:14px;">
+              1311298
+            </div>
             <div class="profile-usertitle-job">
               {{ $positionName }}
     				</div>

@@ -75,7 +75,7 @@ padding: 6px 12px;
 font-size: 14px;
 line-height: 1.42857143;
 color: #555;
-background-color: #fff;
+background-color: #FBFAEF;
 background-image: none;
 
 }
@@ -176,28 +176,28 @@ body{
   border: 0;
 }
 .navbar-default{
-      background-color:  #2d4668;
+      background-color:  #002F4C;
 }
 /*navbar buttons*/
 .navbar-default .navbar-brand {
-  color:#fff;
+  color:#FBFAEF;
 }
 .navbar-default .navbar-nav>li>a {
-  color:#fff;
+  color:#FBFAEF;
 }
 .navbar-default .navbar-nav>li>a:focus {
-  color:#fff;
+  color:#FBFAEF;
 }
 .navbar-default .navbar-toggle .icon-bar{
-  color:#fff;
-  background-color:#fff;
+  color:#FBFAEF;
+  background-color:#FBFAEF;
 }
 .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
   background-color: rgba(1,1,1,0.0);
 }
 
  .navbar-default .navbar-toggle:hover{
-  color:#fff;
+  color:#FBFAEF;
 }
 #sidebar-wrapper {
   top: 52px;
@@ -228,9 +228,22 @@ body{
   line-height: 50px;
 }
 .sidebar-nav li a {
-  color: #fff;
+  color: #FBFAEF;
   display: block;
   text-decoration: none;
+}
+.priviliges{
+  margin-top: 50px;
+}
+@media(max-width:1400px){
+  .priviliges{
+    margin-top: 30px;
+  }
+}
+@media(max-width:1199px){
+  .priviliges{
+    margin-top: 0px;
+  }
 }
 
 #sidebar-wrapper.sidebar-toggle {
@@ -249,7 +262,7 @@ body{
 }
 
 .profile-usertitle-name {
-  color: black;
+  color: #333;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 7px;
@@ -257,7 +270,7 @@ body{
 
 .profile-usertitle-job {
   text-transform: uppercase;
-  color: black;
+  color: #333;
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 15px;
@@ -292,23 +305,23 @@ body{
   border-bottom: none;
 }
 a{
-  color:black;
+  color:#333;
 }
 a:hover{
-  color:#fff;
+  color:#FBFAEF;
 }
 .active-sidebar{
-      background-color: #2d4668;
+      background-color: #002F4C;
 }
 .active-sidebar>a{
-  color:#fff;
+  color:#FBFAEF;
 }
 .nav>li>a:focus, .nav>li>a:hover {
     text-decoration: none;
-    background-color: #2d4668;
+    background-color: #002F4C;
 }
 .profile-usermenu ul li a {
-  color: #fff;
+  color: #FBFAEF;
   font-size: 14px;
   font-weight: 400;
 }
@@ -343,7 +356,7 @@ a:hover{
 }
 /*table*/
 .thead{
-  background:#2d4668;
+  background:#002F4C;
       color: white;
 }
 
@@ -354,20 +367,20 @@ a:hover{
 }
 /*pagination*/
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
-  background-color: #2d4668;
-  border-color: #2d4668;
+  background-color: #002F4C;
+  border-color: #002F4C;
 }
 .pagination>li>a, .pagination>li>span{
-  color:black;
+  color:#333;
 }
 .search{
   float: right;
   display: block;
 }
 .btn-primary{
-  color: #fff;
-background-color: #2d4668;
-border-color: #2d4668;
+  color: #FBFAEF;
+background-color: #002F4C;
+border-color: #002F4C;
 
 }
 
@@ -404,7 +417,7 @@ border-color: #2d4668;
 }
 
 .dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
+    border-left-color: #FBFAEF;
 }
 
 .dropdown-submenu.pull-left {
@@ -520,7 +533,7 @@ float:right;
 .ui-autocomplete { max-height: 200px; overflow-y: auto;overflow-x: hidden; }
 
 .price{
-  border: 2px solid #2d4668;
+  border: 2px solid #002F4C;
   overflow-y: auto;
 }
 .value{
@@ -529,7 +542,7 @@ float:right;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
-    background-color: #fff;
+    background-color: #FBFAEF;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -559,9 +572,9 @@ ul.checkout-bar li:before {
     -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
     box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
     background: #ddd;
-    border: 2px solid #FFF;
+    border: 2px solid #FBFAEF;
     border-radius: 50%;
-    color: #fff;
+    color: #FBFAEF;
     font-size: 16px;
     font-weight: 700;
     text-align: center;
