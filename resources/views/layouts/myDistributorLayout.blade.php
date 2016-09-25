@@ -47,7 +47,7 @@
     					{{ Auth::user()->name }}
     				</div>
             <div class="profile-usertitle-job" style="margin-bottom:8px;font-size:14px;">
-              1311298
+              {{Auth::user()->userID}}
             </div>
             <div class="profile-usertitle-job">
               {{ $positionName }}

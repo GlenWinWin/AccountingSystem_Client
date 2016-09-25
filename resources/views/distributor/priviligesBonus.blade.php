@@ -76,7 +76,7 @@
            <!--  Channel Director-->
           <div class="col-md-6" >
            <b>7%</b> Rebates for Magenta Items<br>
-        <b> 5%</b> Sales Share for Every 200,000-Up Purchased of Channel Manager 
+        <b> 5%</b> Sales Share for Every 200,000-Up Purchased of Channel Manager
         </div>
             <div class="col-md-6" >
         <b>  3%</b> Sales share for every 75,000-Up Purchased of Channel Associate <br>
