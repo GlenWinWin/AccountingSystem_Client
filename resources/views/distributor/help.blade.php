@@ -115,7 +115,7 @@
               </p>
             <p style="padding-left:30px;">
             2,000,000 Group Sales <br>
-            5 Group Enlistment/Month <br>
+            5 Group CA Enlistment/Month <br>
             5 Corporate Channel Enlist
               </p>
         </p>
@@ -156,7 +156,7 @@
               </p>
             <p style="padding-left:30px;">
             3,500,000 Group Sales <br>
-            5 Group Enlistment/Month <br>
+            5 Group CA Enlistment/Month <br>
             7 Corporate Channel Enlist
               </p>
         </p>

@@ -18,7 +18,7 @@
     						<span class="icon-bar"></span>
     						<span class="icon-bar"></span>
     		</a>
-    			<a class="navbar-brand" href="list_clerk">
+    			<a class="navbar-brand" href="genealogy">
     				logo
     			</a>
     		</div>
@@ -183,6 +183,9 @@ $("#imgInp").change(function(){
   var totalSales = numeral({{Auth::user()->totalPersonalSales}}).format('0,0.00');
   var totalSalesMonth = numeral({{Auth::user()->totalSalesMonth}}).format('0,0.00');
   var totalGroupSales = numeral({{Auth::user()->totalGroupSales}}).format('0,0.00');
+  var targetGroupSales = numeral({{Auth::user()->targetGroupSales}}).format('0,0.00');
+  var groupSalesForChannelDirector = numeral(3000000).format('0,0.00');
   document.getElementById("totalPersonalSales").innerHTML = 'PHP ' + totalSales + '/ PHP ' +totalSalesMonth;
-  document.getElementById("totalGroupSalesMoney").innerHTML = 'PHP ' + totalGroupSales;
+  document.getElementById("totalGroupSales").innerHTML = 'PHP ' + totalGroupSales + '/ PHP ' +groupSalesForChannelDirector;
+  document.getElementById("totalGroupSalesMoney").innerHTML = 'PHP ' + totalGroupSales + '/ PHP ' +targetGroupSales;
 </script>

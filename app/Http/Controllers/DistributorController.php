@@ -27,18 +27,18 @@ class DistributorController extends Controller
             }
           }while($distributorID != 0);
           $updateTotalMonthSales = Distributor::where('id','=',Auth::user()->id)->update(['totalSalesMonth'=>500000]);
-          $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish),'monthCounter'=>0]);
+          $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish),'monthCounter'=>0,'targetGroupSales'=>1000000]);
           $promoted = 'You have been promoted to new Channel Associate.';
 
         }
         else if(Auth::user()->channelPosition == 2){
           $updateTotalMonthSales = Distributor::where('id','=',Auth::user()->id)->update(['totalSalesMonth'=>1000000]);
-          $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish),'monthCounter'=>0]);
+          $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish),'monthCounter'=>0,'targetGroupSales'=>2000000]);
           $promoted = 'You have been promoted to new Channel Manager.';
         }
         else if(Auth::user()->channelPosition == 3){
           $updateTotalMonthSales = Distributor::where('id','=',Auth::user()->id)->update(['totalSalesMonth'=>2000000]);
-          $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish),'monthCounter'=>0]);
+          $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish),'monthCounter'=>0,'targetGroupSales'=>3500000]);
           $promoted = 'You have been promoted to new Channel Director.';
         }
         if(Auth::user()->channelPosition != 4){
@@ -300,7 +300,7 @@ class DistributorController extends Controller
       }
       $countCA = Distributor::where('distributor_id','=',Auth::user()->id)->where('channelPosition','=','2')->get();
       $countCM = Distributor::where('distributor_id','=',Auth::user()->id)->where('channelPosition','=','3')->get();
-      return view('distributor.priviligesBonus')->with('positionName',$positionName)->with('CA',count($countCA))->with('CM',count($countCM));
+      return view('distributor.priviliges')->with('positionName',$positionName)->with('CA',count($countCA))->with('CM',count($countCM));
     }
     public function help(){
       $positionName = '';

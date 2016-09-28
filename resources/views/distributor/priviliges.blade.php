@@ -51,29 +51,33 @@
 
 
         <!--  Channel Builder-->
-        <!-- <div class="col-md-12" >
+        @if(Auth::user()->channelPosition == 1)
+        <div class="col-md-12" >
            You don't have any priviliges yet. Please require all the requirements to enjoy the priviliges!
-         </div> -->
+         </div>
            <!--  Channel Builder-->
 
            <!--  Channel Associate-->
-          <!-- <div class="col-md-12" >
+          @elseif(Auth::user()->channelPosition == 2)
+          <div class="col-md-12" >
            <b> 3%</b> Rebates for Magenta Items<br>
            <b>1% </b>Sales Share for Every 20,000-Up Purchased of Channel Builder
-        </div> -->
+        </div>
             <!--  Channel Associate-->
 
            <!--  Channel Manager-->
-          <!-- <div class="col-md-6" >
+           @elseif(Auth::user()->channelPosition == 3)
+          <div class="col-md-6" >
            <b> 5%</b> Rebates for Magenta Items<br>
            <b>3%</b> Sales Share for Every 100,000-Up Purchased of Channel Associate
         </div>
             <div class="col-md-6" >
          <b>  1%</b> Sales share for every 20,000-Up Purchased of Channel Builder
-            </div> -->
+            </div>
             <!--  Channel Manager-->
 
            <!--  Channel Director-->
+          @else
           <div class="col-md-6" >
            <b>7%</b> Rebates for Magenta Items<br>
         <b> 5%</b> Sales Share for Every 200,000-Up Purchased of Channel Manager
@@ -83,7 +87,7 @@
         <b>  1% </b>Sales share for every 20,000-Up Purchased of Channel Builder
             </div>
             <!--  Channel Director-->
-
+            @endif
            </div>
 
       </div>
@@ -137,13 +141,14 @@
          </tr>
          <tr>
            <td>3 M Group Sales</td>
-           <th scope="row" id="totalGroupSalesMoney"></th>
+           <th scope="row" id="totalGroupSales"></th>
            <th>{{ Auth::user()->totalGroupSales  >= 3000000 ? 'Done' : 'Not Yet'}}</th>
          </tr>
          @endif
        </tbody>
      </table>
      </div>
+     @if(Auth::user()->channelPosition != 1)
      <h2>Channel Activity</h2>
         <div class="table-responsive" style="margin-bottom:20px;">
     <table class="table" id="tab1">
@@ -154,13 +159,47 @@
           <th>Remarks</th>
         </tr>
         </thead>
+      <tbody>
+        @if(Auth::user()->channelPosition == 2)
         <tr>
           <td>Group Sales</td>
-          <th> PHP 1,000,000.00 / PHP 1,000,000.00</th>
-          <th>Done</th>
+          <th id="totalGroupSalesMoney"></th>
+          <th>{{ Auth::user()->totalGroupSales  >= 1000000 ? 'Done' : 'Not Yet'}}</th>
         </tr>
         <tr>
           <td>Group Enlistment / Month</td>
+          <th>{{ Auth::user()->totalNewMemberMonth}}/5</th>
+          <th>{{ Auth::user()->totalNewMemberMonth  == 5 ? 'Done' : 'Not Yet'}}</th>
+        </tr>
+        <tr>
+          <td>Corporate Channel Enlist</td>
+          <th>3/3</th>
+          <th>Done</th>
+        </tr>
+        @elseif(Auth::user()->channelPosition == 3)
+        <tr>
+          <td>Group Sales</td>
+          <th id="totalGroupSalesMoney"></th>
+          <th>{{ Auth::user()->totalGroupSales  >= 2000000 ? 'Done' : 'Not Yet'}}</th>
+        </tr>
+        <tr>
+          <td>CA Group Enlistment / Month</td>
+          <th>{{ Auth::user()->totalNewCAMonth}}/5</th>
+          <th>{{ Auth::user()->totalNewCAMonth == 5 ? 'Done' : 'Not Yet'}}</th>
+        </tr>
+        <tr>
+          <td>Corporate Channel Enlist</td>
+          <th>5/5</th>
+          <th>Done</th>
+        </tr>
+        @elseif(Auth::user()->channelPosition == 4)
+        <tr>
+          <td>Group Sales</td>
+          <th id="totalGroupSalesMoney"></th>
+          <th>Done</th>
+        </tr>
+        <tr>
+          <td>CA Group Enlistment / Month</td>
           <th>5/5</th>
           <th>Done</th>
         </tr>
@@ -169,11 +208,10 @@
           <th>3/3</th>
           <th>Done</th>
         </tr>
-
-      <tbody>
-
+        @endif
       </tbody>
     </table>
     </div>
+    @endif
     </div>
   @stop
