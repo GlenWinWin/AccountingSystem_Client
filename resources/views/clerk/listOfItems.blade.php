@@ -151,8 +151,8 @@
 						<div class="modal-body">
 							<div class="form-group col-lg-12">
 								<div class="picture_items">
-									<img id="blah" src="assets/images/login.jpg" class="img-responsive" style="border: 5px solid #002F4C;">
-									<center><input type="file" name="new_dp" class="text-center upload" id="imgInp" style="margin-top:20px;width:80%;"></center>
+									<img id="blah1" src="assets/images/login.jpg" class="img-responsive" style="border: 5px solid #002F4C;">
+									<center><input type="file" name="new_dp" class="text-center upload" id="imgInp1" style="margin-top:20px;width:80%;"></center>
 								</div>
 							</div>
 							<div class="form-group">
@@ -243,9 +243,9 @@
 						<div class="modal-body">
 							<div class="form-group col-lg-12">
 								<div class="picture_items">
-									<img id="blah" src="" class="img-responsive" style="border: 5px solid #002F4C;">
-									<center><input type="file" name="new_dp" class="text-center upload" id="imgInp" style="margin-top:20px;width:80%;"></center>
-								</div>
+									<img id="uploadPreview" src="" class="img-responsive" style="border: 5px solid #002F4C;">
+									<center><input type="file" name="new_dp" class="text-center upload" id="uploadImage" style="margin-top:20px;width:80%;" onchange="PreviewImage();"></center>
+									</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-4 control-label">Item Category</label>

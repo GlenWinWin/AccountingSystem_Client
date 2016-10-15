@@ -4,7 +4,7 @@
 	@if(isset($title))
 		{{$title}}
 	@else
-	List of Clerks
+	List of Merchants
 	@endif
 @stop
 
@@ -14,13 +14,13 @@
 		@if(isset($title))
 			{{$title}}
 		@else
-		List of Clerks
+		List of Merchants
 		@endif
 	</h1></center>
 <hr>
 <div class="dropdown col-lg-8 col-md-8 col-sm-8">
 
-	<input type="button" name="name" value="Add Clerk" class="btn btn-primary btn-md open-modal-addClerk">
+	<input type="button" name="name" value="Add Merchant" class="btn btn-primary btn-md open-modal-addClerk">
 	<input type="button" name="name" value="Manage Priviliges" onclick="doMultipleSelectionOfIdsManage()" class="btn btn-primary btn-md open-modal-managePrivilegesMultipleTimes s5-360">
 	<input type="button" name="name" value="Delete" onclick="doMultipleSelectionOfIdsDelete()" class="btn btn-primary btn-md open-modal-deleteMultipleUsers">
 
@@ -142,7 +142,7 @@
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label><input type="checkbox" id="addClerkCheckBox" name="add_clerk" value="1"/>Add Clerk</label>
+									<label><input type="checkbox" id="addClerkCheckBox" name="add_clerk" value="1"/>Add Merchants</label>
 								</div>
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
@@ -173,7 +173,7 @@
 				<div class="modal-content">
 						<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Add Clerk</h4>
+						<h4 class="modal-title">Add Merchant</h4>
 						</div>
 						<form action="{{ URL::to('clerk_add') }}" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -244,7 +244,7 @@
 					<div class="modal-content">
 							<div class="modal-header" style="color:#b3cccc";>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Are you sure you want to delete this clerk?</h4>
+							<h4 class="modal-title">Are you sure you want to delete this merchant?</h4>
 							</div>
 							<div class="modal-footer">
         {!! Form::open(array('action' => 'AdminController@removeClerk' , 'method' => 'post'))!!}
@@ -283,7 +283,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Check the privileges you will allow to the selected clerks:</h4>
+					<h4 class="modal-title">Check the privileges you will allow to the selected Merchants:</h4>
 					</div>
 				{!! Form::open(array('action' => 'AdminController@multiplemanagePrivileges' , 'method' => 'post'))!!}
 				<input type="hidden" name="ids_to_be_manage" id="manageIdsPrivileges">
@@ -301,7 +301,7 @@
 								</div>
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
-										<label><input type="checkbox" name="add_clerk" value="1"/>Add Clerk</label>
+										<label><input type="checkbox" name="add_clerk" value="1"/>Add Merchants</label>
 									</div>
 								</div>
 								<div class="col-sm-offset-2 col-sm-10">

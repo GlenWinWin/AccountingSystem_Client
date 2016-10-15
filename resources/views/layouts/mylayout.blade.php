@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
         </a>
-          <a class="navbar-brand" href="list_clerk">
+          <a class="navbar-brand" href="list_merchant">
             <img src="assets/images/logo.png" height="55px;" />
           </a>
         </div>
@@ -49,14 +49,14 @@
     			</div>
     		<ul class="nav">
     			<li>
-    				<a href="list_clerk" >
+    				<a href="list_merchant" >
     				<i class="glyphicon glyphicon-user"></i>
-    				Clerks </a>
+    				Merchants </a>
     			</li>
     			<li >
-    				<a href="list_distributor">
+    				<a href="list_channel">
     				<i class="fa fa-users"></i>
-    			Distributors</a>
+    			Channels</a>
     			</li>
     			<li>
     				<a href="list_items">

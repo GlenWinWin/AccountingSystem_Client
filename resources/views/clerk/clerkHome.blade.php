@@ -4,7 +4,7 @@
 	@if(isset($title))
 		{{$title}}
 	@else
-	List of Clerks
+	List of Merchants
 	@endif
 @stop
 
@@ -17,12 +17,12 @@
 		@if(isset($title))
 			{{$title}}
 		@else
-		List of Clerks
+		List of Merchants
 		@endif
 	</h1></center>
 <hr>
 	@if($ac == 1)
-		<input type="button" name="name" value="Add Clerk" data-toggle="modal" data-target="#myModalAddClerk" class="btn btn-primary btn-md">
+		<input type="button" name="name" value="Add Merchant" data-toggle="modal" data-target="#myModalAddClerk" class="btn btn-primary btn-md">
 	@endif
 	<div class="search">
 		{!! Form::open(array('action' => 'ClerkController@searchClerk' , 'method' => 'get'))!!}
@@ -67,7 +67,7 @@
 				<div class="modal-content">
 						<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Add Clerk</h4>
+						<h4 class="modal-title">Add Merchant</h4>
 						</div>
 						<form action="{{ URL::to('add_clerk') }}" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -138,8 +138,8 @@
       <div class="modal-content" style="padding:50px;">
           <center>
 						<img src="assets/images/check.png" alt="" style="height:150px;padding-bottom:20px;"/>
-						<h4 class="modal-title" id="myModalLabel"><b>New Clerk Added</b></h4></center>
-          <center>  <p style="font-size:18px">A new clerk has been successfully added on the list. </p>  </center>
+						<h4 class="modal-title" id="myModalLabel"><b>New Merchant Added</b></h4></center>
+          <center>  <p style="font-size:18px">A new Merchant has been successfully added on the list. </p>  </center>
             <center><button type="button" class="btn btn-primary btn-md edit-btn" data-dismiss="modal" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
       </div>
       <!-- /.modal-content -->

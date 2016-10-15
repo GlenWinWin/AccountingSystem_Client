@@ -52,7 +52,7 @@ Route::get('search_items',[
   'uses' => 'ClerkController@searchItems'
 ]);
 //Home page for clerks and distributors
-Route::get('home_clerk',[
+Route::get('home_merchant',[
   'uses' => 'ClerkController@clerk_home'
 ]);
 
@@ -60,10 +60,10 @@ Route::get('home_clerk',[
 Route::get('login', function () {
   if(Auth::check()){
 		if(Auth::user()->typeOfUser == 0){
-      return redirect('list_clerk');
+      return redirect('list_merchant');
     }
     else if(Auth::user()->typeOfUser == 1){
-      return redirect('home_clerk');
+      return redirect('home_merchant');
     }
     else if(Auth::user()->typeOfUser == 2){
       return redirect('genealogy');
@@ -90,11 +90,11 @@ Route::get('logout',[
   'uses' => 'UserController@logout'
 ]);
 //View functions of admin
-Route::get('list_distributor', [
+Route::get('list_channel', [
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfDistributor'
 ]);
-Route::get('list_clerk',[
+Route::get('list_merchant',[
   'middleware' => 'auth',
   'uses' => 'AdminController@listOfClerk'
 ]);
@@ -104,7 +104,7 @@ Route::get('list_items',[
 ]);
 
 // view functions of clerk
-Route::get('distributor_list', [
+Route::get('channel_list', [
   'middleware' => 'auth',
   'uses' => 'ClerkController@listOfDistributor'
 ]);

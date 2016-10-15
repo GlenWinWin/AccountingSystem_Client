@@ -20,7 +20,7 @@
     						<span class="icon-bar"></span>
     						<span class="icon-bar"></span>
     		</a>
-    			<a class="navbar-brand" href="home_clerk">
+    			<a class="navbar-brand" href="home_merchant">
     				<img src="assets/images/logo.png" height="55px;" />
     			</a>
     		</div>
@@ -49,20 +49,20 @@
     					{{Auth::user()->name}}
     				</div>
             <div class="profile-usertitle-job">
-              Clerk
+              Merchant
             </div>
 
     			</div>
     		<ul class="nav">
             <li>
-              <a href="home_clerk">
+              <a href="home_merchant">
               <i class="fa fa-user"></i>
-              Clerks</a>
+              Merchant</a>
             </li>
             <li>
-              <a href="distributor_list">
+              <a href="channel_list">
               <i class="fa fa-users"></i>
-              Distributors</a>
+              Channel</a>
             </li>
           @if($ui == 1)
           <li>
@@ -331,4 +331,53 @@ function readURL(input) {
 $("#imgInp").change(function(){
   readURL(this);
 });
+</script>
+
+<script type="text/javascript">
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          $('#yey').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgYey").change(function(){
+  readURL(this);
+});
+</script>
+<script type="text/javascript">
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          $('#blah1').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp1").change(function(){
+  readURL(this);
+});
+</script>
+<script type="text/javascript">
+
+    function PreviewImage() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("uploadPreview").src = oFREvent.target.result;
+        };
+    };
+
 </script>
