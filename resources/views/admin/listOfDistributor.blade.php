@@ -4,7 +4,7 @@
 	@if(isset($title))
 		{{$title}}
 	@else
-	List of Distributors
+	List of Channels
 	@endif
 	@stop
 
@@ -14,7 +14,7 @@
 			@if(isset($title))
 			{{$title}}
 			@else
-			List of Distributors
+			List of Channels
 			@endif</h1></center>
 		<hr>
 		<div class="dropdown col-lg-8 col-md-8 col-sm-8" >
@@ -121,7 +121,7 @@
 	        <div class="modal-content">
 	            <div class="modal-header" style="color:#b3cccc";>
 	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	            <h4 class="modal-title">Are you sure you want to delete this distributor?</h4>
+	            <h4 class="modal-title">Are you sure you want to delete this channels?</h4>
 	            </div>
 	            <div class="modal-footer">
 								{!! Form::open(array('action' => 'AdminController@removeDistributor' , 'method' => 'post'))!!}

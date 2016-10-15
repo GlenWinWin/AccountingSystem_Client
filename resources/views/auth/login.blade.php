@@ -96,12 +96,12 @@
                                 </div>
                                 <!-- /.Modal for Forgot Password -->
                                 <div class="modal fade alert-modal" id="myModalForgot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-sm">
-                                    <div class="modal-content" style="padding:50px;">
-                                          <h4 class="modal-title"><b>Forgot Password</b></h4>
+                                  <div class="modal-dialog modal-sm" >
+                                    <div class="modal-content" style="padding:20px;">
+                                          <h4 class="modal-title" style="padding:0px 30px;"><b>Forgot Password</b></h4> <br>
                                             {!! Form::open(array('action' => 'UserController@forgotPassword' , 'method' => 'post' , 'id' => 'formAddItemtoSales'))!!}
-                                            <p style="font-size:18px"><input type="email" required="" placeholder="Enter email" class="form-control" name="emailForgot"></p>
-                                            <button type="submit" class="btn btn-primary" style="padding-left:10px;padding-right:10px;">Submit</button>
+                                            <input type="email" required="" placeholder="Enter email" class="form-control" name="emailForgot" style="margin-bottom:15px;padding:20px;"/>
+                                            <button type="submit" class="btn btn-primary btn-sm" style="width:60%">Submit</button>
                                             {!! Form::close() !!}
                                     </div>
                                     <!-- /.modal-content -->

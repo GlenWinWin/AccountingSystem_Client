@@ -4,7 +4,7 @@
 	@if(isset($title))
 		{{$title}}
 	@else
-	List of Distributors
+	List of Channels
 	@endif
 	@stop
 
@@ -17,10 +17,10 @@
 			@if(isset($title))
 			{{$title}}
 			@else
-			List of Distributors
+			List of Channels
 			@endif</h1></center>
 		<hr>
-		<a href="add_new_distributor" class="btn btn-primary">Add Channel Builder</a>
+		<a href="add_new_distributor" class="btn btn-primary">Add a Channel Builder</a>
 		<div class="search" style="padding-bottom:20px;">
 			{!! Form::open(array('action' => 'ClerkController@searchDistributor' , 'method' => 'get'))!!}
 			<input type="text" name="search" required="" placeholder="Search...">
@@ -32,7 +32,7 @@
 			<thead class="thead">
 				<tr>
 					<th>Name</th>
-					<th>Distributor Id</th>
+					<th>Channel Id</th>
 					<th>Contact</th>
 					<th>Email</th>
 					<th>Address</th>
@@ -69,8 +69,8 @@
  			<div class="modal-content" style="padding:50px;">
  					<center>
  						<img src="assets/images/check.png" alt="" style="height:150px;padding-bottom:20px;"/>
- 						<h4 class="modal-title" id="myModalLabel"><b>New Distributor Added</b></h4></center>
- 					<center>  <p style="font-size:18px">A new Distributor has been successfully added on the list. </p>  </center>
+ 						<h4 class="modal-title" id="myModalLabel"><b>New Channel Added</b></h4></center>
+ 					<center>  <p style="font-size:18px">A new Channel has been successfully added on the list. </p>  </center>
  						<center><button type="button" class="btn btn-primary btn-md edit-btn" data-dismiss="modal" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
  			</div>
  			<!-- /.modal-content -->
