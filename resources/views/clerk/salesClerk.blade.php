@@ -1,4 +1,4 @@
-@extends('layouts.myClerklayout')
+@extends('layouts.myClerkLayout')
 
 @section('title')
 	Sales
@@ -28,7 +28,7 @@
 		<div style="float:none;text-align:center;">
 
       {!! Form::open(array('action' => 'ClerkController@addItemtoSales' , 'method' => 'post' , 'id' => 'formAddItemtoSales'))!!}
-			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:70%;margin-bottom: 0px;display:inline;">
+			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search items..." class="form-control" style="width:70%;margin-bottom: 0px;display:inline;">
 			<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
 			<input type="submit" onclick="" name="name" value="Add" class="btn btn-primary btn-md" style="width:25%;">
       {!! Form::close()!!}
@@ -53,10 +53,10 @@
 			<tr>
 				<td><input type="button" onclick="removeSaleItem({{$sale->temporary_sales_details_id}},{{$sale->id}})" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModalDeleteTemporarySales" style="padding:8px 12px;" value="Cancel"/></td>
 				<td style="padding-top:15px">{{$sale->item_name}}</td>
-				<td style="padding-top:15px">PHP. {{$sale->item_costPrice}}</td>
+				<td style="padding-top:15px">P{{$sale->item_costPrice}}</td>
 				<td><input type="number" id="quantityField{{$counter}}" min="1" value="{{$sale->item_quantity}}" style="width:70px" onchange="updateQuantity({{$counter}},{{$sale->temporary_sales_details_id}})"></td>
 				<input type="hidden" id="priceField{{$counter}}" value="{{$sale->item_costPrice}}">
-				<td style="padding-top:15px;font-weight:bold;" id="subTotal{{$counter}}">{{ $sale->item_costPrice * $sale->item_quantity }}</td>
+				<td style="padding-top:15px;font-weight:bold;" id="subTotal{{$counter}}">P{{ $sale->item_costPrice * $sale->item_quantity }}</td>
 			</tr>
 			<?php $counter++;?>
       @endforeach
@@ -81,8 +81,8 @@
 					@foreach($temporary_sales as $sale)
 					<tr>
 						<td>{{$sale->item_name}}</td>
-						<td id="saleQuantity{{$counter}}">x{{$sale->item_quantity}}</td>
-						<td id="saleSubTotal{{$counter}}">PHP. {{ $sale->item_costPrice * $sale->item_quantity }}</td>
+						<td id="saleQuantity{{$counter}}">x {{$sale->item_quantity}}</td>
+						<td id="saleSubTotal{{$counter}}">P {{ $sale->item_costPrice * $sale->item_quantity }}</td>
 					</tr>
 					<?php $totalSales += $sale->item_costPrice * $sale->item_quantity; ?>
 					<?php $counter++;?>
@@ -90,7 +90,7 @@
 					<tr>
 						<td style="font-weight:bold;font-size:15px;">Total</td>
 						<td></td>
-						<td id="totalSalesID">PHP {{$totalSales}}</td>
+						<td id="totalSalesID">P {{$totalSales}}</td>
 					</tr>
 					<tr>
 						{!! Form::open(array('action' => 'ClerkController@salesEncoding' , 'method' => 'post'))!!}

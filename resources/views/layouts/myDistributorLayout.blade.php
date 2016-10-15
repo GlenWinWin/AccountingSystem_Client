@@ -52,6 +52,9 @@
             <div class="profile-usertitle-job">
               {{ $positionName }}
     				</div>
+    	<div class="profile-usertitle-job">
+              Commission : P {{$comm}}
+    				</div>
     			</div>
     		<ul class="nav">
     			<li>
@@ -118,15 +121,15 @@ $(document).ready(function(){
       $.get("{{ url('selectDetailedTransaction')}}?transactID="+$(this).val(),
           function(data) {
             var i=1;
-            var totalSales =0;
+            var totalSales = 0;
             $.each(data, function(index, element) {
                 $('#transactionDetails').append("<tr>"+
                 "<td>"+element.item_name+"</td>"+
                 "<td>"+element.transaction_quantity+"</td>"+
-                "<td> PHP "+element.transaction_costPrice+"</td>"+
-                "<td> PHP "+element.transaction_subtotal+"</td>"+
+                "<td> P "+element.transaction_costPrice+"</td>"+
+                "<td> P "+element.transaction_subtotal+"</td>"+
                 "</tr>");
-                totalSales += element.transaction_subtotal;
+                totalSales += parseFloat(element.transaction_subtotal);
                 i++;
             });
             $('#transactionDetails').append("<tr>"+
@@ -139,7 +142,7 @@ $(document).ready(function(){
               $('#modalBody').style.height = '300px';
               $('#modalBody').style.overflowY = 'auto';
             }
-            document.getElementById("totalSalesID").innerHTML = 'PHP ' + totalSales;
+            document.getElementById("totalSalesID").innerHTML = 'P ' + totalSales;
             document.getElementById("titleDetailedTransaction").innerHTML = 'Detailed Transaction of ' + transactID;
       });
     });

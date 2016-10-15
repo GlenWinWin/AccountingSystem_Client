@@ -53,9 +53,9 @@
 					<td><input type="checkbox" name="items_ids" id="checkone" value="{{$itemss->item_id}}"></td>
 					<td>{{$itemss->item_name}}</td>
 					<td>{{$itemss->item_quantity}}</td>
-					<td>PHP {{$itemss->item_costPrice}}</td>
-					<td>PHP {{$itemss->item_subcostPrice}}</td>
-					<td>PHP {{$itemss->item_sellingPrice}}</td>
+					<td>P{{$itemss->item_costPrice}}</td>
+					<td>P{{$itemss->item_subcostPrice}}</td>
+					<td>P{{$itemss->item_sellingPrice}}</td>
 					<td><input type="button" value="Edit Items" data-toggle="modal" data-target="#myModalEditItem" class="btn btn-primary btn-sm" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')"></td>
 					<td><input type="button" data-toggle="modal" data-target="#myModalDeleteItem" class="btn btn-sm btn-primary" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
 				</tr>

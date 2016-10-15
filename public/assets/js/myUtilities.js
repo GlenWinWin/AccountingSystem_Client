@@ -205,9 +205,9 @@ function removeSaleItem(temporary_sale_id,temp_id){
 function updateQuantity(counter,id){
   var cost = document.getElementById("priceField"+counter).value;
   var quantity = +document.getElementById("quantityField"+counter).value;
-  document.getElementById("subTotal"+counter).innerHTML = cost * quantity;
-  document.getElementById("saleQuantity"+counter).innerHTML = "x" + quantity;
-  document.getElementById("saleSubTotal"+counter).innerHTML = cost * quantity;
+  document.getElementById("subTotal"+counter).innerHTML = "P"+(cost * quantity).toFixed(2);
+  document.getElementById("saleQuantity"+counter).innerHTML = "x " + quantity;
+  document.getElementById("saleSubTotal"+counter).innerHTML = "P"+(cost * quantity).toFixed(2);
   var dataString = "id="+id+"&quantity="+quantity;
   var totalSales = 0;
   $.ajax({
@@ -224,13 +224,13 @@ function updateQuantity(counter,id){
 
     totalSales += (cost * quantity);
   }
-  document.getElementById("totalSalesID").innerHTML = "PHP " + totalSales;
-  $("input[id=totalSalesHiddenInput]").val(totalSales);
+  document.getElementById("totalSalesID").innerHTML = "P " + (totalSales).toFixed(2);
+  $("input[id=totalSalesHiddenInput]").val((totalSales.toFixed(2)));
 }
 function updateQuantityReceivings(counter,id){
   var cost = document.getElementById("priceField"+counter).value;
   var quantity = +document.getElementById("quantityField"+counter).value;
-  document.getElementById("subTotal"+counter).innerHTML = cost * quantity;
+  document.getElementById("subTotal"+counter).innerHTML = "P"+(cost * quantity).toFixed(2);
 
   var dataString = "id="+id+"&quantity="+quantity;
   $.ajax({

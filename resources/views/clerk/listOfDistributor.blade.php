@@ -32,6 +32,7 @@
 			<thead class="thead">
 				<tr>
 					<th>Name</th>
+					<th>Distributor Id</th>
 					<th>Contact</th>
 					<th>Email</th>
 					<th>Address</th>
@@ -44,10 +45,11 @@
 				@foreach($distributors as $distributorss)
 	      <tr>
 					<th scope="row">{{$distributorss->fname}} {{$distributorss->lname}}</th>
+					<td>{{$distributorss->userID}}</td>
 					<td>{{$distributorss->contact}}</td>
 					<td>{{$distributorss->email}}</td>
 					<td>{{$distributorss->address}}</td>
-					<td>PHP {{$distributorss->totalSales}}</td>
+					<td>P {{$distributorss->totalSales}}</td>
 					<td>{{$distributorss->username}}</td>
 
 				</tr>
