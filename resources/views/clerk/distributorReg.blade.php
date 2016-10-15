@@ -71,6 +71,7 @@
 
                <b>{{$referralID}}</b>
 							 <input type="hidden" name="referralID" value="{{$referralID}}">
+							 <input type="hidden" name="commission" value="{{$comm}}">
            </div>
   </div>
 

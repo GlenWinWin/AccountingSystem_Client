@@ -1,4 +1,4 @@
-@extends('layouts.myClerklayout')
+@extends('layouts.myClerkLayout')
 
 @section('title')
 	Receivings
@@ -19,7 +19,7 @@ Receivings
 		<div class="col-lg-9 col-md-10 col-sm-10 col-xs-12" style="padding-left:0px;padding-right:0px;padding-bottom:5px;">
 
       {!! Form::open(array('action' => 'ClerkController@addItemtoReceivings' , 'method' => 'post' , 'id' => 'formAddItemtoSales'))!!}
-			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search..." class="form-control" style="width:74%;margin-bottom: 0px;display:inline;">
+			<input type="text" name="itemName" required="" id="searchitem" placeholder="Search items..." class="form-control" style="width:74%;margin-bottom: 0px;display:inline;">
 			<input type="hidden" name="hiddenID" value="{{$hiddenID}}">
 			<input type="submit" onclick="" name="name" value="Add" class="btn btn-primary btn-md" style="width:24%;">
       {!! Form::close()!!}
@@ -47,10 +47,10 @@ Receivings
 			<tr>
 				<td><input type="button" onclick="removeReceivingItem({{$receiving->temporary_receivings_details_id}},{{$receiving->id}})" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModalDeleteTemporaryReceivings" style="padding:8px 12px;" value="Cancel"/></td>
 				<td style="padding-top:15px">{{$receiving->item_name}}</td>
-				<td style="padding-top:15px">PHP. {{$receiving->item_costPrice}}</td>
+				<td style="padding-top:15px">P{{$receiving->item_costPrice}}</td>
 				<td><input type="number" name="name" id="quantityField{{$counter}}" min="1" value="{{$receiving->item_quantity}}" style="width:70px" onchange="updateQuantityReceivings({{$counter}},{{$receiving->temporary_receivings_details_id}})"></td>
 				<input type="hidden" id="priceField{{$counter}}" value="{{$receiving->item_costPrice}}">
-        <td style="padding-top:15px;font-weight:bold;" id="subTotal{{$counter}}">{{ $receiving->item_costPrice * $receiving->item_quantity }}</td>
+        <td style="padding-top:15px;font-weight:bold;" id="subTotal{{$counter}}">P{{ $receiving->item_costPrice * $receiving->item_quantity }}</td>
 			</tr>
 			<?php $counter++;?>
       @endforeach

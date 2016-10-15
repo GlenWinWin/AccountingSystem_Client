@@ -10,7 +10,7 @@ use App\TransactionDetails;
 use Auth;
 use DB;
 use Input;
-use Commissions;
+use App\Commissions;
 
 class DistributorController extends Controller
 {
@@ -59,34 +59,34 @@ class DistributorController extends Controller
         }
       }
       else{
-        if(Auth::user()->channelPosition == 1 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales >= 300000){
+        if(Auth::user()->channelPosition == 1 && Auth::user()->dateToFinish <= date('Y-m-d') && Auth::user()->totalPersonalSales >= 300000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           $updateMonth = Distributor::where('id','=',Auth::user()->id)->increment('monthCounter',1);
           $promoted = "You've reached your " . ((Auth::user()->monthCounter == 0) ? "1st month":"2nd month");
         }
-        else if(Auth::user()->channelPosition == 1 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales < 300000){
+        else if(Auth::user()->channelPosition == 1 && Auth::user()->dateToFinish <= date('Y-m-d') && Auth::user()->totalPersonalSales < 300000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           if(Auth::user()->monthCounter >= 1){
             $updateMonth = Distributor::where('id','=',Auth::user()->id)->decrement('monthCounter',1);
           }
         }
-        else if(Auth::user()->channelPosition == 2 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales >= 500000){
+        else if(Auth::user()->channelPosition == 2 && Auth::user()->dateToFinish <= date('Y-m-d') && Auth::user()->totalPersonalSales >= 500000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           $updateMonth = Distributor::where('id','=',Auth::user()->id)->increment('monthCounter',1);
           $promoted = "You've reached your " . ((Auth::user()->monthCounter == 0) ? "1st month":"2nd month");
         }
-        else if(Auth::user()->channelPosition == 2 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales < 500000){
+        else if(Auth::user()->channelPosition == 2 && Auth::user()->dateToFinish <= date('Y-m-d') && Auth::user()->totalPersonalSales < 500000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           if(Auth::user()->monthCounter >= 1){
             $updateMonth = Distributor::where('id','=',Auth::user()->id)->decrement('monthCounter',1);
           }
         }
-        else if(Auth::user()->channelPosition == 3 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales >= 1000000){
+        else if(Auth::user()->channelPosition == 3 && Auth::user()->dateToFinish <= date('Y-m-d') && Auth::user()->totalPersonalSales >= 1000000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           $updateMonth = Distributor::where('id','=',Auth::user()->id)->increment('monthCounter',1);
           $promoted = "You've reached your " . ((Auth::user()->monthCounter == 0) ? "1st month":"2nd month");
         }
-        else if(Auth::user()->channelPosition == 3 && Auth::user()->dateToFinish <= date('Y-m-d',strtotime(date('Y-m-d').  ' + 1 days')) && Auth::user()->totalPersonalSales < 1000000){
+        else if(Auth::user()->channelPosition == 3 && Auth::user()->dateToFinish <= date('Y-m-d') && Auth::user()->totalPersonalSales < 1000000){
           $updateDistributor = Distributor::where('id','=',Auth::user()->id)->update(['totalPersonalSales'=>0,'totalGroupSales'=>0,'totalNewMemberMonth'=>0,'totalNewCAMonth'=>0,'dateToFinish'=>$this->dateToFinish(Auth::user()->dateToFinish)]);
           if(Auth::user()->monthCounter >= 1){
             $updateMonth = Distributor::where('id','=',Auth::user()->id)->decrement('monthCounter',1);
@@ -110,6 +110,12 @@ class DistributorController extends Controller
       }
 
       $selectDownlines = Distributor::where('distributor_id','=',Auth::user()->id)->get();
+      $commission = Commissions::where('distributor_id','=',Auth::user()->id)->get();
+      $generatedCommission = 0;
+      foreach($commission as $comm){
+      	$generatedCommission = $comm->commission;
+      }
+      
       $image1 = 'assets/images/temporary.jpg';
       $image2 = 'assets/images/temporary.jpg';
       $image3 = 'assets/images/temporary.jpg';
@@ -145,7 +151,7 @@ class DistributorController extends Controller
         $i++;
       }
       return view('distributor.genealogy')->with('image1',$image1)->with('image2',$image2)->with('image3',$image3)->with('image4',$image4)->with('image5',$image5)->with('image1ID',$image1ID)->with('image2ID',$image2ID)->with('image3ID',$image3ID)->with('image4ID',$image4ID)
-      ->with('image5ID',$image5ID)->with('downlines',$selectDownlines)->with('promoted',$promoted)->with('positionName',$positionName);
+      ->with('image5ID',$image5ID)->with('downlines',$selectDownlines)->with('promoted',$promoted)->with('positionName',$positionName)->with('comm',$generatedCommission);
     }
     public function viewOtherGenealogy(Request $requests){
       $positionName = '';
@@ -165,6 +171,11 @@ class DistributorController extends Controller
       $id = $requests->distributorID;
       $selectDownlines = Distributor::where('distributor_id','=',$id)->get();
       $profile = "";
+      $commission = Commissions::where('distributor_id','=',Auth::user()->id)->get();
+      $generatedCommission = 0;
+      foreach($commission as $comm){
+      	$generatedCommission = $comm->commission;
+      }
       $selectProfile = Distributor::where('id','=',$id)->get();
       foreach ($selectProfile as $key => $value) {
         $profile = $value->profile_path;
@@ -204,10 +215,15 @@ class DistributorController extends Controller
         $i++;
       }
       return view('distributor.genealogy')->with('image1',$image1)->with('image2',$image2)->with('image3',$image3)->with('image4',$image4)->with('image5',$image5)->with('image1ID',$image1ID)->with('image2ID',$image2ID)->with('image3ID',$image3ID)->with('image4ID',$image4ID)
-      ->with('image5ID',$image5ID)->with('downlines',$selectDownlines)->with('profile',$profile)->with('positionName',$positionName);
+      ->with('image5ID',$image5ID)->with('downlines',$selectDownlines)->with('profile',$profile)->with('positionName',$positionName)->with('comm',$generatedCommission);
     }
     public function viewTransactions(){
       $positionName = '';
+      $commission = Commissions::where('distributor_id','=',Auth::user()->id)->get();
+      $generatedCommission = 0;
+      foreach($commission as $comm){
+      	$generatedCommission = $comm->commission;
+      }
       if(Auth::user()->channelPosition == 1){
         $positionName = 'CHANNEL BUILDER';
       }
@@ -223,7 +239,7 @@ class DistributorController extends Controller
 
       $allTransactions = Transactions::where('distributor_id','=',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
 
-      return view('distributor.viewTransactions')->with('transactions',$allTransactions)->with('positionName',$positionName);
+      return view('distributor.viewTransactions')->with('transactions',$allTransactions)->with('positionName',$positionName)->with('comm',$generatedCommission);
     }
     public function selectDetailedTransaction(){
       $transactID = Input::get('transactID');
@@ -249,7 +265,7 @@ class DistributorController extends Controller
     }
     public function channelActivity($DISTRIBUTOR_Id,$position,$groupSales,$totalMemberForTheMonth,$dateFinished,$totalCAMonth){
       $Date = date('Y-m-d');
-      $todaysDate = date('Y-m-d',strtotime($Date . ' + 1 days'));
+      $todaysDate = date('Y-m-d');
       if($position == 2 && $dateFinished <= $todaysDate){
         if($groupSales < 1000000 && $totalMemberForTheMonth < 5){
           $updateTotalMonthSales = Distributor::where('id','=',$DISTRIBUTOR_Id)->update(['totalSalesMonth'=>300000]);
@@ -286,6 +302,11 @@ class DistributorController extends Controller
     }
     public function priviligesBonus(){
       $positionName = '';
+      $commission = Commissions::where('distributor_id','=',Auth::user()->id)->get();
+      $generatedCommission = 0;
+      foreach($commission as $comm){
+      	$generatedCommission = $comm->commission;
+      }
       if(Auth::user()->channelPosition == 1){
         $positionName = 'CHANNEL BUILDER';
       }
@@ -300,10 +321,15 @@ class DistributorController extends Controller
       }
       $countCA = Distributor::where('distributor_id','=',Auth::user()->id)->where('channelPosition','=','2')->get();
       $countCM = Distributor::where('distributor_id','=',Auth::user()->id)->where('channelPosition','=','3')->get();
-      return view('distributor.priviliges')->with('positionName',$positionName)->with('CA',count($countCA))->with('CM',count($countCM));
+      return view('distributor.priviliges')->with('positionName',$positionName)->with('CA',count($countCA))->with('CM',count($countCM))->with('comm',$generatedCommission);
     }
     public function help(){
       $positionName = '';
+      $commission = Commissions::where('distributor_id','=',Auth::user()->id)->get();
+      $generatedCommission = 0;
+      foreach($commission as $comm){
+      	$generatedCommission = $comm->commission;
+      }
       if(Auth::user()->channelPosition == 1){
         $positionName = 'CHANNEL BUILDER';
       }
@@ -316,6 +342,6 @@ class DistributorController extends Controller
       else{
         $positionName = 'CHANNEL DIRECTOR';
       }
-      return view('distributor.help')->with('positionName',$positionName);
+      return view('distributor.help')->with('positionName',$positionName)->with('comm',$generatedCommission);
     }
 }

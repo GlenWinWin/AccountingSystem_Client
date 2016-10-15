@@ -13,6 +13,7 @@ use Crypt;
 use Hash;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\ManagePrivileges;
+use App\Commissions;
 
 class UserController extends Controller
 {
@@ -101,6 +102,11 @@ class UserController extends Controller
     }
     public function edit_profile_distributor(){
       try{
+      	$commission = Commissions::where('distributor_id','=',Auth::user()->id)->get();
+      $generatedCommission = 0;
+      foreach($commission as $comm){
+      	$generatedCommission = $comm->commission;
+      }
         $positionName = '';
         if(Auth::user()->channelPosition == 1){
           $positionName = 'CHANNEL BUILDER';
@@ -116,7 +122,7 @@ class UserController extends Controller
         }
         $typeOfUser = Auth::user()->typeOfUser;
         $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
-        return view('distributor.editprofile')->with('password',$decryptedPassword)->with('typeOfUser',$typeOfUser)->with('positionName',$positionName);
+        return view('distributor.editprofile')->with('password',$decryptedPassword)->with('typeOfUser',$typeOfUser)->with('positionName',$positionName)->with('comm',$generatedCommission);
       }
       catch(DecryptException $e){
         echo $e;
