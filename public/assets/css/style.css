@@ -17,8 +17,20 @@
   width:3px;
   background:#444;
 }
-
-
+.navbar{
+      min-height: 60px;
+}
+.navbar-brand{
+  padding:3px 15px;
+}
+.navbar-toggle{
+      padding: 14px 14px;
+}
+@media(min-width:800px){
+  .nav-title{
+   padding: 0px 80px;
+}
+}
 .hr-genealogy{
   margin-top: 0px;
 margin-bottom: 20px;

@@ -82,7 +82,8 @@
 	<center>
 		{{$items->links()}}
 	</center>
-</div><!--  Modal Show detailed Items-->
+</div>
+<!--  Modal Show detailed Items-->
 <div id="myModalItemDetails" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 				<div class="modal-content">
