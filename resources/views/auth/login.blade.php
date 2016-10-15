@@ -20,7 +20,6 @@
     </head>
 
     <body>
-      <!--{{Crypt::decrypt('eyJpdiI6ImEzK25QejVBXC80dDVId1VSQW9VVFZnPT0iLCJ2YWx1ZSI6ImhXVjR2R2t0aStiaWZ0cENZSmVwUVE9PSIsIm1hYyI6IjRjNzEyMDEzYzhlZDE3OGI4MGE1MTcyMmQ3NWE2YTk0MWEyNTg0NjA2ZDViMWFhNTkyYzdjZTY4NWZkM2YwYTkifQ==')}}-->
       @if(Session::has('flash_message'))
       <input type="hidden" value="{{Session::get('flash_message')}}" id="errorLogin">
 	   @endif
@@ -77,7 +76,7 @@
                                         <center>
                                           <img src="assets/images/x.png" alt="" style="height:150px;padding-bottom:20px;"/>
                                           <h4 class="modal-title" id="myModalLabel"><b>Invalid Username/Password</b></h4></center>
-                                        <center>  <p style="font-size:18px">The email address or password that you've entered doesn't match any account!</p>  </center>
+                                        <center>  <p style="font-size:18px">The username or password that you've entered doesn't match any account!</p>  </center>
                                           <center><button type="button" class="btn btn-primary btn-md edit-btn" data-dismiss="modal" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
                                     </div>
                                     <!-- /.modal-content -->

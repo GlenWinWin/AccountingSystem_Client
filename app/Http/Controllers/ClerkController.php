@@ -28,6 +28,8 @@ use App\TransactionDetails;
 use App\Sales;
 use App\SalesDetails;
 use App\Commissions;
+use App\Receivings;
+use App\ReceivingsDetails;
 
 
 class ClerkController extends Controller
