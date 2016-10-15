@@ -143,13 +143,26 @@ class AdminController extends Controller{
       return redirect()->back();
     }
     public function editItem(Request $requests){
-      $item_id = $requests->id_item;
-      $item_name = $requests->name_item;
-      $item_costPrice = $requests->costPrice_item;
-      $item_subcostPrice = $requests->subcostPrice_item;
-      $item_sellingPrice = $requests->sellingPrice_item;
-      $editItem = Items::where('item_id','=',$item_id)->update(['item_name'=>$item_name,'item_costPrice'=>$item_costPrice,
-      'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice'=>$item_sellingPrice]);
+      if(Input::hasFile('update_item')){
+        $item_pic = Input::file('update_item');
+        $item_pic->move('assets/images/item_pictures',$item_pic->getClientOriginalName());
+        $item_id = $requests->id_item;
+        $item_name = $requests->name_item;
+        $item_costPrice = $requests->costPrice_item;
+        $item_subcostPrice = $requests->subcostPrice_item;
+        $item_sellingPrice = $requests->sellingPrice_item;
+        $editItem = Items::where('item_id','=',$item_id)->update(['item_name'=>$item_name,'item_costPrice'=>$item_costPrice,
+        'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice'=>$item_sellingPrice,'item_image_path'=>'assets/images/item_pictures/'.$item_pic->getClientOriginalName()]);
+      }
+      else{
+        $item_id = $requests->id_item;
+        $item_name = $requests->name_item;
+        $item_costPrice = $requests->costPrice_item;
+        $item_subcostPrice = $requests->subcostPrice_item;
+        $item_sellingPrice = $requests->sellingPrice_item;
+        $editItem = Items::where('item_id','=',$item_id)->update(['item_name'=>$item_name,'item_costPrice'=>$item_costPrice,
+        'item_subcostPrice'=>$item_subcostPrice,'item_sellingPrice'=>$item_sellingPrice]);  
+      }
       return redirect()->back();
     }
 

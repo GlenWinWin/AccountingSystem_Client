@@ -126,7 +126,7 @@ function editSpecificItem(item_id,item_name,item_costPrice,item_subcostPrice,ite
   $("input[id=itemCostId]").val(item_costPrice);
   $("input[id=itemSubCostId]").val(item_subcostPrice);
   $("input[id=itemSellingId]").val(item_sellingPrice);
-  document.getElementById('blah').src = item_path;
+  document.getElementById('update_itemPic').src = item_path;
 
 }
 function detailedItem(item_id,item_name,item_costPrice,item_subcostPrice,item_sellingPrice,item_path){

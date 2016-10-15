@@ -15,6 +15,7 @@ class Items extends Model
     'item_category',
     'item_sub_category',
     'item_subcostPrice',
+    'item_image_path',
   ];
 
   public $timestamps = false;

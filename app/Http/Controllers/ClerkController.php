@@ -400,7 +400,7 @@ class ClerkController extends Controller
         foreach($selectItems as $item){
           $itemId = $item->item_id;
           $itemName = $item->item_name;
-          $itemPrice = $item->item_costPrice;
+          $itemPrice = $item->item_sellingPrice;
         }
         $selectTemporaryReceivings = TemporaryReceivingsDetails::where('item_name','=',$itemName)->get();
         if(count($selectTemporaryReceivings) == 0){
@@ -570,17 +570,32 @@ class ClerkController extends Controller
         return redirect('distributor_list');
       }
       public function addItem(Request $requests){
-        $item_pic = Input::file('item_pic');
-        $addItem = new Items;
-        $addItem->item_category = $requests->category;
-        $addItem->item_sub_category = $requests->subCategory;
-        $addItem->item_name = $requests->item_name;
-        $addItem->item_quantity = 1;
-        $addItem->item_costPrice = $requests->cost;
-        $addItem->item_subcostPrice = $requests->subcost;
-        $addItem->item_sellingPrice = $requests->selling_price;
-        $addItem->save();
-
+        if(Input::hasFile('new_item')){
+          $item_pic = Input::file('new_item');
+          $item_pic->move('assets/images/item_pictures',$item_pic->getClientOriginalName());
+          $addItem = new Items;
+          $addItem->item_category = $requests->category;
+          $addItem->item_sub_category = $requests->subCategory;
+          $addItem->item_name = $requests->item_name;
+          $addItem->item_quantity = 1;
+          $addItem->item_costPrice = $requests->cost;
+          $addItem->item_subcostPrice = $requests->subcost;
+          $addItem->item_sellingPrice = $requests->selling_price;
+          $addItem->item_image_path = 'assets/images/item_pictures/'.$item_pic->getClientOriginalName();
+          $addItem->save();
+        }
+        else{
+          $addItem = new Items;
+          $addItem->item_category = $requests->category;
+          $addItem->item_sub_category = $requests->subCategory;
+          $addItem->item_name = $requests->item_name;
+          $addItem->item_quantity = 1;
+          $addItem->item_costPrice = $requests->cost;
+          $addItem->item_subcostPrice = $requests->subcost;
+          $addItem->item_sellingPrice = $requests->selling_price;
+          $addItem->item_image_path = 'assets/images/item_pictures/item.svg';
+          $addItem->save(); 
+        }
         return redirect()->back();
 
       }

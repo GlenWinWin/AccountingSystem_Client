@@ -145,14 +145,16 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Edit Items</h4>
 						</div>
-{!! Form::open(array('action' => 'AdminController@editItem' , 'method' => 'post'))!!}
+						<form action="{{ URL::to('update_item') }}" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 <div class="col-lg-12">
 						<input type="hidden" name="id_item" id="item_id" value="">
 						<div class="modal-body">
 							<div class="form-group col-lg-12">
 								<div class="picture_items">
-									<img id="blah" src="assets/images/login.jpg" class="img-responsive" style="border: 5px solid #002F4C;">
-									<center><input type="file" name="new_dp" class="text-center upload" id="imgInp" style="margin-top:20px;width:80%;"></center>
+									<img id="update_itemPic" src="assets/images/login.jpg" class="img-responsive" style="border: 5px solid #002F4C;">
+									<center><input type="file" name="update_item" class="text-center upload" id="imgInp3" style="margin-top:20px;width:80%;"></center>
 								</div>
 							</div>
 							<div class="form-group">
@@ -187,7 +189,7 @@
 						 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 				</div>
-				{!! Form::close()!!}
+				</form>
 		</div>
 </div>
 <!--  modal delete item-->
@@ -243,8 +245,8 @@
 						<div class="modal-body">
 							<div class="form-group col-lg-12">
 								<div class="picture_items">
-									<img id="blah" src="" class="img-responsive" style="border: 5px solid #002F4C;">
-									<center><input type="file" name="new_dp" class="text-center upload" id="imgInp" style="margin-top:20px;width:80%;"></center>
+									<img id="item_pic" src="assets/images/item_pictures/item.svg" class="img-responsive" style="border: 5px solid #002F4C;">
+									<center><input type="file" name="new_item" class="text-center upload" id="imgInp2" style="margin-top:20px;width:80%;"></center>
 								</div>
 							</div>
 							<div class="form-group">
