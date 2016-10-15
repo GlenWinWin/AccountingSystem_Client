@@ -20,7 +20,7 @@
 			List of Distributors
 			@endif</h1></center>
 		<hr>
-
+		<a href="add_new_distributor" class="btn btn-primary">Add Channel Builder</a>
 		<div class="search" style="padding-bottom:20px;">
 			{!! Form::open(array('action' => 'ClerkController@searchDistributor' , 'method' => 'get'))!!}
 			<input type="text" name="search" required="" placeholder="Search...">

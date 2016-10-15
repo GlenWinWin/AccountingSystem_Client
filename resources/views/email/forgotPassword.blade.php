@@ -131,62 +131,14 @@ border-color: #204d74;
   </style>
   <body style="padding:0;">
     <center><h3><b><?php echo date('F j,Y')?></b></h3></center>
-    <div class="container">
 
 <div class="row">
-  <div class="">
-
-
-  <div class="col-lg-3" style="display:inline;margin-left:20px;">
-<img src="" alt="" style="height:100px;width:100px;padding-top:20px;display:inline;"/>
-  <h2 style="display:inline;margin-top:-20px;"><b>Company Name</b></h2><br>
-
-</div>
-
-
-<div class="col-lg-3" style="float:right;padding-top:20px;margin-left:-20px;">
-  <h3 style="display:inline;"><b>Networking/Marketing.com</b></h3><br>
-  <h3 style="display:inline;margin-top:-20px;"><b>Networking/Marketing@gmail.com</b></h3><br>
-  <h3 style="display:inline;margin-top:-20px;"><b>Arlegui St. Quiapo, Manila</b></h3><br>
-  <h3 style="display:inline;margin-top:-20px;"><b>+6393-1234-567</b></h3><br>
-  <h3 style="display:inline;margin-top:-20px;"><b>+6393-1234-567</b></h3>
-
-</div>
-  </div>
-  <div class="site-wrapper">
-  <div class="site-wrapper-inner">
-    <div class="cover-container">
-  <div class="inner cover">
-
-      <center><h1>Greetings  {{$name}} ! </h1>  </center>
-    <p style="text-align:justify;">
-      &emsp;  &emsp;Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details.
-      <br>  <br>
-      &emsp;  &emsp;Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details. Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details Details Details Details Details Details Details
-      Details Details Details Details Details Details.
-    </p>
-
     <div class="col-lg-12">
       <center>
-        <h4>Your Username: {{$username}} </h4>
-          <h4>Your Temporary Password: {{$password}} </h4>
+          <h3>Good day {{$name}}!</h3>
+          <h4>Your New Temporary Password: {{$password}} </h4>
       <a href="http://fist.mywebtrafficsource.com/login" class="btn btn-primary btn-lg">Log In</a><center>
     </div>
-</div>
-</div>
-</div>
-</div>
 </div>
   </body>
 </html>

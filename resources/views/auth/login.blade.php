@@ -20,9 +20,19 @@
     </head>
 
     <body>
-      @if(Session::has('flash_message'))
+      @if(Session::get('flash_message') == 'invalid')
       <input type="hidden" value="{{Session::get('flash_message')}}" id="errorLogin">
-	   @endif
+      <input type="hidden" value="lala" id="forgotPass">
+      <input type="hidden" value="lala" id="errorPass">
+      @elseif(Session::get('flash_message') == 'forgot')
+      <input type="hidden" value="lala" id="errorLogin">
+      <input type="hidden" value="lala" id="errorPass">
+      <input type="hidden" value="{{Session::get('flash_message')}}" id="forgotPass">
+      @elseif(Session::get('flash_message') == 'email')
+      <input type="hidden" value="lala" id="errorLogin">
+      <input type="hidden" value="lala" id="forgotPass">
+      <input type="hidden" value="{{Session::get('flash_message')}}" id="errorPass">
+      @endif
                             {!! Form::open(array('route' => 'user.store'))!!}
                             <!-- Top content -->
                             <div class="top-content">
@@ -58,6 +68,7 @@
                                                     <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
                                                   </div>
                                                   <center><button type="submit" class="btn">Log-in</button></center>
+                                                  <center><a href="" data-toggle="modal" data-target="#myModalForgot">Forgot Password?</a></center>
                                               </form>
                                             </div>
                                             </div>
@@ -70,20 +81,34 @@
                                 {!! Form::close()!!}
 
                                 <!-- Modal for Invalid Password-->
-                                <div class="modal fade alert-modal" id="invalidPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal fade alert-modal" id="showModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                   <div class="modal-dialog alert-modal-dialog">
                                     <div class="modal-content" style="padding:50px;">
                                         <center>
-                                          <img src="assets/images/x.png" alt="" style="height:150px;padding-bottom:20px;"/>
-                                          <h4 class="modal-title" id="myModalLabel"><b>Invalid Username/Password</b></h4></center>
-                                        <center>  <p style="font-size:18px">The username or password that you've entered doesn't match any account!</p>  </center>
+                                          <img alt="" style="height:150px;padding-bottom:20px;" id="status"/>
+                                          <h4 class="modal-title" id="myLabel"></h4></center>
+                                        <center>  <p style="font-size:18px" id="myModalMessage"></p></center>
                                           <center><button type="button" class="btn btn-primary btn-md edit-btn" data-dismiss="modal" style="padding-left:30px;padding-right:30px;">OK</button>  </center>
                                     </div>
                                     <!-- /.modal-content -->
                                   </div>
                                   <!-- /.modal-dialog -->
                                 </div>
-                                <!-- /.Modal for Invalid Password -->
+                                <!-- /.Modal for Forgot Password -->
+                                <div class="modal fade alert-modal" id="myModalForgot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-sm">
+                                    <div class="modal-content" style="padding:50px;">
+                                          <h4 class="modal-title"><b>Forgot Password</b></h4>
+                                            {!! Form::open(array('action' => 'UserController@forgotPassword' , 'method' => 'post' , 'id' => 'formAddItemtoSales'))!!}
+                                            <p style="font-size:18px"><input type="email" required="" placeholder="Enter email" class="form-control" name="emailForgot"></p>
+                                            <button type="submit" class="btn btn-primary" style="padding-left:10px;padding-right:10px;">Submit</button>
+                                            {!! Form::close() !!}
+                                    </div>
+                                    <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.Modal for Forgot Password -->
 
         <!-- Javascript -->
         <script type="text/javascript" src="assets/js/jquery.min.js"></script>
@@ -99,8 +124,33 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var errorLogin = document.getElementById("errorLogin").value;
-    if(errorLogin != '' || errorLogin != null){
-      $("#invalidPassword").modal();
+    if(errorLogin != 'lala' || document.getElementById("forgotPass").value == 'lala' && document.getElementById("errorPass") == 'lala'){
+      document.getElementById("status").src = 'assets/images/x.png';
+      document.getElementById("myLabel").innerHTML = 'Invalid Username/Password';
+      document.getElementById("myModalMessage").innerHTML = "The username or password that you've entered doesn't match any account!";
+      $("#showModal").modal();
+    }
+	});
+</script>
+<script type="text/javascript">
+  	$(document).ready(function(){
+      var forgotPassword = document.getElementById("forgotPass").value;
+      if(forgotPassword != 'lala' || document.getElementById("errorLogin").value == 'lala' && document.getElementById("errorPass") == 'lala'){
+              document.getElementById("status").src = 'assets/images/check.png';
+        document.getElementById("myLabel").innerHTML = 'Successful!';
+        document.getElementById("myModalMessage").innerHTML = "Check your email for your new temporary password!";
+        $("#showModal").modal();
+      }
+    });
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var errorPass = document.getElementById("errorPass").value;
+    if(errorPass != 'lala' || document.getElementById("forgotPass").value == 'lala' && document.getElementById("errorLogin") == 'lala'){
+      document.getElementById("status").src = 'assets/images/x.png';
+      document.getElementById("myLabel").innerHTML = 'Invalid Email';
+      document.getElementById("myModalMessage").innerHTML = "Your email is not on the list!";
+      $("#showModal").modal();
     }
 	});
 </script>

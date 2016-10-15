@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Auth;
+use Mail;
 use Validator;
 use Session;
 use Input;
@@ -52,8 +53,7 @@ class UserController extends Controller
             }
           }
           else{
-            Session::flash('flash_message','Credentials Invalid');
-            Session::flash('type_message','danger');
+            Session::flash('flash_message','invalid');
 
             return redirect('login')->withInput();
           }
@@ -66,6 +66,34 @@ class UserController extends Controller
     public function logout(){
       Auth::logout();
       return redirect('login');
+    }
+    public function forgotPassword(Request $requests){
+      $email = $requests->emailForgot;
+      $selectUser = User::where('email','=',$email)->get();
+      if(count($selectUser) == 1){
+        $temporaryPassword = $this->createRandomPassword();
+        $temporaryPasswordText = Crypt::encrypt($temporaryPassword);
+        $name = "";
+        foreach($selectUser as $user){
+          $name = $user->name;
+        }
+        $updateAccount = User::where('email','=',$email)->update(['password'=>Hash::make($temporaryPassword),'passsword_text'=>$temporaryPasswordText]);
+
+        $data = array( 'email' => $email, 'name' => $name,'password' => $temporaryPassword , 'from' => 'channellingsystem@gmail.com', 'from_name' => 'Admin');
+
+        Mail::send('email.forgotPassword',['name'=> $data['name'],'password'=>$data['password']],function($message) use($data){
+          $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Here is your new temporary password');
+        });
+        Session::flash('flash_message','forgot');
+
+        return redirect('login')->withInput();
+      }
+      else{
+        Session::flash('flash_message','email');
+
+        return redirect('login')->withInput();
+      }
+
     }
     public function edit_profile(){
       try{
@@ -189,6 +217,23 @@ class UserController extends Controller
       else{
           return redirect('genealogy');
       }
+
+    }
+    public function createRandomPassword() {
+
+    $chars = "abcdefghijkmnopqrstuvwxyz0123456789";
+    srand((double)microtime()*1000000);
+    $i = 0;
+    $pass = '' ;
+
+        while ($i < 8) {
+            $num = rand() % 33;
+            $tmp = substr($chars, $num, 1);
+            $pass .= $tmp;
+            $i++;
+        }
+
+        return $pass;
 
     }
 }

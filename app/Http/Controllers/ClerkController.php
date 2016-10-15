@@ -415,6 +415,29 @@ class ClerkController extends Controller
         }
         return redirect('receivings_viewing');
       }
+      public function addDist(){
+        try{
+          $privileges = ManagePrivileges::where('clerk_id','=',Auth::user()->id)->get();
+          $salesEncoding = 0;
+          $accountRegistration = 0;
+          $addClerk = 0;
+          $useInventory = 0;
+          $generateReport = 0;
+          foreach($privileges as $priv){
+            $salesEncoding = $priv->sales_encoding;
+            $accountRegistration = $priv->account_registration;
+            $addClerk = $priv->add_clerk;
+            $useInventory = $priv->use_inventory;
+            $generateReport = $priv->generate_report;
+          }
+          $decryptedPassword = Crypt::decrypt(Auth::user()->passsword_text);
+          return view('clerk.addDist')->with('password',$decryptedPassword)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport);
+        }
+        catch(DecryptException $e){
+          echo $e;
+        }
+
+      }
       public function addClerk(Request $requests){
         $fname = ucfirst($requests->fname);
         $lname = ucfirst($requests->lname);

@@ -2,6 +2,11 @@
 
 use App\ManagePrivileges;
 
+Route::get('add_new_distributor',[
+  'middleware' => 'auth',
+  'uses' => 'ClerkController@addDist'
+]);
+
 //Filter Items
 Route::post('filterItems', 'AdminController@filterByCategorySubCategory');
 Route::post('itemFilter', 'ClerkController@filterByCategorySubCategory');
@@ -15,6 +20,9 @@ Route::post('add_clerk', 'ClerkController@addClerk');
 
 //Add items for clerk
 Route::post('add_item', 'ClerkController@addItem');
+
+//Forgot password
+Route::post('forgotPassword', 'UserController@forgotPassword');
 
 //Search functions of admin
 Route::get('clerk_search',[
