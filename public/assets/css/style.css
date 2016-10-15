@@ -819,3 +819,9 @@ ul.checkout-bar li:nth-child(2):before {
     border: 1px solid black;
   }
 }
+.picture_items img {
+  float: none;
+  margin: 0 auto;
+    width: 400px;
+    height: 300px;
+}

@@ -180,11 +180,11 @@
 						<div class="col-lg-12">
                 <center>
               <div class="col-lg-7" style="    padding-top: 12px;">
-                  <img src="assets/images/user.png" class="edit-image" alt="avatar">
+											<img id="blah" src="assets/images/user.png" class="edit-image">
                     </div>
                   <div class="col-lg-5 upload-clerk">
                   <h6>Upload a different photo</h6>
-                <input type="file" name="clerk_pic" class="text-center upload" name="profile_pic">
+      			<center><input type="file" name="profile_pic" class="text-center upload" id="imgInp"></center>
                   </div>
                   </center>
 </div>

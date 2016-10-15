@@ -126,6 +126,14 @@ function editSpecificItem(item_id,item_name,item_costPrice,item_subcostPrice,ite
   $("input[id=itemCostId]").val(item_costPrice);
   $("input[id=itemSubCostId]").val(item_subcostPrice);
   $("input[id=itemSellingId]").val(item_sellingPrice);
+  document.getElementById('itemNameId').innerHTML = item_name;
+}
+function detailedItem(item_id,item_name,item_costPrice,item_subcostPrice,item_sellingPrice){
+  document.getElementById('itemNameId').innerHTML = item_name;
+  document.getElementById('itemCostId').innerHTML = item_costPrice;
+  document.getElementById('itemSubCostId').innerHTML = item_subcostPrice;
+  document.getElementById('itemSellingId').innerHTML = item_sellingPrice;
+
 }
 function InvalidMsg(textbox){
   var p = document.getElementById("passwordField").value
