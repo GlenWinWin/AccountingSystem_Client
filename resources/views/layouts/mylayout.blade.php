@@ -10,31 +10,31 @@
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-    	<div class="navbar-header">
-    		<a id="menu-toggle" href="#" class="navbar-toggle">
-    				<span class="sr-only">Toggle navigation</span>
-    						<span class="icon-bar"></span>
-    						<span class="icon-bar"></span>
-    						<span class="icon-bar"></span>
-    		</a>
-    			<a class="navbar-brand" href="list_clerk">
-    				logo
-    			</a>
-    		</div>
-    		<div id="navbar" class="navbar-collapse collapse ">
-    			<ul class="nav navbar-nav navbar-right">
-    				<li class="dropdown">
-    											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
-    											<ul class="dropdown-menu">
-    												<li><a href="edit_profile">Edit Profile</a></li>
-    												<li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
-    											</ul>
-    										</li>
+    <div class="nav-title">
+      <div class="navbar-header">
+        <a id="menu-toggle" href="#" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </a>
+          <a class="navbar-brand" href="list_clerk">
+            <img src="assets/images/logo.png" height="55px;" />
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse ">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 25px;font-size:17px;">Settings<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="edit_profile">Edit Profile</a></li>
+                            <li><a href="logout" onclick=" return confirm('Are you sure you want to logout?')">Logout</a></li>
+                          </ul>
+                        </li>
 
-    			</ul>
-    		</div>
-    	</div>
+          </ul>
+        </div>
+      </div>
     </nav>
     	<div class=" col-lg-3">
 
