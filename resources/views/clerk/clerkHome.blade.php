@@ -78,7 +78,7 @@
 									</div>
 								<div class="col-lg-5 upload-clerk">
 								<h6>Upload a different photo</h6>
-					<center><input type="file" name="profile_pic" class="text-center upload" id="imgInp"></center>
+					<center><input type="file" name="clerk_pic" class="text-center upload" id="imgInp"></center>
 								</div>
 								</center>
 </div>
