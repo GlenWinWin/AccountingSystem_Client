@@ -52,13 +52,13 @@
 				@foreach($items as $itemss)
 				<tr >
 					<td><input type="checkbox" name="items_ids" id="checkone" value="{{$itemss->item_id}}"></td>
-					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')" style="cursor:pointer;"><img src="assets/images/login.jpg" alt=""  class="img-responsive" style="height:70px;"/></td>
-					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')" style="cursor:pointer;">{{$itemss->item_name}}</td>
-					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')" style="cursor:pointer;">{{$itemss->item_quantity}}</td>
-					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')" style="cursor:pointer;">P{{$itemss->item_costPrice}}</td>
-					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')" style="cursor:pointer;">P{{$itemss->item_subcostPrice}}</td>
-					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')" style="cursor:pointer;">P{{$itemss->item_sellingPrice}}</td>
-					<td><input type="button" value="Edit Items" data-toggle="modal" data-target="#myModalEditItem" class="btn btn-primary btn-sm" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}')"></td>
+					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}','{{$itemss->item_image_path}}')" style="cursor:pointer;"><img src="{{$itemss->item_image_path}}" alt=""  class="img-responsive" style="height:70px;"/></td>
+					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}','{{$itemss->item_image_path}}')" style="cursor:pointer;">{{$itemss->item_name}}</td>
+					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}','{{$itemss->item_image_path}}')" style="cursor:pointer;">{{$itemss->item_quantity}}</td>
+					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}','{{$itemss->item_image_path}}')" style="cursor:pointer;">P{{$itemss->item_costPrice}}</td>
+					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}','{{$itemss->item_image_path}}')" style="cursor:pointer;">P{{$itemss->item_subcostPrice}}</td>
+					<td  data-toggle="modal" data-target="#myModalItemDetails"  onclick="detailedItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}','{{$itemss->item_image_path}}')" style="cursor:pointer;">P{{$itemss->item_sellingPrice}}</td>
+					<td><input type="button" value="Edit Items" data-toggle="modal" data-target="#myModalEditItem" class="btn btn-primary btn-sm" onclick="editSpecificItem({{$itemss->item_id}},'{{$itemss->item_name}}','{{$itemss->item_costPrice}}','{{$itemss->item_subcostPrice}}','{{$itemss->item_sellingPrice}}','{{$itemss->item_image_path}}')"></td>
 					<td><input type="button" data-toggle="modal" data-target="#myModalDeleteItem" class="btn btn-sm btn-primary" onclick="delete_Clerk_Distributor_Item({{$itemss->item_id}})" value="Delete"></td>
 				</tr>
 				@endforeach
@@ -97,7 +97,7 @@
 						<div class="modal-body">
 							<div class="form-group col-lg-12">
 								<div class="picture_items">
-									<center>	<img src="assets/images/login.jpg" alt=""  class="img-responsive" style="border: 5px solid #002F4C;"/></center>
+									<center>	<img src="assets/images/login.jpg" alt="" id="itemPic" class="img-responsive" style="border: 5px solid #002F4C;"/></center>
 								</div>
 							</div>
 							<div class="form-group">

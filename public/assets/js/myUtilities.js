@@ -120,20 +120,21 @@ function doMultipleSelectionItemsToDelete(){
     $("input[id=itemstoDelete]").val(listIds);
   }
 }
-function editSpecificItem(item_id,item_name,item_costPrice,item_subcostPrice,item_sellingPrice){
+function editSpecificItem(item_id,item_name,item_costPrice,item_subcostPrice,item_sellingPrice,item_path){
   $("input[id=item_id]").val(item_id);
   $("input[id=itemNameId]").val(item_name);
   $("input[id=itemCostId]").val(item_costPrice);
   $("input[id=itemSubCostId]").val(item_subcostPrice);
   $("input[id=itemSellingId]").val(item_sellingPrice);
-  document.getElementById('itemNameId').innerHTML = item_name;
+  document.getElementById('blah').src = item_path;
+
 }
-function detailedItem(item_id,item_name,item_costPrice,item_subcostPrice,item_sellingPrice){
+function detailedItem(item_id,item_name,item_costPrice,item_subcostPrice,item_sellingPrice,item_path){
   document.getElementById('itemNameId').innerHTML = item_name;
   document.getElementById('itemCostId').innerHTML = item_costPrice;
   document.getElementById('itemSubCostId').innerHTML = item_subcostPrice;
   document.getElementById('itemSellingId').innerHTML = item_sellingPrice;
-
+  document.getElementById('itemPic').src = item_path;
 }
 function InvalidMsg(textbox){
   var p = document.getElementById("passwordField").value

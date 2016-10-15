@@ -570,7 +570,7 @@ class ClerkController extends Controller
         return redirect('distributor_list');
       }
       public function addItem(Request $requests){
-
+        $item_pic = Input::file('item_pic');
         $addItem = new Items;
         $addItem->item_category = $requests->category;
         $addItem->item_sub_category = $requests->subCategory;
