@@ -534,11 +534,11 @@ class ClerkController extends Controller
           $totalSales = $value->Total;
         }
 
-         // $data = array( 'email' => $email, 'name' => ucfirst($fname) . ' ' . ucfirst($lname), 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+         $data = array( 'email' => $email, 'name' => ucfirst($fname) . ' ' . ucfirst($lname), 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
 
-         // Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
-         //   $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
-         // });
+         Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+           $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+         });
 
         $myQuery = Distributor::where('userID','LIKE','%'.$referralID.'%')->get();
         $id = 0;
