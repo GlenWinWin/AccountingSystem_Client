@@ -130,11 +130,11 @@ class ClerkController extends Controller
         return view('clerk.receivingsClerk')->with('temporary_receivings',$selectTemporaryReceivings)->with('se',$salesEncoding)->with('ar',$accountRegistration)->with('ac',$addClerk)->with('ui',$useInventory)->with('gr',$generateReport)->with('hiddenID',$existing_id);
       }
       public function salesEncoding(Request $requests){
+          $id = 0;
           $ifTrue =  ($requests->checkIfSelectedNewDistributor == "0")  ? 'false':'true';
           $selectTemporarySales = TemporarySalesDetails::where('id','=',$requests->hiddenID)->get();
-	  $searchId = '%'.trim($requests->distributorID).'%';
-          $myQuery = DB::table('users')->where('userID','like',$searchId)->get();
-          $id = 0;
+	        $searchId = '%'.trim($requests->referralID).'%';
+          $myQuery = Distributor::where('userID','LIKE',$searchId)->get();
           $position = 0;
           $connectCounter = 0;
           $id_distributor = 0;
@@ -189,13 +189,30 @@ class ClerkController extends Controller
           }
           $deleteTemporarySales = TemporarySales::where('id','=',$requests->hiddenID)->delete();
           $deleteTemporarySalesDetails = TemporarySalesDetails::where('id','=',$requests->hiddenID)->delete();
+          $id_to_updateSales = $id;
+          do{
+            $selectDist = Distributor::where('id','=',$id_to_updateSales)->get();
+            $getTotalGroupSales = 0;
+            $getTotalSales = 0;
+            foreach($selectDist as $sd){
+              $getTotalGroupSales = $sd->totalGroupSales;
+              $getTotalSales = $sd->totalSales;
+            }
+            $getTotalGroupSales = $getTotalGroupSales + $requests->totalSalesInput;
+            $getTotalSales = $getTotalSales + $requests->totalSalesInput;
+            $updateTotalGroupSales_Sales = Distributor::where('id','=',$id_to_updateSales)->update(['totalGroupSales'=>$getTotalGroupSales,'totalSales'=>$getTotalSales]);
+            $selectUpline = Distributor::where('id','=',$id_to_updateSales)->get();
+            foreach ($selectUpline as $v) {
+              $id_to_updateSales = $v->distributor_id;
+            }
+          }while($id_to_updateSales != 0);
           $selectCommission = Commissions::where('distributor_id','=',$id)->get();
           $getCommission = 0;
           foreach($selectCommission as $comm){
           	$getCommission = $comm->commission;
           }
           if($ifTrue == 'false'){
-	  	$updateCommission = Commissions::where('distributor_id','=',$id)->update(['commission'=>($getCommission)+($requests->totalSalesInput*0.10)]);
+	  	$updateCommission = Commissions::where('distributor_id','=',$id)->update(['commission'=>(($getCommission)+($requests->totalSalesInput*0.10))]);
           }
           if($requests->totalSalesInput > 20000){
             $distributor_id = $ifTrue == 'true' ? $id : $id_distributor;
@@ -271,35 +288,24 @@ class ClerkController extends Controller
               }
             }while($distributor_id != 0);
           }
-          $id_distributor1 = $id;
-          do{
-          $selectDist = Distributor::where('id','=',$id_distributor1)->get();
-	          $getTotalGroupSales = 0;
-	          $getTotalSales = 0;
-	          foreach($selectDist as $sd){
-	          	$getTotalGroupSales = $sd->totalGroupSales;
-	          	$getTotalSales = $sd->totalSales;
-	          }
-            $updateTotalGroupSales_Sales = Distributor::where('id','=',$id_distributor1)->update(['totalGroupSales'=>(($getTotalGroupSales)+($requests->totalSalesInput)),'totalSales'=>(($getTotalSales)+($requests->totalSalesInput))]);
-            $selectUpline = Distributor::where('id','=',$id_distributor1)->get();
-            foreach ($selectUpline as $key => $value) {
-              $id_distributor1 = $value->distributor_id;
-            }
-          }while($id_distributor1 != 0);
 
         if($ifTrue == 'false'){
           return redirect('inventory');
-          //return $id;
+          
         }
         else{
           $DISTRIBUTOR_Id = $id;
 
-          if($connectCounter < 5){
-            $updateConnectCounter = Distributor::where('id','=',$DISTRIBUTOR_Id)->increment('connectCounter',1);
-          }
           do{
-            $updateTotalDownlines = Distributor::where('id','=',$DISTRIBUTOR_Id)->increment('totalNewMember',1);
-            $updateTotalDownlinesperMonth = Distributor::where('id','=',$DISTRIBUTOR_Id)->increment('totalNewMemberMonth',1);
+              $selectCommission = Commissions::where('distributor_id','=',$DISTRIBUTOR_Id)->get();
+              $getCommission = 0;
+              foreach($selectCommission as $comm){
+                $getCommission = $comm->commission;
+              }
+              $updateConnectCounter = Distributor::where('id','=',$DISTRIBUTOR_Id)->increment('connectCounter',1);
+              $updateCommission = Commissions::where('distributor_id','=',$DISTRIBUTOR_Id)->update(['commission'=>(($getCommission)+(40.00))]);
+              $updateTotalDownlines = Distributor::where('id','=',$DISTRIBUTOR_Id)->increment('totalNewMember',1);
+              $updateTotalDownlinesperMonth = Distributor::where('id','=',$DISTRIBUTOR_Id)->increment('totalNewMemberMonth',1);
             $selectUpline = Distributor::where('id','=',$DISTRIBUTOR_Id)->get();
             foreach ($selectUpline as $key => $value) {
               $DISTRIBUTOR_Id = $value->distributor_id;
@@ -362,6 +368,11 @@ class ClerkController extends Controller
           $id = $requests->hiddenID;
         }
         $selectItems = Items::where('item_name','LIKE','%'.$requests->itemName.'%')->get();
+        $selectCredentials = Clerk::where('name','=',Auth::user()->name)->get();
+        $idClerk = 0;
+        foreach ($selectCredentials as $key => $value) {
+          $idClerk = $value->id;
+        }
         $itemId = 0;
         $itemName = "";
         $itemPrice = 0;
@@ -378,7 +389,7 @@ class ClerkController extends Controller
           $addTemporarySales->item_name = $itemName;
           $addTemporarySales->item_quantity = 1;
           $addTemporarySales->item_costPrice = $itemPrice;
-          $addTemporarySales->clerk_id = Auth::user()->id;
+          $addTemporarySales->clerk_id = $idClerk;
           $addTemporarySales->save();
         }
         return redirect('sales_viewing');
@@ -394,6 +405,11 @@ class ClerkController extends Controller
           $id = $requests->hiddenID;
         }
         $selectItems = Items::where('item_name','=',$requests->itemName)->get();
+        $selectCredentials = Clerk::where('name','=',Auth::user()->name)->get();
+        $idClerk = 0;
+        foreach ($selectCredentials as $key => $value) {
+          $idClerk = $value->id;
+        }
         $itemId = 0;
         $itemName = "";
         $itemPrice = 0;
@@ -410,7 +426,7 @@ class ClerkController extends Controller
           $addTemporaryReceivings->item_name = $itemName;
           $addTemporaryReceivings->item_quantity = 1;
           $addTemporaryReceivings->item_costPrice = $itemPrice;
-          $addTemporaryReceivings->clerk_id = Auth::user()->id;
+          $addTemporaryReceivings->clerk_id = $idClerk;
           $addTemporaryReceivings->save();
         }
         return redirect('receivings_viewing');
@@ -441,7 +457,7 @@ class ClerkController extends Controller
       public function addClerk(Request $requests){
         $fname = ucfirst($requests->fname);
         $lname = ucfirst($requests->lname);
-        $username = 'c_'.substr(strtolower($fname),0,1).strtolower($lname);
+        $username = 'm_'.substr(strtolower($fname),0,1).strtolower($lname);
         $password = $this->createRandomPassword();
         $contact = $requests->contact;
         $email = $requests->email;
@@ -502,11 +518,11 @@ class ClerkController extends Controller
         return redirect('home_clerk');
       }
       public function addDistributor(Request $requests){
-        $referralID = $requests->referralID;
+        $referralID = trim($requests->referralID);
         $comm = $requests->commission;
         $fname = $requests->fname;
         $lname = $requests->lname;
-        $username = 'd_'.substr(strtolower($fname),0,1).strtolower($lname);
+        $username = 'c_'.substr(strtolower($fname),0,1).strtolower($lname);
         $password = $this->createRandomPassword();
         $contact = $requests->contact;
         $email = $requests->email;
@@ -518,18 +534,17 @@ class ClerkController extends Controller
           $totalSales = $value->Total;
         }
 
-         $data = array( 'email' => $email, 'name' => ucfirst($fname) . ' ' . ucfirst($lname), 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
+         // $data = array( 'email' => $email, 'name' => ucfirst($fname) . ' ' . ucfirst($lname), 'username' => $username, 'password' => $password , 'from' => 'admin@gmail.com', 'from_name' => 'Admin');
 
-         Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
-           $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
-         });
+         // Mail::send('email.sendClerkEmail',['name'=> $data['name'],'username'=>$data['username'],'password'=>$data['password']],function($message) use($data){
+         //   $message->to($data['email'],$data['name'])->from( $data['from'], $data['from_name'] )->subject('Login with your temporary username and password');
+         // });
 
-        $myQuery = Distributor::where('userID','LIKE','%'.$requests->referralID.'%')->get();
+        $myQuery = Distributor::where('userID','LIKE','%'.$referralID.'%')->get();
         $id = 0;
         foreach ($myQuery as $key => $value) {
           $id = $value->id;
         }
-        $id = $requests->referralID == '' ? 0 : $id;
 
         $addDistributorQuery = new Distributor;
         $addDistributorQuery->fname = ucfirst($fname);
@@ -562,12 +577,11 @@ class ClerkController extends Controller
         $addTempCommission->save();
 
 
-
         $updateDistributor_id = Transactions::where('transactID','LIKE','%'.$requests->transactionID.'%')->update(['distributor_id' => $addDistributorQuery->id]);
 
         Session::flash('flash_message','success');
 
-        return redirect('distributor_list');
+        return redirect('channel_list');
       }
       public function addItem(Request $requests){
         if(Input::hasFile('new_item')){

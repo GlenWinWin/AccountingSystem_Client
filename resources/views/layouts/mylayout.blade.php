@@ -253,7 +253,22 @@ function readURL(input) {
       reader.readAsDataURL(input.files[0]);
   }
 }
+function readURLeditItem(input) {
+
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          $('#update_itemPic').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+  }
+}
 $("#imgInp").change(function(){
   readURL(this);
+});
+$("#imgInp3").change(function(){
+  readURLeditItem(this);
 });
 </script>

@@ -1,5 +1,5 @@
 function delete_Clerk_Distributor_Item(id){
-  $("input[id=specific_id]").val(id);
+  $("#specific_id").val(id);
 }
 function manage_privileges(id,se,ar,ac,ui,gr){
   if(se == 1){
@@ -234,6 +234,19 @@ function updateQuantity(counter,id){
     totalSales += (cost * quantity);
   }
   document.getElementById("totalSalesID").innerHTML = "P " + (totalSales).toFixed(2);
+  $("input[id=totalSalesHiddenInput]").val((totalSales.toFixed(2)));
+}
+function loadSalesTotals(){
+    document.getElementById('btnSales').disabled = true;
+  var totalSales = 0;
+  var sales = +document.getElementById("quantitySale").value;
+  for(var i=1; i<=sales;i++){
+    var cost = document.getElementById("priceField"+i).value;
+    var quantity = +document.getElementById("quantityField"+i).value;
+
+    totalSales += (cost * quantity);
+  }
+    document.getElementById("totalSalesID").innerHTML = "P " + (totalSales).toFixed(2);
   $("input[id=totalSalesHiddenInput]").val((totalSales.toFixed(2)));
 }
 function updateQuantityReceivings(counter,id){

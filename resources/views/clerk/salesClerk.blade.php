@@ -132,10 +132,4 @@
 		</div>
 </div>
 @stop
-@section('javascript_part')
-<script type="text/javascript">
-	$(document).ready(function(){
-		document.getElementById('btnSales').disabled = true;
-	});
-</script>
-@stop
+

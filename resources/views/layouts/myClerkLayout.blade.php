@@ -7,10 +7,10 @@
          <link rel="stylesheet" href="assets/css/style.css" media="screen" title="no title" charset="utf-8">
          <link rel="stylesheet" href="assets/fonts/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
          <link rel="stylesheet" href="assets/css/jquery-ui.css" type="text/css" />
-
+           <script src="assets/js/myUtilities.js"></script>
     <title>@yield('title')</title>
   </head>
-  <body>
+  <body onload="loadSalesTotals()">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="nav-title">
     	<div class="navbar-header">
@@ -111,7 +111,6 @@
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/sidebar.js"></script>
-  <script src="assets/js/myUtilities.js"></script>
   <script type="text/javascript" src="assets/js/ui.js"></script>
   @yield('javascript_part')
 

@@ -134,12 +134,12 @@ class AdminController extends Controller{
       $addPrivilegesforClerk->generate_report = 0;
       $addPrivilegesforClerk->save();
 
-      return redirect('list_clerk');
+      return redirect('list_merchant');
     }
     public function changePasswordAccount(Request $requests){
-      $id = $requests->specific_id;
+      $id = $requests->the_id;
       $newPassword = $requests->new_password;
-      $changePwordAccount = User::where('id','=',$id)->update(['password'=>Hash::make($newPassword)]);
+      $changePwordAccount = User::where('id','=',$id)->update(['password'=>Hash::make($newPassword),'passsword_text'=>Crypt::encrypt($newPassword)]);
       return redirect()->back();
     }
     public function editItem(Request $requests){
@@ -170,7 +170,7 @@ class AdminController extends Controller{
       $id = $requests->the_id;
       $deleteClerk = Clerk::where('id','=',$id)->delete();
       $removePrivileges = ManagePrivileges::where('clerk_id','=',$id)->delete();
-      return redirect('list_clerk');
+      return redirect('list_merchant');
     }
     public function removeDistributor(Request $requests){
       $id = $requests->the_id;
@@ -214,7 +214,7 @@ class AdminController extends Controller{
         $managePrivileges = ManagePrivileges::where('clerk_id','=',$id)->update(['sales_encoding'=>$sales_encoding,'account_registration'=>$account_registration,
       'add_clerk'=>$add_clerk,'use_inventory'=>$use_inventory,'generate_report'=>$generate_report]);
 
-      return redirect('list_clerk');
+      return redirect('list_merchant');
       }
       else{
         $addPrivilegesforClerk = new ManagePrivileges;
@@ -226,7 +226,7 @@ class AdminController extends Controller{
         $addPrivilegesforClerk->generate_report = $generate_report;
         $addPrivilegesforClerk->save();
 
-        return redirect('list_clerk');
+        return redirect('list_merchant');
       }
     }
     public function multiplemanagePrivileges(Request $requests){
@@ -272,7 +272,7 @@ class AdminController extends Controller{
     }
     public function backFunction(){
       if(Auth::user()->typeOfUser == 0){
-          return redirect('list_clerk');
+          return redirect('list_merchant');
       }
       else if(Auth::user()->typeOfUser == 1){
           return redirect('home_clerk');

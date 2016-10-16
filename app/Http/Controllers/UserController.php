@@ -43,10 +43,10 @@ class UserController extends Controller
           ]);
           if($attempt){
             if(Auth::user()->typeOfUser == 0){
-              return redirect('list_clerk');
+              return redirect('list_merchant');
             }
             else if(Auth::user()->typeOfUser == 1){
-              return redirect('home_clerk');
+              return redirect('home_merchant');
             }
             else if(Auth::user()->typeOfUser == 2){
               return redirect('genealogy');
@@ -172,7 +172,7 @@ class UserController extends Controller
           $username = Auth::user()->username;
         }
         else{
-          $username = Auth::user()->typeOfUser == 1 ? 'c_'.substr(strtolower($fname),0,1).strtolower($lname) : 'd_'.substr(strtolower($fname),0,1).strtolower($lname);
+          $username = Auth::user()->typeOfUser == 1 ? 'm_'.substr(strtolower($fname),0,1).strtolower($lname) : 'c_'.substr(strtolower($fname),0,1).strtolower($lname);
         }
         $newPassword = $requests->new_password;
         if($newPassword != ''){
@@ -196,7 +196,7 @@ class UserController extends Controller
           $username = Auth::user()->username;
         }
         else{
-          $username = Auth::user()->typeOfUser == 1 ? 'c_'.substr(strtolower($fname),0,1).strtolower($lname) : 'd_'.substr(strtolower($fname),0,1).strtolower($lname);
+          $username = Auth::user()->typeOfUser == 1 ? 'm_'.substr(strtolower($fname),0,1).strtolower($lname) : 'c_'.substr(strtolower($fname),0,1).strtolower($lname);
         }
         $newPassword = $requests->new_password;
         if($newPassword != ''){
@@ -209,10 +209,10 @@ class UserController extends Controller
         }
       }
       if(Auth::user()->typeOfUser == 0){
-        return redirect('list_clerk');
+        return redirect('list_merchant');
       }
       else if(Auth::user()->typeOfUser == 1){
-          return redirect('home_clerk');
+          return redirect('home_merchant');
       }
       else{
           return redirect('genealogy');

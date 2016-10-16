@@ -52,7 +52,7 @@
 					<td>{{$distributorss->address}}</td>
 					<td>PHP {{$distributorss->totalSales}}</td>
 					<td>{{$distributorss->username}}</td>
-	        <td><input type="button" class="btn btn-primary btn-sm open-modal-password" value="Change Password"></td>
+	        <td><input type="button" class="btn btn-primary btn-sm open-modal-password" onclick="delete_Clerk_Distributor_Item({{$distributorss->id}})" value="Change Password"></td>
 					<td><input type="button" class="btn btn-sm btn-primary open-modal-delete" onclick="delete_Clerk_Distributor_Item({{$distributorss->id}})" value="Delete"></td>
 				</tr>
 				@endforeach
@@ -75,7 +75,7 @@
 				<div class="form-group">
 							{!! Form::open(array('action' => 'AdminController@changePasswordAccount' , 'method' => 'post' , 'id' => 'changePasswordAccountForm'))!!}
 							<input type="hidden" id="adminPassword" value="{{$password}}">
-							<input type="hidden" name="specific_id" id="myClerkId">
+							<input type="hidden" name="the_id" id="specific_id">
 					<center>
 						<label for="inputPassword3">New Password</label>
 					<br>
