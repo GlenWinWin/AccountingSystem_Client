@@ -509,7 +509,7 @@ class ClerkController extends Controller
         $addPrivilegesforClerk->sales_encoding = 0;
         $addPrivilegesforClerk->account_registration = 0;
         $addPrivilegesforClerk->add_clerk = 0;
-        $addPrivilegesforClerk->use_inventory = 0;
+        $addPrivilegesforClerk->use_inventory = 1;
         $addPrivilegesforClerk->generate_report = 0;
         $addPrivilegesforClerk->save();
 
