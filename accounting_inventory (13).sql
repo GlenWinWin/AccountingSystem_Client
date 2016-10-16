@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2016 at 06:08 PM
+-- Generation Time: Oct 16, 2016 at 04:51 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -61,9 +61,9 @@ CREATE TABLE IF NOT EXISTS `commissions` (
 --
 
 INSERT INTO `commissions` (`id`, `distributor_id`, `commission`, `created_at`, `updated_at`) VALUES
-(1, 49, 10515.812, NULL, NULL),
-(2, 57, 2414.45, NULL, NULL),
-(3, 58, 2017.65, NULL, NULL);
+(1, 6, 1518.077, NULL, NULL),
+(2, 67, 1440, NULL, NULL),
+(3, 68, 2911.112, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -89,10 +89,10 @@ CREATE TABLE IF NOT EXISTS `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_category`, `item_sub_category`, `item_name`, `item_quantity`, `item_costPrice`, `item_subcostPrice`, `item_sellingPrice`, `item_image_path`) VALUES
-(1, '1', '2', 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 4546, 27.5, 30, 100.02, 'assets/images/item_pictures/spectacles.jpg'),
-(2, '1', '1', 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 4228, 180, 207, 280.75, 'assets/images/item_pictures/hardhat.jpg'),
-(3, '1', '3', 'GIDEON PORTABLE EYEWASH - YELLOW', 4712, 4500, 5175, 14000, 'assets/images/item_pictures/eyewash.jpg'),
-(6, '3', '13', 'The Mop', 460, 450.5, 345.75, 555.56, 'assets/images/item_pictures/mop.jpg');
+(1, '1', '2', 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 4275, 27.5, 30, 100.02, 'assets/images/item_pictures/spectacles.jpg'),
+(2, '1', '1', 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 4032, 180, 207, 280.75, 'assets/images/item_pictures/hardhat.jpg'),
+(3, '1', '3', 'GIDEON PORTABLE EYEWASH - YELLOW', 4687, 4500, 5175, 14000, 'assets/images/item_pictures/eyewash.jpg'),
+(6, '3', '13', 'The Mop', 458, 450.55, 345.75, 555.56, 'assets/images/item_pictures/mop.jpg');
 
 -- --------------------------------------------------------
 
@@ -114,12 +114,10 @@ CREATE TABLE IF NOT EXISTS `manage_privileges` (
 --
 
 INSERT INTO `manage_privileges` (`clerk_id`, `sales_encoding`, `account_registration`, `add_clerk`, `use_inventory`, `generate_report`) VALUES
-(3, 1, 0, 1, 1, 0),
-(4, 0, 1, 1, 0, 1),
-(10, 0, 0, 0, 0, 0),
-(41, 0, 0, 0, 0, 0),
-(42, 1, 1, 1, 1, 1),
-(55, 0, 0, 0, 0, 0);
+(2, 0, 0, 0, 1, 0),
+(3, 0, 0, 0, 0, 0),
+(4, 0, 0, 0, 0, 0),
+(5, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -182,16 +180,7 @@ CREATE TABLE IF NOT EXISTS `receivings` (
   `trans_ID` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`receiving_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `receivings`
---
-
-INSERT INTO `receivings` (`receiving_id`, `clerk_id`, `created_at`, `trans_ID`, `updated_at`) VALUES
-(1, 42, '2016-10-14 12:04:36', 'TRANS-0000000002', '2016-10-14 12:04:36'),
-(2, 3, '2016-10-15 07:44:01', 'TRANS-0000000010', '2016-10-15 07:44:01'),
-(3, 3, '2016-10-15 07:47:45', 'TRANS-0000000011', '2016-10-15 07:47:45');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -208,16 +197,7 @@ CREATE TABLE IF NOT EXISTS `receiving_details` (
   `receive_subtotal` double NOT NULL,
   `receive_price` double NOT NULL,
   PRIMARY KEY (`receiving_detail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `receiving_details`
---
-
-INSERT INTO `receiving_details` (`receiving_detail_id`, `receiving_id`, `item_id`, `item_name`, `receive_quantity`, `receive_subtotal`, `receive_price`) VALUES
-(1, 1, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 2, 55, 27.5),
-(2, 2, 6, 'The Mop', 450, 202725, 450.5),
-(3, 3, 6, 'The Mop', 9, 5000.04, 555.56);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -233,21 +213,16 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `trans_ID` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `sales`
 --
 
 INSERT INTO `sales` (`id`, `distributor_id`, `clerk_id`, `created_at`, `trans_ID`, `updated_at`) VALUES
-(1, 49, 3, '2016-10-14 12:00:51', 'TRANS-0000000001', '2016-10-14 12:00:51'),
-(2, 49, 3, '2016-10-14 12:06:19', 'TRANS-0000000003', '2016-10-14 12:06:19'),
-(3, 57, 3, '2016-10-14 13:02:21', 'TRANS-0000000004', '2016-10-14 13:02:21'),
-(4, 49, 3, '2016-10-14 13:49:03', 'TRANS-0000000005', '2016-10-14 13:49:03'),
-(5, 49, 3, '2016-10-14 14:11:10', 'TRANS-0000000006', '2016-10-14 14:11:10'),
-(6, 49, 3, '2016-10-14 14:22:35', 'TRANS-0000000007', '2016-10-14 14:22:35'),
-(7, 49, 3, '2016-10-14 14:25:39', 'TRANS-0000000008', '2016-10-14 14:25:39'),
-(8, 49, 3, '2016-10-14 14:29:18', 'TRANS-0000000009', '2016-10-14 14:29:18');
+(1, 6, 2, '2016-10-16 04:04:26', 'TRANS-0000000001', '2016-10-16 04:04:26'),
+(2, 6, 2, '2016-10-16 04:06:05', 'TRANS-0000000002', '2016-10-16 04:06:05'),
+(3, 67, 2, '2016-10-16 04:08:32', 'TRANS-0000000003', '2016-10-16 04:08:32');
 
 -- --------------------------------------------------------
 
@@ -264,25 +239,19 @@ CREATE TABLE IF NOT EXISTS `sales_details` (
   `sales_subtotal` double NOT NULL,
   `sales_id` int(11) NOT NULL,
   PRIMARY KEY (`sale_detail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `sales_details`
 --
 
 INSERT INTO `sales_details` (`sale_detail_id`, `item_id`, `item_name`, `sales_quantity`, `sales_price`, `sales_subtotal`, `sales_id`) VALUES
-(1, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 80, 100.02, 8001.6, 1),
-(2, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 50, 280.75, 14037.5, 1),
-(3, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 86, 280.75, 24144.5, 2),
-(4, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 22, 280.75, 6176.5, 3),
-(5, 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 14000, 14000, 3),
-(6, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 56, 100.02, 5601.12, 4),
-(7, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 48, 280.75, 13476, 4),
-(8, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 50, 280.75, 14037.5, 5),
-(9, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 20, 100.02, 2000.4, 5),
-(10, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 100, 100.02, 10002, 6),
-(11, 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 2, 14000, 28000, 7),
-(12, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 100, 100.02, 10002, 8);
+(1, 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 14000, 14000, 1),
+(2, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 1, 100.02, 100.02, 1),
+(3, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 1, 280.75, 280.75, 1),
+(4, 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 14000, 14000, 2),
+(5, 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 2, 14000, 28000, 3),
+(6, 6, 'The Mop', 2, 555.56, 1111.12, 3);
 
 -- --------------------------------------------------------
 
@@ -327,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `temporary_receivings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -344,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `temporary_receivings_details` (
   `item_costPrice` double NOT NULL,
   `clerk_id` int(11) NOT NULL,
   PRIMARY KEY (`temporary_receivings_details_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -357,17 +326,7 @@ CREATE TABLE IF NOT EXISTS `temporary_sales` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
-
---
--- Dumping data for table `temporary_sales`
---
-
-INSERT INTO `temporary_sales` (`id`, `created_at`, `updated_at`) VALUES
-(14, '2016-10-14 20:55:11', '2016-10-14 20:55:11'),
-(15, '2016-10-15 07:44:29', '2016-10-15 07:44:29'),
-(16, '2016-10-15 07:44:35', '2016-10-15 07:44:35'),
-(17, '2016-10-15 07:44:40', '2016-10-15 07:44:40');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
 
 -- --------------------------------------------------------
 
@@ -384,15 +343,7 @@ CREATE TABLE IF NOT EXISTS `temporary_sales_details` (
   `item_costPrice` double NOT NULL,
   `clerk_id` int(11) NOT NULL,
   PRIMARY KEY (`temporary_sales_details_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
-
---
--- Dumping data for table `temporary_sales_details`
---
-
-INSERT INTO `temporary_sales_details` (`temporary_sales_details_id`, `id`, `item_id`, `item_name`, `item_quantity`, `item_costPrice`, `clerk_id`) VALUES
-(16, 14, 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 1, 100.02, 42),
-(17, 17, 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 1, 280.75, 3);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 -- --------------------------------------------------------
 
@@ -408,24 +359,16 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `typeOfTransaction` int(11) NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `transactions`
 --
 
 INSERT INTO `transactions` (`id`, `distributor_id`, `created_at`, `transactID`, `typeOfTransaction`, `updated_at`) VALUES
-(1, 49, '2016-10-14 12:00:51', 'TRANS-0000000001', 0, '2016-10-14 12:00:51'),
-(2, 0, '2016-10-14 12:04:35', 'TRANS-0000000002', 1, '2016-10-14 12:04:35'),
-(3, 57, '2016-10-14 12:06:19', 'TRANS-0000000003', 0, '2016-10-14 12:07:29'),
-(4, 58, '2016-10-14 13:02:21', 'TRANS-0000000004', 0, '2016-10-14 13:02:59'),
-(5, 49, '2016-10-14 13:49:03', 'TRANS-0000000005', 0, '2016-10-14 13:49:03'),
-(6, 49, '2016-10-14 14:11:10', 'TRANS-0000000006', 0, '2016-10-14 14:11:10'),
-(7, 49, '2016-10-14 14:22:35', 'TRANS-0000000007', 0, '2016-10-14 14:22:35'),
-(8, 49, '2016-10-14 14:25:39', 'TRANS-0000000008', 0, '2016-10-14 14:25:39'),
-(9, 49, '2016-10-14 14:29:18', 'TRANS-0000000009', 0, '2016-10-14 14:29:18'),
-(10, 0, '2016-10-15 07:44:01', 'TRANS-0000000010', 1, '2016-10-15 07:44:01'),
-(11, 0, '2016-10-15 07:47:45', 'TRANS-0000000011', 1, '2016-10-15 07:47:45');
+(1, 6, '2016-10-16 04:04:26', 'TRANS-0000000001', 0, '2016-10-16 04:04:26'),
+(2, 67, '2016-10-16 04:06:05', 'TRANS-0000000002', 0, '2016-10-16 04:06:31'),
+(3, 68, '2016-10-16 04:08:32', 'TRANS-0000000003', 0, '2016-10-16 04:09:05');
 
 -- --------------------------------------------------------
 
@@ -447,21 +390,12 @@ CREATE TABLE IF NOT EXISTS `transaction_details` (
 --
 
 INSERT INTO `transaction_details` (`transaction_id`, `item_id`, `item_name`, `transaction_quantity`, `transaction_costPrice`, `transaction_subtotal`) VALUES
-('TRANS-0000000001', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 80, 100.02, 8001.6),
-('TRANS-0000000001', 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 50, 280.75, 14037.5),
-('TRANS-0000000002', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 2, 27.5, 55),
-('TRANS-0000000003', 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 86, 280.75, 24144.5),
-('TRANS-0000000004', 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 22, 280.75, 6176.5),
-('TRANS-0000000004', 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 14000, 14000),
-('TRANS-0000000005', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 56, 100.02, 5601.12),
-('TRANS-0000000005', 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 48, 280.75, 13476),
-('TRANS-0000000006', 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 50, 280.75, 14037.5),
-('TRANS-0000000006', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 20, 100.02, 2000.4),
-('TRANS-0000000007', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 100, 100.02, 10002),
-('TRANS-0000000008', 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 2, 14000, 28000),
-('TRANS-0000000009', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 100, 100.02, 10002),
-('TRANS-0000000010', 6, 'The Mop', 450, 450.5, 202725),
-('TRANS-0000000011', 6, 'The Mop', 9, 555.56, 5000.04);
+('TRANS-0000000001', 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 14000, 14000),
+('TRANS-0000000001', 1, 'GIDEON SPECTACLES NON ADJUSTABLE - CLEAR', 1, 100.02, 100.02),
+('TRANS-0000000001', 2, 'SPIDERKING EAGLE HARDHAT WITH CHINSTRAP', 1, 280.75, 280.75),
+('TRANS-0000000002', 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 1, 14000, 14000),
+('TRANS-0000000003', 3, 'GIDEON PORTABLE EYEWASH - YELLOW', 2, 14000, 28000),
+('TRANS-0000000003', 6, 'The Mop', 2, 555.56, 1111.12);
 
 -- --------------------------------------------------------
 
@@ -501,21 +435,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `targetGroupSales` double NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=69 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `name`, `username`, `email`, `password`, `address`, `contact`, `typeOfUser`, `channelPosition`, `distributor_id`, `connectCounter`, `monthCounter`, `totalSalesMonth`, `totalSales`, `totalNewMemberMonth`, `totalNewMember`, `profile_path`, `remember_token`, `created_at`, `updated_at`, `passsword_text`, `userID`, `dateToFinish`, `totalPersonalSales`, `totalGroupSales`, `totalNewCAMonth`, `targetGroupSales`) VALUES
-(1, 'Admin', 'System', 'Admin System', 'admin', 'admin@gmail.com', '$2y$10$rPwvV.3D3Ip4uTzC6DIT4u17WqO7LJtjM0vk6LKhe/woaUQbHkucu', 'tondo', '09358217701', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/Koala.jpg', 'PgzRS9sxl5txQwKj2CKZGq9enJIGQX6tvLvlrHL9s8mmmr74WDBQGXDeYwf0', NULL, '2016-09-29 11:49:46', 'eyJpdiI6Ijd5SzhKZUpEV1Q3ck9yR2tLUXpuMEE9PSIsInZhbHVlIjoiTTNncHV2a2lvOEFcL0dDdWdhMGptXC93PT0iLCJtYWMiOiJkYWM3NDUzYmNmZTAyNDU1MzljMWU5NTUwMGYzNDNlZjEzNzRiZTJjYjc0NDQ5ZjM0MmI5NTE4YjRkOGVhZjQyIn0=', '', '', 0, 0, 0, 0),
-(3, 'Marco', 'Barrera', 'Marco Barrera', 'c_mbarrera', 'marcobarrera@gmail.com', '$2y$10$hssQ.8assSnhk9CWlcAOK.5DN7XHlnrWFYLddXfhAM3d4ZfvVRgxG', 'Boxing St. Suntukan Manila', '09488867723', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/DAVID_OBAJE.jpg', '9jioKK7kCfsHo0lNU2w133ZXCXpYcn8ucb33zLdMowT5AnsoSf3al2Ojaj2d', NULL, '2016-10-10 12:23:08', 'eyJpdiI6InJSRlFLRWZUS2Y2bGh6RmRnM3pPM2c9PSIsInZhbHVlIjoiVXpWRVNYTlh0TXpCXC9aSUJpUUVOMmc9PSIsIm1hYyI6IjE5MDBjM2JhOWM0MGQzYmFiY2NhZmU1M2QyNGYyZjZmZjRiMzM2ZjViMTZkZGQwOTVlMjFjZjg5M2YxOTg0MmEifQ==', '', '', 0, 0, 0, 0),
-(4, 'Freedy', 'Morales', 'Freedy Morales', 'c_frmorales', 'freedy@gmail.com', '$2y$10$OdPte6gcgzcbyJ1UmhNWfe5nGjxJtlUM/s4vkW9aqnFF/AcBoI6xq', 'Free Place', '09352347890', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', '32FiyhmZPClx7nocCzWfswov5Gp4J7znxbd7a6S7KcZ5egfMdkuaLBGC7xOH', NULL, '2016-09-13 23:20:00', 'eyJpdiI6IlFtd0NSaVRJeEVWTlRiZENhOVJtNGc9PSIsInZhbHVlIjoiMHRHSE5EK0FsbUVaQjlcLzRTUU9pMUE9PSIsIm1hYyI6IjFmMWNjYjE0M2FhMThlNzQ3NWM4NGJlM2NkYTllNmFmMThjYTZiZTVlMzJhZTM5ZmNiMWE3Y2I0ZTA1MWU4OTAifQ==', '', '', 0, 0, 0, 0),
-(41, 'Charlotte', 'Napolis', 'Charlotte Napolis', 'c_cnapolis', 'chanapolis22@gmail.com', '$2y$10$CJ6HrjZeUEr.gHpHlAaij.X663xTG7kuO//leRHCauzpEwK7.c2qu', 'valenzuela', '09067856347', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, '2016-09-21 13:57:38', '2016-09-21 13:57:38', 'eyJpdiI6IllFdkJwR1JqcCt3MDBzR3NTc3orT3c9PSIsInZhbHVlIjoiemR6ODFVeUpaamp1cThcL2RINmxJdFE9PSIsIm1hYyI6IjVmYjJlYjUxNmY0YzEyZTM2NTYzODNlMjMwOGZhOGJkMzc0MDhkMWFhNDNkM2FlM2NlMzBhYTE4NzIzYjM0MjIifQ==', '', '', 0, 0, 0, 0),
-(42, 'Felix', 'Hilo', 'Felix Hilo', 'c_fhilo', 'felixh@gmail.com', '$2y$10$et1JI2DMDenJJrEVJijP0.0qKEc6B0WKqWRFakDCL3u9v3WrDt3/e', 'bundok', '09081786890', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', 'svJwYW5U16d3XBtj18vWGriUByg3YLiWz3EjpSyOYvRqCQrsxrS5uwal4UUG', '2016-09-21 13:58:55', '2016-10-13 10:12:35', 'eyJpdiI6IkxrQjhCa3N4NVwvMHZkYVlcL2VxMVdydz09IiwidmFsdWUiOiJtNjRDM0FBSEQreitNYXNMdXRcL3hTdz09IiwibWFjIjoiODAzZjUyYzViMThmMzZjZjNhYTQyNzc3Y2YxYzVhOGFlYmI2OGEyOGUxYzQ2Nzg4NzRiMmEwMzFjYjU3MTMxZSJ9', '', '', 0, 0, 0, 0),
-(49, 'The', 'Owner', 'The Owner', 'd_towner', 'theowner@gmail.com', '$2y$10$wWi8Kv/Sa.g9HASC/bLcIusj9DSczz.Wp2cYi4vdjwCWFG.q0MtdO', 'Comp. Inc.', '09078907653', 2, 1, 0, 1, 0, 300000, 149479.12, 1, 1, 'assets/images/profile_pictures/lock.png', 'VHBSnijqHLdL7tBdVLHazn8X5rB5UDQANbvweveFHbV60PVjCdbb8FZBtCTB', '2016-09-22 00:27:39', '2016-10-14 14:29:18', 'eyJpdiI6InhRQTJvQVFsaitPTmdiTGFHc2hsbHc9PSIsInZhbHVlIjoiVUFGVWV1eE1BNHlpVUdpdTlHZmVrUT09IiwibWFjIjoiOGJkZTBhMDFmMjVjMzliY2Q2MGMxMzI1ZGIxMTUyNGMwYWQzZGE1MGU5M2U0MWMyMzJmZTZlODZhMmI4MThhYSJ9', 'DIST-0000049', '2016-10-31', 105158.12, 149479.12, 0, 0),
-(57, 'Dazzle', 'Turbo', 'Dazzle Turbo', 'd_dturbo', 'dazzlingturbo@gmail.com', '$2y$10$P7cZ0AFohG8nhHKDarA2t.YRgqQ8ESSE7KYTJGnXCdtm80X.YyTzq', 'turbo tondo', '09358217701', 2, 1, 49, 1, 0, 300000, 44321, 1, 1, 'assets/images/user.png', 'GSgdSHIs334L8s6wBgwdqRTZde0aaFUBixm2f9SLCrxs3vGoRlzrFv5yMQQa', '2016-10-14 12:07:29', '2016-10-14 13:02:21', 'eyJpdiI6InNPVjhzWE5oeHlvVWFGbXZmUmhZN1E9PSIsInZhbHVlIjoieTJBSmV5eFBscmcwQkl1NGZVNzY3dz09IiwibWFjIjoiMTgwOTkyZmU3ZjNmNWE5NzBkODU2OTdmYjI0MjY0NWFiNjRjNzJiYTAzMGM3MTdjZDE2ODY4YmRlYTg4NDE2YiJ9', 'DIST-0000057', '2016-10-31', 24144.5, 44321, 0, 0),
-(58, 'Glenwin', 'Bernabe', 'Glenwin Bernabe', 'd_gbernabe', 'glenwinbernabe@gmail.com', '$2y$10$PQwDf3uUx6UVwwfLp9EDgeDhg5YJTLMhYeYJMeyVDaw0weA110ora', 'tondo manila ', '09358217701', 2, 1, 57, 0, 0, 300000, 20176.5, 0, 0, 'assets/images/user.png', 'ym42SwWlH8quEfBmzd8Co9sod1d6GKmuH6ThU4PzdA66SKUeJKm3PqNCk7iJ', '2016-10-14 13:02:59', '2016-10-15 01:19:30', 'eyJpdiI6InpnU1Vpb1NQMUdyc1o2U1FzMkZKZHc9PSIsInZhbHVlIjoibVJYM3RkbUR6OXA5VWNtbDhrRkpyQT09IiwibWFjIjoiYWI3MTQ4YjJkNzk4NjllOGQ3MGZkNjYxNjU4NTQ1NmM5NWNiMDRmMDM5MTU4NjdmZGM2ZjZkNWQyMjRiNjA2MiJ9', 'DIST-0000058', '2016-10-31', 20176.5, 20176.5, 0, 0);
+(1, 'Admin', 'System', 'Admin System', 'admin', 'admin@gmail.com', '$2y$10$rPwvV.3D3Ip4uTzC6DIT4u17WqO7LJtjM0vk6LKhe/woaUQbHkucu', 'tondo', '09358217701', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/joker.jpg', 'wfdXDl40PLUeKmcFxgdFycUFPXnrb4z2xpSqVspymQ1DCWtQJWvcFbnhj8SB', NULL, '2016-10-15 21:03:32', 'eyJpdiI6Ijd5SzhKZUpEV1Q3ck9yR2tLUXpuMEE9PSIsInZhbHVlIjoiTTNncHV2a2lvOEFcL0dDdWdhMGptXC93PT0iLCJtYWMiOiJkYWM3NDUzYmNmZTAyNDU1MzljMWU5NTUwMGYzNDNlZjEzNzRiZTJjYjc0NDQ5ZjM0MmI5NTE4YjRkOGVhZjQyIn0=', '', '', 0, 0, 0, 0),
+(2, 'Marco', 'Barrera', 'Marco Barrera', 'm_mbarrera', 'marcobarrera@gmail.com', '$2y$10$hssQ.8assSnhk9CWlcAOK.5DN7XHlnrWFYLddXfhAM3d4ZfvVRgxG', 'Boxing St. Suntukan Manila', '09488867723', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/profile_pictures/DAVID_OBAJE.jpg', '6ewcgfw47NOpwIBUasBZQ0018UFqSaXdqQS3DAdAzOoluThW0RzZ5vEsRywL', NULL, '2016-10-10 12:23:08', 'eyJpdiI6InJSRlFLRWZUS2Y2bGh6RmRnM3pPM2c9PSIsInZhbHVlIjoiVXpWRVNYTlh0TXpCXC9aSUJpUUVOMmc9PSIsIm1hYyI6IjE5MDBjM2JhOWM0MGQzYmFiY2NhZmU1M2QyNGYyZjZmZjRiMzM2ZjViMTZkZGQwOTVlMjFjZjg5M2YxOTg0MmEifQ==', '', '', 0, 0, 0, 0),
+(3, 'Freedy', 'Morales', 'Freedy Morales', 'm_frmorales', 'freedy@gmail.com', '$2y$10$OdPte6gcgzcbyJ1UmhNWfe5nGjxJtlUM/s4vkW9aqnFF/AcBoI6xq', 'Free Place', '09352347890', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', '32FiyhmZPClx7nocCzWfswov5Gp4J7znxbd7a6S7KcZ5egfMdkuaLBGC7xOH', NULL, '2016-09-13 23:20:00', 'eyJpdiI6IlFtd0NSaVRJeEVWTlRiZENhOVJtNGc9PSIsInZhbHVlIjoiMHRHSE5EK0FsbUVaQjlcLzRTUU9pMUE9PSIsIm1hYyI6IjFmMWNjYjE0M2FhMThlNzQ3NWM4NGJlM2NkYTllNmFmMThjYTZiZTVlMzJhZTM5ZmNiMWE3Y2I0ZTA1MWU4OTAifQ==', '', '', 0, 0, 0, 0),
+(4, 'Charlotte', 'Napolis', 'Charlotte Napolis', 'm_cnapolis', 'chanapolis22@gmail.com', '$2y$10$CJ6HrjZeUEr.gHpHlAaij.X663xTG7kuO//leRHCauzpEwK7.c2qu', 'valenzuela', '09067856347', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', NULL, '2016-09-21 13:57:38', '2016-09-21 13:57:38', 'eyJpdiI6IllFdkJwR1JqcCt3MDBzR3NTc3orT3c9PSIsInZhbHVlIjoiemR6ODFVeUpaamp1cThcL2RINmxJdFE9PSIsIm1hYyI6IjVmYjJlYjUxNmY0YzEyZTM2NTYzODNlMjMwOGZhOGJkMzc0MDhkMWFhNDNkM2FlM2NlMzBhYTE4NzIzYjM0MjIifQ==', '', '', 0, 0, 0, 0),
+(5, 'Felix', 'Hilo', 'Felix Hilo', 'm_fhilo', 'felixh@gmail.com', '$2y$10$et1JI2DMDenJJrEVJijP0.0qKEc6B0WKqWRFakDCL3u9v3WrDt3/e', 'bundok', '09081786890', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'assets/images/user.png', 'svJwYW5U16d3XBtj18vWGriUByg3YLiWz3EjpSyOYvRqCQrsxrS5uwal4UUG', '2016-09-21 13:58:55', '2016-10-13 10:12:35', 'eyJpdiI6IkxrQjhCa3N4NVwvMHZkYVlcL2VxMVdydz09IiwidmFsdWUiOiJtNjRDM0FBSEQreitNYXNMdXRcL3hTdz09IiwibWFjIjoiODAzZjUyYzViMThmMzZjZjNhYTQyNzc3Y2YxYzVhOGFlYmI2OGEyOGUxYzQ2Nzg4NzRiMmEwMzFjYjU3MTMxZSJ9', '', '', 0, 0, 0, 0),
+(6, 'The', 'Owner', 'The Owner', 'c_towner', 'theowner@gmail.com', '$2y$10$y/cWLkK5BsyXEg.tyVWLBep5Wz3P8qT5tAGn32/dlB3pUsC997nlG', 'Comp. Inc.', '09078907653', 2, 1, 0, 2, 0, 300000, 57491.89, 2, 2, 'assets/images/profile_pictures/lock.png', 'RR8lJwe9YUmwfpqOMZoqhcj8gKEJozt9MIaCrVIbZDGmszi4yBaCTvQnE7kz', '2016-09-22 00:27:39', '2016-10-16 04:08:33', 'eyJpdiI6IkdJc0dJam43OG5jZnNRTGdBbG5oS0E9PSIsInZhbHVlIjoiU1hVdWlNSkFQTzNyR1FkbXQwbUhSZz09IiwibWFjIjoiNjk0MTAyNGE3ZTk4NGNhNjliODhhNGVhOTdiZDY0YjVkOTAxNjgzZTNkNTZmMmY3NDhkNmJlNmQ2ZGMwNTJmOCJ9', 'DIST-0000006', '2016-10-31', 14380.77, 57491.89, 0, 0),
+(67, 'Glenwin', 'Bernabe', 'Glenwin Bernabe', 'c_gbernabe', 'glenwinbernabe@gmail.com', '$2y$10$o4X27iP9ppjgU.sL13RNxuquDAqVkcFzsIvW/Hr2Ju84qtXsh.DYO', 'tondo', '09358217701', 2, 1, 6, 1, 0, 300000, 43111.12, 1, 1, 'assets/images/user.png', NULL, '2016-10-16 04:06:31', '2016-10-16 04:08:33', 'eyJpdiI6IjhlZ3RoNVAzZmVxdUYyS2l5bmQwSVE9PSIsInZhbHVlIjoiS2JmZkVsbzFtTWpKa1cxUnBJY1wvdUE9PSIsIm1hYyI6IjM4YmVhNTdhYTg3OGZlYzgyOTMzYzdmZDIxOGZhZTQ0M2Q1OTRjZDNjODRlNDUyZjQ4ODUwNGNlMTJjOWZhN2EifQ==', 'DIST-0000067', '2016-10-31', 14000, 43111.12, 0, 0),
+(68, 'Geisher', 'Bernabe', 'Geisher Bernabe', 'c_gbernabe', 'geisherbernabe@gmail.com', '$2y$10$RLEgN/Q8U9U5EP/Blnb6K.b7nvvpzf0TB/i1UnMHM.dsCYXwUPP9G', 'tondo', '09284569056', 2, 1, 67, 0, 0, 300000, 29111.12, 0, 0, 'assets/images/user.png', NULL, '2016-10-16 04:09:05', '2016-10-16 04:09:05', 'eyJpdiI6IjNKcDFKRDZoeWh0N3kxU1wvcmVydlFRPT0iLCJ2YWx1ZSI6InNRVHljdHN3UzBFeGkzS1hFNEM3a1E9PSIsIm1hYyI6IjMwMzIzYmI4YTUxYzE2OGRmZDFmOTMxMDcwYzgwNzQ3OGFmODI4MTkzODZmM2IxMTcyOGE1MjMxOGQ5OGE2ZDUifQ==', 'DIST-0000068', '2016-10-31', 29111.12, 29111.12, 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
